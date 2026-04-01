@@ -71,13 +71,13 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
 .action-sub{font-size:11px;color:var(--muted)}
 .action-cta{font-size:11px;font-weight:500;color:var(--red)}
 /* WOTD */
-.wotd-card{margin:12px 14px 10px;background:linear-gradient(135deg,#2d2250,#1a3a6e);border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.12);box-shadow:0 4px 16px rgba(0,0,0,0.2)}
-.wotd-card::before{content:'';position:absolute;top:-20px;right:-20px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%}
-.wotd-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;opacity:0.75;margin-bottom:10px;font-weight:500}
-.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:36px;margin-bottom:4px;line-height:1.2}
-.wotd-rom{font-size:14px;opacity:0.7;margin-bottom:3px}
-.wotd-en{font-size:17px;font-weight:500;margin-bottom:14px}
-.wotd-btn{background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);border-radius:9px;padding:8px 16px;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500}
+.wotd-card{margin:14px 14px 12px;background:#1a3a6e;border-radius:18px;padding:20px 18px 18px;color:#fff;border:2px solid rgba(255,255,255,0.15);box-shadow:0 6px 20px rgba(15,76,129,0.35)}
+.wotd-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,0.6);margin-bottom:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:42px;margin-bottom:6px;line-height:1.2;color:#fff}
+.wotd-rom{font-size:15px;color:rgba(255,255,255,0.65);margin-bottom:4px}
+.wotd-en{font-size:19px;font-weight:500;margin-bottom:16px;color:#fff}
+.wotd-btn{background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.35);border-radius:10px;padding:10px 20px;color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500}
+.wotd-btn:active{background:rgba(255,255,255,0.3)}
 /* STREAK BANNER */
 .streak-banner{margin:12px 14px 10px;background:linear-gradient(135deg,#ff6b35,var(--red));border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;color:#fff}
 .streak-banner.hidden{display:none}
@@ -1577,10 +1577,108 @@ const strokeOrder={
   "ン":["Short diagonal","Long curve down-right"]
 };
 
+/* Stroke start positions as % of canvas [x,y] for numbered dots */
+const strokeDots={
+  "あ":[[0.65,0.2],[0.2,0.5],[0.35,0.75]],
+  "い":[[0.3,0.25],[0.65,0.25]],
+  "う":[[0.5,0.18],[0.35,0.42]],
+  "え":[[0.25,0.35],[0.5,0.2],[0.25,0.65]],
+  "お":[[0.25,0.3],[0.5,0.2],[0.55,0.45]],
+  "か":[[0.35,0.2],[0.2,0.5],[0.6,0.6]],
+  "き":[[0.2,0.28],[0.2,0.48],[0.5,0.2],[0.6,0.65]],
+  "く":[[0.3,0.25]],
+  "け":[[0.25,0.2],[0.55,0.2],[0.55,0.55]],
+  "こ":[[0.2,0.35],[0.2,0.6]],
+  "さ":[[0.2,0.3],[0.5,0.2],[0.35,0.65]],
+  "し":[[0.4,0.2]],
+  "す":[[0.2,0.35],[0.45,0.2]],
+  "せ":[[0.25,0.2],[0.25,0.5],[0.55,0.25]],
+  "そ":[[0.25,0.3],[0.25,0.6]],
+  "た":[[0.2,0.35],[0.5,0.2],[0.22,0.6],[0.6,0.6]],
+  "ち":[[0.22,0.35],[0.45,0.5]],
+  "つ":[[0.25,0.4]],
+  "て":[[0.22,0.42]],
+  "と":[[0.4,0.22],[0.4,0.55]],
+  "な":[[0.22,0.35],[0.5,0.2],[0.55,0.5]],
+  "に":[[0.22,0.35],[0.58,0.35],[0.4,0.2]],
+  "ぬ":[[0.28,0.28],[0.62,0.28]],
+  "ね":[[0.22,0.32],[0.5,0.2],[0.55,0.55]],
+  "の":[[0.35,0.25]],
+  "は":[[0.22,0.2],[0.5,0.2],[0.65,0.42]],
+  "ひ":[[0.4,0.3]],
+  "ふ":[[0.5,0.18],[0.3,0.4],[0.62,0.35],[0.62,0.6]],
+  "へ":[[0.25,0.52]],
+  "ほ":[[0.25,0.2],[0.22,0.48],[0.58,0.3],[0.58,0.58]],
+  "ま":[[0.22,0.32],[0.22,0.52],[0.5,0.25]],
+  "み":[[0.3,0.3],[0.58,0.35]],
+  "む":[[0.28,0.35],[0.55,0.3]],
+  "め":[[0.28,0.35],[0.58,0.28]],
+  "も":[[0.22,0.35],[0.22,0.52],[0.5,0.25]],
+  "や":[[0.28,0.3],[0.58,0.22],[0.58,0.6]],
+  "ゆ":[[0.28,0.35],[0.55,0.22],[0.55,0.58]],
+  "よ":[[0.22,0.35],[0.22,0.55],[0.58,0.22]],
+  "ら":[[0.5,0.25],[0.35,0.5]],
+  "り":[[0.32,0.28],[0.62,0.28]],
+  "る":[[0.35,0.28]],
+  "れ":[[0.3,0.22],[0.55,0.35]],
+  "ろ":[[0.28,0.38]],
+  "わ":[[0.38,0.22],[0.62,0.28]],
+  "を":[[0.22,0.3],[0.5,0.45],[0.28,0.65]],
+  "ん":[[0.35,0.28]],
+  "ア":[[0.3,0.22],[0.6,0.22],[0.5,0.42],[0.5,0.62]],
+  "イ":[[0.3,0.25],[0.6,0.22]],
+  "ウ":[[0.5,0.18],[0.28,0.4],[0.62,0.4]],
+  "エ":[[0.22,0.32],[0.5,0.22],[0.22,0.65]],
+  "オ":[[0.22,0.35],[0.5,0.22],[0.62,0.5]],
+  "カ":[[0.22,0.35],[0.58,0.22],[0.62,0.52]],
+  "キ":[[0.22,0.28],[0.22,0.48],[0.5,0.22],[0.62,0.6]],
+  "ク":[[0.3,0.25],[0.58,0.4]],
+  "ケ":[[0.28,0.22],[0.52,0.22],[0.65,0.52]],
+  "コ":[[0.22,0.25],[0.65,0.25],[0.22,0.65]],
+  "サ":[[0.32,0.25],[0.58,0.25],[0.5,0.5]],
+  "シ":[[0.28,0.3],[0.5,0.22],[0.35,0.6]],
+  "ス":[[0.22,0.35],[0.42,0.22]],
+  "セ":[[0.28,0.22],[0.22,0.5],[0.6,0.28]],
+  "ソ":[[0.32,0.25],[0.55,0.25]],
+  "タ":[[0.3,0.22],[0.22,0.42],[0.62,0.5],[0.28,0.65]],
+  "チ":[[0.22,0.35],[0.22,0.55],[0.45,0.5]],
+  "ツ":[[0.28,0.3],[0.5,0.25],[0.35,0.52]],
+  "テ":[[0.22,0.32],[0.22,0.52],[0.5,0.22]],
+  "ト":[[0.42,0.22],[0.55,0.5]],
+  "ナ":[[0.22,0.42],[0.5,0.22]],
+  "ニ":[[0.25,0.38],[0.22,0.62]],
+  "ヌ":[[0.32,0.3],[0.52,0.52]],
+  "ネ":[[0.22,0.35],[0.5,0.22],[0.28,0.62],[0.6,0.55]],
+  "ノ":[[0.3,0.25]],
+  "ハ":[[0.3,0.28],[0.62,0.28]],
+  "ヒ":[[0.28,0.22],[0.22,0.38],[0.22,0.62]],
+  "フ":[[0.22,0.32],[0.45,0.5]],
+  "ヘ":[[0.25,0.5]],
+  "ホ":[[0.22,0.35],[0.22,0.55],[0.55,0.28],[0.55,0.6]],
+  "マ":[[0.22,0.35],[0.28,0.58],[0.62,0.38]],
+  "ミ":[[0.28,0.32],[0.28,0.5],[0.22,0.68]],
+  "ム":[[0.28,0.38],[0.55,0.28]],
+  "メ":[[0.28,0.3],[0.55,0.28]],
+  "モ":[[0.22,0.32],[0.22,0.52],[0.5,0.22],[0.22,0.68]],
+  "ヤ":[[0.28,0.3],[0.58,0.22],[0.58,0.6]],
+  "ユ":[[0.22,0.35],[0.62,0.25],[0.22,0.65]],
+  "ヨ":[[0.22,0.28],[0.22,0.5],[0.22,0.68],[0.62,0.28]],
+  "ラ":[[0.22,0.38],[0.38,0.58]],
+  "リ":[[0.32,0.28],[0.62,0.28]],
+  "ル":[[0.28,0.28],[0.6,0.42]],
+  "レ":[[0.38,0.25]],
+  "ロ":[[0.22,0.28],[0.62,0.28],[0.22,0.68],[0.22,0.28]],
+  "ワ":[[0.22,0.35],[0.62,0.28]],
+  "ヲ":[[0.22,0.32],[0.42,0.5],[0.28,0.68]],
+  "ン":[[0.35,0.28],[0.5,0.55]]
+};
+
 function drawCanvasGuide(ctx,char,w,h){
   ctx.clearRect(0,0,w,h);
-  // Light grid
-  ctx.strokeStyle="rgba(15,76,129,0.1)";ctx.lineWidth=0.8;ctx.setLineDash([5,5]);
+  // Light background
+  ctx.fillStyle="#faf8f2";ctx.fillRect(0,0,w,h);
+  // Grid lines
+  ctx.strokeStyle="rgba(15,76,129,0.08)";ctx.lineWidth=1;ctx.setLineDash([6,6]);
   ctx.beginPath();
   ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);
   ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);
@@ -1588,17 +1686,31 @@ function drawCanvasGuide(ctx,char,w,h){
   ctx.moveTo(3*w/4,0);ctx.lineTo(3*w/4,h);
   ctx.stroke();ctx.setLineDash([]);
   // Border box
-  const pad=14;
-  ctx.strokeStyle="rgba(15,76,129,0.18)";ctx.lineWidth=1.5;
+  const pad=12;
+  ctx.strokeStyle="rgba(15,76,129,0.2)";ctx.lineWidth=2;
   ctx.strokeRect(pad,pad,w-pad*2,h-pad*2);
-  // Guide character — fit inside box
+  // Guide character — sized to fit inside box
   const isSingle=char.length===1;
   const maxSize=Math.min(w,h)-pad*4;
-  const fontSize=isSingle?maxSize:Math.floor(maxSize/Math.max(char.length,2)*1.5);
+  const fontSize=isSingle?maxSize:Math.floor((w-pad*4)/Math.max(char.length,1)*0.95);
   ctx.font=`${Math.min(fontSize,maxSize)}px 'Noto Sans JP',sans-serif`;
-  ctx.fillStyle="rgba(15,76,129,0.09)";
+  ctx.fillStyle="rgba(15,76,129,0.1)";
   ctx.textAlign="center";ctx.textBaseline="middle";
   ctx.fillText(char,w/2,h/2);
+  // Draw stroke number dots on the guide
+  const dots=strokeDots[char];
+  if(dots){
+    dots.forEach((dot,i)=>{
+      const dx=dot[0]*w;const dy=dot[1]*h;
+      // Circle
+      ctx.beginPath();ctx.arc(dx,dy,11,0,Math.PI*2);
+      ctx.fillStyle="#0f4c81";ctx.fill();
+      // Number
+      ctx.fillStyle="#fff";ctx.font="bold 10px 'DM Sans',sans-serif";
+      ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.fillText(String(i+1),dx,dy);
+    });
+  }
 }
 
 function renderWriteCanvas(){
