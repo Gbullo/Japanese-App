@@ -10,252 +10,316 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--red:#E84855;--gold:#F5A623;--ink:#1a1a2e;--paper:#faf8f2;--muted:#8a8680;--green:#2ecc71;--blue:#3b82f6;--soft:#f0ede4;--shadow:0 2px 14px rgba(0,0,0,0.10);--purple:#7c3aed}
+:root{--red:#E84855;--gold:#F5A623;--ink:#1a1a2e;--paper:#faf8f2;--muted:#8a8680;--green:#2ecc71;--blue:#3b82f6;--soft:#f0ede4;--shadow:0 2px 14px rgba(0,0,0,0.10);--purple:#7c3aed;--navy:#0f4c81;--teal:#0d9488}
 html,body{height:100%;background:#ddd9cf}
-body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-content:center;min-height:100vh}
 .phone{width:100%;max-width:390px;min-height:100svh;background:var(--paper);margin:0 auto;display:flex;flex-direction:column;overflow:hidden}
 .screen{flex:1;overflow:hidden;display:flex;flex-direction:column}
 .page{display:none;flex:1;flex-direction:column;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:90px;scroll-behavior:smooth}
 .page.active{display:flex}
-.page::-webkit-scrollbar{width:4px}
-.page::-webkit-scrollbar-track{background:transparent}
-.page::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.18);border-radius:4px}
+.page::-webkit-scrollbar{width:3px}
+.page::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.15);border-radius:4px}
 /* STATUS BAR */
 .status-bar{background:var(--ink);padding:12px 20px 8px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-top:max(12px,env(safe-area-inset-top))}
-.sb-greeting{font-family:'Noto Sans JP',sans-serif;font-size:13px;color:rgba(255,255,255,0.85);letter-spacing:0.5px}
+.sb-greeting{font-family:'Noto Sans JP',sans-serif;font-size:12px;color:rgba(255,255,255,0.8);letter-spacing:0.5px}
 /* TAB BAR */
-.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;height:84px;background:#fff;border-top:0.5px solid #ddd;display:flex;align-items:flex-start;padding-top:10px;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding-top:2px;transition:all .2s}
-.tab-icon{font-size:22px;transition:transform .2s}
-.tab-label{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:0.3px}
+.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;height:82px;background:#fff;border-top:0.5px solid #ddd;display:grid;grid-template-columns:repeat(5,1fr);align-items:flex-start;padding-top:8px;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding-top:2px;transition:all .2s}
+.tab-icon{font-size:20px;transition:transform .2s}
+.tab-label{font-size:9px;color:var(--muted);font-weight:500;letter-spacing:0.3px}
 .tab.active .tab-label{color:var(--red)}
-.tab.active .tab-icon{transform:scale(1.15)}
-/* PAGE HEADERS */
-.page-header{padding:24px 22px 22px;color:#fff}
+.tab.active .tab-icon{transform:scale(1.12)}
+/* HEADERS */
+.page-header{padding:20px 20px 18px;color:#fff;flex-shrink:0}
 .page-header.dark{background:var(--ink)}
 .page-header.red{background:var(--red)}
-.page-header.plan{background:#2d2250}
+.page-header.navy{background:var(--navy)}
+.page-header.purple{background:var(--purple)}
+.page-header.teal{background:var(--teal)}
 .page-header.exam{background:var(--purple)}
-.header-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:4px}
-.header-sub{font-size:13px;opacity:0.7}
+.page-header.plan{background:#2d2250}
+.h-title{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:3px}
+.h-sub{font-size:12px;opacity:0.7}
 /* SHARED */
-.section-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.9px;padding:0 20px;margin:18px 0 10px}
-.card{background:#fff;border-radius:16px;padding:16px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);margin:0 16px 12px}
-.pill-row{display:flex;gap:10px;flex-wrap:wrap}
-.pill{background:rgba(255,255,255,0.15);border-radius:20px;padding:6px 13px;font-size:12px;display:flex;align-items:center;gap:5px}
-.goal-bar-bg{background:#f0ede4;border-radius:8px;height:8px;overflow:hidden;margin:10px 0 6px}
-.goal-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:8px;transition:width 1.2s ease}
-.goal-sub{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
-/* HOME CHIPS */
-.lesson-scroll{display:flex;gap:12px;padding:0 20px;overflow-x:auto;padding-bottom:10px}
-.lesson-scroll::-webkit-scrollbar{height:4px}
-.lesson-scroll::-webkit-scrollbar-track{background:#f0ede4;border-radius:4px}
-.lesson-scroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
-.lesson-chip{min-width:120px;background:#fff;border-radius:14px;padding:14px;border:0.5px solid #e8e4db;cursor:pointer;transition:transform .15s;box-shadow:0 1px 6px rgba(0,0,0,0.06);flex-shrink:0}
-.lesson-chip:active{transform:scale(0.95)}
-.lesson-chip.done-chip{border-color:var(--green)}
-.chip-icon{font-size:26px;margin-bottom:7px}
-.chip-name{font-size:13px;font-weight:500;margin-bottom:3px}
-.chip-sub{font-size:11px;color:var(--muted)}
-.chip-bar{height:3px;background:#f0ede4;border-radius:2px;margin-top:8px;overflow:hidden}
+.sec-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:0 18px;margin:16px 0 8px}
+.card{background:#fff;border-radius:14px;padding:14px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);margin:0 14px 10px}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pill{background:rgba(255,255,255,0.15);border-radius:16px;padding:5px 11px;font-size:11px}
+.goal-bg{background:#f0ede4;border-radius:6px;height:7px;overflow:hidden;margin:8px 0 5px}
+.goal-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:6px;transition:width 1.2s ease}
+.goal-sub{font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+/* CHIPS */
+.h-scroll{display:flex;gap:10px;padding:0 18px;overflow-x:auto;padding-bottom:8px}
+.h-scroll::-webkit-scrollbar{height:3px}
+.h-scroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
+.chip{min-width:110px;background:#fff;border-radius:12px;padding:12px;border:0.5px solid #e8e4db;cursor:pointer;transition:transform .15s;box-shadow:0 1px 5px rgba(0,0,0,0.06);flex-shrink:0}
+.chip:active{transform:scale(0.94)}
+.chip.done{border-color:var(--green)}
+.chip-icon{font-size:22px;margin-bottom:6px}
+.chip-name{font-size:12px;font-weight:500;margin-bottom:2px}
+.chip-sub{font-size:10px;color:var(--muted)}
+.chip-bar{height:3px;background:#f0ede4;border-radius:2px;margin-top:6px;overflow:hidden}
 .chip-bar-fill{height:100%;background:var(--red);border-radius:2px}
-/* HOME ACTIONS */
-.action-list{padding:0 16px;display:flex;flex-direction:column;gap:10px}
-.action-row{background:#fff;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:0.5px solid #e8e4db;cursor:pointer;transition:transform .15s;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.action-row:active{transform:scale(0.98)}
-.action-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+/* ACTION ROWS */
+.action-list{padding:0 14px;display:flex;flex-direction:column;gap:8px}
+.action-row{background:#fff;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;border:0.5px solid #e8e4db;cursor:pointer;transition:transform .15s;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.action-row:active{transform:scale(0.97)}
+.action-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .action-info{flex:1}
-.action-name{font-size:14px;font-weight:500;margin-bottom:2px}
-.action-sub{font-size:12px;color:var(--muted)}
-.action-cta{font-size:12px;font-weight:500;color:var(--red)}
+.action-name{font-size:13px;font-weight:500;margin-bottom:1px}
+.action-sub{font-size:11px;color:var(--muted)}
+.action-cta{font-size:11px;font-weight:500;color:var(--red)}
 /* WOTD */
-.wotd-card{margin:0 16px 12px;background:linear-gradient(135deg,var(--ink),#2d2250);border-radius:18px;padding:18px;color:#fff;position:relative;overflow:hidden}
-.wotd-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:rgba(255,255,255,0.05);border-radius:50%}
-.wotd-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:0.6;margin-bottom:10px}
-.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:36px;margin-bottom:4px;line-height:1.2}
-.wotd-romaji{font-size:14px;opacity:0.7;margin-bottom:2px}
-.wotd-en{font-size:18px;font-weight:500;margin-bottom:14px}
-.wotd-btn{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:8px 16px;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer}
+.wotd-card{margin:0 14px 10px;background:linear-gradient(135deg,var(--ink),#2d2250);border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden}
+.wotd-card::before{content:'';position:absolute;top:-20px;right:-20px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%}
+.wotd-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:0.55;margin-bottom:8px}
+.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:32px;margin-bottom:3px;line-height:1.2}
+.wotd-rom{font-size:13px;opacity:0.65;margin-bottom:2px}
+.wotd-en{font-size:16px;font-weight:500;margin-bottom:12px}
+.wotd-btn{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.22);border-radius:9px;padding:7px 14px;color:#fff;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer}
 /* STREAK BANNER */
-.streak-banner{margin:0 16px 12px;background:linear-gradient(135deg,#ff6b35,var(--red));border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;color:#fff}
+.streak-banner{margin:0 14px 10px;background:linear-gradient(135deg,#ff6b35,var(--red));border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;color:#fff}
 .streak-banner.hidden{display:none}
-.sb-fire{font-size:28px}
 .sb-text{flex:1}
-.sb-title{font-size:14px;font-weight:500;margin-bottom:2px}
-.sb-sub{font-size:12px;opacity:0.8}
-.sb-close{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;opacity:0.7;padding:4px}
+.sb-title{font-size:13px;font-weight:500;margin-bottom:1px}
+.sb-sub{font-size:11px;opacity:0.8}
+.sb-close{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;opacity:0.7}
 /* TIPS */
-.tips-card{margin:0 16px 12px;background:linear-gradient(135deg,#fff5f5,#fffdf0);border-radius:16px;padding:16px;border:0.5px solid #f5d9b0}
-.tips-title{font-size:13px;font-weight:500;margin-bottom:10px;color:var(--ink)}
-.tip-item{font-size:13px;color:#5a5650;margin-bottom:5px;padding-left:4px;line-height:1.5}
-/* LEARN UNIT CARDS */
-#unitList{display:flex;flex-direction:row;gap:12px;padding:0 20px 12px;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
-#unitList::-webkit-scrollbar{height:4px}
-#unitList::-webkit-scrollbar-track{background:#f0ede4;border-radius:4px}
-#unitList::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.2);border-radius:4px}
-.unit-card{min-width:260px;max-width:280px;background:#fff;border-radius:18px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
-.unit-header{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.unit-badge{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tips-card{margin:0 14px 10px;background:linear-gradient(135deg,#fff5f5,#fffdf0);border-radius:14px;padding:14px;border:0.5px solid #f5d9b0}
+.tips-title{font-size:12px;font-weight:500;margin-bottom:8px}
+.tip-item{font-size:12px;color:#5a5650;margin-bottom:4px;line-height:1.5}
+/* LEARN */
+#unitList{display:flex;gap:10px;padding:0 18px 10px;overflow-x:auto;scroll-behavior:smooth}
+#unitList::-webkit-scrollbar{height:3px}
+#unitList::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.15);border-radius:4px}
+.unit-card{min-width:240px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
+.unit-head{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.unit-badge{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .unit-info{flex:1}
-.unit-title{font-size:14px;font-weight:500;margin-bottom:2px}
-.unit-meta{font-size:11px;color:var(--muted)}
-.unit-chevron{font-size:14px;color:var(--muted);transition:transform .2s}
-.unit-chevron.open{transform:rotate(90deg)}
-.unit-lessons{border-top:0.5px solid #f0ede4;display:none}
-.unit-lessons.open{display:block}
-.lesson-row{padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;border-bottom:0.5px solid #f8f6f0;transition:background .15s}
+.unit-title{font-size:13px;font-weight:500;margin-bottom:1px}
+.unit-meta{font-size:10px;color:var(--muted)}
+.unit-chev{font-size:13px;color:var(--muted);transition:transform .2s}
+.unit-chev.open{transform:rotate(90deg)}
+.unit-body{border-top:0.5px solid #f0ede4;display:none}
+.unit-body.open{display:block}
+.lesson-row{padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;border-bottom:0.5px solid #f8f6f0;transition:background .15s}
 .lesson-row:last-child{border-bottom:none}
 .lesson-row:active{background:#f8f6f2}
-.lesson-num{width:28px;height:28px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--muted);flex-shrink:0}
-.lesson-num.done{background:var(--green);color:#fff}
-.lesson-row-info{flex:1}
-.lesson-row-name{font-size:13px;font-weight:500;margin-bottom:1px}
-.lesson-row-meta{font-size:11px;color:var(--muted)}
-.lesson-row-arrow{font-size:13px;color:var(--muted)}
-.diff-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.l-num{width:24px;height:24px;border-radius:7px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--muted);flex-shrink:0}
+.l-num.done{background:var(--green);color:#fff}
+.l-info{flex:1}
+.l-name{font-size:12px;font-weight:500;margin-bottom:1px}
+.l-meta{font-size:10px;color:var(--muted)}
+.diff-badge{font-size:9px;padding:1px 6px;border-radius:8px;font-weight:500}
 .diff-beginner{background:#e8f8ef;color:#1a7a40}
 .diff-early{background:#e8f0fe;color:#1a5ab0}
 .diff-intermediate{background:#fef3e8;color:#a05a00}
 .diff-conversation{background:#f8e8f8;color:#6a1a7a}
-/* SECTION TEST ENTRY CARD */
-.section-test-card{margin:0 16px 14px;background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-radius:16px;padding:16px;border:1px solid #c4b5fd;cursor:pointer;transition:transform .15s}
-.section-test-card:active{transform:scale(0.98)}
-.st-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--purple);font-weight:600;margin-bottom:6px}
-.st-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
-.st-sub{font-size:12px;color:#6b5b9e;margin-bottom:12px}
-.st-btn{background:var(--purple);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
-/* LESSON DETAIL */
+.section-test-card{margin:0 14px 12px;background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-radius:14px;padding:14px;border:1px solid #c4b5fd;cursor:pointer;transition:transform .15s}
+.section-test-card:active{transform:scale(0.97)}
+.st-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--purple);font-weight:600;margin-bottom:4px}
+.st-title{font-size:14px;font-weight:600;margin-bottom:3px}
+.st-sub{font-size:11px;color:#6b5b9e;margin-bottom:10px}
+.st-btn{background:var(--purple);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
+/* DETAIL */
 .lesson-detail{flex:1;display:flex;flex-direction:column;overflow-y:scroll;padding-bottom:20px}
-.lesson-detail::-webkit-scrollbar{width:4px}
-.lesson-detail::-webkit-scrollbar-track{background:transparent}
-.lesson-detail::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.15);border-radius:4px}
-.detail-back{padding:16px 20px 0;display:flex;align-items:center;gap:8px;cursor:pointer}
-.detail-back-btn{font-size:22px;background:none;border:none;cursor:pointer}
-.detail-back-label{font-size:14px;color:var(--muted)}
-.detail-header{padding:16px 20px 16px;background:var(--soft);margin-bottom:4px}
-.detail-class{font-size:10px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:4px}
-.detail-unit{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
-.detail-title{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:6px}
-.detail-obj{font-size:13px;color:var(--muted);line-height:1.6;background:#fff;border-radius:10px;padding:10px 12px;border:0.5px solid #e8e4db}
-.detail-tabs{display:flex;padding:0 20px;margin-bottom:16px;border-bottom:0.5px solid #f0ede4;background:#fff;position:sticky;top:0;z-index:10}
-.detail-tab{flex:1;padding:12px 4px;text-align:center;font-size:12px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:all .2s;margin-bottom:-0.5px}
+.lesson-detail::-webkit-scrollbar{width:3px}
+.lesson-detail::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:4px}
+.detail-back{padding:14px 18px 0;display:flex;align-items:center;gap:8px;cursor:pointer}
+.detail-back-btn{font-size:20px;background:none;border:none;cursor:pointer}
+.detail-back-lbl{font-size:13px;color:var(--muted)}
+.detail-hdr{padding:14px 18px;background:var(--soft)}
+.detail-class{font-size:9px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:3px}
+.detail-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:5px}
+.detail-obj{font-size:12px;color:var(--muted);line-height:1.6;background:#fff;border-radius:9px;padding:9px 11px;border:0.5px solid #e8e4db}
+.detail-tabs{display:flex;padding:0 18px;border-bottom:0.5px solid #f0ede4;background:#fff;position:sticky;top:0;z-index:10;overflow-x:auto}
+.detail-tabs::-webkit-scrollbar{display:none}
+.detail-tab{flex-shrink:0;padding:10px 8px;text-align:center;font-size:11px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:all .2s;white-space:nowrap}
 .detail-tab.active{color:var(--red);border-bottom-color:var(--red)}
-.detail-panel{display:none;padding:0 20px}
+.detail-panel{display:none;padding:0 18px}
 .detail-panel.active{display:block}
 /* FLASHCARDS */
-.flashcard{background:#fff;border-radius:20px;padding:24px 20px;margin-bottom:14px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);text-align:center}
-.fc-num{font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.8px}
-.fc-jp{font-family:'Noto Sans JP',sans-serif;font-size:42px;margin-bottom:6px;line-height:1.2}
-.fc-romaji{font-size:15px;color:var(--muted);margin-bottom:4px}
-.fc-en{font-size:18px;font-weight:500;margin-bottom:14px}
-.fc-tip{font-size:12px;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 12px;text-align:left;line-height:1.5;margin-bottom:14px}
-.fc-audio{background:var(--ink);color:#fff;border:none;border-radius:12px;padding:9px 18px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .15s}
-.fc-audio:active{transform:scale(0.95)}
+.flashcard{background:#fff;border-radius:18px;padding:20px 18px;margin-bottom:12px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);text-align:center}
+.fc-num{font-size:10px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px}
+.fc-jp{font-family:'Noto Sans JP',sans-serif;font-size:40px;margin-bottom:5px;line-height:1.2}
+.fc-rom{font-size:14px;color:var(--muted);margin-bottom:3px}
+.fc-en{font-size:17px;font-weight:500;margin-bottom:12px}
+.fc-tip{font-size:11px;color:var(--muted);background:var(--soft);border-radius:9px;padding:7px 10px;text-align:left;line-height:1.5;margin-bottom:12px}
+.fc-audio{background:var(--ink);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
 /* QUIZ */
-.quiz-wrap{padding:0 20px}
-.quiz-header-band{background:var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:16px;color:#fff}
-.quiz-type-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:0.6;margin-bottom:2px}
-.quiz-section-title{font-size:14px;font-weight:500}
-.quiz-prog-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.quiz-prog{flex:1;height:6px;background:#f0ede4;border-radius:3px;overflow:hidden}
+.quiz-wrap{padding:0 18px}
+.quiz-hdr-band{background:var(--ink);border-radius:12px;padding:10px 14px;margin-bottom:14px;color:#fff}
+.quiz-type-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:0.6;margin-bottom:2px}
+.quiz-sec-title{font-size:13px;font-weight:500}
+.quiz-prog-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.quiz-prog{flex:1;height:5px;background:#f0ede4;border-radius:3px;overflow:hidden}
 .quiz-prog-fill{height:100%;background:var(--red);border-radius:3px;transition:width .4s}
-.quiz-step-lbl{font-size:12px;color:var(--muted);white-space:nowrap}
-.quiz-q-type{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:8px}
-.quiz-prompt{font-size:16px;font-weight:500;margin-bottom:16px;line-height:1.5}
-.quiz-jp{font-family:'Noto Sans JP',sans-serif;font-size:30px;margin-bottom:16px;text-align:center;cursor:pointer;background:var(--soft);border-radius:12px;padding:12px}
-.quiz-choices{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
-.choice-btn{background:#fff;border:1.5px solid #e8e4db;border-radius:14px;padding:14px 16px;font-size:15px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:all .2s}
+.quiz-step-lbl{font-size:11px;color:var(--muted);white-space:nowrap}
+.quiz-q-type{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:7px}
+.quiz-prompt{font-size:15px;font-weight:500;margin-bottom:14px;line-height:1.5}
+.quiz-jp{font-family:'Noto Sans JP',sans-serif;font-size:28px;margin-bottom:14px;text-align:center;cursor:pointer;background:var(--soft);border-radius:11px;padding:10px}
+.quiz-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.choice-btn{background:#fff;border:1.5px solid #e8e4db;border-radius:12px;padding:12px 14px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:all .2s}
 .choice-btn.correct{background:#e8f8ef;border-color:var(--green);color:#1a7a40;font-weight:500}
 .choice-btn.wrong{background:#fde8e8;border-color:var(--red);color:#c0392b}
-.choice-btn:active:not(:disabled){transform:scale(0.98)}
-.quiz-feedback{padding:12px 14px;border-radius:12px;font-size:14px;font-weight:500;margin-bottom:14px;display:none;line-height:1.5}
+.choice-btn:active:not(:disabled){transform:scale(0.97)}
+.quiz-feedback{padding:10px 12px;border-radius:10px;font-size:13px;font-weight:500;margin-bottom:12px;display:none;line-height:1.5}
 .quiz-feedback.ok{background:#e8f8ef;color:#1a7a40;display:block}
 .quiz-feedback.bad{background:#fde8e8;color:#c0392b;display:block}
-.quiz-next{width:100%;background:var(--ink);color:#fff;border:none;border-radius:14px;padding:15px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;display:none;transition:transform .15s}
+.quiz-next{width:100%;background:var(--ink);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;display:none;transition:transform .15s}
 .quiz-next.show{display:block}
-.quiz-next:active{transform:scale(0.98)}
-/* QUIZ DONE */
-.quiz-done{text-align:center;padding:24px 0}
-.qd-grade{font-size:52px;margin-bottom:8px}
-.qd-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:8px}
-.qd-grade-box{display:inline-block;background:var(--soft);border-radius:14px;padding:10px 24px;margin-bottom:14px}
-.qd-grade-label{font-size:11px;color:var(--muted);margin-bottom:2px}
-.qd-grade-value{font-size:28px;font-weight:300;color:var(--ink)}
-.qd-sub{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
-.xp-pill{display:inline-flex;align-items:center;gap:6px;background:#fffdf0;border:1px solid var(--gold);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:500;color:#a07000;margin-bottom:20px}
-.qd-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:14px;padding:15px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;margin-bottom:10px}
-.qd-btn2{width:100%;background:transparent;color:var(--ink);border:1.5px solid #ddd;border-radius:14px;padding:13px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer}
+.quiz-next:active{transform:scale(0.97)}
+.quiz-done{text-align:center;padding:20px 0}
+.qd-grade-box{display:inline-block;background:var(--soft);border-radius:12px;padding:8px 22px;margin-bottom:12px}
+.qd-grade-lbl{font-size:10px;color:var(--muted);margin-bottom:1px}
+.qd-grade-val{font-size:26px;font-weight:300}
+.qd-title{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:7px}
+.qd-sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6}
+.xp-pill{display:inline-flex;align-items:center;gap:5px;background:#fffdf0;border:1px solid var(--gold);border-radius:16px;padding:6px 14px;font-size:12px;font-weight:500;color:#a07000;margin-bottom:16px}
+.qd-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;margin-bottom:8px}
+.qd-btn2{width:100%;background:transparent;color:var(--ink);border:1.5px solid #ddd;border-radius:12px;padding:11px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer}
 /* SPEAKING */
-.speak-prompt-card{background:var(--soft);border-radius:16px;padding:20px;margin-bottom:14px}
-.sp-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
-.sp-jp{font-family:'Noto Sans JP',sans-serif;font-size:24px;margin-bottom:4px;line-height:1.4}
-.sp-romaji{font-size:14px;color:var(--muted);margin-bottom:4px}
-.sp-en{font-size:15px;font-weight:500;margin-bottom:16px}
-.sp-btn-row{display:flex;gap:10px}
-.sp-listen,.sp-mic{flex:1;border:none;border-radius:12px;padding:11px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.speak-prompt-card{background:var(--soft);border-radius:14px;padding:18px;margin-bottom:12px}
+.sp-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px}
+.sp-jp{font-family:'Noto Sans JP',sans-serif;font-size:22px;margin-bottom:3px;line-height:1.4}
+.sp-rom{font-size:13px;color:var(--muted);margin-bottom:3px}
+.sp-en{font-size:14px;font-weight:500;margin-bottom:14px}
+.sp-btn-row{display:flex;gap:8px}
+.sp-listen,.sp-mic{flex:1;border:none;border-radius:10px;padding:10px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
 .sp-listen{background:var(--ink);color:#fff}
 .sp-mic{background:var(--red);color:#fff}
 .sp-mic.listening{background:var(--green);animation:pulse 1s infinite}
-.sp-listen:active,.sp-mic:active{transform:scale(0.95)}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.sp-fb{font-size:13px;color:var(--muted);margin-top:10px;text-align:center;min-height:20px}
-/* SECTION EXAM PAGE */
-.exam-intro{padding:20px;background:var(--soft);margin-bottom:16px}
-.exam-rule{font-size:13px;color:#555;line-height:1.8;margin-bottom:4px;padding-left:8px}
-.exam-meta-row{display:flex;gap:10px;margin-top:12px}
-.exam-meta{flex:1;background:#fff;border-radius:10px;padding:10px;text-align:center;border:0.5px solid #e8e4db}
-.exam-meta-val{font-size:18px;font-weight:300;margin-bottom:2px}
-.exam-meta-lbl{font-size:11px;color:var(--muted)}
-.exam-start-btn{width:calc(100% - 40px);margin:0 20px 20px;background:var(--purple);color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:transform .15s}
-.exam-start-btn:active{transform:scale(0.98)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.sp-fb{font-size:12px;color:var(--muted);margin-top:8px;text-align:center;min-height:18px}
 /* SPEAK TAB */
-.scenario-card{margin:0 16px 14px;background:#fff;border-radius:18px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);overflow:hidden}
-.sc-head{padding:14px 16px;background:linear-gradient(135deg,#fff5f5,#fafafa)}
-.sc-title{font-size:14px;font-weight:500;margin-bottom:3px}
-.sc-sit{font-size:12px;color:var(--muted)}
-.sc-body{padding:14px 16px}
-.sc-prompt{font-size:13px;font-weight:500;color:var(--red);margin-bottom:12px}
-.sc-jp{font-family:'Noto Sans JP',sans-serif;font-size:20px;margin-bottom:4px;line-height:1.4;cursor:pointer}
-.sc-romaji{font-size:13px;color:var(--muted);margin-bottom:3px}
-.sc-en{font-size:13px;color:#555;margin-bottom:14px}
-.sc-btns{display:flex;gap:10px}
-.sc-lb,.sc-mb{flex:1;border:none;border-radius:12px;padding:10px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.scenario-card{margin:0 14px 12px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);overflow:hidden}
+.sc-head{padding:12px 14px;background:linear-gradient(135deg,#fff5f5,#fafafa)}
+.sc-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.sc-sit{font-size:11px;color:var(--muted)}
+.sc-body{padding:12px 14px}
+.sc-prompt{font-size:12px;font-weight:500;color:var(--red);margin-bottom:10px}
+.sc-jp{font-family:'Noto Sans JP',sans-serif;font-size:18px;margin-bottom:3px;cursor:pointer}
+.sc-rom{font-size:12px;color:var(--muted);margin-bottom:2px}
+.sc-en{font-size:12px;color:#555;margin-bottom:12px}
+.sc-btns{display:flex;gap:8px}
+.sc-lb,.sc-mb{flex:1;border:none;border-radius:10px;padding:9px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
 .sc-lb{background:var(--ink);color:#fff}
 .sc-mb{background:var(--red);color:#fff}
 .sc-mb.listening{background:var(--green);animation:pulse 1s infinite}
-.sc-lb:active,.sc-mb:active{transform:scale(0.95)}
-.sc-fb{font-size:12px;color:var(--muted);margin-top:10px;min-height:18px}
-/* PLAN */
-.phase-card{margin:0 16px 14px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;padding:16px;box-shadow:var(--shadow)}
-.phase-card.cur{border-color:var(--red);border-width:1.5px}
-.phase-num{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:4px}
-.phase-title{font-size:15px;font-weight:500;margin-bottom:4px}
-.phase-months{font-size:12px;color:var(--red);margin-bottom:6px;font-weight:500}
-.phase-lvl{font-size:12px;color:var(--blue);font-weight:500;margin-bottom:8px}
-.phase-focus{font-size:13px;color:#555;line-height:1.6}
-.daily-tgt{margin:0 16px 14px;background:linear-gradient(135deg,#fff8f0,#fffdf5);border-radius:16px;padding:16px;border:0.5px solid #f5d9b0}
+.sc-fb{font-size:11px;color:var(--muted);margin-top:8px;min-height:16px}
+/* WRITE */
+.write-sub-tabs{display:flex;padding:10px 14px;gap:6px;background:#fff;border-bottom:0.5px solid #f0ede4;position:sticky;top:0;z-index:10;overflow-x:auto}
+.write-sub-tabs::-webkit-scrollbar{display:none}
+.write-sub-tab{flex-shrink:0;padding:7px 12px;text-align:center;font-size:11px;font-weight:500;border-radius:9px;cursor:pointer;color:var(--muted);background:var(--soft);border:none;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.write-sub-tab.active{background:var(--navy);color:#fff}
+.kana-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 14px}
+.kana-cell{background:#fff;border-radius:10px;padding:8px 4px;text-align:center;border:0.5px solid #e8e4db;cursor:pointer;transition:all .2s}
+.kana-cell:active{transform:scale(0.93)}
+.kana-cell.sel{border-color:var(--navy);border-width:2px;background:#e8f0fe}
+.kana-cell.mastered{border-color:var(--green);background:#e8f8ef}
+.kana-char{font-family:'Noto Sans JP',sans-serif;font-size:20px;margin-bottom:1px;line-height:1.2}
+.kana-rom{font-size:9px;color:var(--muted)}
+.canvas-wrap-card{margin:0 14px 10px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(--shadow)}
+.canvas-hdr{padding:12px 14px 8px;border-bottom:0.5px solid #f0ede4;display:flex;align-items:center;justify-content:space-between}
+.canvas-char{font-family:'Noto Sans JP',sans-serif;font-size:48px;line-height:1}
+.canvas-info{text-align:right}
+.canvas-rom{font-size:14px;color:var(--muted);margin-bottom:1px}
+.canvas-meaning{font-size:11px;color:var(--muted)}
+.canvas-draw{position:relative;background:#faf8f2;cursor:crosshair}
+.canvas-draw canvas{display:block;width:100%;touch-action:none}
+.canvas-hint{padding:6px 14px;background:#f8f6f2;font-size:10px;color:var(--muted);text-align:center}
+.canvas-actions{display:flex;gap:6px;padding:8px 12px}
+.canvas-btn{flex:1;border:none;border-radius:9px;padding:9px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:transform .15s}
+.canvas-btn:active{transform:scale(0.95)}
+.canvas-btn.clear{background:#f0ede4;color:var(--ink)}
+.canvas-btn.hear{background:var(--ink);color:#fff}
+.canvas-btn.mastered-btn{background:var(--green);color:#fff}
+.canvas-btn.next-btn{background:var(--navy);color:#fff}
+.write-tip-card{margin:0 14px 10px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:12px}
+.write-tip-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
+.prog-row{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:#fff;border-bottom:0.5px solid #f0ede4}
+.prog-lbl{font-size:11px;color:var(--muted)}
+.prog-val{font-size:12px;font-weight:500;color:var(--navy)}
+/* PRACTICE HUB */
+.practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px}
+.practice-card{background:#fff;border-radius:14px;padding:14px;border:0.5px solid #e8e4db;cursor:pointer;transition:transform .15s;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.practice-card:active{transform:scale(0.95)}
+.practice-icon{font-size:28px;margin-bottom:7px}
+.practice-name{font-size:13px;font-weight:500;margin-bottom:2px}
+.practice-sub{font-size:10px;color:var(--muted);line-height:1.4}
+.practice-badge{font-size:9px;padding:2px 7px;border-radius:8px;font-weight:600;margin-top:6px;display:inline-block}
+/* SENTENCE BUILDER */
+.sb-sentence{background:var(--soft);border-radius:12px;padding:14px;margin-bottom:12px;min-height:50px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sb-slot{min-width:60px;height:36px;border:2px dashed #ccc;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;padding:4px 8px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;color:var(--muted)}
+.sb-slot.filled{border:2px solid var(--navy);background:#fff;color:var(--ink)}
+.sb-words{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.sb-word{background:#fff;border:1.5px solid #e8e4db;border-radius:9px;padding:7px 11px;font-family:'Noto Sans JP',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
+.sb-word:active{transform:scale(0.95)}
+.sb-word.used{opacity:0.3;pointer-events:none}
+.sb-word.correct-w{border-color:var(--green);background:#e8f8ef}
+/* LISTENING */
+.listen-card{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);text-align:center}
+.listen-play-btn{width:64px;height:64px;border-radius:32px;background:var(--navy);border:none;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;margin:0 auto 12px;box-shadow:0 4px 14px rgba(15,76,129,0.3);transition:transform .2s}
+.listen-play-btn:active{transform:scale(0.93)}
+.listen-play-btn.playing{background:var(--teal);animation:pulse 1s infinite}
+/* PLANNER */
+.planner-day{margin:0 14px 10px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;overflow:hidden}
+.planner-day-hdr{padding:10px 14px;display:flex;align-items:center;gap:10px;background:var(--soft)}
+.planner-day-num{width:32px;height:32px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.planner-day-num.today{background:var(--red)}
+.planner-day-num.done-day{background:var(--green)}
+.planner-day-info{flex:1}
+.planner-day-name{font-size:13px;font-weight:500}
+.planner-day-sub{font-size:10px;color:var(--muted)}
+.planner-tasks{padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.planner-task{display:flex;align-items:center;gap:8px;font-size:12px}
+.task-check{width:18px;height:18px;border-radius:5px;border:1.5px solid #ddd;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
+.task-check.done{background:var(--green);border-color:var(--green);color:#fff}
+/* REVIEW */
+.review-banner{margin:0 14px 10px;background:linear-gradient(135deg,#fef3e8,#fffdf0);border-radius:14px;padding:14px;border:0.5px solid #f5d9b0}
 /* PROGRESS */
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 4px}
-.stat-box{background:#fff;border-radius:14px;padding:14px;border:0.5px solid #e8e4db}
-.stat-num{font-size:28px;font-weight:300;margin-bottom:2px}
-.stat-lbl{font-size:12px;color:var(--muted)}
-.bdg-row{display:flex;gap:10px;padding:0 16px;overflow-x:auto;padding-bottom:10px}
-.bdg-row::-webkit-scrollbar{height:4px}
-.bdg-row::-webkit-scrollbar-track{background:#f0ede4;border-radius:4px}
-.bdg-row::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
-.bdg{min-width:84px;background:#fff;border-radius:14px;padding:12px 8px;text-align:center;border:0.5px solid #e8e4db;flex-shrink:0}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px}
+.stat-box{background:#fff;border-radius:12px;padding:12px;border:0.5px solid #e8e4db}
+.stat-num{font-size:26px;font-weight:300;margin-bottom:1px}
+.stat-lbl{font-size:11px;color:var(--muted)}
+.bdg-row{display:flex;gap:8px;padding:0 14px;overflow-x:auto;padding-bottom:8px}
+.bdg-row::-webkit-scrollbar{display:none}
+.bdg{min-width:78px;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;border:0.5px solid #e8e4db;flex-shrink:0}
 .bdg.earned{border-color:var(--gold);background:#fffdf0}
-.bdg-emoji{font-size:22px;margin-bottom:4px}
-.bdg-name{font-size:10px;font-weight:500}
-.bdg-status{font-size:9px;color:var(--muted);margin-top:2px}
-.cal-grid{display:flex;flex-wrap:wrap;gap:5px;padding:0 16px}
-.cal-dot{width:28px;height:28px;border-radius:8px;background:#f0ede4;font-size:10px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.bdg-emoji{font-size:20px;margin-bottom:3px}
+.bdg-name{font-size:9px;font-weight:500}
+.bdg-status{font-size:8px;color:var(--muted);margin-top:1px}
+.cal-grid{display:flex;flex-wrap:wrap;gap:4px;padding:0 14px}
+.cal-dot{width:26px;height:26px;border-radius:7px;background:#f0ede4;font-size:9px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
 .cal-dot.done{background:var(--red);color:#fff}
-.cal-dot.today{border:2px solid var(--red);background:#fff;color:var(--red);font-weight:500}
-.reset-btn{display:block;margin:8px 16px 16px;background:none;border:0.5px solid #ddd;border-radius:12px;padding:10px;font-size:12px;color:var(--muted);cursor:pointer;width:calc(100% - 32px);text-align:center}
+.cal-dot.today{border:2px solid var(--red);background:#fff;color:var(--red);font-weight:600}
+.reset-btn{display:block;margin:6px 14px 14px;background:none;border:0.5px solid #ddd;border-radius:10px;padding:9px;font-size:11px;color:var(--muted);cursor:pointer;width:calc(100% - 28px);text-align:center}
 /* TOAST */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:98px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 18px;border-radius:18px;font-size:12px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1}
+/* EXAM */
+.exam-intro{padding:14px;background:var(--soft)}
+.exam-rule{font-size:12px;color:#555;line-height:1.8;padding-left:6px}
+.exam-meta-row{display:flex;gap:8px;margin-top:10px}
+.exam-meta{flex:1;background:#fff;border-radius:9px;padding:9px;text-align:center;border:0.5px solid #e8e4db}
+.exam-meta-val{font-size:16px;font-weight:300;margin-bottom:1px}
+.exam-meta-lbl{font-size:10px;color:var(--muted)}
+.exam-start-btn{width:calc(100% - 28px);margin:0 14px 16px;background:var(--purple);color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
+/* CERTIFICATE */
+.cert-card{margin:0 14px 14px;background:linear-gradient(135deg,#fffdf0,#fff8e8);border-radius:16px;border:2px solid var(--gold);padding:18px;text-align:center}
+.cert-emoji{font-size:40px;margin-bottom:8px}
+.cert-title{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:4px;color:var(--ink)}
+.cert-sub{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.cert-btn{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:9px 20px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer}
+/* PHASE */
+.phase-card{margin:0 14px 12px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px;box-shadow:var(--shadow)}
+.phase-card.cur{border-color:var(--red);border-width:1.5px}
+.phase-num{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:3px}
+.phase-title{font-size:14px;font-weight:500;margin-bottom:3px}
+.phase-months{font-size:11px;color:var(--red);margin-bottom:5px;font-weight:500}
+.phase-lvl{font-size:11px;color:var(--blue);font-weight:500;margin-bottom:6px}
+.phase-focus{font-size:12px;color:#555;line-height:1.6}
+.daily-tgt{margin:0 14px 12px;background:linear-gradient(135deg,#fff8f0,#fffdf5);border-radius:14px;padding:14px;border:0.5px solid #f5d9b0}
 </style>
 </head>
 <body>
@@ -269,77 +333,83 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
     <!-- HOME -->
     <div class="page active" id="page-home">
       <div class="page-header dark">
-        <div class="header-title">NihongoStep 🌸</div>
-        <div class="header-sub" id="homeGreeting">Your Japanese journey starts today</div>
-        <div class="pill-row" style="margin-top:14px">
+        <div class="h-title">NihongoStep 🌸</div>
+        <div class="h-sub" id="homeGreeting">Your Japanese journey starts today</div>
+        <div class="pill-row">
           <div class="pill" id="pillStreak">🔥 Day 1</div>
           <div class="pill" id="pillXP">⭐ 0 XP</div>
           <div class="pill">🎯 N5 Goal</div>
         </div>
       </div>
       <div class="streak-banner" id="streakBanner">
-        <div class="sb-fire">🔥</div>
-        <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today to continue</div></div>
+        <div style="font-size:24px">🔥</div>
+        <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
         <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
       </div>
       <div class="wotd-card">
-        <div class="wotd-label">🌟 Word of the Day</div>
+        <div class="wotd-lbl">🌟 Word of the Day</div>
         <div class="wotd-jp" id="wotdJP">がんばって</div>
-        <div class="wotd-romaji" id="wotdRomaji">Ganbatte</div>
+        <div class="wotd-rom" id="wotdRomaji">Ganbatte</div>
         <div class="wotd-en" id="wotdEn">Do your best / Good luck!</div>
         <button class="wotd-btn" onclick="speakWotd()">🔊 Hear it</button>
       </div>
-      <div class="card" style="margin-top:4px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="font-size:13px;font-weight:500">N5 by December 2026</span>
-          <span style="font-size:13px;color:var(--red);font-weight:500" id="goalPct">0%</span>
+      <div class="card" style="margin-top:2px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:500">N5 by December 2026</span>
+          <span style="font-size:12px;color:var(--red);font-weight:500" id="goalPct">0%</span>
         </div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" id="goalFill" style="width:0%"></div></div>
-        <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months ahead</span></div>
+        <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+        <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months</span></div>
       </div>
-      <div class="section-title">Your Units</div>
-      <div class="lesson-scroll" id="homeChips"></div>
-      <div class="section-title">Today's Practice</div>
+      <div class="sec-title">Daily Review</div>
+      <div class="review-banner" id="reviewBanner">
+        <div style="font-size:12px;font-weight:500;margin-bottom:5px">📚 5-Question Daily Recap</div>
+        <div style="font-size:11px;color:#5a4a30;line-height:1.5;margin-bottom:10px">A quick recap of words you've learned — keeps them fresh in your memory.</div>
+        <button style="background:var(--gold);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer" onclick="startDailyReview()">Start Review →</button>
+      </div>
+      <div class="sec-title">Your Units</div>
+      <div class="h-scroll" id="homeChips"></div>
+      <div class="sec-title">Practice</div>
       <div class="action-list">
         <div class="action-row" onclick="openLesson(0)">
           <div class="action-icon" style="background:#fde8e8">🎯</div>
-          <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics · 12 min</div></div>
+          <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics</div></div>
           <div class="action-cta">Start →</div>
         </div>
         <div class="action-row" onclick="openExam()">
           <div class="action-icon" style="background:#f3e8ff">📝</div>
-          <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam across all units</div></div>
-          <div class="action-cta">Take test →</div>
+          <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam · all units</div></div>
+          <div class="action-cta">Take →</div>
         </div>
-        <div class="action-row" onclick="switchTab('speak')">
-          <div class="action-icon" style="background:#e8f0fe">🗣️</div>
-          <div class="action-info"><div class="action-name">Speaking Scenarios</div><div class="action-sub">3 real-life conversations to practice</div></div>
-          <div class="action-cta">Practice →</div>
+        <div class="action-row" onclick="switchTab('practice')">
+          <div class="action-icon" style="background:#e8f8ef">🎮</div>
+          <div class="action-info"><div class="action-name">Practice Hub</div><div class="action-sub">Listening · sentences · role-play</div></div>
+          <div class="action-cta">Open →</div>
         </div>
       </div>
-      <div class="tips-card" style="margin-top:12px">
-        <div class="tips-title">🎯 How to hit your December 2026 goal</div>
-        <div class="tip-item">1. Study flashcards first, then take the lesson quiz</div>
-        <div class="tip-item">2. Take the Section Test after every 2–3 units</div>
-        <div class="tip-item">3. Repeat every audio cue aloud after hearing it</div>
-        <div class="tip-item">4. Do one speaking scenario daily</div>
-        <div class="tip-item">5. Aim for 80%+ on tests before moving on</div>
+      <div class="tips-card" style="margin-top:10px">
+        <div class="tips-title">🎯 Your daily study routine</div>
+        <div class="tip-item">1. Do the Daily Review first (5 min)</div>
+        <div class="tip-item">2. Study a lesson + take its quiz</div>
+        <div class="tip-item">3. Practice writing in the Write tab</div>
+        <div class="tip-item">4. Do one speaking or listening drill</div>
+        <div class="tip-item">5. After 3+ lessons, take the Section Test</div>
       </div>
     </div>
 
-    <!-- LEARN -->
+    <!-- LESSONS -->
     <div class="page" id="page-learn">
       <div class="page-header dark">
-        <div class="header-title">Classroom</div>
-        <div class="header-sub">5 lessons · JLPT N5 → N4</div>
+        <div class="h-title">Classroom 🏫</div>
+        <div class="h-sub">5 lessons · JLPT N5 → N4</div>
       </div>
-      <div style="height:16px"></div>
+      <div style="height:14px"></div>
       <div id="unitList"></div>
-      <div class="section-title">Section Test</div>
+      <div class="sec-title">Section Test</div>
       <div class="section-test-card" onclick="openExam()">
-        <div class="st-label">📝 JLPT-Style Exam</div>
+        <div class="st-lbl">📝 JLPT-Style Exam</div>
         <div class="st-title">Units 1–5 Section Test</div>
-        <div class="st-sub">Covers vocabulary, grammar, reading & listening — just like the real N5 exam format</div>
+        <div class="st-sub">Vocab · Grammar · Reading · Listening · Pass = 70%+</div>
         <button class="st-btn">Start Test →</button>
       </div>
     </div>
@@ -352,39 +422,42 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
     <!-- SECTION EXAM -->
     <div class="page" id="page-exam">
       <div class="page-header exam">
-        <div class="header-title">Section Test 📝</div>
-        <div class="header-sub">JLPT N5 Format — Units 1–5</div>
+        <div class="h-title">Section Test 📝</div>
+        <div class="h-sub">JLPT N5 Format — Units 1–5</div>
       </div>
       <div id="examContent"></div>
     </div>
 
-    <!-- SPEAK -->
-    <div class="page" id="page-speak">
-      <div class="page-header red">
-        <div class="header-title">Speak</div>
-        <div class="header-sub">Real scenarios — listen, then reply</div>
+    <!-- PRACTICE HUB -->
+    <div class="page" id="page-practice">
+      <div class="page-header teal">
+        <div class="h-title">Practice Hub 🎮</div>
+        <div class="h-sub">Listening · Writing · Speaking · Games</div>
       </div>
-      <div style="height:16px"></div>
-      <div id="scenarioList"></div>
+      <div id="practiceContent"></div>
     </div>
 
-    <!-- PLAN -->
-    <div class="page" id="page-plan">
-      <div class="page-header plan">
-        <div class="header-title">Your Roadmap</div>
-        <div class="header-sub">April 2026 → December 2026</div>
+    <!-- PRACTICE SUB-PAGE -->
+    <div class="page" id="page-practice-sub">
+      <div class="lesson-detail" id="practiceSubContent"></div>
+    </div>
+
+    <!-- WRITE -->
+    <div class="page" id="page-write">
+      <div class="page-header navy">
+        <div class="h-title">Write ✍️</div>
+        <div class="h-sub">Hiragana · Katakana · Vocabulary</div>
       </div>
-      <div style="height:16px"></div>
-      <div id="planContent"></div>
+      <div id="writeContent"></div>
     </div>
 
     <!-- PROGRESS -->
     <div class="page" id="page-progress">
       <div class="page-header dark">
-        <div class="header-title">Progress</div>
-        <div class="header-sub">Your saved stats — updated as you learn</div>
+        <div class="h-title">Progress 📊</div>
+        <div class="h-sub">Your stats · badges · planner</div>
       </div>
-      <div style="height:16px"></div>
+      <div style="height:14px"></div>
       <div id="progressContent"></div>
     </div>
 
@@ -393,182 +466,254 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
   <div class="tab-bar">
     <div class="tab active" id="tab-home" onclick="switchTab('home')"><div class="tab-icon">🏠</div><div class="tab-label">Home</div></div>
     <div class="tab" id="tab-learn" onclick="switchTab('learn')"><div class="tab-icon">📖</div><div class="tab-label">Lessons</div></div>
-    <div class="tab" id="tab-speak" onclick="switchTab('speak')"><div class="tab-icon">🗣️</div><div class="tab-label">Speak</div></div>
-    <div class="tab" id="tab-plan" onclick="switchTab('plan')"><div class="tab-icon">🗺️</div><div class="tab-label">Plan</div></div>
+    <div class="tab" id="tab-practice" onclick="switchTab('practice')"><div class="tab-icon">🎮</div><div class="tab-label">Practice</div></div>
+    <div class="tab" id="tab-write" onclick="switchTab('write')"><div class="tab-icon">✍️</div><div class="tab-label">Write</div></div>
     <div class="tab" id="tab-progress" onclick="switchTab('progress')"><div class="tab-icon">📊</div><div class="tab-label">Progress</div></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* ===== LESSON DATA ===== */
+/* ============================================================
+   DATA
+============================================================ */
 const lessons=[
   {unit:"Lesson 1",title:"Greetings & Polite Basics",objective:"Recognize and say the most common greetings and polite phrases.",difficulty:"beginner",minutes:12,jlpt:"JLPT N5",
    cards:[
-    {jp:"こんにちは",romaji:"Konnichiwa",en:"Hello / Good afternoon",tip:"Used during the day. The 'wa' particle is written with は here."},
-    {jp:"おはようございます",romaji:"Ohayou gozaimasu",en:"Good morning",tip:"Formal version. Safe for strangers and at work."},
-    {jp:"こんばんは",romaji:"Konbanwa",en:"Good evening",tip:"Used after sunset. The 'wa' is also written with は."},
-    {jp:"ありがとうございます",romaji:"Arigatou gozaimasu",en:"Thank you (formal)",tip:"The polite, full version. Use this with anyone you respect."},
-    {jp:"すみません",romaji:"Sumimasen",en:"Excuse me / Sorry",tip:"Very versatile — used to get attention, apologize, or thank someone."},
-    {jp:"はい / いいえ",romaji:"Hai / Iie",en:"Yes / No",tip:"はい can also mean 'I heard you' — it doesn't always mean agreement."}
+    {jp:"こんにちは",rom:"Konnichiwa",en:"Hello / Good afternoon",tip:"Used during the day. The 'wa' particle is written with は here."},
+    {jp:"おはようございます",rom:"Ohayou gozaimasu",en:"Good morning",tip:"Formal version. Safe for strangers and at work."},
+    {jp:"こんばんは",rom:"Konbanwa",en:"Good evening",tip:"Used after sunset. Also written with は."},
+    {jp:"ありがとうございます",rom:"Arigatou gozaimasu",en:"Thank you (formal)",tip:"The polite, full version. Use with anyone you respect."},
+    {jp:"すみません",rom:"Sumimasen",en:"Excuse me / Sorry",tip:"Used to get attention, apologize, or thank someone."},
+    {jp:"はい / いいえ",rom:"Hai / Iie",en:"Yes / No",tip:"はい can also mean 'I heard you' — not always agreement."}
    ],
    quiz:[
-    {type:"vocab",prompt:"What does こんにちは mean?",jp:"こんにちは",choices:["Good morning","Hello / Good afternoon","Good evening","Thank you"],answer:"Hello / Good afternoon",explain:"こんにちは is used during the day for 'hello'."},
+    {type:"vocab",prompt:"What does こんにちは mean?",jp:"こんにちは",choices:["Good morning","Hello / Good afternoon","Good evening","Thank you"],answer:"Hello / Good afternoon",explain:"こんにちは is used during the day."},
     {type:"vocab",prompt:"Which phrase do you use in the morning?",jp:"",choices:["こんばんは","すみません","おはようございます","ありがとう"],answer:"おはようございます",explain:"おはようございます means 'Good morning'."},
-    {type:"reading",prompt:"Read this and choose the correct meaning:",jp:"すみません",choices:["You're welcome","Excuse me / Sorry","Good evening","Yes"],answer:"Excuse me / Sorry",explain:"すみません is used to say sorry or excuse me."},
-    {type:"vocab",prompt:"How do you say 'Thank you' formally in Japanese?",jp:"",choices:["はい","ありがとうございます","こんにちは","いいえ"],answer:"ありがとうございます",explain:"ありがとうございます is the formal way to say thank you."},
-    {type:"grammar",prompt:"Which word means 'No' in Japanese?",jp:"",choices:["はい","すみません","いいえ","また"],answer:"いいえ",explain:"いいえ means 'No'. はい means 'Yes'."}
+    {type:"reading",prompt:"What does this mean?",jp:"すみません",choices:["You're welcome","Excuse me / Sorry","Good evening","Yes"],answer:"Excuse me / Sorry",explain:"すみません = Excuse me or Sorry."},
+    {type:"vocab",prompt:"How do you say 'Thank you' formally?",jp:"",choices:["はい","ありがとうございます","こんにちは","いいえ"],answer:"ありがとうございます",explain:"ありがとうございます is the formal thank you."},
+    {type:"grammar",prompt:"Which word means 'No'?",jp:"",choices:["はい","すみません","いいえ","また"],answer:"いいえ",explain:"いいえ = No. はい = Yes."}
    ],
-   speaking:{jp:"こんにちは。ありがとうございます。",romaji:"Konnichiwa. Arigatou gozaimasu.",en:"Hello. Thank you."}
+   speaking:{jp:"こんにちは。ありがとうございます。",rom:"Konnichiwa. Arigatou gozaimasu.",en:"Hello. Thank you."}
   },
   {unit:"Lesson 2",title:"Self-Introduction",objective:"Introduce yourself with a simple and polite pattern.",difficulty:"beginner",minutes:15,jlpt:"JLPT N5",
    cards:[
-    {jp:"わたし は ～ です",romaji:"Watashi wa ~ desu",en:"I am ~",tip:"This is the basic introduction pattern. Fill in your name for ~."},
-    {jp:"です",romaji:"Desu",en:"To be (polite)",tip:"です ends most polite sentences. Never skip it in formal speech."},
-    {jp:"よろしくおねがいします",romaji:"Yoroshiku onegaishimasu",en:"Nice to meet you / Please treat me well",tip:"Always said after introducing yourself. It's essential etiquette."},
-    {jp:"なまえ は ～ です",romaji:"Namae wa ~ desu",en:"My name is ~",tip:"なまえ means 'name'. Add your name and end with です."},
-    {jp:"～じん です",romaji:"~jin desu",en:"I am from ~ (nationality)",tip:"じん attaches to a country name. アメリカじん = American."},
-    {jp:"しゅみ は ～ です",romaji:"Shumi wa ~ desu",en:"My hobby is ~",tip:"しゅみ means 'hobby'. Use this to add a personal detail."}
+    {jp:"わたし は ～ です",rom:"Watashi wa ~ desu",en:"I am ~",tip:"Basic intro pattern. Fill in your name for ~."},
+    {jp:"です",rom:"Desu",en:"To be (polite)",tip:"です ends most polite sentences. Never skip it."},
+    {jp:"よろしくおねがいします",rom:"Yoroshiku onegaishimasu",en:"Nice to meet you",tip:"Always said after introducing yourself."},
+    {jp:"なまえ は ～ です",rom:"Namae wa ~ desu",en:"My name is ~",tip:"なまえ means 'name'. Add your name then です."},
+    {jp:"～じん です",rom:"~jin desu",en:"I am from ~ (nationality)",tip:"じん attaches to a country. アメリカじん = American."},
+    {jp:"しゅみ は ～ です",rom:"Shumi wa ~ desu",en:"My hobby is ~",tip:"しゅみ means 'hobby'."}
    ],
    quiz:[
-    {type:"grammar",prompt:"How do you say 'I am Yuki' in Japanese?",jp:"",choices:["わたしは ゆきです","ゆきは わたしです","ゆき です わたし","ですゆきわたし"],answer:"わたしは ゆきです",explain:"The pattern is わたしは [name] です — 'I am [name]'."},
-    {type:"vocab",prompt:"What does よろしくおねがいします mean?",jp:"よろしくおねがいします",choices:["Goodbye","Nice to meet you","Thank you","Excuse me"],answer:"Nice to meet you",explain:"よろしくおねがいします means 'Nice to meet you / Please treat me well'."},
-    {type:"reading",prompt:"Choose the correct reading:",jp:"です",choices:["desu","deso","deske","deshi"],answer:"desu",explain:"です is read 'desu' — the polite sentence ending."},
-    {type:"grammar",prompt:"'アメリカじんです' means:",jp:"アメリカじんです",choices:["I like America","I am American","America is nice","From America"],answer:"I am American",explain:"じん means 'person from'. アメリカじん = American person."},
-    {type:"vocab",prompt:"How do you say 'hobby' in Japanese?",jp:"",choices:["なまえ","しゅみ","ゆめ","ともだち"],answer:"しゅみ",explain:"しゅみ means 'hobby'."}
+    {type:"grammar",prompt:"How do you say 'I am Yuki'?",jp:"",choices:["わたしは ゆきです","ゆきは わたしです","ゆき です わたし","ですゆきわたし"],answer:"わたしは ゆきです",explain:"Pattern: わたしは [name] です."},
+    {type:"vocab",prompt:"What does よろしくおねがいします mean?",jp:"よろしくおねがいします",choices:["Goodbye","Nice to meet you","Thank you","Excuse me"],answer:"Nice to meet you",explain:"よろしくおねがいします = Nice to meet you."},
+    {type:"reading",prompt:"Choose the correct reading:",jp:"です",choices:["desu","deso","deske","deshi"],answer:"desu",explain:"です is read 'desu'."},
+    {type:"grammar",prompt:"'アメリカじんです' means:",jp:"アメリカじんです",choices:["I like America","I am American","America is nice","From America"],answer:"I am American",explain:"じん = person from. アメリカじん = American."},
+    {type:"vocab",prompt:"How do you say 'hobby'?",jp:"",choices:["なまえ","しゅみ","ゆめ","ともだち"],answer:"しゅみ",explain:"しゅみ = hobby."}
    ],
-   speaking:{jp:"わたしは [なまえ] です。よろしくおねがいします。",romaji:"Watashi wa [name] desu. Yoroshiku onegaishimasu.",en:"I am [name]. Nice to meet you."}
+   speaking:{jp:"わたしは [なまえ] です。よろしくおねがいします。",rom:"Watashi wa [name] desu. Yoroshiku onegaishimasu.",en:"I am [name]. Nice to meet you."}
   },
-  {unit:"Lesson 3",title:"Travel & Daily Survival",objective:"Ask simple questions and handle stores or stations with confidence.",difficulty:"earlyIntermediate",minutes:18,jlpt:"JLPT N5",
+  {unit:"Lesson 3",title:"Travel & Daily Survival",objective:"Ask simple questions and handle stores or stations confidently.",difficulty:"earlyIntermediate",minutes:18,jlpt:"JLPT N5",
    cards:[
-    {jp:"これは いくらですか",romaji:"Kore wa ikura desu ka",en:"How much is this?",tip:"これ = this. いくら = how much. Add か to make a question."},
-    {jp:"～は どこですか",romaji:"~ wa doko desu ka",en:"Where is ~?",tip:"どこ = where. Great pattern for finding places."},
-    {jp:"えき",romaji:"Eki",en:"Station (train)",tip:"Japan's train network is huge — you'll use this constantly."},
-    {jp:"みずを おねがいします",romaji:"Mizu o onegaishimasu",en:"Water, please",tip:"みず = water. This restaurant phrase works everywhere."},
-    {jp:"もういちど おねがいします",romaji:"Mou ichido onegaishimasu",en:"One more time, please",tip:"もういちど = one more time. Use when you didn't catch something."},
-    {jp:"わかりません",romaji:"Wakarimasen",en:"I don't understand",tip:"Honest and polite. Native speakers will often slow down for you."}
+    {jp:"これは いくらですか",rom:"Kore wa ikura desu ka",en:"How much is this?",tip:"これ = this, いくら = how much, か = question marker."},
+    {jp:"～は どこですか",rom:"~ wa doko desu ka",en:"Where is ~?",tip:"どこ = where. Great for finding places."},
+    {jp:"えき",rom:"Eki",en:"Station",tip:"Japan's train network is huge — you'll use this daily."},
+    {jp:"みずを おねがいします",rom:"Mizu o onegaishimasu",en:"Water, please",tip:"みず = water. Works in any restaurant."},
+    {jp:"もういちど おねがいします",rom:"Mou ichido onegaishimasu",en:"One more time, please",tip:"Use when you didn't catch something."},
+    {jp:"わかりません",rom:"Wakarimasen",en:"I don't understand",tip:"Honest and polite. Speakers will slow down for you."}
    ],
    quiz:[
-    {type:"vocab",prompt:"How do you ask 'Where is the bathroom?'",jp:"",choices:["トイレはいくらですか","トイレはどこですか","トイレはなんですか","えきはどこですか"],answer:"トイレはどこですか",explain:"どこ means 'where'. トイレは どこですか = Where is the bathroom?"},
-    {type:"reading",prompt:"What does this mean?",jp:"わかりません",choices:["I understand","I don't understand","I don't know the price","Please repeat"],answer:"I don't understand",explain:"わかりません = 'I don't understand'."},
-    {type:"grammar",prompt:"'これは いくらですか' means:",jp:"これは いくらですか",choices:["What is this?","Where is this?","How much is this?","Is this cheap?"],answer:"How much is this?",explain:"いくら means 'how much'. これ means 'this'."},
-    {type:"vocab",prompt:"How do you say 'station' in Japanese?",jp:"",choices:["みず","でんしゃ","えき","ホテル"],answer:"えき",explain:"えき means 'station' (train station)."},
-    {type:"grammar",prompt:"You want to ask for something politely. Which ending do you use?",jp:"",choices:["ください","おねがいします","ありがとう","すみません"],answer:"おねがいします",explain:"おねがいします is a polite way to request something."}
+    {type:"vocab",prompt:"How do you ask 'Where is the bathroom?'",jp:"",choices:["トイレはいくらですか","トイレはどこですか","トイレはなんですか","えきはどこですか"],answer:"トイレはどこですか",explain:"どこ = where. トイレはどこですか = Where is the bathroom?"},
+    {type:"reading",prompt:"What does this mean?",jp:"わかりません",choices:["I understand","I don't understand","I don't know the price","Repeat please"],answer:"I don't understand",explain:"わかりません = I don't understand."},
+    {type:"grammar",prompt:"'これは いくらですか' means:",jp:"これは いくらですか",choices:["What is this?","Where is this?","How much is this?","Is this cheap?"],answer:"How much is this?",explain:"いくら = how much. これ = this."},
+    {type:"vocab",prompt:"How do you say 'station'?",jp:"",choices:["みず","でんしゃ","えき","ホテル"],answer:"えき",explain:"えき = train station."},
+    {type:"grammar",prompt:"Which ending do you use to politely request something?",jp:"",choices:["ください","おねがいします","ありがとう","すみません"],answer:"おねがいします",explain:"おねがいします is the polite request ending."}
    ],
-   speaking:{jp:"トイレは どこですか。もういちど おねがいします。",romaji:"Toire wa doko desu ka. Mou ichido onegaishimasu.",en:"Where is the bathroom? One more time, please."}
+   speaking:{jp:"トイレは どこですか。もういちど おねがいします。",rom:"Toire wa doko desu ka. Mou ichido onegaishimasu.",en:"Where is the bathroom? One more time, please."}
   },
-  {unit:"Lesson 4",title:"Conversation Builders",objective:"Use short replies and connectors so conversations feel more natural.",difficulty:"conversation",minutes:16,jlpt:"JLPT N4",
+  {unit:"Lesson 4",title:"Conversation Builders",objective:"Use short replies and connectors to keep conversations natural.",difficulty:"conversation",minutes:16,jlpt:"JLPT N4",
    cards:[
-    {jp:"そうですね",romaji:"Sou desu ne",en:"I see / That's right",tip:"A natural thinking filler. Shows you're engaged without committing."},
-    {jp:"ほんとうですか",romaji:"Hontou desu ka",en:"Really? / Is that true?",tip:"Perfect for showing surprise or interest in conversation."},
-    {jp:"たのしいです",romaji:"Tanoshii desu",en:"It's fun / I'm having fun",tip:"Use i-adjective + です pattern. たのしい is a common feeling adjective."},
-    {jp:"すきです",romaji:"Suki desu",en:"I like it",tip:"な-adjective. すき + です = I like. Add が before the thing you like."},
-    {jp:"でも",romaji:"Demo",en:"But / However",tip:"Used to contrast two ideas. 'I like it, but...' = すきです、でも..."},
-    {jp:"だから",romaji:"Dakara",en:"So / Therefore",tip:"Used to explain cause and effect. Links your reason to your conclusion."}
+    {jp:"そうですね",rom:"Sou desu ne",en:"I see / That's right",tip:"Natural thinking filler. Shows you're engaged."},
+    {jp:"ほんとうですか",rom:"Hontou desu ka",en:"Really?",tip:"Shows surprise or interest."},
+    {jp:"たのしいです",rom:"Tanoshii desu",en:"It's fun",tip:"i-adjective + です pattern."},
+    {jp:"すきです",rom:"Suki desu",en:"I like it",tip:"Add が before what you like."},
+    {jp:"でも",rom:"Demo",en:"But / However",tip:"Contrasts two ideas."},
+    {jp:"だから",rom:"Dakara",en:"So / Therefore",tip:"Links reason to conclusion."}
    ],
    quiz:[
-    {type:"grammar",prompt:"Which word means 'But / However'?",jp:"",choices:["だから","でも","そして","また"],answer:"でも",explain:"でも means 'but' or 'however', used to contrast ideas."},
-    {type:"vocab",prompt:"What does ほんとうですか mean?",jp:"ほんとうですか",choices:["Really?","That's right","I understand","How interesting"],answer:"Really?",explain:"ほんとうですか = Really? / Is that true?"},
-    {type:"reading",prompt:"Choose the correct meaning:",jp:"たのしいです",choices:["It's difficult","It's fun","It's delicious","It's pretty"],answer:"It's fun",explain:"たのしい means 'fun' or 'enjoyable'."},
-    {type:"grammar",prompt:"'にほんごが すきです' means:",jp:"にほんごが すきです",choices:["Japanese is difficult","I want to learn Japanese","I like Japanese","Japanese is fun"],answer:"I like Japanese",explain:"すきです = I like it. が marks what you like."},
-    {type:"vocab",prompt:"だから means:",jp:"だから",choices:["But","And","So / Therefore","Or"],answer:"So / Therefore",explain:"だから connects a reason to a result — 'so' or 'therefore'."}
+    {type:"grammar",prompt:"Which word means 'But'?",jp:"",choices:["だから","でも","そして","また"],answer:"でも",explain:"でも = but / however."},
+    {type:"vocab",prompt:"What does ほんとうですか mean?",jp:"ほんとうですか",choices:["Really?","That's right","I understand","How interesting"],answer:"Really?",explain:"ほんとうですか = Really?"},
+    {type:"reading",prompt:"Choose the correct meaning:",jp:"たのしいです",choices:["It's difficult","It's fun","It's delicious","It's pretty"],answer:"It's fun",explain:"たのしい = fun / enjoyable."},
+    {type:"grammar",prompt:"'にほんごが すきです' means:",jp:"にほんごが すきです",choices:["Japanese is difficult","I want Japanese","I like Japanese","Japanese is fun"],answer:"I like Japanese",explain:"すきです = I like it. が marks what you like."},
+    {type:"vocab",prompt:"だから means:",jp:"だから",choices:["But","And","So / Therefore","Or"],answer:"So / Therefore",explain:"だから = so / therefore."}
    ],
-   speaking:{jp:"にほんごが すきです。でも、むずかしいです。",romaji:"Nihongo ga suki desu. Demo, muzukashii desu.",en:"I like Japanese. But it's difficult."}
+   speaking:{jp:"にほんごが すきです。でも、むずかしいです。",rom:"Nihongo ga suki desu. Demo, muzukashii desu.",en:"I like Japanese. But it's difficult."}
   },
   {unit:"Lesson 5",title:"Daily Routine & Core Verbs",objective:"Describe your daily routine using basic verb patterns.",difficulty:"intermediate",minutes:20,jlpt:"JLPT N4",
    cards:[
-    {jp:"おきます",romaji:"Okimasu",en:"(I) wake up",tip:"Verb in polite form (ます-form). All daily routine verbs use this ending."},
-    {jp:"たべます",romaji:"Tabemasu",en:"(I) eat",tip:"Use を particle before the food: パンを たべます = I eat bread."},
-    {jp:"はたらきます",romaji:"Hatarakimasu",en:"(I) work",tip:"Use で to say where: かいしゃで はたらきます = I work at a company."},
-    {jp:"べんきょうします",romaji:"Benkyou shimasu",en:"(I) study",tip:"します is the verb 'to do'. べんきょう = study. べんきょうします = I study."},
-    {jp:"まいにち",romaji:"Mainichi",en:"Every day",tip:"Time words go near the start of a sentence: まいにち にほんごを べんきょうします."},
-    {jp:"なんじに",romaji:"Nanji ni",en:"At what time?",tip:"に marks the time: ろくじに おきます = I wake up at 6 o'clock."}
+    {jp:"おきます",rom:"Okimasu",en:"Wake up",tip:"Polite ます-form. All daily verbs use this ending."},
+    {jp:"たべます",rom:"Tabemasu",en:"Eat",tip:"Use を before food: パンを たべます = I eat bread."},
+    {jp:"はたらきます",rom:"Hatarakimasu",en:"Work",tip:"Use で for where: かいしゃで はたらきます = I work at a company."},
+    {jp:"べんきょうします",rom:"Benkyou shimasu",en:"Study",tip:"べんきょう = study + します = do."},
+    {jp:"まいにち",rom:"Mainichi",en:"Every day",tip:"Time words go near the start of a sentence."},
+    {jp:"なんじに",rom:"Nanji ni",en:"At what time?",tip:"に marks time: ろくじに おきます = I wake up at 6."}
    ],
    quiz:[
-    {type:"grammar",prompt:"Which verb means 'I study'?",jp:"",choices:["たべます","おきます","べんきょうします","はたらきます"],answer:"べんきょうします",explain:"べんきょうします = I study (べんきょう + します)."},
-    {type:"vocab",prompt:"What does まいにち mean?",jp:"まいにち",choices:["Every day","Every morning","Yesterday","Tomorrow"],answer:"Every day",explain:"まいにち means 'every day'."},
-    {type:"grammar",prompt:"'パンを たべます' means:",jp:"パンを たべます",choices:["I eat bread","I like bread","I buy bread","Bread is tasty"],answer:"I eat bread",explain:"を marks the object. たべます = eat. So パンを たべます = I eat bread."},
-    {type:"reading",prompt:"What does this sentence mean?",jp:"まいにち にほんごを べんきょうします",choices:["I study Japanese every day","Japanese is hard every day","Every day I eat Japanese food","I work in Japan every day"],answer:"I study Japanese every day",explain:"まいにち = every day, にほんごを = Japanese (object), べんきょうします = study."},
-    {type:"grammar",prompt:"Which particle marks the time of an action?",jp:"",choices:["は","を","が","に"],answer:"に",explain:"に marks time. ろくじに = at 6 o'clock."}
+    {type:"grammar",prompt:"Which verb means 'I study'?",jp:"",choices:["たべます","おきます","べんきょうします","はたらきます"],answer:"べんきょうします",explain:"べんきょうします = study."},
+    {type:"vocab",prompt:"What does まいにち mean?",jp:"まいにち",choices:["Every day","Every morning","Yesterday","Tomorrow"],answer:"Every day",explain:"まいにち = every day."},
+    {type:"grammar",prompt:"'パンを たべます' means:",jp:"パンを たべます",choices:["I eat bread","I like bread","I buy bread","Bread is tasty"],answer:"I eat bread",explain:"を marks object. たべます = eat."},
+    {type:"reading",prompt:"What does this mean?",jp:"まいにち にほんごを べんきょうします",choices:["I study Japanese every day","Japanese is hard","I eat Japanese food","I work in Japan"],answer:"I study Japanese every day",explain:"まいにち = every day, べんきょうします = study."},
+    {type:"grammar",prompt:"Which particle marks the time of an action?",jp:"",choices:["は","を","が","に"],answer:"に",explain:"に marks time: ろくじに = at 6."}
    ],
-   speaking:{jp:"まいにち にほんごを べんきょうします。",romaji:"Mainichi nihongo o benkyou shimasu.",en:"I study Japanese every day."}
+   speaking:{jp:"まいにち にほんごを べんきょうします。",rom:"Mainichi nihongo o benkyou shimasu.",en:"I study Japanese every day."}
   }
 ];
 
-/* ===== SECTION EXAM (JLPT N5 FORMAT) ===== */
+const vocabBank=[
+  {jp:"こんにちは",rom:"Konnichiwa",en:"Hello",lesson:0},
+  {jp:"ありがとう",rom:"Arigatou",en:"Thank you",lesson:0},
+  {jp:"すみません",rom:"Sumimasen",en:"Excuse me",lesson:0},
+  {jp:"おはよう",rom:"Ohayou",en:"Good morning",lesson:0},
+  {jp:"わたし",rom:"Watashi",en:"I / Me",lesson:1},
+  {jp:"です",rom:"Desu",en:"To be (polite)",lesson:1},
+  {jp:"なまえ",rom:"Namae",en:"Name",lesson:1},
+  {jp:"しゅみ",rom:"Shumi",en:"Hobby",lesson:1},
+  {jp:"えき",rom:"Eki",en:"Station",lesson:2},
+  {jp:"みず",rom:"Mizu",en:"Water",lesson:2},
+  {jp:"いくら",rom:"Ikura",en:"How much",lesson:2},
+  {jp:"どこ",rom:"Doko",en:"Where",lesson:2},
+  {jp:"すき",rom:"Suki",en:"Like",lesson:3},
+  {jp:"たのしい",rom:"Tanoshii",en:"Fun",lesson:3},
+  {jp:"でも",rom:"Demo",en:"But",lesson:3},
+  {jp:"おきます",rom:"Okimasu",en:"Wake up",lesson:4},
+  {jp:"たべます",rom:"Tabemasu",en:"Eat",lesson:4},
+  {jp:"べんきょう",rom:"Benkyou",en:"Study",lesson:4},
+  {jp:"まいにち",rom:"Mainichi",en:"Every day",lesson:4}
+];
+
+const sentenceBuilderQs=[
+  {prompt:"Build: 'I am Yuki'",answer:["わたしは","ゆきです"],words:["わたしは","ゆきです","ありがとう","どこ"],translate:"Watashi wa Yuki desu"},
+  {prompt:"Build: 'Where is the station?'",answer:["えきは","どこですか"],words:["えきは","どこですか","みずを","です"],translate:"Eki wa doko desu ka"},
+  {prompt:"Build: 'I eat bread every day'",answer:["まいにち","パンを","たべます"],words:["まいにち","パンを","たべます","すきです"],translate:"Mainichi pan o tabemasu"},
+  {prompt:"Build: 'I like Japanese'",answer:["にほんごが","すきです"],words:["にほんごが","すきです","どこ","わたし"],translate:"Nihongo ga suki desu"},
+  {prompt:"Build: 'I study every day'",answer:["まいにち","べんきょうします"],words:["まいにち","べんきょうします","たべます","えき"],translate:"Mainichi benkyou shimasu"}
+];
+
+const listeningQs=[
+  {text:"こんにちは。わたしは たなかです。",question:"What is the speaker saying?",choices:["Hello, I am Tanaka","Good morning, my hobby is Tanaka","Excuse me, where is Tanaka","Thank you, I like Tanaka"],answer:"Hello, I am Tanaka"},
+  {text:"トイレは どこですか。",question:"What is being asked?",choices:["How much is the bathroom?","What is the bathroom?","Where is the bathroom?","Who is in the bathroom?"],answer:"Where is the bathroom?"},
+  {text:"まいにち にほんごを べんきょうします。",question:"What does this sentence say?",choices:["I eat Japanese food every day","I study Japanese every day","I like Japanese every day","I work in Japan every day"],answer:"I study Japanese every day"},
+  {text:"ありがとうございます。よろしくおねがいします。",question:"What are these phrases?",choices:["Thank you. Nice to meet you","Good morning. Goodbye","Excuse me. Thank you","Hello. Good night"],answer:"Thank you. Nice to meet you"},
+  {text:"えきは どこですか。みずを おねがいします。",question:"What is being requested?",choices:["Station location and water","Price and directions","Two greetings","A name and hobby"],answer:"Station location and water"}
+];
+
+const rolePlayScripts=[
+  {title:"At a Restaurant 🍜",steps:[
+    {speaker:"staff",jp:"いらっしゃいませ！",rom:"Irasshaimase!",en:"Welcome!"},
+    {speaker:"you",prompt:"Say: Water please",answer:"みずを おねがいします",rom:"Mizu o onegaishimasu"},
+    {speaker:"staff",jp:"はい、かしこまりました。",rom:"Hai, kashikomarimashita.",en:"Yes, understood."},
+    {speaker:"you",prompt:"Ask: How much is this?",answer:"これは いくらですか",rom:"Kore wa ikura desu ka"},
+    {speaker:"staff",jp:"せんえんです。",rom:"Sen en desu.",en:"It's 1,000 yen."},
+    {speaker:"you",prompt:"Say: Thank you",answer:"ありがとうございます",rom:"Arigatou gozaimasu"}
+  ]},
+  {title:"Meeting Someone 🤝",steps:[
+    {speaker:"them",jp:"はじめまして！",rom:"Hajimemashite!",en:"Nice to meet you!"},
+    {speaker:"you",prompt:"Introduce yourself",answer:"わたしは [なまえ] です",rom:"Watashi wa [name] desu"},
+    {speaker:"them",jp:"しゅみは なんですか。",rom:"Shumi wa nan desu ka.",en:"What is your hobby?"},
+    {speaker:"you",prompt:"Say: My hobby is Japanese",answer:"しゅみは にほんごです",rom:"Shumi wa Nihongo desu"},
+    {speaker:"them",jp:"すごいですね！",rom:"Sugoi desu ne!",en:"That's amazing!"},
+    {speaker:"you",prompt:"Say: Thank you. Nice to meet you.",answer:"ありがとうございます。よろしくおねがいします。",rom:"Arigatou gozaimasu. Yoroshiku onegaishimasu."}
+  ]}
+];
+
 const sectionExam={
-  title:"Section Test — Units 1–5",
-  instructions:[
-    "This test covers all 5 lessons you have studied.",
-    "There are 4 sections: Vocabulary, Grammar, Reading, and Listening.",
-    "Each question has one correct answer. Choose carefully.",
-    "You need 70% or above to pass. Aim for 80%+."
-  ],
   sections:[
-    {
-      name:"Section 1 — Vocabulary (語彙)",
-      jlpt:"もんだい 1",
-      desc:"Choose the correct meaning of the underlined word.",
-      questions:[
-        {prompt:"What does おはようございます mean?",jp:"おはようございます",choices:["Good evening","Good morning","Good afternoon","Good night"],answer:"Good morning",explain:"おはようございます is the formal 'Good morning'."},
-        {prompt:"What is the meaning of すきです?",jp:"すきです",choices:["I understand","I don't like it","I like it","It's delicious"],answer:"I like it",explain:"すきです = I like it."},
-        {prompt:"Choose the correct meaning of えき.",jp:"えき",choices:["Airport","Hotel","Station","Hospital"],answer:"Station",explain:"えき means 'train station'."},
-        {prompt:"What does わかりません mean?",jp:"わかりません",choices:["I understand","I don't understand","I don't know the price","Please repeat"],answer:"I don't understand",explain:"わかりません = I don't understand."}
-      ]
-    },
-    {
-      name:"Section 2 — Grammar (文法)",
-      jlpt:"もんだい 2",
-      desc:"Choose the word or phrase that best completes the sentence.",
-      questions:[
-        {prompt:"わたしは たなか ___。",jp:"わたしは たなか ___",choices:["です","は","が","を"],answer:"です",explain:"です ends the polite sentence: わたしは たなかです = I am Tanaka."},
-        {prompt:"Choose the correct question word for 'where'.",jp:"トイレは ___ ですか",choices:["なに","いつ","どこ","だれ"],answer:"どこ",explain:"どこ means 'where'."},
-        {prompt:"パンを ___。 (I eat bread.)",jp:"パンを ___",choices:["たべます","たべて","たべない","たべる"],answer:"たべます",explain:"たべます is the polite form of 'to eat'."},
-        {prompt:"___、むずかしいです。(I like it, but it's difficult.)",jp:"すきです、___、むずかしいです",choices:["だから","そして","でも","また"],answer:"でも",explain:"でも means 'but' — it connects contrasting ideas."}
-      ]
-    },
-    {
-      name:"Section 3 — Reading (読解)",
-      jlpt:"もんだい 3",
-      desc:"Read the sentence or passage and answer the question.",
-      questions:[
-        {prompt:"Tanaka says: 'まいにち ろくじに おきます。' What time does Tanaka wake up?",jp:"まいにち ろくじに おきます",choices:["5:00 AM","6:00 AM","7:00 AM","8:00 AM"],answer:"6:00 AM",explain:"ろくじ = 6 o'clock. に marks the time."},
-        {prompt:"Yuki says: 'わたしは アメリカじんです。' What nationality is Yuki?",jp:"わたしは アメリカじんです",choices:["Japanese","British","American","Canadian"],answer:"American",explain:"アメリカじん = American (person from America)."},
-        {prompt:"The sign reads: 'みずを おねがいします。' What is being requested?",jp:"みずを おねがいします",choices:["Coffee","Food","Water","Tea"],answer:"Water",explain:"みず = water. おねがいします = please."},
-        {prompt:"A classmate says: 'にほんごが すきです。でも、むずかしいです。' Which is true?",jp:"にほんごが すきです。でも、むずかしいです。",choices:["They hate Japanese","They find Japanese easy","They like Japanese but find it hard","They don't study Japanese"],answer:"They like Japanese but find it hard",explain:"すきです = like it. でも = but. むずかしい = difficult."}
-      ]
-    },
-    {
-      name:"Section 4 — Listening (聴解)",
-      jlpt:"もんだい 4",
-      desc:"Listen to the phrase and choose the correct response or meaning.",
-      questions:[
-        {prompt:"You hear this. What is the speaker saying?",jp:"こんばんは",choices:["Good morning","Good afternoon","Good evening","Goodbye"],answer:"Good evening",speak:"こんばんは",explain:"こんばんは = Good evening (used after sunset)."},
-        {prompt:"Listen and choose the correct meaning:",jp:"ありがとうございます",choices:["Excuse me","You're welcome","Thank you","Sorry"],answer:"Thank you",speak:"ありがとうございます",explain:"ありがとうございます = Thank you (formal)."},
-        {prompt:"You hear this greeting. What time of day is it likely?",jp:"おはようございます",choices:["Evening","Afternoon","Morning","Night"],answer:"Morning",speak:"おはようございます",explain:"おはようございます is a morning greeting."},
-        {prompt:"Listen and choose the correct response:",jp:"よろしくおねがいします",choices:["Goodbye","こちらこそ よろしく","ありがとうございます","はじめまして"],answer:"こちらこそ よろしく",speak:"よろしくおねがいします",explain:"The natural reply to よろしくおねがいします is こちらこそ よろしく (Nice to meet you too)."}
-      ]
-    }
+    {name:"Section 1 — Vocabulary",jlpt:"もんだい 1",desc:"Choose the correct meaning.",questions:[
+      {type:"vocab",prompt:"What does おはようございます mean?",jp:"おはようございます",choices:["Good evening","Good morning","Good afternoon","Good night"],answer:"Good morning",explain:"おはようございます = Good morning."},
+      {type:"vocab",prompt:"What is the meaning of すきです?",jp:"すきです",choices:["I understand","I don't like it","I like it","It's delicious"],answer:"I like it",explain:"すきです = I like it."},
+      {type:"vocab",prompt:"Choose the meaning of えき.",jp:"えき",choices:["Airport","Hotel","Station","Hospital"],answer:"Station",explain:"えき = train station."},
+      {type:"vocab",prompt:"What does わかりません mean?",jp:"わかりません",choices:["I understand","I don't understand","I don't know the price","Please repeat"],answer:"I don't understand",explain:"わかりません = I don't understand."}
+    ]},
+    {name:"Section 2 — Grammar",jlpt:"もんだい 2",desc:"Complete the sentence.",questions:[
+      {type:"grammar",prompt:"わたしは たなか ___。",jp:"わたしは たなか ___",choices:["です","は","が","を"],answer:"です",explain:"です ends the polite sentence."},
+      {type:"grammar",prompt:"トイレは ___ ですか",jp:"トイレは ___ ですか",choices:["なに","いつ","どこ","だれ"],answer:"どこ",explain:"どこ = where."},
+      {type:"grammar",prompt:"パンを ___。(I eat bread.)",jp:"パンを ___",choices:["たべます","たべて","たべない","たべる"],answer:"たべます",explain:"たべます = polite form of eat."},
+      {type:"grammar",prompt:"すきです、___、むずかしいです。",jp:"すきです、___、むずかしいです",choices:["だから","そして","でも","また"],answer:"でも",explain:"でも = but."}
+    ]},
+    {name:"Section 3 — Reading",jlpt:"もんだい 3",desc:"Read and answer.",questions:[
+      {type:"reading",prompt:"'まいにち ろくじに おきます.' What time?",jp:"まいにち ろくじに おきます",choices:["5:00 AM","6:00 AM","7:00 AM","8:00 AM"],answer:"6:00 AM",explain:"ろくじ = 6 o'clock."},
+      {type:"reading",prompt:"'わたしは アメリカじんです.' Nationality?",jp:"わたしは アメリカじんです",choices:["Japanese","British","American","Canadian"],answer:"American",explain:"アメリカじん = American."},
+      {type:"reading",prompt:"Sign: 'みずを おねがいします.' What's requested?",jp:"みずを おねがいします",choices:["Coffee","Food","Water","Tea"],answer:"Water",explain:"みず = water."},
+      {type:"reading",prompt:"'にほんごが すきです。でも、むずかしいです.' Which is true?",jp:"にほんごが すきです。でも、むずかしいです",choices:["They hate Japanese","Easy","Like but find hard","Don't study"],answer:"Like but find hard",explain:"すきです = like. でも = but. むずかしい = hard."}
+    ]},
+    {name:"Section 4 — Listening",jlpt:"もんだい 4",desc:"Listen and answer.",questions:[
+      {type:"listening",prompt:"You hear this. What is it?",jp:"こんばんは",speak:"こんばんは",choices:["Good morning","Good afternoon","Good evening","Goodbye"],answer:"Good evening",explain:"こんばんは = Good evening."},
+      {type:"listening",prompt:"Listen and choose the meaning:",jp:"ありがとうございます",speak:"ありがとうございます",choices:["Excuse me","Welcome","Thank you","Sorry"],answer:"Thank you",explain:"ありがとうございます = Thank you."},
+      {type:"listening",prompt:"What time of day is this greeting for?",jp:"おはようございます",speak:"おはようございます",choices:["Evening","Afternoon","Morning","Night"],answer:"Morning",explain:"おはようございます = morning greeting."},
+      {type:"listening",prompt:"Natural response to: よろしくおねがいします",jp:"よろしくおねがいします",speak:"よろしくおねがいします",choices:["Goodbye","こちらこそ よろしく","ありがとうございます","はじめまして"],answer:"こちらこそ よろしく",explain:"こちらこそ よろしく = Nice to meet you too."}
+    ]}
   ]
 };
 
-const scenarios=[
-  {title:"At a café",situation:"Order politely and ask for water.",prompt:"Say: Coffee, please. Water too, please.",jp:"コーヒーを おねがいします。みずも おねがいします。",romaji:"Koohii o onegaishimasu. Mizu mo onegaishimasu.",en:"Coffee, please. Water too, please."},
-  {title:"At the station",situation:"You need to find the station quickly.",prompt:"Ask: Where is the station?",jp:"えきは どこですか。",romaji:"Eki wa doko desu ka.",en:"Where is the station?"},
-  {title:"Meeting someone",situation:"Introduce yourself simply.",prompt:"Say: I am [your name]. Nice to meet you.",jp:"わたしは [なまえ] です。よろしくおねがいします。",romaji:"Watashi wa [name] desu. Yoroshiku onegaishimasu.",en:"I am [name]. Nice to meet you."}
+const hiragana=[
+  {char:"あ",rom:"a"},{char:"い",rom:"i"},{char:"う",rom:"u"},{char:"え",rom:"e"},{char:"お",rom:"o"},
+  {char:"か",rom:"ka"},{char:"き",rom:"ki"},{char:"く",rom:"ku"},{char:"け",rom:"ke"},{char:"こ",rom:"ko"},
+  {char:"さ",rom:"sa"},{char:"し",rom:"shi"},{char:"す",rom:"su"},{char:"せ",rom:"se"},{char:"そ",rom:"so"},
+  {char:"た",rom:"ta"},{char:"ち",rom:"chi"},{char:"つ",rom:"tsu"},{char:"て",rom:"te"},{char:"と",rom:"to"},
+  {char:"な",rom:"na"},{char:"に",rom:"ni"},{char:"ぬ",rom:"nu"},{char:"ね",rom:"ne"},{char:"の",rom:"no"},
+  {char:"は",rom:"ha"},{char:"ひ",rom:"hi"},{char:"ふ",rom:"fu"},{char:"へ",rom:"he"},{char:"ほ",rom:"ho"},
+  {char:"ま",rom:"ma"},{char:"み",rom:"mi"},{char:"む",rom:"mu"},{char:"め",rom:"me"},{char:"も",rom:"mo"},
+  {char:"や",rom:"ya"},{char:"ゆ",rom:"yu"},{char:"よ",rom:"yo"},
+  {char:"ら",rom:"ra"},{char:"り",rom:"ri"},{char:"る",rom:"ru"},{char:"れ",rom:"re"},{char:"ろ",rom:"ro"},
+  {char:"わ",rom:"wa"},{char:"を",rom:"wo"},{char:"ん",rom:"n"}
+];
+const katakana=[
+  {char:"ア",rom:"a"},{char:"イ",rom:"i"},{char:"ウ",rom:"u"},{char:"エ",rom:"e"},{char:"オ",rom:"o"},
+  {char:"カ",rom:"ka"},{char:"キ",rom:"ki"},{char:"ク",rom:"ku"},{char:"ケ",rom:"ke"},{char:"コ",rom:"ko"},
+  {char:"サ",rom:"sa"},{char:"シ",rom:"shi"},{char:"ス",rom:"su"},{char:"セ",rom:"se"},{char:"ソ",rom:"so"},
+  {char:"タ",rom:"ta"},{char:"チ",rom:"chi"},{char:"ツ",rom:"tsu"},{char:"テ",rom:"te"},{char:"ト",rom:"to"},
+  {char:"ナ",rom:"na"},{char:"ニ",rom:"ni"},{char:"ヌ",rom:"nu"},{char:"ネ",rom:"ne"},{char:"ノ",rom:"no"},
+  {char:"ハ",rom:"ha"},{char:"ヒ",rom:"hi"},{char:"フ",rom:"fu"},{char:"ヘ",rom:"he"},{char:"ホ",rom:"ho"},
+  {char:"マ",rom:"ma"},{char:"ミ",rom:"mi"},{char:"ム",rom:"mu"},{char:"メ",rom:"me"},{char:"モ",rom:"mo"},
+  {char:"ヤ",rom:"ya"},{char:"ユ",rom:"yu"},{char:"ヨ",rom:"yo"},
+  {char:"ラ",rom:"ra"},{char:"リ",rom:"ri"},{char:"ル",rom:"ru"},{char:"レ",rom:"re"},{char:"ロ",rom:"ro"},
+  {char:"ワ",rom:"wa"},{char:"ヲ",rom:"wo"},{char:"ン",rom:"n"}
+];
+const writeVocab=[
+  {char:"日本語",rom:"Nihongo",meaning:"Japanese language"},
+  {char:"ありがとう",rom:"Arigatou",meaning:"Thank you"},
+  {char:"がんばって",rom:"Ganbatte",meaning:"Do your best"},
+  {char:"さくら",rom:"Sakura",meaning:"Cherry blossom"},
+  {char:"ともだち",rom:"Tomodachi",meaning:"Friend"},
+  {char:"がっこう",rom:"Gakkou",meaning:"School"},
+  {char:"せんせい",rom:"Sensei",meaning:"Teacher"},
+  {char:"たべもの",rom:"Tabemono",meaning:"Food"}
+];
+const wotdList=[
+  {jp:"がんばって",rom:"Ganbatte",en:"Do your best / Good luck!"},
+  {jp:"ありがとう",rom:"Arigatou",en:"Thank you"},
+  {jp:"おつかれさま",rom:"Otsukaresama",en:"Good work!"},
+  {jp:"しあわせ",rom:"Shiawase",en:"Happiness"},
+  {jp:"たのしい",rom:"Tanoshii",en:"Fun / Enjoyable"},
+  {jp:"きれい",rom:"Kirei",en:"Beautiful / Clean"},
+  {jp:"おいしい",rom:"Oishii",en:"Delicious"},
+  {jp:"すごい",rom:"Sugoi",en:"Amazing / Wow!"},
+  {jp:"だいじょうぶ",rom:"Daijoubu",en:"It's okay / Are you alright?"},
+  {jp:"もちろん",rom:"Mochiron",en:"Of course"},
+  {jp:"ゆめ",rom:"Yume",en:"Dream"},
+  {jp:"さくら",rom:"Sakura",en:"Cherry blossom"},
+  {jp:"なつかしい",rom:"Natsukashii",en:"Nostalgic"},
+  {jp:"よろしく",rom:"Yoroshiku",en:"Please / Nice to meet you"},
+  {jp:"いただきます",rom:"Itadakimasu",en:"Let's eat!"}
 ];
 
-const phases=[
-  {num:"Phase 1",title:"Kana & First Words",months:"Apr – Jun 2026",lvl:"JLPT N5",focus:"Hiragana, katakana, greetings, pronunciation, fixed phrases. Build the alphabet foundation first.",cur:true},
-  {num:"Phase 2",title:"Core Grammar & Travel",months:"Jul – Sep 2026",lvl:"JLPT N5 → N4",focus:"Core grammar patterns, daily verbs, travel questions, listening repetition drills.",cur:false},
-  {num:"Phase 3",title:"Conversation Practice",months:"Oct – Nov 2026",lvl:"JLPT N4",focus:"Longer answers, real conversation scenarios, reviewing weak spots and vocabulary gaps.",cur:false},
-  {num:"Phase 4",title:"Confidence & Review",months:"December 2026",lvl:"Speaking consolidation",focus:"Confidence building, travel simulations, full retention review — you are ready!",cur:false}
-];
-
-/* ===== SAVE ===== */
-const SAVE_KEY='nihongostep_v2';
+/* ============================================================
+   SAVE / LOAD
+============================================================ */
+const SAVE_KEY="nihongostep_v3";
 function todayStr(){return new Date().toISOString().slice(0,10);}
-function defaultSave(){return{xp:0,streak:1,lastOpenDate:todayStr(),completedLessons:[],activeDays:[todayStr()],totalCorrect:0,totalAnswered:0,speakAttempts:0,examScores:[]};}
+function defaultSave(){return{xp:0,streak:1,lastOpenDate:todayStr(),completedLessons:[],activeDays:[todayStr()],totalCorrect:0,totalAnswered:0,speakAttempts:0,examScores:[],writeMastered:[],srQueue:[],plannerChecked:{}};}
 function loadSave(){
   try{
     const raw=localStorage.getItem(SAVE_KEY);
@@ -590,588 +735,916 @@ function saveSave(s){try{localStorage.setItem(SAVE_KEY,JSON.stringify(s));}catch
 function resetSave(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}save=defaultSave();saveSave(save);}
 let save=loadSave();
 
-/* ===== STATE ===== */
-let curLesson=null,curDTab='cards',qState={qIndex:0,score:0,answered:false,questions:[]};
-let examState={active:false,secIdx:0,qIdx:0,score:0,answered:false,allQ:[],results:[]};
+/* ============================================================
+   STATE
+============================================================ */
+let curLesson=null,curDTab="cards",qState={qIndex:0,score:0,answered:false,questions:[]};
+let examState={qIdx:0,score:0,answered:false,allQ:[],results:[]};
+let writeMode="hiragana",writeCurIdx=0,writeCanvas=null,writeCtx=null,writePainting=false;
+let writeMastered=new Set(save.writeMastered||[]);
+let srCards=[],srIdx=0,srAnswered=false;
+let sbQ=null,sbPlaced=[],sbUsed=[];
+let listenIdx=0,listenAnswered=false;
+let rpScript=null,rpStep=0;
 let audioCtx=null;
 
-/* ===== AUDIO ===== */
+/* ============================================================
+   AUDIO
+============================================================ */
 function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
-function tone(f,d,t,v){t=t||'sine';v=v||0.22;try{const c=getCtx();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
-function playOK(){tone(523,0.12,'sine',0.18);setTimeout(()=>tone(659,0.12,'sine',0.18),130);setTimeout(()=>tone(784,0.25,'sine',0.18),260);}
-function playBad(){tone(300,0.18,'sawtooth',0.12);setTimeout(()=>tone(240,0.25,'sawtooth',0.08),180);}
-function playClick(){tone(750,0.05,'sine',0.08);}
-function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=0.8;u.pitch=1.05;window.speechSynthesis.speak(u);}
+function tone(f,d,t,v){t=t||"sine";v=v||0.2;try{const c=getCtx();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d);}catch(e){}}
+function playOK(){tone(523,0.1,null,0.16);setTimeout(()=>tone(659,0.1,null,0.16),120);setTimeout(()=>tone(784,0.22,null,0.16),240);}
+function playBad(){tone(300,0.16,"sawtooth",0.1);setTimeout(()=>tone(240,0.22,"sawtooth",0.07),170);}
+function playClick(){tone(700,0.05,null,0.07);}
+function speak(t){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ja-JP";u.rate=0.8;u.pitch=1.05;window.speechSynthesis.speak(u);}
 
-/* ===== TOAST ===== */
-let toastTimer=null;
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
+/* ============================================================
+   TOAST
+============================================================ */
+let toastT=null;
+function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
 
-/* ===== HOME ===== */
+/* ============================================================
+   GREETING / CLOCK
+============================================================ */
+function updateGreeting(){
+  const h=new Date().getHours();
+  const g=h>=5&&h<12?"おはようございます · Good morning":h<18?"こんにちは · Good afternoon":"こんばんは · Good evening";
+  const el=document.getElementById("sbGreeting");if(el)el.textContent=g;
+}
+updateGreeting();setInterval(updateGreeting,60000);
+
+/* ============================================================
+   WORD OF THE DAY
+============================================================ */
+function loadWotd(){
+  const w=wotdList[Math.floor(Date.now()/86400000)%wotdList.length];
+  ["wotdJP","wotdRomaji","wotdEn"].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[w.jp,w.rom,w.en][i];});
+}
+function speakWotd(){const jp=document.getElementById("wotdJP");if(jp)speak(jp.textContent);tone(440,0.07,null,0.09);}
+loadWotd();
+
+/* ============================================================
+   HOME UI
+============================================================ */
 function updateHomeUI(){
   const done=save.completedLessons.length;
   const pct=Math.round((done/lessons.length)*100);
-  document.getElementById('pillStreak').textContent='🔥 '+save.streak+' day'+(save.streak===1?'':'s');
-  document.getElementById('pillXP').textContent='⭐ '+save.xp+' XP';
-  document.getElementById('goalPct').textContent=pct+'%';
-  document.getElementById('goalFill').style.width=pct+'%';
-  document.getElementById('goalLeft').textContent=done===0?'Started today 🌱':done+' of '+lessons.length+' lessons done';
-  const icons=['👋','🙋','✈️','💬','📅'];
-  document.getElementById('homeChips').innerHTML=lessons.map((l,i)=>{
+  document.getElementById("pillStreak").textContent="🔥 "+save.streak+" day"+(save.streak===1?"":"s");
+  document.getElementById("pillXP").textContent="⭐ "+save.xp+" XP";
+  document.getElementById("goalPct").textContent=pct+"%";
+  document.getElementById("goalFill").style.width=pct+"%";
+  document.getElementById("goalLeft").textContent=done===0?"Started today 🌱":done+" of "+lessons.length+" lessons done";
+  const icons=["👋","🙋","✈️","💬","📅"];
+  document.getElementById("homeChips").innerHTML=lessons.map((l,i)=>{
     const isDone=save.completedLessons.includes(i);
-    return `<div class="lesson-chip ${isDone?'done-chip':''}" onclick="openLesson(${i})">
-      <div class="chip-icon">${isDone?'✅':icons[i]}</div>
+    return`<div class="chip ${isDone?"done":""}" onclick="openLesson(${i})">
+      <div class="chip-icon">${isDone?"✅":icons[i]}</div>
       <div class="chip-name">${l.unit}</div>
-      <div class="chip-sub">${l.title.split(' ').slice(0,2).join(' ')}</div>
+      <div class="chip-sub">${l.title.split(" ").slice(0,2).join(" ")}</div>
       <div class="chip-bar"><div class="chip-bar-fill" style="width:${isDone?100:0}%"></div></div>
     </div>`;
-  }).join('');
+  }).join("");
+  // streak banner
+  const banner=document.getElementById("streakBanner");
+  if(banner){
+    const studiedToday=(save.activeDays||[]).includes(todayStr());
+    if(studiedToday||!(save.streak>1||save.xp>0))banner.classList.add("hidden");
+    else banner.classList.remove("hidden");
+  }
 }
 
-/* ===== NAV ===== */
+/* ============================================================
+   NAV
+============================================================ */
 function switchTab(name){
   playClick();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  const tabEl=document.getElementById('tab-'+name);
-  if(tabEl)tabEl.classList.add('active');
-  if(name==='home'){updateHomeUI();setTimeout(()=>makeDraggable(document.getElementById('homeChips')),100);}
-  if(name==='learn'){buildLearn();setTimeout(()=>makeDraggable(document.getElementById('unitList')),100);}
-  if(name==='speak')buildSpeak();
-  if(name==='plan')buildPlan();
-  if(name==='progress')buildProgress();
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-"+name).classList.add("active");
+  const tabEl=document.getElementById("tab-"+name);if(tabEl)tabEl.classList.add("active");
+  if(name==="home"){updateHomeUI();setTimeout(()=>makeDraggable(document.getElementById("homeChips")),80);}
+  if(name==="learn"){buildLearn();setTimeout(()=>makeDraggable(document.getElementById("unitList")),80);}
+  if(name==="practice")buildPractice();
+  if(name==="write")buildWrite();
+  if(name==="progress")buildProgress();
 }
-
 function openLesson(idx){
-  playClick();
-  curLesson=idx;curDTab='cards';qState={qIndex:0,score:0,answered:false,questions:[]};
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-detail').classList.add('active');
+  playClick();curLesson=idx;curDTab="cards";qState={qIndex:0,score:0,answered:false,questions:[]};
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-detail").classList.add("active");
   renderDetail();
 }
-
 function backFromDetail(){
   playClick();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-learn').classList.add('active');
-  document.getElementById('tab-learn').classList.add('active');
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-learn").classList.add("active");
+  document.getElementById("tab-learn").classList.add("active");
   buildLearn();
 }
+function openPracticeSub(title,html){
+  playClick();
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-practice-sub").classList.add("active");
+  document.getElementById("practiceSubContent").innerHTML=`
+    <div class="detail-back" onclick="switchTab('practice')">
+      <button class="detail-back-btn">←</button>
+      <span class="detail-back-lbl">Practice Hub</span>
+    </div>
+    <div style="padding:14px 18px 10px">
+      <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px">${title}</div>
+    </div>
+    <div style="padding:0 18px">${html}</div>`;
+}
 
-/* ===== LEARN ===== */
+/* ============================================================
+   LEARN
+============================================================ */
 function diffBadge(d){
-  const m={beginner:'Beginner',earlyIntermediate:'Early Intermediate',intermediate:'Intermediate',conversation:'Conversation'};
-  const c={beginner:'diff-beginner',earlyIntermediate:'diff-early',intermediate:'diff-intermediate',conversation:'diff-conversation'};
-  return `<span class="diff-badge ${c[d]||'diff-beginner'}">${m[d]||d}</span>`;
+  const m={beginner:"Beginner",earlyIntermediate:"Early Intermediate",intermediate:"Intermediate",conversation:"Conversation"};
+  const c={beginner:"diff-beginner",earlyIntermediate:"diff-early",intermediate:"diff-intermediate",conversation:"diff-conversation"};
+  return`<span class="diff-badge ${c[d]||"diff-beginner"}">${m[d]||d}</span>`;
 }
 function buildLearn(){
-  const icons=['👋','🙋','✈️','💬','📅'];
-  const bgs=['#fde8e8','#e8f0fe','#e8f8ef','#f8e8f8','#fef3e8'];
-  document.getElementById('unitList').innerHTML=lessons.map((l,i)=>{
+  const icons=["👋","🙋","✈️","💬","📅"];
+  const bgs=["#fde8e8","#e8f0fe","#e8f8ef","#f8e8f8","#fef3e8"];
+  document.getElementById("unitList").innerHTML=lessons.map((l,i)=>{
     const isDone=save.completedLessons.includes(i);
-    return `
-    <div class="unit-card">
-      <div class="unit-header" onclick="toggleUnit(${i})">
-        <div class="unit-badge" style="background:${bgs[i]}">${isDone?'✅':icons[i]}</div>
+    return`<div class="unit-card">
+      <div class="unit-head" onclick="toggleUnit(${i})">
+        <div class="unit-badge" style="background:${bgs[i]}">${isDone?"✅":icons[i]}</div>
         <div class="unit-info">
           <div class="unit-title">${l.title}</div>
-          <div class="unit-meta">${l.unit} · ${l.jlpt} · ${l.minutes} min ${diffBadge(l.difficulty)}</div>
+          <div class="unit-meta">${l.unit} · ${l.jlpt} · ${l.minutes}min ${diffBadge(l.difficulty)}</div>
         </div>
-        <div class="unit-chevron" id="chev${i}">›</div>
+        <div class="unit-chev" id="chev${i}">›</div>
       </div>
-      <div class="unit-lessons" id="ul${i}">
+      <div class="unit-body" id="ul${i}">
         <div class="lesson-row" onclick="openLesson(${i})">
-          <div class="lesson-num ${isDone?'done':''}">${isDone?'✓':'→'}</div>
-          <div class="lesson-row-info">
-            <div class="lesson-row-name">${l.title}</div>
-            <div class="lesson-row-meta">${l.cards.length} flashcards · ${l.quiz.length}-question lesson quiz · speaking</div>
+          <div class="l-num ${isDone?"done":""}">${isDone?"✓":"→"}</div>
+          <div class="l-info">
+            <div class="l-name">${l.title}</div>
+            <div class="l-meta">${l.cards.length} cards · ${l.quiz.length} quiz Qs · speaking</div>
           </div>
-          <div class="lesson-row-arrow">›</div>
+          <span style="font-size:12px;color:var(--muted)">›</span>
         </div>
       </div>
-    </div>`}).join('');
+    </div>`;
+  }).join("");
 }
-function toggleUnit(i){playClick();document.getElementById('ul'+i).classList.toggle('open');document.getElementById('chev'+i).classList.toggle('open');}
+function toggleUnit(i){playClick();document.getElementById("ul"+i).classList.toggle("open");document.getElementById("chev"+i).classList.toggle("open");}
 
-/* ===== LESSON DETAIL ===== */
+/* ============================================================
+   LESSON DETAIL
+============================================================ */
 function renderDetail(){
   const l=lessons[curLesson];
-  const typeColors={vocab:'#1a5ab0',grammar:'#1a7a40',reading:'#a05a00',listening:'#6a1a7a'};
-  document.getElementById('detailContent').innerHTML=`
+  document.getElementById("detailContent").innerHTML=`
     <div class="detail-back" onclick="backFromDetail()">
       <button class="detail-back-btn">←</button>
-      <span class="detail-back-label">All Lessons</span>
+      <span class="detail-back-lbl">All Lessons</span>
     </div>
-    <div class="detail-header">
+    <div class="detail-hdr">
       <div class="detail-class">🏫 ${l.unit} · ${l.jlpt}</div>
       <div class="detail-title">${l.title}</div>
-      <div class="detail-obj">📋 Objective: ${l.objective}</div>
+      <div class="detail-obj">📋 ${l.objective}</div>
     </div>
     <div class="detail-tabs">
       <div class="detail-tab active" id="dtab-cards" onclick="switchDTab('cards')">📚 Study</div>
       <div class="detail-tab" id="dtab-quiz" onclick="switchDTab('quiz')">📝 Quiz</div>
       <div class="detail-tab" id="dtab-speak" onclick="switchDTab('speak')">🗣️ Speak</div>
+      <div class="detail-tab" id="dtab-shadow" onclick="switchDTab('shadow')">📣 Shadow</div>
     </div>
     <div class="detail-panel active" id="dpanel-cards">${buildCards(l)}</div>
-    <div class="detail-panel" id="dpanel-quiz"><div class="quiz-wrap" id="quizArea"><div style="text-align:center;padding:24px;color:var(--muted)">Tap Quiz to start the lesson test</div></div></div>
+    <div class="detail-panel" id="dpanel-quiz"><div class="quiz-wrap" id="quizArea"><div style="text-align:center;padding:20px;color:var(--muted)">Tap Quiz to start</div></div></div>
     <div class="detail-panel" id="dpanel-speak">${buildSpeakPanel(l)}</div>
+    <div class="detail-panel" id="dpanel-shadow">${buildShadowPanel(l)}</div>
   `;
   speak(l.cards[0].jp);
 }
-
 function switchDTab(tab){
   playClick();curDTab=tab;
-  document.querySelectorAll('.detail-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.detail-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('dtab-'+tab).classList.add('active');
-  document.getElementById('dpanel-'+tab).classList.add('active');
-  if(tab==='quiz')initQuiz();
+  document.querySelectorAll(".detail-tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".detail-panel").forEach(p=>p.classList.remove("active"));
+  document.getElementById("dtab-"+tab).classList.add("active");
+  document.getElementById("dpanel-"+tab).classList.add("active");
+  if(tab==="quiz")initQuiz();
 }
-
 function buildCards(l){
-  return `<div style="padding:12px 0 4px;font-size:12px;color:var(--muted)">Study each card, then tap the Quiz tab to test yourself.</div>`+
+  return`<div style="padding:10px 0 2px;font-size:11px;color:var(--muted)">Study each card, then tap the Quiz tab.</div>`+
   l.cards.map((c,i)=>`
     <div class="flashcard">
       <div class="fc-num">Card ${i+1} of ${l.cards.length}</div>
       <div class="fc-jp">${c.jp}</div>
-      <div class="fc-romaji">${c.romaji}</div>
+      <div class="fc-rom">${c.rom}</div>
       <div class="fc-en">${c.en}</div>
       <div class="fc-tip">💡 ${c.tip}</div>
       <button class="fc-audio" onclick="speak('${c.jp.replace(/'/g,"\\'")}')">🔊 Hear it</button>
-    </div>`).join('');
+    </div>`).join("");
 }
-
 function buildSpeakPanel(l){
-  const s=l.speaking;
-  const jp=s.jp.replace(/'/g,"\\'");
-  return `
-    <div style="padding:12px 0 4px;font-size:12px;color:var(--muted)">Listen to the model sentence, then try saying it yourself.</div>
+  const s=l.speaking;const jp=s.jp.replace(/'/g,"\\'");
+  return`<div style="padding:10px 0 2px;font-size:11px;color:var(--muted)">Hear the model sentence, then speak it aloud.</div>
     <div class="speak-prompt-card">
       <div class="sp-label">🎤 Speaking prompt</div>
       <div class="sp-jp">${s.jp}</div>
-      <div class="sp-romaji">${s.romaji}</div>
+      <div class="sp-rom">${s.rom}</div>
       <div class="sp-en">${s.en}</div>
       <div class="sp-btn-row">
-        <button class="sp-listen" onclick="speak('${jp}')">🔊 Hear model</button>
+        <button class="sp-listen" onclick="speak('${jp}')">🔊 Model</button>
         <button class="sp-mic" id="spMic" onclick="toggleSpMic('${jp}')">🎤 Speak</button>
       </div>
-      <div class="sp-fb" id="spFb">Step 1: tap Hear model. Step 2: tap Speak and repeat.</div>
+      <div class="sp-fb" id="spFb">Step 1: hear model. Step 2: speak.</div>
     </div>`;
 }
-
+function buildShadowPanel(l){
+  return`<div style="padding:10px 0 10px;font-size:11px;color:var(--muted)">🎯 Shadowing: a sentence plays, then you have 3 seconds to repeat it immediately.</div>
+  ${l.cards.slice(0,3).map((c,i)=>`
+    <div class="speak-prompt-card" style="margin-bottom:10px">
+      <div class="sp-label">Phrase ${i+1}</div>
+      <div class="sp-jp">${c.jp}</div>
+      <div class="sp-rom">${c.rom}</div>
+      <div class="sp-en">${c.en}</div>
+      <button class="sp-listen" style="width:100%;margin-bottom:6px" onclick="startShadow('${c.jp.replace(/'/g,"\\'")}',${i})">▶ Play & Shadow</button>
+      <div class="sp-fb" id="shFb${i}">Tap to hear, then repeat immediately!</div>
+    </div>`).join("")}`;
+}
 function toggleSpMic(jp){
-  const btn=document.getElementById('spMic');const fb=document.getElementById('spFb');if(!btn)return;
-  if(btn.classList.contains('listening')){btn.classList.remove('listening');btn.textContent='🎤 Speak';fb.textContent='Step 1: tap Hear model. Step 2: tap Speak and repeat.';return;}
-  btn.classList.add('listening');btn.textContent='🟢 Listening...';fb.textContent='Listening... speak clearly!';
-  tone(880,0.08,'sine',0.1);
-  setTimeout(()=>{btn.classList.remove('listening');btn.textContent='🎤 Try again';fb.textContent='✅ Good effort! Hear it again and keep repeating.';save.speakAttempts=(save.speakAttempts||0)+1;saveSave(save);playOK();speak(jp);},3000);
+  const btn=document.getElementById("spMic");const fb=document.getElementById("spFb");if(!btn)return;
+  if(btn.classList.contains("listening")){btn.classList.remove("listening");btn.textContent="🎤 Speak";fb.textContent="Step 1: hear model. Step 2: speak.";return;}
+  btn.classList.add("listening");btn.textContent="🟢 Listening...";fb.textContent="Listening...";
+  tone(880,0.06,null,0.09);
+  setTimeout(()=>{btn.classList.remove("listening");btn.textContent="🎤 Again";fb.textContent="✅ Good! Keep repeating.";save.speakAttempts=(save.speakAttempts||0)+1;saveSave(save);playOK();speak(jp);},3000);
+}
+function startShadow(jp,i){
+  const fb=document.getElementById("shFb"+i);if(!fb)return;
+  fb.textContent="▶ Listen now...";speak(jp);
+  setTimeout(()=>{fb.textContent="🎤 Repeat now!";tone(880,0.06,null,0.09);},1800);
+  setTimeout(()=>{fb.textContent="✅ Keep going — repeat 5 times!";save.speakAttempts=(save.speakAttempts||0)+1;saveSave(save);playOK();},4800);
 }
 
-/* ===== LESSON QUIZ ===== */
-function quizTypeBadge(type){
-  const map={vocab:'Vocabulary',grammar:'Grammar',reading:'Reading',listening:'Listening'};
-  return map[type]||'Question';
-}
+/* ============================================================
+   LESSON QUIZ
+============================================================ */
+function qTypeBadge(type){return{vocab:"Vocabulary",grammar:"Grammar",reading:"Reading",listening:"Listening"}[type]||"Question";}
 function initQuiz(){
   const l=lessons[curLesson];
   qState={qIndex:0,score:0,answered:false,questions:[...l.quiz].sort(()=>Math.random()-0.5)};
-  renderLessonQuiz();
+  renderLQ();
 }
-function renderLessonQuiz(){
-  const qa=document.getElementById('quizArea');if(!qa)return;
+function renderLQ(){
+  const qa=document.getElementById("quizArea");if(!qa)return;
   const{questions,qIndex}=qState;
-  if(qIndex>=questions.length){renderLessonQuizDone(qa);return;}
+  if(qIndex>=questions.length){doneLQ(qa);return;}
   const q=questions[qIndex];
   const pct=Math.round((qIndex/questions.length)*100);
   const opts=[...q.choices].sort(()=>Math.random()-0.5);
-  const jp=q.jp?q.jp.replace(/'/g,"\\'"):'';
+  const jp=q.jp?q.jp.replace(/'/g,"\\'"):"";
   qa.innerHTML=`
-    <div class="quiz-header-band">
-      <div class="quiz-type-label">Lesson Quiz — ${lessons[curLesson].unit}</div>
-      <div class="quiz-section-title">${lessons[curLesson].title}</div>
+    <div class="quiz-hdr-band">
+      <div class="quiz-type-lbl">Lesson Quiz · ${lessons[curLesson].unit}</div>
+      <div class="quiz-sec-title">${lessons[curLesson].title}</div>
     </div>
     <div class="quiz-prog-row">
       <div class="quiz-prog"><div class="quiz-prog-fill" style="width:${pct}%"></div></div>
-      <div class="quiz-step-lbl">${qIndex+1} / ${questions.length}</div>
+      <div class="quiz-step-lbl">${qIndex+1}/${questions.length}</div>
     </div>
-    <div class="quiz-q-type">${quizTypeBadge(q.type)}</div>
-    ${q.jp?`<div class="quiz-jp" onclick="speak('${jp}')">${q.jp} <span style="font-size:14px">🔊</span></div>`:''}
+    <div class="quiz-q-type">${qTypeBadge(q.type)}</div>
+    ${q.jp?`<div class="quiz-jp" onclick="speak('${jp}')">${q.jp} 🔊</div>`:""}
     <div class="quiz-prompt">${q.prompt}</div>
     <div class="quiz-choices">
-      ${opts.map(o=>`<button class="choice-btn" onclick="checkLessonQ(this,\`${o.replace(/`/g,'\\`')}\`,\`${q.answer.replace(/`/g,'\\`')}\`,\`${jp.replace(/`/g,'\\`')}\`,\`${(q.explain||'').replace(/`/g,'\\`')}\`)">${o}</button>`).join('')}
+      ${opts.map(o=>`<button class="choice-btn" onclick="checkLQ(this,\`${o.replace(/`/g,"\\`")}\`,\`${q.answer.replace(/`/g,"\\`")}\`,\`${jp.replace(/`/g,"\\`")}\`,\`${(q.explain||"").replace(/`/g,"\\`")}\`)">${o}</button>`).join("")}
     </div>
     <div class="quiz-feedback" id="qFb"></div>
-    <button class="quiz-next" id="qNext" onclick="nextLessonQ()">Next Question →</button>`;
+    <button class="quiz-next" id="qNext" onclick="nextLQ()">Next →</button>`;
   if(q.jp)speak(q.jp);
 }
-function checkLessonQ(btn,chosen,correct,jp,explain){
+function checkLQ(btn,chosen,correct,jp,explain){
   if(qState.answered)return;
   qState.answered=true;
-  document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('qFb');const nx=document.getElementById('qNext');
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("qFb");const nx=document.getElementById("qNext");
   save.totalAnswered=(save.totalAnswered||0)+1;
-  if(chosen===correct){
-    btn.classList.add('correct');fb.className='quiz-feedback ok';
-    fb.innerHTML=`✅ Correct! ${explain?'<br><span style="font-size:13px;opacity:0.85">'+explain+'</span>':''}`;
-    qState.score++;save.totalCorrect=(save.totalCorrect||0)+1;playOK();
-  }else{
-    btn.classList.add('wrong');fb.className='quiz-feedback bad';
-    fb.innerHTML=`❌ Answer: <b>${correct}</b>${explain?'<br><span style="font-size:13px">'+explain+'</span>':''}`;
-    document.querySelectorAll('.choice-btn').forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
-    playBad();
-  }
-  saveSave(save);nx.classList.add('show');
-  if(jp)speak(jp);
+  if(chosen===correct){btn.classList.add("correct");fb.className="quiz-feedback ok";fb.innerHTML=`✅ Correct! ${explain?"<br><span style='font-size:11px;opacity:.85'>"+explain+"</span>":""}`;qState.score++;save.totalCorrect=(save.totalCorrect||0)+1;playOK();}
+  else{btn.classList.add("wrong");fb.className="quiz-feedback bad";fb.innerHTML=`❌ Answer: <b>${correct}</b>${explain?"<br><span style='font-size:11px'>"+explain+"</span>":""}`;document.querySelectorAll(".choice-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("correct");});playBad();}
+  saveSave(save);nx.classList.add("show");if(jp)speak(jp);
 }
-function nextLessonQ(){playClick();qState.qIndex++;qState.answered=false;renderLessonQuiz();}
-function renderLessonQuizDone(qa){
+function nextLQ(){playClick();qState.qIndex++;qState.answered=false;renderLQ();}
+function doneLQ(qa){
   const{score,questions}=qState;
   const pct=Math.round((score/questions.length)*100);
-  const grade=pct>=90?'A':pct>=80?'B':pct>=70?'C':pct>=60?'D':'F';
+  const grade=pct>=90?"A":pct>=80?"B":pct>=70?"C":pct>=60?"D":"F";
   const earned=score*15;
   save.xp=(save.xp||0)+earned;
   if(!save.completedLessons.includes(curLesson))save.completedLessons.push(curLesson);
-  const today=todayStr();
-  if(!save.activeDays)save.activeDays=[];
-  if(!save.activeDays.includes(today))save.activeDays.push(today);
-  saveSave(save);showToast('⭐ +'+earned+' XP saved!');
-  qa.innerHTML=`
-    <div class="quiz-done">
-      <div class="qd-grade">${pct>=80?'🎉':pct>=60?'👍':'💪'}</div>
-      <div class="qd-title">${lessons[curLesson].unit} Complete</div>
-      <div class="qd-grade-box">
-        <div class="qd-grade-label">Your Grade</div>
-        <div class="qd-grade-value">${grade} — ${pct}%</div>
-      </div>
-      <div class="qd-sub">${score}/${questions.length} correct<br>${pct>=80?'Excellent! Ready to move on.':pct>=60?'Good progress — review flashcards and retry.':'Study the flashcards again and retake the quiz.'}</div>
-      <div class="xp-pill">⭐ +${earned} XP earned</div>
-      <button class="qd-btn" onclick="initQuiz()">Retake Quiz</button>
-      <button class="qd-btn2" onclick="switchDTab('speak')">Practice Speaking →</button>
-    </div>`;
+  const today=todayStr();if(!save.activeDays.includes(today))save.activeDays.push(today);
+  saveSave(save);showToast("⭐ +"+earned+" XP saved!");
+  qa.innerHTML=`<div class="quiz-done">
+    <div style="font-size:48px;margin-bottom:8px">${pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
+    <div class="qd-title">${lessons[curLesson].unit} Complete</div>
+    <div class="qd-grade-box"><div class="qd-grade-lbl">Grade</div><div class="qd-grade-val">${grade} — ${pct}%</div></div>
+    <div class="qd-sub">${score}/${questions.length} correct<br>${pct>=80?"Excellent! Ready to move on.":pct>=60?"Good — review and retry.":"Study flashcards again then retake."}</div>
+    <div class="xp-pill">⭐ +${earned} XP earned</div>
+    <button class="qd-btn" onclick="initQuiz()">Retake Quiz</button>
+    <button class="qd-btn2" onclick="switchDTab('speak')">Practice Speaking →</button>
+  </div>`;
   playOK();
+  // Add to SR queue
+  lessons[curLesson].cards.forEach(c=>{if(!save.srQueue.find(s=>s.jp===c.jp))save.srQueue.push({jp:c.jp,rom:c.rom,en:c.en,nextReview:todayStr(),interval:1,correct:0,total:0});});
+  saveSave(save);
 }
 
-/* ===== SECTION EXAM ===== */
+/* ============================================================
+   SECTION EXAM
+============================================================ */
 function openExam(){
   playClick();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-exam').classList.add('active');
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("page-exam").classList.add("active");
   buildExamIntro();
 }
 function buildExamIntro(){
   const totalQ=sectionExam.sections.reduce((a,s)=>a+s.questions.length,0);
-  document.getElementById('examContent').innerHTML=`
+  document.getElementById("examContent").innerHTML=`
     <div class="exam-intro">
-      <div style="font-size:12px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📋 Instructions</div>
-      ${sectionExam.instructions.map(r=>`<div class="exam-rule">• ${r}</div>`).join('')}
+      <div style="font-size:10px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">📋 Instructions</div>
+      ${["Covers all 5 lessons you have studied.","4 sections: Vocabulary, Grammar, Reading, Listening.","One correct answer per question.","Score 70%+ to pass. Aim for 80%+."].map(r=>`<div class="exam-rule">• ${r}</div>`).join("")}
       <div class="exam-meta-row">
         <div class="exam-meta"><div class="exam-meta-val">${sectionExam.sections.length}</div><div class="exam-meta-lbl">Sections</div></div>
         <div class="exam-meta"><div class="exam-meta-val">${totalQ}</div><div class="exam-meta-lbl">Questions</div></div>
         <div class="exam-meta"><div class="exam-meta-val">70%</div><div class="exam-meta-lbl">Pass mark</div></div>
       </div>
     </div>
-    <div style="padding:0 20px 12px">
-      ${sectionExam.sections.map((s,i)=>`
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:0.5px solid #f0ede4">
-          <div style="width:32px;height:32px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--purple);flex-shrink:0">${i+1}</div>
-          <div>
-            <div style="font-size:13px;font-weight:500">${s.name}</div>
-            <div style="font-size:11px;color:var(--muted)">${s.jlpt} · ${s.questions.length} questions · ${s.desc}</div>
-          </div>
-        </div>`).join('')}
+    <div style="padding:0 14px 10px">
+      ${sectionExam.sections.map((s,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #f0ede4">
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--purple);flex-shrink:0">${i+1}</div>
+        <div><div style="font-size:12px;font-weight:500">${s.name}</div><div style="font-size:10px;color:var(--muted)">${s.jlpt} · ${s.questions.length} Qs · ${s.desc}</div></div>
+      </div>`).join("")}
     </div>
-    <div style="padding:0 20px 8px">
-      <button class="exam-start-btn" onclick="startExam()">Begin Section Test →</button>
-      <div style="text-align:center"><button style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:8px" onclick="backFromExam()">← Back</button></div>
-    </div>`;
-}
-function backFromExam(){
-  playClick();
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-learn').classList.add('active');
-  document.getElementById('tab-learn').classList.add('active');
+    <button class="exam-start-btn" onclick="startExam()">Begin Section Test →</button>
+    <div style="text-align:center;margin-bottom:12px"><button style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer" onclick="switchTab('learn')">← Back</button></div>`;
 }
 function startExam(){
   playClick();
-  // Build flat question list with section info
-  examState={active:true,secIdx:0,qIdx:0,score:0,answered:false,allQ:[],results:[]};
-  sectionExam.sections.forEach((sec,si)=>{
-    sec.questions.forEach((q,qi)=>{
-      examState.allQ.push({...q,secName:sec.name,secJlpt:sec.jlpt,secIdx:si});
-    });
-  });
-  renderExamQuestion();
+  examState={qIdx:0,score:0,answered:false,allQ:[],results:[]};
+  sectionExam.sections.forEach((sec,si)=>{sec.questions.forEach(q=>{examState.allQ.push({...q,secName:sec.name,secJlpt:sec.jlpt,secIdx:si});});});
+  renderExamQ();
 }
-function renderExamQuestion(){
-  const ec=document.getElementById('examContent');if(!ec)return;
+function renderExamQ(){
+  const ec=document.getElementById("examContent");if(!ec)return;
   const{allQ,qIdx}=examState;
-  if(qIdx>=allQ.length){renderExamDone();return;}
-  const q=allQ[qIdx];
-  const pct=Math.round((qIdx/allQ.length)*100);
-  const opts=[...q.choices].sort(()=>Math.random()-0.5);
-  const jp=q.jp?q.jp.replace(/'/g,"\\'"):'';
-  ec.innerHTML=`
-    <div class="quiz-wrap" style="padding-top:16px">
-      <div class="quiz-header-band">
-        <div class="quiz-type-label">${q.secName} · ${q.secJlpt}</div>
-        <div class="quiz-section-title">${quizTypeBadge(q.type||'vocab')}</div>
-      </div>
-      <div class="quiz-prog-row">
-        <div class="quiz-prog"><div class="quiz-prog-fill" style="width:${pct}%"></div></div>
-        <div class="quiz-step-lbl">${qIdx+1} / ${allQ.length}</div>
-      </div>
-      ${q.jp?`<div class="quiz-jp" onclick="${q.speak?`speak('${q.speak.replace(/'/g,"\\'")}')`:''};speak('${jp}')">${q.jp} <span style="font-size:14px">🔊</span></div>`:''}
-      <div class="quiz-prompt">${q.prompt}</div>
-      <div class="quiz-choices">
-        ${opts.map(o=>`<button class="choice-btn" onclick="checkExamQ(this,\`${o.replace(/`/g,'\\`')}\`,\`${q.answer.replace(/`/g,'\\`')}\`,\`${jp.replace(/`/g,'\\`')}\`,\`${(q.explain||'').replace(/`/g,'\\`')}\`)">${o}</button>`).join('')}
-      </div>
-      <div class="quiz-feedback" id="examFb"></div>
-      <button class="quiz-next" id="examNext" onclick="nextExamQ()">Next →</button>
-    </div>`;
+  if(qIdx>=allQ.length){doneExam();return;}
+  const q=allQ[qIdx];const pct=Math.round((qIdx/allQ.length)*100);
+  const opts=[...q.choices].sort(()=>Math.random()-0.5);const jp=q.jp?q.jp.replace(/'/g,"\\'"):"";
+  ec.innerHTML=`<div class="quiz-wrap" style="padding-top:14px">
+    <div class="quiz-hdr-band"><div class="quiz-type-lbl">${q.secName} · ${q.secJlpt}</div><div class="quiz-sec-title">${qTypeBadge(q.type||"vocab")}</div></div>
+    <div class="quiz-prog-row"><div class="quiz-prog"><div class="quiz-prog-fill" style="width:${pct}%"></div></div><div class="quiz-step-lbl">${qIdx+1}/${allQ.length}</div></div>
+    ${q.jp?`<div class="quiz-jp" onclick="speak('${jp}')">${q.jp} 🔊</div>`:""}
+    <div class="quiz-prompt">${q.prompt}</div>
+    <div class="quiz-choices">${opts.map(o=>`<button class="choice-btn" onclick="checkExamQ(this,\`${o.replace(/`/g,"\\`")}\`,\`${q.answer.replace(/`/g,"\\`")}\`,\`${jp.replace(/`/g,"\\`")}\`,\`${(q.explain||"").replace(/`/g,"\\`")}\`)">${o}</button>`).join("")}</div>
+    <div class="quiz-feedback" id="examFb"></div>
+    <button class="quiz-next" id="examNext" onclick="nextExamQ()">Next →</button>
+  </div>`;
   if(q.speak)speak(q.speak);else if(q.jp)speak(q.jp);
 }
 function checkExamQ(btn,chosen,correct,jp,explain){
   if(examState.answered)return;
   examState.answered=true;
-  document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
-  const fb=document.getElementById('examFb');const nx=document.getElementById('examNext');
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("examFb");const nx=document.getElementById("examNext");
   save.totalAnswered=(save.totalAnswered||0)+1;
-  const isCorrect=chosen===correct;
-  examState.results.push({correct:isCorrect});
-  if(isCorrect){
-    btn.classList.add('correct');fb.className='quiz-feedback ok';
-    fb.innerHTML=`✅ Correct! ${explain?'<br><span style="font-size:13px;opacity:0.85">'+explain+'</span>':''}`;
-    examState.score++;save.totalCorrect=(save.totalCorrect||0)+1;playOK();
-  }else{
-    btn.classList.add('wrong');fb.className='quiz-feedback bad';
-    fb.innerHTML=`❌ Answer: <b>${correct}</b>${explain?'<br><span style="font-size:13px">'+explain+'</span>':''}`;
-    document.querySelectorAll('.choice-btn').forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
-    playBad();
-  }
-  saveSave(save);nx.classList.add('show');
-  if(jp)speak(jp);
+  const ok=chosen===correct;examState.results.push({correct:ok});
+  if(ok){btn.classList.add("correct");fb.className="quiz-feedback ok";fb.innerHTML=`✅ Correct! ${explain?"<br><span style='font-size:11px;opacity:.85'>"+explain+"</span>":""}`;examState.score++;save.totalCorrect=(save.totalCorrect||0)+1;playOK();}
+  else{btn.classList.add("wrong");fb.className="quiz-feedback bad";fb.innerHTML=`❌ Answer: <b>${correct}</b>${explain?"<br><span style='font-size:11px'>"+explain+"</span>":""}`;document.querySelectorAll(".choice-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("correct");});playBad();}
+  saveSave(save);nx.classList.add("show");if(jp)speak(jp);
 }
-function nextExamQ(){playClick();examState.qIdx++;examState.answered=false;renderExamQuestion();}
-function renderExamDone(){
-  const{score,allQ}=examState;
-  const pct=Math.round((score/allQ.length)*100);
-  const passed=pct>=70;
-  const grade=pct>=90?'A':pct>=80?'B':pct>=70?'C':pct>=60?'D':'F';
-  const xp=score*20;
-  save.xp=(save.xp||0)+xp;
-  if(!save.examScores)save.examScores=[];
-  save.examScores.push({date:todayStr(),pct,grade});
-  saveSave(save);showToast('⭐ +'+xp+' XP — Exam complete!');
-
-  // Section breakdown
+function nextExamQ(){playClick();examState.qIdx++;examState.answered=false;renderExamQ();}
+function doneExam(){
+  const{score,allQ}=examState;const pct=Math.round((score/allQ.length)*100);const passed=pct>=70;
+  const grade=pct>=90?"A":pct>=80?"B":pct>=70?"C":pct>=60?"D":"F";const xp=score*20;
+  save.xp=(save.xp||0)+xp;if(!save.examScores)save.examScores=[];save.examScores.push({date:todayStr(),pct,grade});
+  saveSave(save);showToast("⭐ +"+xp+" XP — Exam done!");
   const secBreakdown=sectionExam.sections.map((sec,si)=>{
     const secQs=examState.allQ.filter(q=>q.secIdx===si);
-    const secResults=examState.results.slice(examState.allQ.findIndex(q=>q.secIdx===si),examState.allQ.findIndex(q=>q.secIdx===si)+secQs.length);
-    const correct=secResults.filter(r=>r.correct).length;
-    const secPct=Math.round((correct/secQs.length)*100);
-    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:0.5px solid #f0ede4;font-size:13px">
-      <span>${sec.name.split('—')[1]?.trim()||sec.name}</span>
-      <span style="font-weight:500;color:${secPct>=70?'var(--green)':'var(--red)'}">${correct}/${secQs.length} (${secPct}%)</span>
-    </div>`;
-  }).join('');
-
-  document.getElementById('examContent').innerHTML=`
-    <div class="quiz-wrap" style="padding-top:16px">
-      <div class="quiz-done">
-        <div class="qd-grade">${passed?'🏆':'📚'}</div>
-        <div class="qd-title">${passed?'Section Test Passed!':'Section Test Complete'}</div>
-        <div class="qd-grade-box">
-          <div class="qd-grade-label">Overall Grade</div>
-          <div class="qd-grade-value">${grade} — ${pct}%</div>
-        </div>
-        <div class="qd-sub">${score}/${allQ.length} correct · ${passed?'Well done! You passed.':'Score 70%+ to pass. Review and retry.'}</div>
-        <div class="xp-pill">⭐ +${xp} XP earned</div>
-      </div>
-      <div style="background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px;margin-bottom:16px">
-        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Section Breakdown</div>
-        ${secBreakdown}
-      </div>
-      <button class="qd-btn" onclick="startExam()">Retake Test</button>
-      <button class="qd-btn2" onclick="backFromExam()">Back to Lessons</button>
-    </div>`;
+    const correct=examState.results.slice(examState.allQ.findIndex(q=>q.secIdx===si),examState.allQ.findIndex(q=>q.secIdx===si)+secQs.length).filter(r=>r.correct).length;
+    const sp=Math.round((correct/secQs.length)*100);
+    return`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid #f0ede4;font-size:12px"><span>${sec.name.split("—")[1]?.trim()||sec.name}</span><span style="font-weight:500;color:${sp>=70?"var(--green)":"var(--red)"}">${correct}/${secQs.length} (${sp}%)</span></div>`;
+  }).join("");
+  document.getElementById("examContent").innerHTML=`<div class="quiz-wrap" style="padding-top:14px">
+    <div class="quiz-done">
+      <div style="font-size:48px;margin-bottom:8px">${passed?"🏆":"📚"}</div>
+      <div class="qd-title">${passed?"Passed!":"Complete"}</div>
+      <div class="qd-grade-box"><div class="qd-grade-lbl">Grade</div><div class="qd-grade-val">${grade} — ${pct}%</div></div>
+      <div class="qd-sub">${score}/${allQ.length} correct · ${passed?"Well done!":"Score 70%+ to pass."}</div>
+      <div class="xp-pill">⭐ +${xp} XP</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;border:0.5px solid #e8e4db;padding:12px;margin-bottom:14px">
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Section Breakdown</div>${secBreakdown}
+    </div>
+    ${passed?`<div class="cert-card">
+      <div class="cert-emoji">🏅</div>
+      <div class="cert-title">Section Test Certificate</div>
+      <div class="cert-sub">Awarded for passing the N5 Section Test<br>${new Date().toLocaleDateString()}</div>
+      <button class="cert-btn" onclick="showToast('🎉 Certificate earned! Keep going!')">Claim Certificate</button>
+    </div>`:""}
+    <button class="qd-btn" onclick="startExam()">Retake</button>
+    <button class="qd-btn2" onclick="switchTab('learn')">Back to Lessons</button>
+  </div>`;
   playOK();
 }
 
-/* ===== SPEAK ===== */
-function buildSpeak(){
-  document.getElementById('scenarioList').innerHTML=scenarios.map((s,i)=>{
-    const jp=s.jp.replace(/'/g,"\\'");
-    return `
-      <div class="scenario-card">
-        <div class="sc-head"><div class="sc-title">${s.title}</div><div class="sc-sit">${s.situation}</div></div>
-        <div class="sc-body">
-          <div class="sc-prompt">📌 ${s.prompt}</div>
-          <div class="sc-jp" onclick="speak('${jp}')">${s.jp} <span style="font-size:14px">🔊</span></div>
-          <div class="sc-romaji">${s.romaji}</div>
-          <div class="sc-en">${s.en}</div>
-          <div class="sc-btns">
-            <button class="sc-lb" onclick="speak('${jp}')">🔊 Hear it</button>
-            <button class="sc-mb" id="scm${i}" onclick="toggleScMic(${i},'${jp}')">🎤 Reply</button>
-          </div>
-          <div class="sc-fb" id="scf${i}">Hear it first, then tap Reply and speak</div>
-        </div>
-      </div>`;
-  }).join('');
-}
-function toggleScMic(i,jp){
-  const btn=document.getElementById('scm'+i);const fb=document.getElementById('scf'+i);if(!btn)return;
-  if(btn.classList.contains('listening')){btn.classList.remove('listening');btn.textContent='🎤 Reply';fb.textContent='Hear it first, then tap Reply and speak';return;}
-  btn.classList.add('listening');btn.textContent='🟢 Listening...';fb.textContent='Listening... speak clearly!';
-  tone(880,0.08,'sine',0.1);
-  setTimeout(()=>{btn.classList.remove('listening');btn.textContent='🎤 Try again';fb.textContent='✅ Well done! Keep practicing.';save.speakAttempts=(save.speakAttempts||0)+1;saveSave(save);playOK();},3000);
-}
-
-/* ===== PLAN ===== */
-function buildPlan(){
-  document.getElementById('planContent').innerHTML=phases.map(p=>`
-    <div class="phase-card ${p.cur?'cur':''}">
-      <div class="phase-num">${p.num}${p.cur?' · 📍 You are here':''}</div>
-      <div class="phase-title">${p.title}</div>
-      <div class="phase-months">${p.months}</div>
-      <div class="phase-lvl">🎯 ${p.lvl}</div>
-      <div class="phase-focus">${p.focus}</div>
-    </div>`).join('')+`
-  <div class="daily-tgt">
-    <div style="font-size:14px;font-weight:500;margin-bottom:8px">📅 Daily study routine</div>
-    <div style="font-size:13px;color:#555;line-height:1.8">
-      <b>Step 1:</b> Read all flashcards in today's lesson<br>
-      <b>Step 2:</b> Take the lesson quiz (aim for B or above)<br>
-      <b>Step 3:</b> Practice speaking aloud<br>
-      <b>Step 4:</b> After 3+ lessons, take the Section Test<br>
-      <b>Step 5:</b> Review any wrong answers before bed
+/* ============================================================
+   PRACTICE HUB
+============================================================ */
+function buildPractice(){
+  document.getElementById("practiceContent").innerHTML=`
+    <div style="height:14px"></div>
+    <div class="practice-grid">
+      <div class="practice-card" onclick="startListening()">
+        <div class="practice-icon">🎧</div>
+        <div class="practice-name">Listening Drills</div>
+        <div class="practice-sub">Hear sentences, pick the meaning</div>
+        <span class="practice-badge" style="background:#e8f0fe;color:#1a5ab0">JLPT format</span>
+      </div>
+      <div class="practice-card" onclick="startSentenceBuilder()">
+        <div class="practice-icon">🧩</div>
+        <div class="practice-name">Sentence Builder</div>
+        <div class="practice-sub">Arrange words in correct order</div>
+        <span class="practice-badge" style="background:#e8f8ef;color:#1a7a40">Grammar</span>
+      </div>
+      <div class="practice-card" onclick="startSpacedRep()">
+        <div class="practice-icon">🃏</div>
+        <div class="practice-name">Spaced Repetition</div>
+        <div class="practice-sub">Smart flashcard review (Anki-style)</div>
+        <span class="practice-badge" style="background:#fef3e8;color:#a05a00">Memory</span>
+      </div>
+      <div class="practice-card" onclick="startRolePlay(0)">
+        <div class="practice-icon">🎭</div>
+        <div class="practice-name">Role-Play</div>
+        <div class="practice-sub">At a restaurant / Meeting someone</div>
+        <span class="practice-badge" style="background:#f8e8f8;color:#6a1a7a">Conversation</span>
+      </div>
+      <div class="practice-card" onclick="startDailyReview()">
+        <div class="practice-icon">📅</div>
+        <div class="practice-name">Daily Review</div>
+        <div class="practice-sub">5-question recap of all vocab</div>
+        <span class="practice-badge" style="background:#fffdf0;color:#a07000">Daily</span>
+      </div>
+      <div class="practice-card" onclick="switchTab('learn');setTimeout(()=>openLesson(0),100)">
+        <div class="practice-icon">📖</div>
+        <div class="practice-name">Reading</div>
+        <div class="practice-sub">Read hiragana sentences in lessons</div>
+        <span class="practice-badge" style="background:#e8f0fe;color:#1a5ab0">Reading</span>
+      </div>
     </div>
-  </div><div style="height:8px"></div>`;
+    <div class="sec-title" style="margin-top:8px">Role-Play Scenarios</div>
+    ${rolePlayScripts.map((r,i)=>`
+      <div class="card" onclick="startRolePlay(${i})" style="cursor:pointer">
+        <div style="font-size:16px;margin-bottom:5px">${r.title}</div>
+        <div style="font-size:11px;color:var(--muted)">${r.steps.length} exchanges · tap to start</div>
+      </div>`).join("")}
+    <div style="height:14px"></div>`;
 }
 
-/* ===== PROGRESS ===== */
+/* ============================================================
+   LISTENING DRILLS
+============================================================ */
+function startListening(){
+  listenIdx=0;listenAnswered=false;
+  openPracticeSub("🎧 Listening Drills","");
+  renderListenQ();
+}
+function renderListenQ(){
+  const cont=document.getElementById("practiceSubContent");if(!cont)return;
+  if(listenIdx>=listeningQs.length){
+    const sc=document.getElementById("practiceSubContent");
+    sc.innerHTML+=`<div style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:10px">🎧</div><div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Drills Complete!</div><div style="font-size:13px;color:var(--muted);margin-bottom:16px">All ${listeningQs.length} questions done</div><button class="qd-btn" style="max-width:200px" onclick="startListening()">Restart</button></div>`;
+    return;
+  }
+  const q=listeningQs[listenIdx];listenAnswered=false;
+  const existingCard=document.getElementById("listenCard");
+  const html=`<div class="listen-card" id="listenCard">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.8px">Question ${listenIdx+1} of ${listeningQs.length}</div>
+    <button class="listen-play-btn" id="playBtn" onclick="playListenAudio('${q.text.replace(/'/g,"\\'")}')">🔊</button>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Tap to hear the audio</div>
+    <div style="font-size:14px;font-weight:500;margin-bottom:14px">${q.question}</div>
+    <div class="quiz-choices">
+      ${[...q.choices].sort(()=>Math.random()-0.5).map(o=>`<button class="choice-btn" onclick="checkListenQ(this,'${o.replace(/'/g,"\\'")}','${q.answer.replace(/'/g,"\\'")}','${q.text.replace(/'/g,"\\'")}','${listenIdx}')">${o}</button>`).join("")}
+    </div>
+    <div class="quiz-feedback" id="listenFb"></div>
+    <button class="quiz-next" id="listenNext" onclick="nextListenQ()" style="display:none;margin-top:8px">Next →</button>
+  </div>`;
+  if(existingCard)existingCard.outerHTML=html;
+  else cont.querySelector("div[style]").insertAdjacentHTML("afterend",html);
+  speak(q.text);
+}
+function playListenAudio(text){speak(text);const btn=document.getElementById("playBtn");if(!btn)return;btn.classList.add("playing");setTimeout(()=>btn.classList.remove("playing"),2000);}
+function checkListenQ(btn,chosen,correct,text,idx){
+  if(listenAnswered)return;listenAnswered=true;
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("listenFb");const nx=document.getElementById("listenNext");
+  save.totalAnswered=(save.totalAnswered||0)+1;
+  if(chosen===correct){btn.classList.add("correct");fb.className="quiz-feedback ok";fb.innerHTML="✅ Correct!";save.totalCorrect=(save.totalCorrect||0)+1;playOK();}
+  else{btn.classList.add("wrong");fb.className="quiz-feedback bad";fb.innerHTML=`❌ Answer: <b>${correct}</b>`;document.querySelectorAll(".choice-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("correct");});playBad();}
+  saveSave(save);if(nx)nx.style.display="block";speak(text);
+}
+function nextListenQ(){playClick();listenIdx++;renderListenQ();}
+
+/* ============================================================
+   SENTENCE BUILDER
+============================================================ */
+function startSentenceBuilder(){
+  sbQ=sentenceBuilderQs[Math.floor(Math.random()*sentenceBuilderQs.length)];
+  sbPlaced=new Array(sbQ.answer.length).fill(null);sbUsed=new Array(sbQ.words.length).fill(false);
+  const shuffled=[...sbQ.words].sort(()=>Math.random()-0.5);
+  const html=`
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px">${sbQ.prompt}</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Tap words to place them in order:</div>
+    <div class="sb-sentence" id="sbSentence">
+      ${sbQ.answer.map((_,i)=>`<div class="sb-slot" id="sbSlot${i}" onclick="removeFromSlot(${i})">　</div>`).join("")}
+    </div>
+    <div class="sb-words" id="sbWords">
+      ${shuffled.map((w,i)=>`<button class="sb-word" id="sbW${i}" onclick="placeWord(${i},'${w.replace(/'/g,"\\'")}',${sbQ.words.indexOf(w)})">${w}</button>`).join("")}
+    </div>
+    <div class="quiz-feedback" id="sbFb"></div>
+    <div style="display:flex;gap:8px;margin-top:4px">
+      <button class="qd-btn" style="margin:0" onclick="checkSentence()">Check ✓</button>
+      <button class="qd-btn2" style="margin:0" onclick="startSentenceBuilder()">New</button>
+    </div>`;
+  openPracticeSub("🧩 Sentence Builder",html);
+}
+let sbPlacedIdx=0;
+function placeWord(wordIdx,word,origIdx){
+  const nextSlot=sbPlaced.findIndex(s=>s===null);if(nextSlot===-1)return;
+  sbPlaced[nextSlot]=word;
+  const slot=document.getElementById("sbSlot"+nextSlot);if(slot){slot.textContent=word;slot.classList.add("filled");}
+  const btn=document.getElementById("sbW"+wordIdx);if(btn)btn.classList.add("used");
+}
+function removeFromSlot(i){
+  const word=sbPlaced[i];if(!word)return;
+  sbPlaced[i]=null;
+  const slot=document.getElementById("sbSlot"+i);if(slot){slot.textContent="　";slot.classList.remove("filled");}
+  document.querySelectorAll(".sb-word").forEach(b=>{if(b.textContent===word&&b.classList.contains("used")){b.classList.remove("used");}});
+}
+function checkSentence(){
+  const fb=document.getElementById("sbFb");if(!fb)return;
+  const filled=sbPlaced.filter(s=>s!==null);
+  if(filled.length<sbQ.answer.length){fb.className="quiz-feedback bad";fb.innerHTML="Place all words first!";return;}
+  const correct=sbQ.answer.every((w,i)=>sbPlaced[i]===w);
+  if(correct){fb.className="quiz-feedback ok";fb.innerHTML=`✅ Correct! "${sbQ.translate}"`;playOK();}
+  else{fb.className="quiz-feedback bad";fb.innerHTML=`❌ Try again. Hint: ${sbQ.answer[0]}...`;playBad();}
+}
+
+/* ============================================================
+   SPACED REPETITION
+============================================================ */
+function startSpacedRep(){
+  const due=save.srQueue.filter(c=>c.nextReview<=todayStr());
+  if(due.length===0){
+    openPracticeSub("🃏 Spaced Repetition",`<div style="text-align:center;padding:20px">
+      <div style="font-size:40px;margin-bottom:10px">✨</div>
+      <div style="font-size:16px;font-weight:500;margin-bottom:8px">All caught up!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">No cards due today. Complete more lessons to add cards.</div>
+      <button class="qd-btn2" onclick="switchTab('learn')">Go to Lessons</button>
+    </div>`);
+    return;
+  }
+  srCards=[...due].sort(()=>Math.random()-0.5).slice(0,10);
+  srIdx=0;srAnswered=false;
+  renderSRCard();
+}
+function renderSRCard(){
+  if(srIdx>=srCards.length){
+    openPracticeSub("🃏 Spaced Repetition",`<div style="text-align:center;padding:20px">
+      <div style="font-size:40px;margin-bottom:10px">🎉</div>
+      <div style="font-size:16px;font-weight:500;margin-bottom:8px">Session Complete!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">${srCards.length} cards reviewed</div>
+      <button class="qd-btn" onclick="startSpacedRep()">Review Again</button>
+    </div>`);
+    return;
+  }
+  const c=srCards[srIdx];srAnswered=false;
+  const wrong=vocabBank.filter(v=>v.en!==c.en).sort(()=>Math.random()-0.5).slice(0,3).map(v=>v.en);
+  const opts=[c.en,...wrong].sort(()=>Math.random()-0.5);
+  const html=`<div class="listen-card">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Card ${srIdx+1} of ${srCards.length}</div>
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:44px;margin-bottom:6px;line-height:1.2">${c.jp}</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:4px">${c.rom}</div>
+    <button class="wotd-btn" style="background:var(--ink);color:#fff;border:none;margin-bottom:16px" onclick="speak('${c.jp.replace(/'/g,"\\'")}')">🔊 Hear it</button>
+    <div style="font-size:13px;font-weight:500;margin-bottom:12px">What does this mean?</div>
+    <div class="quiz-choices">${opts.map(o=>`<button class="choice-btn" onclick="checkSR(this,'${o.replace(/'/g,"\\'")}','${c.en.replace(/'/g,"\\'")}','${c.jp.replace(/'/g,"\\'")}','${srIdx}')">${o}</button>`).join("")}</div>
+    <div class="quiz-feedback" id="srFb"></div>
+    <button class="quiz-next" id="srNext" onclick="nextSR()" style="display:none;margin-top:8px">Next Card →</button>
+  </div>`;
+  openPracticeSub("🃏 Spaced Repetition",html);
+}
+function checkSR(btn,chosen,correct,jp,idx){
+  if(srAnswered)return;srAnswered=true;
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("srFb");const nx=document.getElementById("srNext");
+  const c=srCards[parseInt(idx)];
+  const queueItem=save.srQueue.find(s=>s.jp===c.jp);
+  if(chosen===correct){
+    btn.classList.add("correct");fb.className="quiz-feedback ok";fb.innerHTML="✅ Correct!";
+    if(queueItem){queueItem.interval=Math.min((queueItem.interval||1)*2,30);queueItem.correct=(queueItem.correct||0)+1;const nextDate=new Date();nextDate.setDate(nextDate.getDate()+queueItem.interval);queueItem.nextReview=nextDate.toISOString().slice(0,10);}
+    save.totalCorrect=(save.totalCorrect||0)+1;playOK();
+  }else{
+    btn.classList.add("wrong");fb.className="quiz-feedback bad";fb.innerHTML=`❌ It means: <b>${correct}</b>`;document.querySelectorAll(".choice-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("correct");});
+    if(queueItem){queueItem.interval=1;queueItem.nextReview=todayStr();}
+    playBad();
+  }
+  if(queueItem)queueItem.total=(queueItem.total||0)+1;
+  save.totalAnswered=(save.totalAnswered||0)+1;saveSave(save);
+  if(nx)nx.style.display="block";speak(jp);
+}
+function nextSR(){playClick();srIdx++;renderSRCard();}
+
+/* ============================================================
+   ROLE PLAY
+============================================================ */
+function startRolePlay(scriptIdx){
+  rpScript=rolePlayScripts[scriptIdx];rpStep=0;
+  renderRPStep();
+}
+function renderRPStep(){
+  const s=rpScript.steps[rpStep];
+  const isYou=s.speaker==="you";
+  const html=`
+    <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Step ${rpStep+1} of ${rpScript.steps.length}</div>
+    ${!isYou?`<div style="background:var(--soft);border-radius:14px;padding:14px;margin-bottom:14px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">🧑 They say:</div>
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:22px;margin-bottom:3px">${s.jp}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:3px">${s.rom}</div>
+      <div style="font-size:13px;font-weight:500;margin-bottom:10px">${s.en}</div>
+      <button class="sp-listen" onclick="speak('${s.jp.replace(/'/g,"\\'")}')">🔊 Hear it</button>
+    </div>`:
+    `<div style="background:#e8f0fe;border-radius:14px;padding:14px;margin-bottom:14px">
+      <div style="font-size:10px;color:#1a5ab0;margin-bottom:6px">🎤 Your turn:</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:6px">${s.prompt}</div>
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;margin-bottom:2px;color:var(--muted)">${s.answer}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">${s.rom}</div>
+      <div style="display:flex;gap:8px">
+        <button class="sp-listen" onclick="speak('${s.answer.replace(/'/g,"\\'")}')">🔊 Model</button>
+        <button class="sp-mic" id="rpMic" onclick="triggerRPMic('${s.answer.replace(/'/g,"\\'")}')">🎤 Speak</button>
+      </div>
+      <div class="sp-fb" id="rpFb">Tap Hear, then speak your line</div>
+    </div>`}
+    ${rpStep<rpScript.steps.length-1?`<button class="qd-btn" onclick="nextRPStep()">Continue →</button>`:`<div style="text-align:center;padding:12px"><div style="font-size:32px;margin-bottom:8px">🎉</div><div style="font-size:16px;font-weight:500;margin-bottom:6px">Scene complete!</div><button class="qd-btn" onclick="startRolePlay(${rolePlayScripts.indexOf(rpScript)})">Replay</button><br><br><button class="qd-btn2" onclick="switchTab('practice')">Back to Practice</button></div>`}`;
+  openPracticeSub("🎭 "+rpScript.title,html);
+}
+function triggerRPMic(answer){
+  const btn=document.getElementById("rpMic");const fb=document.getElementById("rpFb");if(!btn)return;
+  btn.classList.add("listening");btn.textContent="🟢 Listening...";fb.textContent="Listening...";
+  tone(880,0.06,null,0.09);
+  setTimeout(()=>{btn.classList.remove("listening");btn.textContent="🎤 Again";fb.textContent="✅ Great! Moving on...";save.speakAttempts=(save.speakAttempts||0)+1;saveSave(save);playOK();},3000);
+}
+function nextRPStep(){playClick();rpStep++;renderRPStep();}
+
+/* ============================================================
+   DAILY REVIEW
+============================================================ */
+function startDailyReview(){
+  const pool=vocabBank.filter(v=>save.completedLessons.length===0?v.lesson===0:save.completedLessons.includes(v.lesson));
+  const qs=pool.sort(()=>Math.random()-0.5).slice(0,5).map(v=>{
+    const wrong=pool.filter(w=>w.en!==v.en).sort(()=>Math.random()-0.5).slice(0,3).map(w=>w.en);
+    return{jp:v.jp,rom:v.rom,en:v.en,choices:[v.en,...wrong].sort(()=>Math.random()-0.5)};
+  });
+  qState={qIndex:0,score:0,answered:false,questions:qs};
+  openPracticeSub("📅 Daily Review","");
+  renderDailyQ();
+}
+function renderDailyQ(){
+  const{questions,qIndex}=qState;
+  if(qIndex>=questions.length){
+    const pct=Math.round((qState.score/questions.length)*100);
+    openPracticeSub("📅 Daily Review",`<div style="text-align:center;padding:20px">
+      <div style="font-size:40px;margin-bottom:10px">📅</div>
+      <div style="font-size:20px;font-weight:500;margin-bottom:8px">Daily Review Done!</div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:16px">${qState.score}/${questions.length} correct (${pct}%)</div>
+      <button class="qd-btn" onclick="startDailyReview()">Retry</button>
+    </div>`);
+    return;
+  }
+  const q=questions[qIndex];const pct=Math.round((qIndex/questions.length)*100);const jp=q.jp.replace(/'/g,"\\'");
+  openPracticeSub("📅 Daily Review",`
+    <div class="quiz-hdr-band"><div class="quiz-type-lbl">Daily Recap</div><div class="quiz-sec-title">Vocabulary Review</div></div>
+    <div class="quiz-prog-row"><div class="quiz-prog"><div class="quiz-prog-fill" style="width:${pct}%"></div></div><div class="quiz-step-lbl">${qIndex+1}/5</div></div>
+    <div class="quiz-jp" onclick="speak('${jp}')">${q.jp} 🔊</div>
+    <div class="quiz-prompt" style="margin-bottom:14px">What does this mean?</div>
+    <div class="quiz-choices">${q.choices.map(o=>`<button class="choice-btn" onclick="checkDailyQ(this,'${o.replace(/'/g,"\\'")}','${q.en.replace(/'/g,"\\'")}','${jp}')">${o}</button>`).join("")}</div>
+    <div class="quiz-feedback" id="drFb"></div>
+    <button class="quiz-next" id="drNext" onclick="nextDailyQ()" style="display:none">Next →</button>`);
+  speak(q.jp);
+}
+function checkDailyQ(btn,chosen,correct,jp){
+  document.querySelectorAll(".choice-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("drFb");const nx=document.getElementById("drNext");
+  save.totalAnswered=(save.totalAnswered||0)+1;
+  if(chosen===correct){btn.classList.add("correct");fb.className="quiz-feedback ok";fb.innerHTML="✅ Correct!";qState.score++;save.totalCorrect=(save.totalCorrect||0)+1;playOK();}
+  else{btn.classList.add("wrong");fb.className="quiz-feedback bad";fb.innerHTML=`❌ It means: <b>${correct}</b>`;document.querySelectorAll(".choice-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("correct");});playBad();}
+  saveSave(save);if(nx)nx.style.display="block";speak(jp);
+}
+function nextDailyQ(){playClick();qState.qIndex++;renderDailyQ();}
+
+/* ============================================================
+   WRITE
+============================================================ */
+function buildWrite(){
+  const wc=document.getElementById("writeContent");
+  const masteredCount=writeMastered.size;
+  wc.innerHTML=`
+    <div class="write-sub-tabs">
+      <button class="write-sub-tab ${writeMode==="hiragana"?"active":""}" onclick="setWriteMode('hiragana')">Hiragana (${hiragana.length})</button>
+      <button class="write-sub-tab ${writeMode==="katakana"?"active":""}" onclick="setWriteMode('katakana')">Katakana (${katakana.length})</button>
+      <button class="write-sub-tab ${writeMode==="vocab"?"active":""}" onclick="setWriteMode('vocab')">Words</button>
+    </div>
+    <div class="prog-row"><span class="prog-lbl">Mastered this session</span><span class="prog-val">${masteredCount} characters ✓</span></div>
+    <div class="canvas-wrap-card" id="canvasWrap"></div>
+    <div class="write-tip-card" id="writeTip"></div>
+    <div class="sec-title" style="margin-top:6px">All Characters — tap to practice</div>
+    <div class="kana-grid" id="kanaGrid"></div>
+    <div style="height:16px"></div>`;
+  renderWriteCanvas();renderKanaGrid();
+}
+function setWriteMode(mode){writeMode=mode;writeCurIdx=0;buildWrite();}
+function selectKana(idx){writeCurIdx=idx;renderWriteCanvas();renderKanaGrid();const w=document.getElementById("canvasWrap");if(w)w.scrollIntoView({behavior:"smooth",block:"nearest"});}
+function renderKanaGrid(){
+  const grid=document.getElementById("kanaGrid");if(!grid)return;
+  const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
+  grid.innerHTML=list.map((k,i)=>`<div class="kana-cell ${i===writeCurIdx?"sel":""} ${writeMastered.has(writeMode+i)?"mastered":""}" onclick="selectKana(${i})"><div class="kana-char">${k.char}</div><div class="kana-rom">${k.rom}</div></div>`).join("");
+}
+function renderWriteCanvas(){
+  const wrap=document.getElementById("canvasWrap");if(!wrap)return;
+  const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
+  const k=list[writeCurIdx];const isMastered=writeMastered.has(writeMode+writeCurIdx);
+  wrap.innerHTML=`
+    <div class="canvas-hdr">
+      <div class="canvas-char">${k.char}</div>
+      <div class="canvas-info">
+        <div class="canvas-rom">${k.rom}</div>
+        <div class="canvas-meaning">${k.meaning||""}</div>
+        ${isMastered?"<div style='font-size:10px;color:var(--green);font-weight:600;margin-top:3px'>✓ Mastered</div>":""}
+      </div>
+    </div>
+    <div class="canvas-draw" id="drawArea"><canvas id="writeCanvas" height="220"></canvas></div>
+    <div class="canvas-hint">Draw with your finger or mouse · Faint guide shows the character</div>
+    <div class="canvas-actions">
+      <button class="canvas-btn clear" onclick="clearCanvas()">🗑 Clear</button>
+      <button class="canvas-btn hear" onclick="speak('${k.char.replace(/'/g,"\\'")}')">🔊 Hear</button>
+      <button class="canvas-btn mastered-btn" onclick="markMastered()">✓ Done</button>
+      <button class="canvas-btn next-btn" onclick="nextKana()">Next →</button>
+    </div>`;
+  const canvas=document.getElementById("writeCanvas");const drawArea=document.getElementById("drawArea");
+  if(!canvas||!drawArea)return;
+  canvas.width=drawArea.offsetWidth||340;canvas.height=220;
+  writeCtx=canvas.getContext("2d");
+  writeCtx.font="140px 'Noto Sans JP', sans-serif";writeCtx.fillStyle="rgba(15,76,129,0.07)";
+  writeCtx.textAlign="center";writeCtx.textBaseline="middle";writeCtx.fillText(k.char,canvas.width/2,110);
+  writeCtx.strokeStyle="rgba(0,0,0,0.07)";writeCtx.lineWidth=1;writeCtx.setLineDash([4,4]);
+  writeCtx.beginPath();writeCtx.moveTo(canvas.width/2,0);writeCtx.lineTo(canvas.width/2,220);
+  writeCtx.moveTo(0,110);writeCtx.lineTo(canvas.width,110);writeCtx.stroke();writeCtx.setLineDash([]);
+  writeCanvas=canvas;writePainting=false;
+  canvas.addEventListener("mousedown",e=>{writePainting=true;const p=getPos(e,canvas);writeCtx.strokeStyle="#0f4c81";writeCtx.lineWidth=5;writeCtx.lineCap="round";writeCtx.lineJoin="round";writeCtx.beginPath();writeCtx.moveTo(p.x,p.y);});
+  canvas.addEventListener("mousemove",e=>{if(!writePainting)return;const p=getPos(e,canvas);writeCtx.lineTo(p.x,p.y);writeCtx.stroke();});
+  canvas.addEventListener("mouseup",()=>{writePainting=false;});
+  canvas.addEventListener("mouseleave",()=>{writePainting=false;});
+  canvas.addEventListener("touchstart",e=>{e.preventDefault();writePainting=true;const p=getPos(e.touches[0],canvas);writeCtx.strokeStyle="#0f4c81";writeCtx.lineWidth=5;writeCtx.lineCap="round";writeCtx.lineJoin="round";writeCtx.beginPath();writeCtx.moveTo(p.x,p.y);},{passive:false});
+  canvas.addEventListener("touchmove",e=>{e.preventDefault();if(!writePainting)return;const p=getPos(e.touches[0],canvas);writeCtx.lineTo(p.x,p.y);writeCtx.stroke();},{passive:false});
+  canvas.addEventListener("touchend",()=>{writePainting=false;});
+  // tip card
+  const tip=document.getElementById("writeTip");
+  if(tip)tip.innerHTML=`<div class="write-tip-title">📝 Tips for ${k.char} (${k.rom})</div><div style="font-size:12px;color:#555;line-height:1.7">• Write top to bottom, left to right<br>• Say <b>${k.rom}</b> aloud as you write<br>• Tap 🔊 to hear the pronunciation<br>• Practice until confident, then tap ✓ Done</div>`;
+}
+function getPos(e,canvas){const r=canvas.getBoundingClientRect();const sx=canvas.width/r.width;const sy=canvas.height/r.height;return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}
+function clearCanvas(){
+  if(!writeCtx||!writeCanvas)return;
+  writeCtx.clearRect(0,0,writeCanvas.width,writeCanvas.height);
+  const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
+  const k=list[writeCurIdx];
+  writeCtx.font="140px 'Noto Sans JP', sans-serif";writeCtx.fillStyle="rgba(15,76,129,0.07)";
+  writeCtx.textAlign="center";writeCtx.textBaseline="middle";writeCtx.fillText(k.char,writeCanvas.width/2,110);
+  writeCtx.strokeStyle="rgba(0,0,0,0.07)";writeCtx.lineWidth=1;writeCtx.setLineDash([4,4]);
+  writeCtx.beginPath();writeCtx.moveTo(writeCanvas.width/2,0);writeCtx.lineTo(writeCanvas.width/2,220);
+  writeCtx.moveTo(0,110);writeCtx.lineTo(writeCanvas.width,110);writeCtx.stroke();writeCtx.setLineDash([]);
+}
+function markMastered(){
+  writeMastered.add(writeMode+writeCurIdx);
+  save.writeMastered=[...writeMastered];saveSave(save);
+  playOK();showToast("✓ Marked as mastered!");renderKanaGrid();renderWriteCanvas();
+}
+function nextKana(){
+  playClick();
+  const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
+  writeCurIdx=(writeCurIdx+1)%list.length;renderWriteCanvas();renderKanaGrid();
+}
+
+/* ============================================================
+   PROGRESS
+============================================================ */
 function buildProgress(){
-  const done=save.completedLessons.length;
-  const xp=save.xp||0;
-  const streak=save.streak||1;
-  const speaks=save.speakAttempts||0;
-  const totalA=save.totalAnswered||0;
-  const totalC=save.totalCorrect||0;
-  const acc=totalA>0?Math.round((totalC/totalA)*100)+'%':'—';
+  const done=save.completedLessons.length,xp=save.xp||0,streak=save.streak||1;
+  const speaks=save.speakAttempts||0,totalA=save.totalAnswered||0,totalC=save.totalCorrect||0;
+  const acc=totalA>0?Math.round((totalC/totalA)*100)+"%":"—";
   const pct=Math.round((done/lessons.length)*100);
   const lastExam=save.examScores&&save.examScores.length?save.examScores[save.examScores.length-1]:null;
+  const writtenCount=writeMastered.size;
+  const srDue=(save.srQueue||[]).filter(c=>c.nextReview<=todayStr()).length;
   const earnedBadges=[
-    {emoji:'🌱',name:'Day 1',status:'Started!',earned:true},
-    {emoji:'🌸',name:'Lesson 1',status:done>=1?'Earned!':'Complete L1',earned:done>=1},
-    {emoji:'⭐',name:'100 XP',status:xp>=100?'Earned!':xp+'/100',earned:xp>=100},
-    {emoji:'🔥',name:'7-Day',status:streak>=7?'Earned!':streak+'/7 days',earned:streak>=7},
-    {emoji:'📝',name:'Passed Test',status:lastExam&&lastExam.pct>=70?'Earned!':'Take the test',earned:!!(lastExam&&lastExam.pct>=70)},
-    {emoji:'🏆',name:'N5 Ready',status:done>=5?'Achieved!':'Dec 2026',earned:done>=5}
+    {emoji:"🌱",name:"Started",status:"Day 1 ✓",earned:true},
+    {emoji:"🌸",name:"Lesson 1",status:done>=1?"Earned!":"Complete L1",earned:done>=1},
+    {emoji:"⭐",name:"100 XP",status:xp>=100?"Earned!":xp+"/100",earned:xp>=100},
+    {emoji:"🔥",name:"7-Day",status:streak>=7?"Earned!":streak+"/7",earned:streak>=7},
+    {emoji:"📝",name:"Passed Test",status:lastExam&&lastExam.pct>=70?"Earned!":"Take test",earned:!!(lastExam&&lastExam.pct>=70)},
+    {emoji:"✍️",name:"10 Written",status:writtenCount>=10?"Earned!":writtenCount+"/10",earned:writtenCount>=10},
+    {emoji:"🃏",name:"SR Master",status:(save.srQueue||[]).length>=5?"Active!":"Do lessons",earned:(save.srQueue||[]).length>=5},
+    {emoji:"🏆",name:"N5 Ready",status:done>=5?"Done!":"Dec 2026",earned:done>=5}
   ];
-  const now=new Date();
-  const daysInMonth=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
-  const todayDay=now.getDate();
-  const activeDates=save.activeDays||[];
-  document.getElementById('progressContent').innerHTML=`
+  const now=new Date();const daysInMonth=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+  const todayDay=now.getDate();const activeDates=save.activeDays||[];
+  // Study planner — next 7 days
+  const plannerDays=Array.from({length:7},(_,i)=>{
+    const d=new Date();d.setDate(d.getDate()+i);
+    const dStr=d.toISOString().slice(0,10);
+    const checked=save.plannerChecked&&save.plannerChecked[dStr]?save.plannerChecked[dStr]:[];
+    const isToday=i===0;
+    const tasks=["📚 Study flashcards","📝 Take lesson quiz","✍️ Write 5 characters","🎧 Listening drill","🗣️ Speaking practice"];
+    return{dStr,isToday,dayName:d.toLocaleDateString("en",{weekday:"short"}),dayNum:d.getDate(),tasks,checked};
+  });
+  document.getElementById("progressContent").innerHTML=`
     <div class="stats-grid">
       <div class="stat-box"><div class="stat-num">${streak}</div><div class="stat-lbl">Day streak 🔥</div></div>
       <div class="stat-box"><div class="stat-num">${xp}</div><div class="stat-lbl">Total XP ⭐</div></div>
       <div class="stat-box"><div class="stat-num">${done}</div><div class="stat-lbl">Lessons done 📖</div></div>
       <div class="stat-box"><div class="stat-num">${acc}</div><div class="stat-lbl">Quiz accuracy 🎯</div></div>
+      <div class="stat-box"><div class="stat-num">${writtenCount}</div><div class="stat-lbl">Characters ✍️</div></div>
+      <div class="stat-box"><div class="stat-num">${srDue}</div><div class="stat-lbl">Cards due 🃏</div></div>
     </div>
-    ${lastExam?`<div class="card" style="margin-top:12px;background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-color:#c4b5fd">
-      <div style="font-size:11px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">📝 Last Section Test</div>
-      <div style="font-size:22px;font-weight:300">${lastExam.grade} — ${lastExam.pct}%</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">${lastExam.date} · ${lastExam.pct>=70?'✅ Passed':'❌ Not passed yet'}</div>
-    </div>`:''}
-    <div class="section-title">Achievements</div>
-    <div class="bdg-row">${earnedBadges.map(b=>`<div class="bdg ${b.earned?'earned':''}"><div class="bdg-emoji">${b.emoji}</div><div class="bdg-name">${b.name}</div><div class="bdg-status">${b.status}</div></div>`).join('')}</div>
-    <div class="section-title">Activity — ${now.toLocaleString('default',{month:'long'})} ${now.getFullYear()}</div>
+    ${lastExam?`<div class="card" style="background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-color:#c4b5fd;margin-top:10px">
+      <div style="font-size:9px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">📝 Last Section Test</div>
+      <div style="font-size:20px;font-weight:300">${lastExam.grade} — ${lastExam.pct}%</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">${lastExam.date} · ${lastExam.pct>=70?"✅ Passed":"❌ Not passed yet"}</div>
+    </div>`:""}
+    <div class="sec-title">Achievements</div>
+    <div class="bdg-row">${earnedBadges.map(b=>`<div class="bdg ${b.earned?"earned":""}"><div class="bdg-emoji">${b.emoji}</div><div class="bdg-name">${b.name}</div><div class="bdg-status">${b.status}</div></div>`).join("")}</div>
+    <div class="sec-title">📅 Study Planner — Next 7 Days</div>
+    ${plannerDays.map(d=>`
+      <div class="planner-day">
+        <div class="planner-day-hdr">
+          <div class="planner-day-num ${d.isToday?"today":""}">${d.dayNum}</div>
+          <div class="planner-day-info"><div class="planner-day-name">${d.dayName}${d.isToday?" — Today":""}</div><div class="planner-day-sub">${d.checked.length}/5 tasks</div></div>
+        </div>
+        <div class="planner-tasks">${d.tasks.map((t,i)=>`<div class="planner-task" onclick="togglePlanTask('${d.dStr}',${i})"><div class="task-check ${(d.checked.includes&&d.checked.includes(i))?"done":""}">${(d.checked.includes&&d.checked.includes(i))?"✓":""}</div><span>${t}</span></div>`).join("")}</div>
+      </div>`).join("")}
+    <div class="sec-title">Activity — ${now.toLocaleString("default",{month:"long"})} ${now.getFullYear()}</div>
     <div class="cal-grid">${Array.from({length:daysInMonth},(_,i)=>{
-      const day=i+1;
-      const dateStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
-      const isDone=activeDates.includes(dateStr);
-      const isToday=day===todayDay;
-      return `<div class="cal-dot ${isDone&&!isToday?'done':''} ${isToday?'today':''}">${day}</div>`;
-    }).join('')}</div>
-    <div class="card" style="margin-top:16px">
-      <div style="font-size:13px;font-weight:500;margin-bottom:8px">December 2026 Goal</div>
-      <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:${pct}%"></div></div>
-      <div class="goal-sub"><span>${done} / ${lessons.length} lessons done</span><span>${pct}% complete</span></div>
+      const day=i+1;const dStr=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+      const isDone=activeDates.includes(dStr);const isToday=day===todayDay;
+      return`<div class="cal-dot ${isDone&&!isToday?"done":""} ${isToday?"today":""}">${day}</div>`;
+    }).join("")}</div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:500;margin-bottom:6px">December 2026 Goal</div>
+      <div class="goal-bg"><div class="goal-fill" style="width:${pct}%"></div></div>
+      <div class="goal-sub"><span>${done}/${lessons.length} lessons</span><span>${pct}% complete</span></div>
     </div>
     <button class="reset-btn" onclick="confirmReset()">🔄 Reset all progress</button>
     <div style="height:8px"></div>`;
 }
+function togglePlanTask(dStr,idx){
+  if(!save.plannerChecked)save.plannerChecked={};
+  if(!save.plannerChecked[dStr])save.plannerChecked[dStr]=[];
+  const arr=save.plannerChecked[dStr];
+  const pos=arr.indexOf(idx);
+  if(pos>=0)arr.splice(pos,1);else arr.push(idx);
+  saveSave(save);buildProgress();playClick();
+}
 function confirmReset(){
-  if(confirm('Reset all progress? This cannot be undone.')){resetSave();showToast('Progress reset 🌱');updateHomeUI();buildProgress();}
-}
+  if(confirm("Reset all progress? Cannot be undone.")){resetSave();writeMastered=new Set();showToast("Progress reset 🌱");updateHomeUI();buildProgress();}}
 
-/* ===== GREETING ===== */
-function updateGreeting(){
-  const h=new Date().getHours();
-  let g='';
-  if(h>=5&&h<12)g='おはようございます · Good morning';
-  else if(h>=12&&h<18)g='こんにちは · Good afternoon';
-  else g='こんばんは · Good evening';
-  const el=document.getElementById('sbGreeting');if(el)el.textContent=g;
-}
-updateGreeting();setInterval(updateGreeting,60000);
-
-/* ===== WORD OF THE DAY ===== */
-const wotdList=[
-  {jp:'がんばって',romaji:'Ganbatte',en:'Do your best / Good luck!'},
-  {jp:'ありがとう',romaji:'Arigatou',en:'Thank you'},
-  {jp:'おつかれさま',romaji:'Otsukaresama',en:'Good work / You did well'},
-  {jp:'しあわせ',romaji:'Shiawase',en:'Happiness'},
-  {jp:'たのしい',romaji:'Tanoshii',en:'Fun / Enjoyable'},
-  {jp:'きれい',romaji:'Kirei',en:'Beautiful / Clean'},
-  {jp:'おいしい',romaji:'Oishii',en:'Delicious'},
-  {jp:'すごい',romaji:'Sugoi',en:'Amazing / Wow!'},
-  {jp:'だいじょうぶ',romaji:'Daijoubu',en:"It's okay / Are you alright?"},
-  {jp:'もちろん',romaji:'Mochiron',en:'Of course'},
-  {jp:'ゆめ',romaji:'Yume',en:'Dream'},
-  {jp:'さくら',romaji:'Sakura',en:'Cherry blossom'},
-  {jp:'なつかしい',romaji:'Natsukashii',en:'Nostalgic / I miss this'},
-  {jp:'よろしく',romaji:'Yoroshiku',en:'Please / Nice to meet you'},
-  {jp:'いただきます',romaji:'Itadakimasu',en:'Let\'s eat / I humbly receive'}
-];
-function loadWotd(){
-  const w=wotdList[Math.floor(Date.now()/86400000)%wotdList.length];
-  const jp=document.getElementById('wotdJP');const ro=document.getElementById('wotdRomaji');const en=document.getElementById('wotdEn');
-  if(jp)jp.textContent=w.jp;if(ro)ro.textContent=w.romaji;if(en)en.textContent=w.en;
-}
-function speakWotd(){const jp=document.getElementById('wotdJP');if(jp)speak(jp.textContent);tone(440,0.08,'sine',0.1);}
-loadWotd();
-
-/* ===== STREAK BANNER ===== */
-(function(){
-  const banner=document.getElementById('streakBanner');if(!banner)return;
-  const studiedToday=(save.activeDays||[]).includes(todayStr());
-  if(studiedToday||!(save.streak>1||save.xp>0))banner.classList.add('hidden');
-})();
-
-/* ===== DRAG TO SCROLL ===== */
+/* ============================================================
+   DRAG TO SCROLL
+============================================================ */
 function makeDraggable(el){
-  if(!el)return;
-  let isDown=false,startX,scrollLeft,moved=false;
-  el.addEventListener('mousedown',e=>{isDown=true;moved=false;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft;el.style.cursor='grabbing';el.style.userSelect='none';});
-  el.addEventListener('mouseleave',()=>{isDown=false;el.style.cursor='grab';el.style.userSelect='';});
-  el.addEventListener('mouseup',e=>{isDown=false;el.style.cursor='grab';el.style.userSelect='';if(moved){e.preventDefault();e.stopPropagation();}moved=false;});
-  el.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-el.offsetLeft;const walk=(x-startX)*1.6;if(Math.abs(walk)>5)moved=true;el.scrollLeft=scrollLeft-walk;});
+  if(!el)return;let isDown=false,startX,scrollLeft,moved=false;
+  el.addEventListener("mousedown",e=>{isDown=true;moved=false;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft;el.style.cursor="grabbing";el.style.userSelect="none";});
+  el.addEventListener("mouseleave",()=>{isDown=false;el.style.cursor="grab";el.style.userSelect="";});
+  el.addEventListener("mouseup",e=>{isDown=false;el.style.cursor="grab";el.style.userSelect="";if(moved){e.preventDefault();e.stopPropagation();}moved=false;});
+  el.addEventListener("mousemove",e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-el.offsetLeft;const walk=(x-startX)*1.6;if(Math.abs(walk)>5)moved=true;el.scrollLeft=scrollLeft-walk;});
   let tX=0,tSL=0,tM=false;
-  el.addEventListener('touchstart',e=>{tX=e.touches[0].pageX;tSL=el.scrollLeft;tM=false;},{passive:true});
-  el.addEventListener('touchmove',e=>{const dx=e.touches[0].pageX-tX;if(Math.abs(dx)>6){tM=true;el.scrollLeft=tSL-dx;}},{passive:true});
-  el.addEventListener('touchend',e=>{if(tM)e.stopPropagation();});
-  el.style.cursor='grab';
+  el.addEventListener("touchstart",e=>{tX=e.touches[0].pageX;tSL=el.scrollLeft;tM=false;},{passive:true});
+  el.addEventListener("touchmove",e=>{const dx=e.touches[0].pageX-tX;if(Math.abs(dx)>6){tM=true;el.scrollLeft=tSL-dx;}},{passive:true});
+  el.addEventListener("touchend",e=>{if(tM)e.stopPropagation();});
+  el.style.cursor="grab";
 }
 
-/* ===== INIT ===== */
-updateHomeUI();buildLearn();buildSpeak();buildPlan();buildProgress();
-setTimeout(()=>{makeDraggable(document.getElementById('homeChips'));makeDraggable(document.getElementById('unitList'));},150);
+/* ============================================================
+   INIT
+============================================================ */
+updateHomeUI();buildLearn();buildPractice();buildWrite();buildProgress();
+setTimeout(()=>{makeDraggable(document.getElementById("homeChips"));makeDraggable(document.getElementById("unitList"));},150);
 </script>
 </body>
 </html>
