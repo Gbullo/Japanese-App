@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -321,7 +321,48 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
 .phase-lvl{font-size:11px;color:var(--blue);font-weight:500;margin-bottom:6px}
 .phase-focus{font-size:12px;color:#555;line-height:1.6}
 .daily-tgt{margin:0 14px 12px;background:linear-gradient(135deg,#fff8f0,#fffdf5);border-radius:14px;padding:14px;border:0.5px solid #f5d9b0}
+
+/* GRAMMAR TAB */
+.grammar-sub-tabs{display:flex;padding:10px 14px;gap:6px;background:#fff;border-bottom:0.5px solid #f0ede4;position:sticky;top:0;z-index:10;overflow-x:auto}
+.grammar-sub-tabs::-webkit-scrollbar{display:none}
+.grammar-sub-tab{flex-shrink:0;padding:7px 13px;font-size:11px;font-weight:500;border-radius:9px;cursor:pointer;color:var(–muted);background:var(–soft);border:none;font-family:‘DM Sans’,sans-serif;transition:all .2s;white-space:nowrap}
+.grammar-sub-tab.active{background:#7c3aed;color:#fff}
+.sentence-card{margin:0 14px 14px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(–shadow)}
+.sentence-jp{font-family:‘Noto Sans JP’,sans-serif;font-size:22px;padding:16px 16px 10px;line-height:1.6;display:flex;flex-wrap:wrap;gap:4px;align-items:baseline}
+.sentence-rom{font-size:12px;color:var(–muted);padding:0 16px 8px;font-style:italic}
+.sentence-en{font-size:14px;font-weight:500;padding:0 16px 14px;border-bottom:0.5px solid #f0ede4}
+.parts-list{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.part-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;transition:background .15s}
+.part-row:active{background:var(–soft)}
+.part-token{font-family:‘Noto Sans JP’,sans-serif;font-size:20px;min-width:60px;flex-shrink:0;line-height:1.3}
+.part-info{flex:1}
+.part-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;padding:2px 8px;border-radius:6px;display:inline-block}
+.part-meaning{font-size:13px;font-weight:500;margin-bottom:3px}
+.part-explain{font-size:11px;color:var(–muted);line-height:1.5}
+.role-subject{background:#dbeafe;color:#1e40af}
+.role-topic{background:#ede9fe;color:#5b21b6}
+.role-verb{background:#d1fae5;color:#065f46}
+.role-object{background:#fef3c7;color:#92400e}
+.role-particle{background:#fce7f3;color:#9d174d}
+.role-adjective{background:#ffedd5;color:#9a3412}
+.role-time{background:#cffafe;color:#164e63}
+.role-copula{background:#f3f4f6;color:#374151}
+.role-connector{background:#fdf4ff;color:#7e22ce}
+.grammar-rule-card{margin:0 14px 12px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px}
+.rule-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(–purple);margin-bottom:6px}
+.rule-title{font-size:14px;font-weight:600;margin-bottom:6px}
+.rule-pattern{font-family:‘Noto Sans JP’,sans-serif;background:var(–soft);border-radius:9px;padding:10px 12px;font-size:14px;margin-bottom:8px;line-height:1.6}
+.rule-explain{font-size:12px;color:#555;line-height:1.7}
+.rule-example{margin-top:8px;padding:8px 10px;background:#f3e8ff;border-radius:8px;font-size:12px}
+.rule-ex-jp{font-family:‘Noto Sans JP’,sans-serif;font-size:16px;margin-bottom:2px}
+.rule-ex-en{color:var(–muted);font-size:11px}
+/* CANVAS COMPARE */
+.compare-result{margin:8px 14px;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:500;display:none}
+.compare-result.show{display:block}
+.compare-score-bar{height:8px;border-radius:4px;background:#f0ede4;overflow:hidden;margin:6px 0}
+.compare-score-fill{height:100%;border-radius:4px;transition:width .8s ease}
 </style>
+
 </head>
 <body>
 <div class="phone">
@@ -445,6 +486,15 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
   <div class="lesson-detail" id="practiceSubContent"></div>
 </div>
 
+<!-- GRAMMAR -->
+<div class="page" id="page-grammar">
+  <div class="page-header" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
+    <div class="h-title">Grammar 📐</div>
+    <div class="h-sub">Understand how Japanese sentences work</div>
+  </div>
+  <div id="grammarContent"></div>
+</div>
+
 <!-- WRITE -->
 <div class="page" id="page-write">
   <div class="page-header navy">
@@ -470,7 +520,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
   <div class="tab-bar">
     <div class="tab active" id="tab-home" onclick="switchTab('home')"><div class="tab-icon">🏠</div><div class="tab-label">Home</div></div>
     <div class="tab" id="tab-learn" onclick="switchTab('learn')"><div class="tab-icon">📖</div><div class="tab-label">Lessons</div></div>
-    <div class="tab" id="tab-practice" onclick="switchTab('practice')"><div class="tab-icon">🎮</div><div class="tab-label">Practice</div></div>
+    <div class="tab" id="tab-grammar" onclick="switchTab('grammar')"><div class="tab-icon">📐</div><div class="tab-label">Grammar</div></div>
     <div class="tab" id="tab-write" onclick="switchTab('write')"><div class="tab-icon">✍️</div><div class="tab-label">Write</div></div>
     <div class="tab" id="tab-progress" onclick="switchTab('progress')"><div class="tab-icon">📊</div><div class="tab-label">Progress</div></div>
   </div>
@@ -830,6 +880,7 @@ function switchTab(name){
   if(name==="home"){updateHomeUI();setTimeout(()=>makeDraggable(document.getElementById("homeChips")),80);}
   if(name==="learn"){buildLearn();setTimeout(()=>makeDraggable(document.getElementById("unitList")),80);}
   if(name==="practice")buildPractice();
+  if(name==="grammar")buildGrammar();
   if(name==="write")buildWrite();
   if(name==="progress")buildProgress();
 }
@@ -1741,8 +1792,11 @@ function renderWriteCanvas(){
     <div class="canvas-actions">
       <button class="canvas-btn clear" onclick="clearCanvas()">🗑 Clear</button>
       <button class="canvas-btn hear" onclick="speak('${k.char.replace(/'/g,"\'")}')">🔊 Hear</button>
-      <button class="canvas-btn mastered-btn" onclick="markMastered()">✓ Done</button>
-      <button class="canvas-btn next-btn" onclick="nextKana()">Next →</button>
+      <button class="canvas-btn" style="background:#7c3aed;color:#fff;flex:1.2" onclick="compareCanvasToGuide()">📊 Compare</button>
+      <button class="canvas-btn mastered-btn" onclick="markMastered()">✓</button>
+    </div>
+    <div class="canvas-actions" style="padding-top:0">
+      <button class="canvas-btn next-btn" style="flex:1" onclick="nextKana()">Next Character →</button>
     </div>`;
   const canvas=document.getElementById("writeCanvas");const drawArea=document.getElementById("drawArea");
   if(!canvas||!drawArea)return;
@@ -1881,6 +1935,311 @@ function makeDraggable(el){
 ============================================================ */
 updateHomeUI();buildLearn();buildPractice();buildWrite();buildProgress();
 setTimeout(()=>{makeDraggable(document.getElementById("homeChips"));makeDraggable(document.getElementById("unitList"));},150);
+
+/* ============================================================
+   GRAMMAR TAB
+============================================================ */
+const grammarData={
+  sentences:[
+    {
+      jp:"わたしは がくせい です",
+      rom:"Watashi wa gakusei desu",
+      en:"I am a student",
+      parts:[
+        {token:"わたし",rom:"Watashi",role:"Topic / Subject",roleClass:"role-topic",meaning:"I / Me",explain:"The speaker. わたし is the first-person pronoun. It comes first in most sentences."},
+        {token:"は",rom:"wa",role:"Particle",roleClass:"role-particle",meaning:"Topic marker",explain:"は (wa) marks the topic of the sentence — what the sentence is 'about'. It is written with は but pronounced 'wa'."},
+        {token:"がくせい",rom:"Gakusei",role:"Noun",roleClass:"role-subject",meaning:"Student",explain:"The predicate noun — what わたし IS. Nouns in Japanese don't change form."},
+        {token:"です",rom:"Desu",role:"Copula",roleClass:"role-copula",meaning:"To be (polite)",explain:"です links the subject to the predicate, like 'am/is/are' in English. It always comes at the end and makes the sentence polite."}
+      ],
+      rule:"Topic は Noun です — The basic 'A is B' pattern. Use this for introductions and descriptions."
+    },
+    {
+      jp:"にほんごを べんきょうします",
+      rom:"Nihongo o benkyou shimasu",
+      en:"I study Japanese",
+      parts:[
+        {token:"にほんご",rom:"Nihongo",role:"Object",roleClass:"role-object",meaning:"Japanese language",explain:"The object — what is being studied. In Japanese, the subject (I) is often dropped when it's obvious from context."},
+        {token:"を",rom:"o",role:"Particle",roleClass:"role-particle",meaning:"Object marker",explain:"を (o) marks the direct object — the thing receiving the action. It always follows the noun and precedes the verb."},
+        {token:"べんきょうします",rom:"Benkyou shimasu",role:"Verb",roleClass:"role-verb",meaning:"Study (polite)",explain:"べんきょう (study) + します (to do). します is one of the most useful verbs — attach it to many nouns to make action verbs. ます ending = polite form."}
+      ],
+      rule:"Object を Verb — The standard action sentence. Object comes BEFORE the verb in Japanese, unlike English."
+    },
+    {
+      jp:"トイレは どこ ですか",
+      rom:"Toire wa doko desu ka",
+      en:"Where is the bathroom?",
+      parts:[
+        {token:"トイレ",rom:"Toire",role:"Topic",roleClass:"role-topic",meaning:"Bathroom / Toilet",explain:"The topic being asked about. Katakana is used here because トイレ is a loanword from English 'toilet'."},
+        {token:"は",rom:"wa",role:"Particle",roleClass:"role-particle",meaning:"Topic marker",explain:"Marks トイレ as the topic of the question. Same は as in statements."},
+        {token:"どこ",rom:"Doko",role:"Question Word",roleClass:"role-adjective",meaning:"Where",explain:"Question word meaning 'where'. Japanese question words go where the answer would go — not at the start of the sentence like English."},
+        {token:"です",rom:"Desu",role:"Copula",roleClass:"role-copula",meaning:"To be (polite)",explain:"Same です as statements. Japanese questions are formed by adding か, not by changing word order."},
+        {token:"か",rom:"Ka",role:"Particle",roleClass:"role-particle",meaning:"Question marker",explain:"か at the end turns a statement into a question. It works like a spoken question mark. No inversion of word order needed!"}
+      ],
+      rule:"Statement + か = Question. Just add か to the end — no need to rearrange the sentence like in English."
+    },
+    {
+      jp:"まいにち にほんごを べんきょうします",
+      rom:"Mainichi nihongo o benkyou shimasu",
+      en:"I study Japanese every day",
+      parts:[
+        {token:"まいにち",rom:"Mainichi",role:"Time",roleClass:"role-time",meaning:"Every day",explain:"Time expressions in Japanese usually come near the beginning of the sentence, right after the topic if there is one."},
+        {token:"にほんご",rom:"Nihongo",role:"Object",roleClass:"role-object",meaning:"Japanese language",explain:"The thing being studied. Direct object marked by を that follows."},
+        {token:"を",rom:"o",role:"Particle",roleClass:"role-particle",meaning:"Object marker",explain:"を marks the direct object — にほんご is what receives the action of studying."},
+        {token:"べんきょうします",rom:"Benkyou shimasu",role:"Verb",roleClass:"role-verb",meaning:"Study (polite)",explain:"Always at the end. Japanese verbs ALWAYS go last — this is the most important word order rule in Japanese."}
+      ],
+      rule:"Time + Topic + Object を Verb. Remember: Time comes first, Verb comes last — always."
+    },
+    {
+      jp:"これは いくら ですか",
+      rom:"Kore wa ikura desu ka",
+      en:"How much is this?",
+      parts:[
+        {token:"これ",rom:"Kore",role:"Topic",roleClass:"role-topic",meaning:"This (thing here)",explain:"これ means 'this' for something near the speaker. それ = near listener. あれ = far from both."},
+        {token:"は",rom:"wa",role:"Particle",roleClass:"role-particle",meaning:"Topic marker",explain:"Marks これ as the topic being asked about."},
+        {token:"いくら",rom:"Ikura",role:"Question Word",roleClass:"role-adjective",meaning:"How much",explain:"Question word for price/amount. Goes where the answer (the price) would go."},
+        {token:"です",rom:"Desu",role:"Copula",roleClass:"role-copula",meaning:"To be",explain:"Links the topic to the predicate."},
+        {token:"か",rom:"Ka",role:"Particle",roleClass:"role-particle",meaning:"Question marker",explain:"Turns the statement into a question. Spoken with a rising intonation in casual speech."}
+      ],
+      rule:"これ/それ/あれ + は + Question word + ですか — The demonstrative question pattern for shopping."
+    },
+    {
+      jp:"にほんごが すきです",
+      rom:"Nihongo ga suki desu",
+      en:"I like Japanese",
+      parts:[
+        {token:"にほんご",rom:"Nihongo",role:"Subject",roleClass:"role-subject",meaning:"Japanese language",explain:"What is liked. Note: with すき (like) and きらい (dislike), the thing liked uses が, not を."},
+        {token:"が",rom:"Ga",role:"Particle",roleClass:"role-particle",meaning:"Subject marker",explain:"が marks the grammatical subject. Here it marks what is liked. Compare: は marks topic, が marks subject — subtle but important difference."},
+        {token:"すき",rom:"Suki",role:"Adjective (な)",roleClass:"role-adjective",meaning:"Like / Fond of",explain:"すき is a な-adjective meaning 'like' or 'fond of'. It acts differently from the English verb — the liked thing is the subject (が), not the object (を)."},
+        {token:"です",rom:"Desu",role:"Copula",roleClass:"role-copula",meaning:"To be (polite)",explain:"Follows な-adjectives to make polite sentences. すきです = it is liked = I like it."}
+      ],
+      rule:"[Thing] が すきです — 'I like [thing]'. The liked item takes が, not を. This surprises many English speakers!"
+    },
+    {
+      jp:"たなかさんは せんせい ではありません",
+      rom:"Tanaka-san wa sensei dewa arimasen",
+      en:"Tanaka is not a teacher",
+      parts:[
+        {token:"たなかさん",rom:"Tanaka-san",role:"Topic",roleClass:"role-topic",meaning:"Mr/Ms Tanaka",explain:"さん is the polite title (like Mr/Ms). Always use さん with other people's names — never with your own name."},
+        {token:"は",rom:"wa",role:"Particle",roleClass:"role-particle",meaning:"Topic marker",explain:"Marks Tanaka as the topic of the sentence."},
+        {token:"せんせい",rom:"Sensei",role:"Noun",roleClass:"role-subject",meaning:"Teacher",explain:"What Tanaka is NOT. The noun itself doesn't change for negation — only the copula changes."},
+        {token:"では ありません",rom:"Dewa arimasen",role:"Copula (negative)",roleClass:"role-copula",meaning:"Is not (polite)",explain:"The negative of です. ではありません = is not. In casual speech: じゃないです or じゃない. This is how you negate noun/adjective sentences."}
+      ],
+      rule:"Topic は Noun ではありません — Polite negative. Swap です for ではありません to make 'is not' sentences."
+    },
+    {
+      jp:"すきです。でも、むずかしいです",
+      rom:"Suki desu. Demo, muzukashii desu.",
+      en:"I like it. But it is difficult.",
+      parts:[
+        {token:"すきです",rom:"Suki desu",role:"Clause 1",roleClass:"role-verb",meaning:"I like it",explain:"First complete thought. すき (な-adjective) + です. Short sentences work well in Japanese."},
+        {token:"でも",rom:"Demo",role:"Connector",roleClass:"role-connector",meaning:"But / However",explain:"でも connects contrasting ideas. It goes at the START of the second clause, not between clauses like English 'but'. Other connectors: そして (and then), だから (therefore)."},
+        {token:"むずかしい",rom:"Muzukashii",role:"Adjective (い)",roleClass:"role-adjective",meaning:"Difficult",explain:"An い-adjective — notice it ends in い. い-adjectives don't need な before です. They conjugate differently from な-adjectives."},
+        {token:"です",rom:"Desu",role:"Copula",roleClass:"role-copula",meaning:"To be (polite)",explain:"Follows the い-adjective to make the sentence polite. Note: you can say むずかしい without です in casual speech."}
+      ],
+      rule:"Sentence. でも、Sentence — Use でも to contrast two ideas. It starts the second sentence, not the middle."
+    }
+  ],
+  rules:[
+    {tag:"Word Order",title:"Japanese is SOV — Subject, Object, Verb",pattern:"わたしは にほんごを べんきょうします",explain:"The most important rule: the VERB always comes LAST in Japanese. Unlike English (SVO), Japanese puts the action at the end. Everything else — subject, object, time — comes before it.",example:{jp:"パンを たべます",en:"I eat bread (lit: bread [obj] eat)"}},
+    {tag:"Particles",title:"Particles glue sentences together",pattern:"は · が · を · に · で · も · か",explain:"Particles are small words that follow nouns and show their role. は = topic, が = subject, を = object, に = direction/time, で = location of action, も = also, か = question. Learning particles is key to reading Japanese.",example:{jp:"えきに いきます",en:"I go TO the station (に = direction)"}},
+    {tag:"Verb Form",title:"ます-form = polite present/future",pattern:"たべます · のみます · べんきょうします",explain:"Verbs in the polite ます-form are used in everyday speech. The negative is ません. The past is ました. The negative past is ませんでした.",example:{jp:"たべません",en:"I don't eat (negative)"}},
+    {tag:"Questions",title:"Add か to make questions",pattern:"Sentence + か？",explain:"No word-order change needed! Just add か at the end of a statement to make it a question. Question words (どこ、なに、いつ、だれ) go where the answer would be.",example:{jp:"がくせいですか",en:"Are you a student?"}},
+    {tag:"Adjectives",title:"い-adjectives vs な-adjectives",pattern:"い-adj: たのしい、むずかしい　な-adj: すき、きれい",explain:"い-adjectives end in い and conjugate on their own. な-adjectives need な before nouns and behave like nouns. Both use です to be polite.",example:{jp:"きれいな ひと です",en:"It is a beautiful person (な before noun)"}}
+  ]
+};
+
+let grammarMode="sentences",grammarIdx=0;
+
+function buildGrammar(){
+  const gc=document.getElementById("grammarContent");if(!gc)return;
+  gc.innerHTML=`
+    <div class="grammar-sub-tabs">
+      <button class="grammar-sub-tab ${grammarMode==="sentences"?"active":""}" onclick="setGrammarMode('sentences')">Sentence Breakdown</button>
+      <button class="grammar-sub-tab ${grammarMode==="rules"?"active":""}" onclick="setGrammarMode('rules')">Grammar Rules</button>
+      <button class="grammar-sub-tab ${grammarMode==="particles"?"active":""}" onclick="setGrammarMode('particles')">Particle Guide</button>
+    </div>
+    <div id="grammarBody"></div>`;
+  renderGrammarBody();
+}
+function setGrammarMode(mode){grammarMode=mode;grammarIdx=0;buildGrammar();}
+function renderGrammarBody(){
+  const gb=document.getElementById("grammarBody");if(!gb)return;
+  if(grammarMode==="sentences") renderSentenceBreakdown(gb);
+  else if(grammarMode==="rules") renderGrammarRules(gb);
+  else renderParticleGuide(gb);
+}
+function renderSentenceBreakdown(gb){
+  const sentences=grammarData.sentences;
+  gb.innerHTML=`
+    <div style="padding:12px 14px 4px;font-size:12px;color:var(--muted)">Tap any part of the sentence to see a full explanation. Swipe through all ${sentences.length} example sentences.</div>
+    ${sentences.map((s,i)=>`
+      <div class="sentence-card" id="sent${i}">
+        <div style="padding:12px 14px 6px;display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:10px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:1px">Sentence ${i+1} of ${sentences.length}</div>
+          <button onclick="speak('${s.jp.replace(/'/g,"\'")}') " style="background:var(--soft);border:none;border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer">🔊 Hear</button>
+        </div>
+        <div class="sentence-jp" style="padding:0 16px 4px">${s.jp}</div>
+        <div class="sentence-rom">${s.rom}</div>
+        <div class="sentence-en">${s.en}</div>
+        <div class="parts-list">
+          ${s.parts.map((p,pi)=>`
+            <div class="part-row" onclick="togglePart('part-${i}-${pi}')">
+              <div style="min-width:70px;flex-shrink:0">
+                <div class="part-token">${p.token}</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:1px">${p.rom}</div>
+              </div>
+              <div class="part-info">
+                <span class="part-role ${p.roleClass}">${p.role}</span>
+                <div class="part-meaning">${p.meaning}</div>
+                <div class="part-explain" id="part-${i}-${pi}" style="display:none;margin-top:4px;padding:8px 10px;background:var(--soft);border-radius:8px;font-size:11px;line-height:1.6;color:#444">${p.explain}</div>
+              </div>
+            </div>`).join("")}
+        </div>
+        <div style="margin:0 14px 14px;background:#f3e8ff;border-radius:10px;padding:10px 12px">
+          <div style="font-size:10px;color:var(--purple);font-weight:600;margin-bottom:4px">💡 Pattern</div>
+          <div style="font-size:12px;color:#4c1d95;line-height:1.6">${s.rule}</div>
+        </div>
+      </div>`).join("")}
+    <div style="height:10px"></div>`;
+}
+function togglePart(id){
+  const el=document.getElementById(id);if(!el)return;
+  const isOpen=el.style.display!=="none";
+  el.style.display=isOpen?"none":"block";
+  playClick();
+}
+function renderGrammarRules(gb){
+  gb.innerHTML=`
+    <div style="padding:12px 14px 6px;font-size:12px;color:var(--muted)">Core grammar patterns you need for N5. Tap to expand.</div>
+    ${grammarData.rules.map((r,i)=>`
+      <div class="grammar-rule-card" onclick="toggleRule('rule${i}')">
+        <div class="rule-tag">${r.tag}</div>
+        <div class="rule-title">${r.title}</div>
+        <div class="rule-pattern">${r.pattern}</div>
+        <div id="rule${i}" style="display:none">
+          <div class="rule-explain">${r.explain}</div>
+          <div class="rule-example">
+            <div class="rule-ex-jp">${r.example.jp}</div>
+            <div class="rule-ex-en">${r.example.en}</div>
+          </div>
+        </div>
+      </div>`).join("")}
+    <div style="height:10px"></div>`;
+}
+function toggleRule(id){
+  const el=document.getElementById(id);if(!el)return;
+  el.style.display=el.style.display==="none"?"block":"none";playClick();
+}
+function renderParticleGuide(gb){
+  const particles=[
+    {p:"は",rom:"wa",name:"Topic Marker",color:"#ede9fe",textColor:"#5b21b6",uses:["Marks the main topic of the sentence","Often replaces が when emphasizing the topic","わたしは = As for me..."],examples:[{jp:"わたしは がくせいです",en:"I am a student"}]},
+    {p:"が",rom:"ga",name:"Subject Marker",color:"#dbeafe",textColor:"#1e40af",uses:["Marks the grammatical subject","Used with question words","Used with すき、きらい、わかる、できる"],examples:[{jp:"にほんごが すきです",en:"I like Japanese"}]},
+    {p:"を",rom:"o",name:"Object Marker",color:"#fef3c7",textColor:"#92400e",uses:["Marks the direct object (thing receiving the action)","Always comes right before a verb","Only used with action verbs"],examples:[{jp:"パンを たべます",en:"I eat bread"}]},
+    {p:"に",rom:"ni",name:"Direction / Time",color:"#d1fae5",textColor:"#065f46",uses:["Direction: I go TO the station","Time: AT 6 o'clock (ろくじに)","Indirect object: give TO someone"],examples:[{jp:"えきに いきます",en:"I go to the station"}]},
+    {p:"で",rom:"de",name:"Location of Action",color:"#ffedd5",textColor:"#9a3412",uses:["Where an action takes place","By means of (でんしゃで = by train)","Made of a material"],examples:[{jp:"がっこうで べんきょうします",en:"I study at school"}]},
+    {p:"も",rom:"mo",name:"Also / Too",color:"#fce7f3",textColor:"#9d174d",uses:["Replaces は or が to mean 'also'","わたしも = me too","Adds the same action/state to another subject"],examples:[{jp:"わたしも がくせいです",en:"I am also a student"}]},
+    {p:"か",rom:"ka",name:"Question Marker",color:"#cffafe",textColor:"#164e63",uses:["Added to the end of a sentence to make a question","No word-order change needed","Rising intonation in casual speech"],examples:[{jp:"がくせいですか",en:"Are you a student?"}]}
+  ];
+  gb.innerHTML=`
+    <div style="padding:12px 14px 6px;font-size:12px;color:var(--muted)">Particles are the glue of Japanese. Master these 7 and you can build most N5 sentences.</div>
+    ${particles.map(p=>`
+      <div class="grammar-rule-card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div style="width:48px;height:48px;border-radius:14px;background:${p.color};display:flex;align-items:center;justify-content:center;font-family:'Noto Sans JP',sans-serif;font-size:26px;color:${p.textColor};font-weight:500;flex-shrink:0">${p.p}</div>
+          <div>
+            <div style="font-size:14px;font-weight:600">${p.name}</div>
+            <div style="font-size:12px;color:var(--muted)">pronounced "${p.rom}"</div>
+          </div>
+        </div>
+        <div style="margin-bottom:8px">${p.uses.map(u=>`<div style="font-size:12px;color:#444;margin-bottom:4px;padding-left:12px;border-left:2px solid ${p.color}">• ${u}</div>`).join("")}</div>
+        ${p.examples.map(e=>`<div style="background:var(--soft);border-radius:9px;padding:9px 11px"><div style="font-family:'Noto Sans JP',sans-serif;font-size:16px;margin-bottom:2px">${e.jp}</div><div style="font-size:11px;color:var(--muted)">${e.en}</div></div>`).join("")}
+      </div>`).join("")}
+    <div style="height:10px"></div>`;
+}
+
+/* ============================================================
+   CANVAS COMPARISON (pixel similarity score)
+============================================================ */
+function compareCanvasToGuide(){
+  if(!writeCanvas||!writeCtx)return;
+  const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
+  const k=list[writeCurIdx];
+  const w=writeCanvas.width,h=writeCanvas.height;
+
+  // Render just the guide character to an offscreen canvas
+  const guide=document.createElement("canvas");
+  guide.width=w;guide.height=h;
+  const gCtx=guide.getContext("2d");
+  const isSingle=k.char.length===1;
+  const maxSize=Math.min(w,h)-50;
+  const fontSize=isSingle?maxSize:Math.floor((w-50)/Math.max(k.char.length,1)*0.95);
+  gCtx.font=`${Math.min(fontSize,maxSize)}px 'Noto Sans JP',sans-serif`;
+  gCtx.fillStyle="rgba(0,0,0,1)";
+  gCtx.textAlign="center";gCtx.textBaseline="middle";
+  gCtx.fillText(k.char,w/2,h/2);
+
+  // Get pixel data from both
+  const userPixels=writeCtx.getImageData(0,0,w,h).data;
+  const guidePixels=gCtx.getImageData(0,0,w,h).data;
+
+  // Find guide ink pixels and check how many user covered
+  let guideInk=0,userCoveredGuide=0,userInkTotal=0;
+  for(let i=0;i<guidePixels.length;i+=4){
+    const gAlpha=guidePixels[i+3];
+    const uAlpha=userPixels[i+3];
+    if(gAlpha>50){
+      guideInk++;
+      if(uAlpha>30)userCoveredGuide++;
+    }
+    if(uAlpha>30)userInkTotal++;
+  }
+
+  if(userInkTotal<100){
+    showCompareResult(null,"Draw first, then tap Compare!");
+    return;
+  }
+  if(guideInk===0){showCompareResult(50,"Good effort!");return;}
+
+  // Coverage = how much of guide the user covered
+  const coverage=Math.min(userCoveredGuide/guideInk,1);
+  // Accuracy = penalise if user drew a LOT outside the guide area
+  const overshoot=Math.max(0,(userInkTotal-userCoveredGuide)/Math.max(guideInk,1));
+  const penalty=Math.min(overshoot*0.3,0.4);
+  const rawScore=Math.max(0,coverage-penalty);
+  const score=Math.round(rawScore*100);
+
+  let msg="",color="";
+  if(score>=80){msg="🌟 Excellent! Very close to the guide!";color="#2ecc71";}
+  else if(score>=60){msg="👍 Good match! Keep practising.";color="#f59e0b";}
+  else if(score>=40){msg="📝 Getting there — try to follow the strokes.";color="#f97316";}
+  else{msg="💪 Keep going — trace the guide more carefully.";color="#E84855";}
+
+  showCompareResult(score,msg,color);
+}
+
+
+function showCompareResult(score,msg,color){
+  let el=document.getElementById("compareResult");
+  if(!el){
+    const wrap=document.getElementById("canvasWrap");if(!wrap)return;
+    el=document.createElement("div");el.id="compareResult";el.className="compare-result";
+    wrap.appendChild(el);
+  }
+  if(score===null){
+    el.style.background="#fef3e8";el.style.color="#92400e";
+    el.innerHTML=msg;el.classList.add("show");return;
+  }
+  el.style.background=score>=60?"#e8f8ef":"#fde8e8";
+  el.style.color=score>=60?"#1a7a40":"#c0392b";
+  el.innerHTML=`
+    <div style="margin-bottom:6px">${msg}</div>
+    <div style="font-size:11px;margin-bottom:4px">Match score: <b>${score}%</b></div>
+    <div class="compare-score-bar"><div class="compare-score-fill" style="width:${score}%;background:${color||"#2ecc71"}"></div></div>
+    <div style="font-size:10px;margin-top:4px;opacity:0.7">${score>=80?"Ready to mark as mastered!":score>=60?"Try once more to improve":"Trace the faint guide character carefully"}</div>`;
+  el.classList.add("show");
+  if(score>=60)playOK();else playBad();
+}
+
 </script>
 
 </body>
