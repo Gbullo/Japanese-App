@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -70,15 +71,15 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
 .action-sub{font-size:11px;color:var(--muted)}
 .action-cta{font-size:11px;font-weight:500;color:var(--red)}
 /* WOTD */
-.wotd-card{margin:0 14px 10px;background:linear-gradient(135deg,var(--ink),#2d2250);border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden}
+.wotd-card{margin:12px 14px 10px;background:linear-gradient(135deg,#2d2250,#1a3a6e);border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.12);box-shadow:0 4px 16px rgba(0,0,0,0.2)}
 .wotd-card::before{content:'';position:absolute;top:-20px;right:-20px;width:90px;height:90px;background:rgba(255,255,255,0.04);border-radius:50%}
-.wotd-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:0.55;margin-bottom:8px}
-.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:32px;margin-bottom:3px;line-height:1.2}
-.wotd-rom{font-size:13px;opacity:0.65;margin-bottom:2px}
-.wotd-en{font-size:16px;font-weight:500;margin-bottom:12px}
-.wotd-btn{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.22);border-radius:9px;padding:7px 14px;color:#fff;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer}
+.wotd-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;opacity:0.75;margin-bottom:10px;font-weight:500}
+.wotd-jp{font-family:'Noto Sans JP',sans-serif;font-size:36px;margin-bottom:4px;line-height:1.2}
+.wotd-rom{font-size:14px;opacity:0.7;margin-bottom:3px}
+.wotd-en{font-size:17px;font-weight:500;margin-bottom:14px}
+.wotd-btn{background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);border-radius:9px;padding:8px 16px;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;font-weight:500}
 /* STREAK BANNER */
-.streak-banner{margin:0 14px 10px;background:linear-gradient(135deg,#ff6b35,var(--red));border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;color:#fff}
+.streak-banner{margin:12px 14px 10px;background:linear-gradient(135deg,#ff6b35,var(--red));border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;color:#fff}
 .streak-banner.hidden{display:none}
 .sb-text{flex:1}
 .sb-title{font-size:13px;font-weight:500;margin-bottom:1px}
@@ -330,136 +331,138 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
   </div>
   <div class="screen">
 
-    <!-- HOME -->
-    <div class="page active" id="page-home">
-      <div class="page-header dark">
-        <div class="h-title">NihongoStep 🌸</div>
-        <div class="h-sub" id="homeGreeting">Your Japanese journey starts today</div>
-        <div class="pill-row">
-          <div class="pill" id="pillStreak">🔥 Day 1</div>
-          <div class="pill" id="pillXP">⭐ 0 XP</div>
-          <div class="pill">🎯 N5 Goal</div>
-        </div>
-      </div>
-      <div class="streak-banner" id="streakBanner">
-        <div style="font-size:24px">🔥</div>
-        <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
-        <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
-      </div>
-      <div class="wotd-card">
-        <div class="wotd-lbl">🌟 Word of the Day</div>
-        <div class="wotd-jp" id="wotdJP">がんばって</div>
-        <div class="wotd-rom" id="wotdRomaji">Ganbatte</div>
-        <div class="wotd-en" id="wotdEn">Do your best / Good luck!</div>
-        <button class="wotd-btn" onclick="speakWotd()">🔊 Hear it</button>
-      </div>
-      <div class="card" style="margin-top:2px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
-          <span style="font-size:12px;font-weight:500">N5 by December 2026</span>
-          <span style="font-size:12px;color:var(--red);font-weight:500" id="goalPct">0%</span>
-        </div>
-        <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
-        <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months</span></div>
-      </div>
-      <div class="sec-title">Daily Review</div>
-      <div class="review-banner" id="reviewBanner">
-        <div style="font-size:12px;font-weight:500;margin-bottom:5px">📚 5-Question Daily Recap</div>
-        <div style="font-size:11px;color:#5a4a30;line-height:1.5;margin-bottom:10px">A quick recap of words you've learned — keeps them fresh in your memory.</div>
-        <button style="background:var(--gold);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer" onclick="startDailyReview()">Start Review →</button>
-      </div>
-      <div class="sec-title">Your Units</div>
-      <div class="h-scroll" id="homeChips"></div>
-      <div class="sec-title">Practice</div>
-      <div class="action-list">
-        <div class="action-row" onclick="openLesson(0)">
-          <div class="action-icon" style="background:#fde8e8">🎯</div>
-          <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics</div></div>
-          <div class="action-cta">Start →</div>
-        </div>
-        <div class="action-row" onclick="openExam()">
-          <div class="action-icon" style="background:#f3e8ff">📝</div>
-          <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam · all units</div></div>
-          <div class="action-cta">Take →</div>
-        </div>
-        <div class="action-row" onclick="switchTab('practice')">
-          <div class="action-icon" style="background:#e8f8ef">🎮</div>
-          <div class="action-info"><div class="action-name">Practice Hub</div><div class="action-sub">Listening · sentences · role-play</div></div>
-          <div class="action-cta">Open →</div>
-        </div>
-      </div>
-      <div class="tips-card" style="margin-top:10px">
-        <div class="tips-title">🎯 Your daily study routine</div>
-        <div class="tip-item">1. Do the Daily Review first (5 min)</div>
-        <div class="tip-item">2. Study a lesson + take its quiz</div>
-        <div class="tip-item">3. Practice writing in the Write tab</div>
-        <div class="tip-item">4. Do one speaking or listening drill</div>
-        <div class="tip-item">5. After 3+ lessons, take the Section Test</div>
-      </div>
+```
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="page-header dark">
+    <div class="h-title">NihongoStep 🌸</div>
+    <div class="h-sub" id="homeGreeting">Your Japanese journey starts today</div>
+    <div class="pill-row">
+      <div class="pill" id="pillStreak">🔥 Day 1</div>
+      <div class="pill" id="pillXP">⭐ 0 XP</div>
+      <div class="pill">🎯 N5 Goal</div>
     </div>
+  </div>
+  <div class="streak-banner" id="streakBanner">
+    <div style="font-size:24px">🔥</div>
+    <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
+    <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
+  </div>
+  <div class="wotd-card">
+    <div class="wotd-lbl">🌟 Word of the Day</div>
+    <div class="wotd-jp" id="wotdJP">がんばって</div>
+    <div class="wotd-rom" id="wotdRomaji">Ganbatte</div>
+    <div class="wotd-en" id="wotdEn">Do your best / Good luck!</div>
+    <button class="wotd-btn" onclick="speakWotd()">🔊 Hear it</button>
+  </div>
+  <div class="card" style="margin-top:2px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+      <span style="font-size:12px;font-weight:500">N5 by December 2026</span>
+      <span style="font-size:12px;color:var(--red);font-weight:500" id="goalPct">0%</span>
+    </div>
+    <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+    <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months</span></div>
+  </div>
+  <div class="sec-title">Daily Review</div>
+  <div class="review-banner" id="reviewBanner">
+    <div style="font-size:12px;font-weight:500;margin-bottom:5px">📚 5-Question Daily Recap</div>
+    <div style="font-size:11px;color:#5a4a30;line-height:1.5;margin-bottom:10px">A quick recap of words you've learned — keeps them fresh in your memory.</div>
+    <button style="background:var(--gold);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer" onclick="startDailyReview()">Start Review →</button>
+  </div>
+  <div class="sec-title">Your Units</div>
+  <div class="h-scroll" id="homeChips"></div>
+  <div class="sec-title">Practice</div>
+  <div class="action-list">
+    <div class="action-row" onclick="openLesson(0)">
+      <div class="action-icon" style="background:#fde8e8">🎯</div>
+      <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics</div></div>
+      <div class="action-cta">Start →</div>
+    </div>
+    <div class="action-row" onclick="openExam()">
+      <div class="action-icon" style="background:#f3e8ff">📝</div>
+      <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam · all units</div></div>
+      <div class="action-cta">Take →</div>
+    </div>
+    <div class="action-row" onclick="switchTab('practice')">
+      <div class="action-icon" style="background:#e8f8ef">🎮</div>
+      <div class="action-info"><div class="action-name">Practice Hub</div><div class="action-sub">Listening · sentences · role-play</div></div>
+      <div class="action-cta">Open →</div>
+    </div>
+  </div>
+  <div class="tips-card" style="margin-top:10px">
+    <div class="tips-title">🎯 Your daily study routine</div>
+    <div class="tip-item">1. Do the Daily Review first (5 min)</div>
+    <div class="tip-item">2. Study a lesson + take its quiz</div>
+    <div class="tip-item">3. Practice writing in the Write tab</div>
+    <div class="tip-item">4. Do one speaking or listening drill</div>
+    <div class="tip-item">5. After 3+ lessons, take the Section Test</div>
+  </div>
+</div>
 
-    <!-- LESSONS -->
-    <div class="page" id="page-learn">
-      <div class="page-header dark">
-        <div class="h-title">Classroom 🏫</div>
-        <div class="h-sub">5 lessons · JLPT N5 → N4</div>
-      </div>
-      <div style="height:14px"></div>
-      <div id="unitList"></div>
-      <div class="sec-title">Section Test</div>
-      <div class="section-test-card" onclick="openExam()">
-        <div class="st-lbl">📝 JLPT-Style Exam</div>
-        <div class="st-title">Units 1–5 Section Test</div>
-        <div class="st-sub">Vocab · Grammar · Reading · Listening · Pass = 70%+</div>
-        <button class="st-btn">Start Test →</button>
-      </div>
-    </div>
+<!-- LESSONS -->
+<div class="page" id="page-learn">
+  <div class="page-header dark">
+    <div class="h-title">Classroom 🏫</div>
+    <div class="h-sub">5 lessons · JLPT N5 → N4</div>
+  </div>
+  <div style="height:14px"></div>
+  <div id="unitList"></div>
+  <div class="sec-title">Section Test</div>
+  <div class="section-test-card" onclick="openExam()">
+    <div class="st-lbl">📝 JLPT-Style Exam</div>
+    <div class="st-title">Units 1–5 Section Test</div>
+    <div class="st-sub">Vocab · Grammar · Reading · Listening · Pass = 70%+</div>
+    <button class="st-btn">Start Test →</button>
+  </div>
+</div>
 
-    <!-- LESSON DETAIL -->
-    <div class="page" id="page-detail">
-      <div class="lesson-detail" id="detailContent"></div>
-    </div>
+<!-- LESSON DETAIL -->
+<div class="page" id="page-detail">
+  <div class="lesson-detail" id="detailContent"></div>
+</div>
 
-    <!-- SECTION EXAM -->
-    <div class="page" id="page-exam">
-      <div class="page-header exam">
-        <div class="h-title">Section Test 📝</div>
-        <div class="h-sub">JLPT N5 Format — Units 1–5</div>
-      </div>
-      <div id="examContent"></div>
-    </div>
+<!-- SECTION EXAM -->
+<div class="page" id="page-exam">
+  <div class="page-header exam">
+    <div class="h-title">Section Test 📝</div>
+    <div class="h-sub">JLPT N5 Format — Units 1–5</div>
+  </div>
+  <div id="examContent"></div>
+</div>
 
-    <!-- PRACTICE HUB -->
-    <div class="page" id="page-practice">
-      <div class="page-header teal">
-        <div class="h-title">Practice Hub 🎮</div>
-        <div class="h-sub">Listening · Writing · Speaking · Games</div>
-      </div>
-      <div id="practiceContent"></div>
-    </div>
+<!-- PRACTICE HUB -->
+<div class="page" id="page-practice">
+  <div class="page-header teal">
+    <div class="h-title">Practice Hub 🎮</div>
+    <div class="h-sub">Listening · Writing · Speaking · Games</div>
+  </div>
+  <div id="practiceContent"></div>
+</div>
 
-    <!-- PRACTICE SUB-PAGE -->
-    <div class="page" id="page-practice-sub">
-      <div class="lesson-detail" id="practiceSubContent"></div>
-    </div>
+<!-- PRACTICE SUB-PAGE -->
+<div class="page" id="page-practice-sub">
+  <div class="lesson-detail" id="practiceSubContent"></div>
+</div>
 
-    <!-- WRITE -->
-    <div class="page" id="page-write">
-      <div class="page-header navy">
-        <div class="h-title">Write ✍️</div>
-        <div class="h-sub">Hiragana · Katakana · Vocabulary</div>
-      </div>
-      <div id="writeContent"></div>
-    </div>
+<!-- WRITE -->
+<div class="page" id="page-write">
+  <div class="page-header navy">
+    <div class="h-title">Write ✍️</div>
+    <div class="h-sub">Hiragana · Katakana · Vocabulary</div>
+  </div>
+  <div id="writeContent"></div>
+</div>
 
-    <!-- PROGRESS -->
-    <div class="page" id="page-progress">
-      <div class="page-header dark">
-        <div class="h-title">Progress 📊</div>
-        <div class="h-sub">Your stats · badges · planner</div>
-      </div>
-      <div style="height:14px"></div>
-      <div id="progressContent"></div>
-    </div>
+<!-- PROGRESS -->
+<div class="page" id="page-progress">
+  <div class="page-header dark">
+    <div class="h-title">Progress 📊</div>
+    <div class="h-sub">Your stats · badges · planner</div>
+  </div>
+  <div style="height:14px"></div>
+  <div id="progressContent"></div>
+</div>
+```
 
   </div>
 
@@ -1646,5 +1649,6 @@ function makeDraggable(el){
 updateHomeUI();buildLearn();buildPractice();buildWrite();buildProgress();
 setTimeout(()=>{makeDraggable(document.getElementById("homeChips"));makeDraggable(document.getElementById("unitList"));},150);
 </script>
+
 </body>
 </html>
