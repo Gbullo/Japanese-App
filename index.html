@@ -348,6 +348,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
     <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
     <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
   </div>
+  <div style="height:14px;background:var(--paper)"></div>
   <div class="wotd-card">
     <div class="wotd-lbl">🌟 Word of the Day</div>
     <div class="wotd-jp" id="wotdJP">がんばって</div>
@@ -1480,36 +1481,162 @@ function renderKanaGrid(){
   const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
   grid.innerHTML=list.map((k,i)=>`<div class="kana-cell ${i===writeCurIdx?"sel":""} ${writeMastered.has(writeMode+i)?"mastered":""}" onclick="selectKana(${i})"><div class="kana-char">${k.char}</div><div class="kana-rom">${k.rom}</div></div>`).join("");
 }
+/* stroke order for hiragana */
+const strokeOrder={
+  "あ":["Top-right curve down-left","Horizontal stroke left to right","Curved stroke: down, loop right, extend down"],
+  "い":["Left stroke: curve down","Right stroke: curve down, hook left"],
+  "う":["Short top stroke","Curved stroke: top, down, curve right"],
+  "え":["Horizontal stroke","Vertical stroke through center","Bottom curved sweep right"],
+  "お":["Horizontal stroke","Vertical stroke down","Curved stroke: right, loop, down"],
+  "か":["Vertical stroke down","Horizontal crossing stroke","Lower diagonal right-down"],
+  "き":["Top horizontal","Middle horizontal","Vertical stroke","Bottom right curve"],
+  "く":["Single stroke: diagonal down-right then up-right"],
+  "け":["Vertical stroke","Top-right diagonal","Lower curve right"],
+  "こ":["Top horizontal stroke","Bottom horizontal stroke"],
+  "さ":["Horizontal stroke","Vertical stroke","Lower curve right"],
+  "し":["Single stroke: down then hook right"],
+  "す":["Horizontal stroke","Vertical then curve with left loop"],
+  "せ":["Vertical left stroke","Cross stroke","Right stroke down with hook"],
+  "そ":["Two linked curves sweeping right"],
+  "た":["Horizontal","Vertical through it","Lower-left diagonal","Lower-right curve"],
+  "ち":["Horizontal stroke","Curved stroke: down, loop left"],
+  "つ":["Single sweep: right then down-left curve"],
+  "て":["Single stroke: horizontal then hook down-left"],
+  "と":["Vertical stroke","Small hook right"],
+  "な":["Horizontal stroke","Vertical stroke","Curve right and loop"],
+  "に":["Two horizontals","Vertical stroke connecting them"],
+  "ぬ":["Left curve down","Right loop and sweep"],
+  "ね":["Horizontal","Vertical","Loop right then sweep left"],
+  "の":["Single oval loop stroke"],
+  "は":["Vertical stroke","Middle vertical stroke","Right curve loop"],
+  "ひ":["Single loop stroke right"],
+  "ふ":["Top stroke","Left dot","Right upper stroke","Right lower curve"],
+  "へ":["Single peak stroke: up then down-right"],
+  "ほ":["Vertical","Cross stroke","Right upper curve","Right lower loop"],
+  "ま":["Horizontal","Horizontal","Vertical down with loop right"],
+  "み":["Curve down-right","Loop and extend right"],
+  "む":["Curve stroke","Loop stroke down-right"],
+  "め":["Left curve","Right loop"],
+  "も":["Two horizontals","Vertical down with right curve"],
+  "や":["Left diagonal","Upper right curve","Lower right stroke"],
+  "ゆ":["Left curve stroke","Right upper stroke","Right lower curve"],
+  "よ":["Two horizontal strokes","Vertical right side"],
+  "ら":["Short curve right","Long stroke: curve down, hook left"],
+  "り":["Left stroke down","Right stroke curve down"],
+  "る":["Curve right and loop back"],
+  "れ":["Vertical stroke","Curve right, loop, sweep left"],
+  "ろ":["Single stroke: right then down loop"],
+  "わ":["Vertical stroke","Curve right, down, hook left"],
+  "を":["Three strokes forming the character"],
+  "ん":["Curve right, hook up, then down-left"],
+  "ア":["Left diagonal","Right short stroke","Horizontal stroke","Vertical stroke"],
+  "イ":["Left diagonal down","Vertical stroke down"],
+  "ウ":["Top dot","Left curve","Right curve"],
+  "エ":["Top horizontal","Vertical stroke","Bottom horizontal"],
+  "オ":["Horizontal","Vertical stroke","Diagonal right stroke"],
+  "カ":["Horizontal stroke","Vertical stroke","Right diagonal"],
+  "キ":["Top horizontal","Middle horizontal","Vertical","Right lower stroke"],
+  "ク":["Left diagonal","Right curve down"],
+  "ケ":["Vertical","Cross stroke","Right diagonal"],
+  "コ":["Top horizontal","Right vertical","Bottom horizontal"],
+  "サ":["Two diagonals crossing","Vertical stroke"],
+  "シ":["Two short diagonals","Long diagonal stroke"],
+  "ス":["Horizontal stroke","Curve down to loop"],
+  "セ":["Vertical","Cross stroke","Right hook down"],
+  "ソ":["Short diagonal","Long diagonal sweep down"],
+  "タ":["Top diagonal","Horizontal","Diagonal right","Left curve"],
+  "チ":["Horizontal","Horizontal","Vertical with left hook"],
+  "ツ":["Three short strokes: two diagonals + sweep"],
+  "テ":["Horizontal","Horizontal","Vertical through center"],
+  "ト":["Vertical","Short diagonal right"],
+  "ナ":["Horizontal stroke","Vertical stroke"],
+  "ニ":["Short horizontal","Long horizontal"],
+  "ヌ":["Diagonal crossing","Loop sweep right"],
+  "ネ":["Horizontal","Vertical","Left diagonal","Right curve"],
+  "ノ":["Single diagonal sweep down-right"],
+  "ハ":["Left diagonal down-left","Right diagonal down-right"],
+  "ヒ":["Vertical stroke","Top horizontal","Bottom horizontal"],
+  "フ":["Horizontal stroke","Left curve down"],
+  "ヘ":["Single peak stroke"],
+  "ホ":["Horizontal","Vertical through it","Left stroke","Right stroke"],
+  "マ":["Horizontal stroke","Left curve down","Right diagonal"],
+  "ミ":["Three horizontal strokes: short, short, long"],
+  "ム":["Curve left down","Right hook up"],
+  "メ":["Left diagonal","Right crossing diagonal"],
+  "モ":["Two horizontals","Vertical","Bottom horizontal"],
+  "ヤ":["Left diagonal","Right upper stroke","Bottom right stroke"],
+  "ユ":["Left horizontal","Right vertical","Bottom horizontal"],
+  "ヨ":["Three horizontals","Vertical connecting right side"],
+  "ラ":["Horizontal stroke","Curve down-right with hook"],
+  "リ":["Left stroke down","Right stroke down"],
+  "ル":["Left curve down","Right angle hook"],
+  "レ":["Single stroke: down then right hook"],
+  "ロ":["Box shape: top, right, bottom, left side open"],
+  "ワ":["Horizontal","Right curve down"],
+  "ヲ":["Three strokes: horizontal, curve, diagonal"],
+  "ン":["Short diagonal","Long curve down-right"]
+};
+
+function drawCanvasGuide(ctx,char,w,h){
+  ctx.clearRect(0,0,w,h);
+  // Light grid
+  ctx.strokeStyle="rgba(15,76,129,0.1)";ctx.lineWidth=0.8;ctx.setLineDash([5,5]);
+  ctx.beginPath();
+  ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);
+  ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);
+  ctx.moveTo(w/4,0);ctx.lineTo(w/4,h);
+  ctx.moveTo(3*w/4,0);ctx.lineTo(3*w/4,h);
+  ctx.stroke();ctx.setLineDash([]);
+  // Border box
+  const pad=14;
+  ctx.strokeStyle="rgba(15,76,129,0.18)";ctx.lineWidth=1.5;
+  ctx.strokeRect(pad,pad,w-pad*2,h-pad*2);
+  // Guide character — fit inside box
+  const isSingle=char.length===1;
+  const maxSize=Math.min(w,h)-pad*4;
+  const fontSize=isSingle?maxSize:Math.floor(maxSize/Math.max(char.length,2)*1.5);
+  ctx.font=`${Math.min(fontSize,maxSize)}px 'Noto Sans JP',sans-serif`;
+  ctx.fillStyle="rgba(15,76,129,0.09)";
+  ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillText(char,w/2,h/2);
+}
+
 function renderWriteCanvas(){
   const wrap=document.getElementById("canvasWrap");if(!wrap)return;
   const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
   const k=list[writeCurIdx];const isMastered=writeMastered.has(writeMode+writeCurIdx);
+  const strokes=strokeOrder[k.char]||null;
   wrap.innerHTML=`
-    <div class="canvas-hdr">
-      <div class="canvas-char">${k.char}</div>
-      <div class="canvas-info">
-        <div class="canvas-rom">${k.rom}</div>
-        <div class="canvas-meaning">${k.meaning||""}</div>
-        ${isMastered?"<div style='font-size:10px;color:var(--green);font-weight:600;margin-top:3px'>✓ Mastered</div>":""}
+    <div style="background:linear-gradient(135deg,#0f4c81,#1a237e);color:#fff;border-radius:16px 16px 0 0;padding:12px 14px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:44px;line-height:1">${k.char}</div>
+          <div>
+            <div style="font-size:15px;font-weight:500">${k.rom}</div>
+            <div style="font-size:12px;opacity:0.65">${k.meaning||""}</div>
+            ${isMastered?"<div style='font-size:10px;color:#6ee7b7;font-weight:600;margin-top:2px'>✓ Mastered</div>":""}
+          </div>
+        </div>
+        <div style="font-size:10px;opacity:0.55;text-align:right">${writeMode==="hiragana"?"Hiragana":writeMode==="katakana"?"Katakana":"Word"}</div>
       </div>
     </div>
-    <div class="canvas-draw" id="drawArea"><canvas id="writeCanvas" height="220"></canvas></div>
-    <div class="canvas-hint">Draw with your finger or mouse · Faint guide shows the character</div>
+    ${strokes?`<div style="background:#1a3a6e;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1)">
+      <div style="font-size:9px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600">✏️ Stroke Order</div>
+      ${strokes.map((s,i)=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:5px;color:#fff"><span style="background:rgba(255,255,255,0.22);border-radius:50%;width:18px;height:18px;min-width:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;margin-top:1px">${i+1}</span><span style="font-size:11px;opacity:0.9;line-height:1.4">${s}</span></div>`).join("")}
+    </div>`:""}
+    <div class="canvas-draw" id="drawArea"><canvas id="writeCanvas" height="260"></canvas></div>
+    <div class="canvas-hint">✏️ Draw inside the box · Follow the numbered strokes above</div>
     <div class="canvas-actions">
       <button class="canvas-btn clear" onclick="clearCanvas()">🗑 Clear</button>
-      <button class="canvas-btn hear" onclick="speak('${k.char.replace(/'/g,"\\'")}')">🔊 Hear</button>
+      <button class="canvas-btn hear" onclick="speak('${k.char.replace(/'/g,"\'")}')">🔊 Hear</button>
       <button class="canvas-btn mastered-btn" onclick="markMastered()">✓ Done</button>
       <button class="canvas-btn next-btn" onclick="nextKana()">Next →</button>
     </div>`;
   const canvas=document.getElementById("writeCanvas");const drawArea=document.getElementById("drawArea");
   if(!canvas||!drawArea)return;
-  canvas.width=drawArea.offsetWidth||340;canvas.height=220;
+  canvas.width=drawArea.offsetWidth||340;canvas.height=260;
   writeCtx=canvas.getContext("2d");
-  writeCtx.font="140px 'Noto Sans JP', sans-serif";writeCtx.fillStyle="rgba(15,76,129,0.07)";
-  writeCtx.textAlign="center";writeCtx.textBaseline="middle";writeCtx.fillText(k.char,canvas.width/2,110);
-  writeCtx.strokeStyle="rgba(0,0,0,0.07)";writeCtx.lineWidth=1;writeCtx.setLineDash([4,4]);
-  writeCtx.beginPath();writeCtx.moveTo(canvas.width/2,0);writeCtx.lineTo(canvas.width/2,220);
-  writeCtx.moveTo(0,110);writeCtx.lineTo(canvas.width,110);writeCtx.stroke();writeCtx.setLineDash([]);
+  drawCanvasGuide(writeCtx,k.char,canvas.width,canvas.height);
   writeCanvas=canvas;writePainting=false;
   canvas.addEventListener("mousedown",e=>{writePainting=true;const p=getPos(e,canvas);writeCtx.strokeStyle="#0f4c81";writeCtx.lineWidth=5;writeCtx.lineCap="round";writeCtx.lineJoin="round";writeCtx.beginPath();writeCtx.moveTo(p.x,p.y);});
   canvas.addEventListener("mousemove",e=>{if(!writePainting)return;const p=getPos(e,canvas);writeCtx.lineTo(p.x,p.y);writeCtx.stroke();});
@@ -1518,21 +1645,15 @@ function renderWriteCanvas(){
   canvas.addEventListener("touchstart",e=>{e.preventDefault();writePainting=true;const p=getPos(e.touches[0],canvas);writeCtx.strokeStyle="#0f4c81";writeCtx.lineWidth=5;writeCtx.lineCap="round";writeCtx.lineJoin="round";writeCtx.beginPath();writeCtx.moveTo(p.x,p.y);},{passive:false});
   canvas.addEventListener("touchmove",e=>{e.preventDefault();if(!writePainting)return;const p=getPos(e.touches[0],canvas);writeCtx.lineTo(p.x,p.y);writeCtx.stroke();},{passive:false});
   canvas.addEventListener("touchend",()=>{writePainting=false;});
-  // tip card
   const tip=document.getElementById("writeTip");
-  if(tip)tip.innerHTML=`<div class="write-tip-title">📝 Tips for ${k.char} (${k.rom})</div><div style="font-size:12px;color:#555;line-height:1.7">• Write top to bottom, left to right<br>• Say <b>${k.rom}</b> aloud as you write<br>• Tap 🔊 to hear the pronunciation<br>• Practice until confident, then tap ✓ Done</div>`;
+  if(tip)tip.innerHTML=`<div class="write-tip-title">📝 Practice tips for ${k.char} (${k.rom})</div><div style="font-size:12px;color:#555;line-height:1.7">• Follow the numbered strokes shown above the canvas<br>• Say <b>${k.rom}</b> aloud with each stroke<br>• Keep your strokes inside the border box<br>• Tap 🔊 to hear it · Tap ✓ Done when confident</div>`;
 }
 function getPos(e,canvas){const r=canvas.getBoundingClientRect();const sx=canvas.width/r.width;const sy=canvas.height/r.height;return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}
 function clearCanvas(){
   if(!writeCtx||!writeCanvas)return;
-  writeCtx.clearRect(0,0,writeCanvas.width,writeCanvas.height);
   const list=writeMode==="hiragana"?hiragana:writeMode==="katakana"?katakana:writeVocab;
   const k=list[writeCurIdx];
-  writeCtx.font="140px 'Noto Sans JP', sans-serif";writeCtx.fillStyle="rgba(15,76,129,0.07)";
-  writeCtx.textAlign="center";writeCtx.textBaseline="middle";writeCtx.fillText(k.char,writeCanvas.width/2,110);
-  writeCtx.strokeStyle="rgba(0,0,0,0.07)";writeCtx.lineWidth=1;writeCtx.setLineDash([4,4]);
-  writeCtx.beginPath();writeCtx.moveTo(writeCanvas.width/2,0);writeCtx.lineTo(writeCanvas.width/2,220);
-  writeCtx.moveTo(0,110);writeCtx.lineTo(writeCanvas.width,110);writeCtx.stroke();writeCtx.setLineDash([]);
+  drawCanvasGuide(writeCtx,k.char,writeCanvas.width,writeCanvas.height);
 }
 function markMastered(){
   writeMastered.add(writeMode+writeCurIdx);
