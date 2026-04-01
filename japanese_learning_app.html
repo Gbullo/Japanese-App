@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="日本語">
+<title>日本語 — Learn Japanese</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --red:#D85A30;--red-lt:#FAECE7;--red-dk:#4A1B0C;
+  --teal:#1D9E75;--teal-lt:#E1F5EE;--teal-dk:#04342C;
+  --amber:#BA7517;--amber-lt:#FAEEDA;
+  --purple:#534AB7;--purple-lt:#EEEDFE;--purple-md:#CECBF6;
+  --gray:#888780;--gray-lt:#F1EFE8;
+  --ink:#1a1a1a;--ink2:#555;--ink3:#999;
+  --border:#e8e5e0;
+  --ff:'DM Sans',sans-serif;
+  --jp:'Noto Sans JP',sans-serif;
+  --title:'Shippori Mincho',serif;
+}
+html,body{height:100%;overflow:hidden;background:#1a1a1a}
+body{font-family:var(--ff);color:var(--ink)}
+
+.phone{
+  max-width:390px;
+  height:100vh;
+  margin:0 auto;
+  background:#fafaf8;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+
+/* STATUS BAR */
+.sbar{
+  background:#fff;
+  padding:14px 20px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  font-weight:600;
+  color:#1a1a1a;
+  border-bottom:0.5px solid var(--border);
+  flex-shrink:0;
+  safe-area-inset-top:env(safe-area-inset-top);
+}
+.sbar-icons{display:flex;gap:5px;font-size:11px;color:#666;align-items:center}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:84px}
+.screen.active{display:flex}
+
+/* ── HOME ── */
+.home-hero{
+  background:#2C2C2A;
+  padding:28px 20px 22px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.home-hero::after{
+  content:'日本語';
+  position:absolute;right:-8px;top:-8px;
+  font-family:var(--jp);font-size:110px;font-weight:700;
+  color:rgba(255,255,255,0.05);pointer-events:none;line-height:1;
+}
+.greeting{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:4px;letter-spacing:0.02em}
+.hero-h{font-family:var(--title);font-size:22px;color:#fff;margin-bottom:18px;line-height:1.3}
+.prog-box{background:rgba(255,255,255,0.1);border-radius:12px;padding:14px}
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:8px}
+.prog-track{height:6px;background:rgba(255,255,255,0.15);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:#9FE1CB;border-radius:3px;transition:width .6s ease}
+.prog-note{font-size:11px;color:rgba(255,255,255,0.45);margin-top:6px}
+
+.sec-title{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;padding:18px 20px 8px;flex-shrink:0}
+
+/* STAT CARDS */
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 20px 4px;flex-shrink:0}
+.stat-card{background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center}
+.stat-n{font-size:22px;font-weight:600;color:#2C2C2A;line-height:1}
+.stat-l{font-size:10px;color:#aaa;margin-top:4px;line-height:1.2}
+
+/* LESSON LIST */
+.lessons{padding:0 20px;display:flex;flex-direction:column;gap:9px}
+.lcard{
+  background:#fff;border:0.5px solid var(--border);border-radius:14px;
+  padding:13px 14px;display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:transform .12s,box-shadow .12s;
+  -webkit-user-select:none;user-select:none;
+}
+.lcard:active{transform:scale(0.97)}
+.lcard.locked{opacity:0.45;pointer-events:none}
+.licon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--jp);font-size:20px;flex-shrink:0}
+.linfo{flex:1;min-width:0}
+.lname{font-size:14px;font-weight:500;color:var(--ink)}
+.lsub{font-size:12px;color:#999;margin-top:1px}
+.badge{font-size:10px;padding:3px 8px;border-radius:6px;font-weight:600;white-space:nowrap}
+.badge-go{background:var(--amber-lt);color:var(--amber)}
+.badge-ok{background:var(--teal-lt);color:var(--teal-dk)}
+.badge-lk{background:var(--gray-lt);color:var(--gray)}
+
+/* BANNER */
+.banner{background:linear-gradient(135deg,var(--teal),#0F6E56);border-radius:14px;padding:20px;margin:4px 20px 0;color:#fff;text-align:center}
+.banner-jp{font-family:var(--jp);font-size:28px;font-weight:700;margin-bottom:4px}
+.banner-en{font-size:13px;color:rgba(255,255,255,0.8)}
+
+/* ── LESSON DETAIL ── */
+.lhdr{
+  background:#fff;padding:14px 16px;border-bottom:0.5px solid var(--border);
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:9px;background:var(--gray-lt);border:none;
+  cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.lhdr-title{font-size:15px;font-weight:500;flex:1}
+.mode-btns{display:flex;gap:6px}
+.mbtn{
+  padding:6px 10px;border-radius:8px;border:none;font-size:11px;font-weight:600;
+  cursor:pointer;font-family:var(--ff);
+}
+
+/* FLASHCARD */
+.fc-area{padding:16px 20px;flex:1}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:18px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s}
+.dot.cur{background:var(--purple);width:18px;border-radius:4px}
+.dot.done{background:var(--teal)}
+
+.card{
+  background:#fff;border:0.5px solid var(--border);border-radius:20px;
+  padding:28px 20px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:200px;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .15s;
+}
+.card:active{transform:scale(0.985)}
+.card::before{
+  content:attr(data-lbl);
+  position:absolute;top:10px;left:14px;
+  font-size:10px;color:#ccc;text-transform:uppercase;letter-spacing:.06em;
+}
+.card-jp{font-family:var(--jp);font-size:58px;font-weight:700;color:#1a1a1a;line-height:1.1;margin-bottom:6px}
+.card-rm{font-size:17px;color:#aaa;font-style:italic}
+.card-hint{font-size:14px;color:#666;margin-top:8px;opacity:0;transition:opacity .3s}
+.card-hint.show{opacity:1}
+.tap-hint{font-size:12px;color:#ccc;margin-top:14px}
+
+.audio-fab{
+  background:var(--purple-lt);border:none;border-radius:50%;
+  width:42px;height:42px;cursor:pointer;font-size:16px;
+  margin-top:14px;display:flex;align-items:center;justify-content:center;
+  transition:transform .15s;flex-shrink:0;
+}
+.audio-fab:active{transform:scale(0.88);background:var(--purple-md)}
+
+.card-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.act-btn{
+  padding:13px;border-radius:12px;border:none;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:var(--ff);transition:transform .12s;
+}
+.act-btn:active{transform:scale(0.96)}
+.btn-hard{background:var(--red-lt);color:var(--red)}
+.btn-easy{background:var(--teal-lt);color:var(--teal-dk)}
+.speak-link{
+  text-align:center;margin-top:12px;
+}
+.speak-link button{
+  background:var(--gray-lt);border:none;border-radius:10px;
+  padding:10px 18px;font-size:13px;color:var(--purple);
+  font-weight:600;cursor:pointer;font-family:var(--ff);
+}
+
+/* QUIZ MODE */
+.quiz-wrap{padding:0 0 20px}
+.quiz-q{padding:24px 20px 16px;text-align:center}
+.quiz-char{font-family:var(--jp);font-size:64px;font-weight:700;color:#1a1a1a}
+.quiz-sub{font-size:12px;color:#bbb;margin-top:4px}
+.quiz-opts{padding:0 20px;display:flex;flex-direction:column;gap:9px}
+.qopt{
+  background:#fff;border:1.5px solid var(--border);border-radius:12px;
+  padding:14px 16px;font-size:15px;font-weight:500;cursor:pointer;
+  text-align:left;font-family:var(--ff);transition:all .18s;
+}
+.qopt:active{transform:scale(0.97)}
+.qopt.correct{border-color:var(--teal);background:var(--teal-lt);color:#0F6E56}
+.qopt.wrong{border-color:var(--red);background:var(--red-lt);color:#993C1D}
+.quiz-fb{padding:14px 20px;text-align:center;font-size:14px;font-weight:600;min-height:44px}
+
+/* SPEAK MODE */
+.sp-area{padding:0 20px 16px}
+.sp-label{font-size:12px;color:#bbb;text-align:center;padding:14px 0 10px}
+.sp-card{background:#fff;border:0.5px solid var(--border);border-radius:16px;padding:20px;margin-bottom:12px}
+.sp-jp{font-family:var(--jp);font-size:30px;font-weight:700;color:#1a1a1a;text-align:center;margin-bottom:4px}
+.sp-en{font-size:13px;color:#999;text-align:center;margin-bottom:16px}
+.sp-btns{display:flex;gap:14px;justify-content:center}
+.sp-play{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:20px;background:var(--purple-lt);display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.sp-play:active{transform:scale(0.88)}
+.sp-mic{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:20px;background:var(--red-lt);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.sp-mic.rec{background:var(--red);animation:pulse 1s infinite}
+.sp-mic:active{transform:scale(0.88)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.sp-result{font-size:13px;text-align:center;margin-top:10px;min-height:18px;font-weight:500}
+
+/* PHRASE LIST */
+.phrase-item{
+  background:#fff;border:0.5px solid var(--border);border-radius:13px;
+  padding:13px 14px;display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:9px;
+}
+.pi-jp{font-family:var(--jp);font-size:17px;font-weight:700;color:#1a1a1a}
+.pi-en{font-size:11px;color:#aaa;margin-top:2px}
+.pi-rm{font-size:11px;color:#bbb;font-style:italic}
+.pi-btns{display:flex;gap:8px;flex-shrink:0}
+.pi-play{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;font-size:13px;background:var(--purple-lt);display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.pi-play:active{transform:scale(0.88)}
+.pi-mic{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;font-size:13px;background:var(--red-lt);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.pi-mic.rec{background:var(--red)}
+.pi-mic:active{transform:scale(0.88)}
+.pi-score{font-size:11px;font-weight:600;margin-top:4px;min-height:14px}
+
+/* ── SPEAKING SCREEN ── */
+.sp-hero{padding:22px 20px 16px;text-align:center;flex-shrink:0}
+.sp-hero-title{font-family:var(--title);font-size:22px;font-weight:700;color:#1a1a1a}
+.sp-hero-sub{font-size:13px;color:#aaa;margin-top:3px}
+
+/* ── PROGRESS SCREEN ── */
+.prog-hero2{padding:22px 20px 16px;background:#fff;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.prog-hero2-title{font-family:var(--title);font-size:22px;font-weight:700}
+.prog-hero2-sub{font-size:13px;color:#aaa;margin-top:2px}
+.skill-grid{padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:4px}
+.skill-card2{background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:13px}
+.sk-name{font-size:11px;color:#aaa;margin-bottom:7px}
+.sk-bg{height:4px;background:var(--gray-lt);border-radius:2px;overflow:hidden}
+.sk-bar{height:4px;border-radius:2px;transition:width .7s ease}
+.sk-pct{font-size:18px;font-weight:600;margin-top:7px}
+
+/* TIMELINE */
+.tl-wrap{padding:0 20px 20px}
+.tl-item{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.tl-dot{width:12px;height:12px;border-radius:50%;margin-top:3px;flex-shrink:0}
+.tl-dot.done{background:var(--teal)}
+.tl-dot.now{background:var(--purple);box-shadow:0 0 0 3px var(--purple-lt)}
+.tl-dot.soon{background:var(--border)}
+.tl-line{width:1px;height:8px;background:var(--border);margin-left:5.5px;margin-top:2px}
+.tl-txt{}
+.tl-m{font-size:13px;font-weight:500}
+.tl-d{font-size:12px;color:#aaa;margin-top:1px}
+
+/* ── BOTTOM NAV ── */
+.bnav{
+  position:fixed;
+  bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:390px;
+  background:#fff;border-top:0.5px solid var(--border);
+  display:flex;
+  padding:10px 0 calc(16px + env(safe-area-inset-bottom));
+  z-index:200;
+}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:2px 0}
+.ni-icon{font-size:20px;line-height:1}
+.ni-lbl{font-size:10px;color:#bbb;font-weight:500}
+.ni.active .ni-lbl{color:var(--purple)}
+.ni-pip{width:4px;height:4px;background:var(--purple);border-radius:50%;display:none}
+.ni.active .ni-pip{display:block}
+</style>
+</head>
+<body>
+<div class="phone" id="app">
+
+  <!-- STATUS BAR -->
+  <div class="sbar">
+    <span id="clock" style="font-size:15px;font-weight:700">9:41</span>
+    <div class="sbar-icons">
+      <span>●●●</span>&nbsp;<span>Wi-Fi</span>&nbsp;<span>🔋</span>
+    </div>
+  </div>
+
+  <!-- ════ HOME ════ -->
+  <div class="screen active" id="scr-home">
+    <div class="home-hero">
+      <div class="greeting">おはようございます！ Good morning</div>
+      <div class="hero-h">Learn Japanese by<br>December 2026 🎯</div>
+      <div class="prog-box">
+        <div class="prog-row"><span>Overall Progress</span><span id="ov-pct">8%</span></div>
+        <div class="prog-track"><div class="prog-fill" id="ov-bar" style="width:8%"></div></div>
+        <div class="prog-note" id="days-left">Loading...</div>
+      </div>
+    </div>
+
+    <div class="stat-row" style="margin-top:14px">
+      <div class="stat-card"><div class="stat-n" id="xp">145</div><div class="stat-l">XP Earned</div></div>
+      <div class="stat-card"><div class="stat-n" id="streak">3</div><div class="stat-l">Day Streak 🔥</div></div>
+      <div class="stat-card"><div class="stat-n" id="words">42</div><div class="stat-l">Words Known</div></div>
+    </div>
+
+    <div class="sec-title">Lessons</div>
+    <div class="lessons">
+      <div class="lcard" onclick="openLesson('hiragana','Hiragana')">
+        <div class="licon" style="background:var(--purple-lt)">あ</div>
+        <div class="linfo"><div class="lname">Hiragana</div><div class="lsub">46 characters · Foundation</div></div>
+        <span class="badge badge-go">In Progress</span>
+      </div>
+      <div class="lcard" onclick="openLesson('greetings','Greetings')">
+        <div class="licon" style="background:var(--teal-lt);font-size:22px">👋</div>
+        <div class="linfo"><div class="lname">Greetings &amp; Phrases</div><div class="lsub">10 essential expressions</div></div>
+        <span class="badge badge-ok">✓ Done</span>
+      </div>
+      <div class="lcard" onclick="openLesson('numbers','Numbers 1–100')">
+        <div class="licon" style="background:var(--amber-lt)">数</div>
+        <div class="linfo"><div class="lname">Numbers 1–100</div><div class="lsub">Counting &amp; telling time</div></div>
+        <span class="badge badge-go">New</span>
+      </div>
+      <div class="lcard locked">
+        <div class="licon" style="background:var(--gray-lt)">カ</div>
+        <div class="linfo"><div class="lname">Katakana</div><div class="lsub">Complete Hiragana first</div></div>
+        <span class="badge badge-lk">Locked</span>
+      </div>
+      <div class="lcard locked">
+        <div class="licon" style="background:var(--gray-lt)">漢</div>
+        <div class="linfo"><div class="lname">Kanji N5</div><div class="lsub">80 essential characters</div></div>
+        <span class="badge badge-lk">Locked</span>
+      </div>
+    </div>
+
+    <div class="sec-title">Today's Phrase</div>
+    <div class="banner">
+      <div class="banner-jp">頑張ってください！</div>
+      <div class="banner-en">Please do your best!</div>
+    </div>
+    <div style="height:8px"></div>
+  </div>
+
+  <!-- ════ LESSON DETAIL ════ -->
+  <div class="screen" id="scr-lesson">
+    <div class="lhdr">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="lhdr-title" id="l-title">Hiragana</div>
+      <div class="mode-btns">
+        <button class="mbtn" style="background:var(--purple-lt);color:var(--purple)" onclick="setMode('flash')">Flash</button>
+        <button class="mbtn" style="background:var(--amber-lt);color:var(--amber)" onclick="setMode('quiz')">Quiz</button>
+        <button class="mbtn" style="background:var(--red-lt);color:var(--red)" onclick="setMode('speak')">Speak</button>
+      </div>
+    </div>
+
+    <!-- FLASHCARD -->
+    <div id="m-flash" class="fc-area">
+      <div class="dots" id="f-dots"></div>
+      <div class="card" data-lbl="character" onclick="revealCard()" id="fc">
+        <div class="card-jp" id="fc-jp">あ</div>
+        <div class="card-rm" id="fc-rm">a</div>
+        <div class="card-hint" id="fc-hint">Like "ah" in father</div>
+        <div class="tap-hint" id="fc-tap">Tap to reveal · tap 🔊 to hear</div>
+        <button class="audio-fab" onclick="evt_speak(event)" title="Hear pronunciation">🔊</button>
+      </div>
+      <div class="card-acts">
+        <button class="act-btn btn-hard" onclick="nextCard(0)">😅 Hard — again</button>
+        <button class="act-btn btn-easy" onclick="nextCard(5)">✓ Easy — next</button>
+      </div>
+      <div class="speak-link"><button onclick="setMode('speak')">🎙 Practice Speaking</button></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="m-quiz" style="display:none" class="quiz-wrap">
+      <div class="quiz-q">
+        <div class="quiz-char" id="q-char">あ</div>
+        <div class="quiz-sub">What sound does this make?</div>
+      </div>
+      <div class="quiz-opts" id="q-opts"></div>
+      <div class="quiz-fb" id="q-fb"></div>
+    </div>
+
+    <!-- SPEAK -->
+    <div id="m-speak" style="display:none">
+      <div class="sp-label">Tap 🔊 to hear · then 🎙 to repeat</div>
+      <div class="sp-area">
+        <div class="sp-card">
+          <div class="sp-jp" id="sp-jp">あいうえお</div>
+          <div class="sp-en" id="sp-en">a · i · u · e · o</div>
+          <div class="sp-btns">
+            <button class="sp-play" onclick="tts(document.getElementById('sp-jp').textContent)">🔊</button>
+            <button class="sp-mic" id="sp-mic-main" onclick="listenMain()">🎙</button>
+          </div>
+          <div class="sp-result" id="sp-result"></div>
+        </div>
+        <div id="sp-rows"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SPEAKING SCREEN ════ -->
+  <div class="screen" id="scr-speak">
+    <div class="sp-hero">
+      <div class="sp-hero-title">Speaking Practice</div>
+      <div class="sp-hero-sub">Build your pronunciation daily</div>
+    </div>
+    <div style="padding:0 20px" id="daily-list"></div>
+  </div>
+
+  <!-- ════ PROGRESS SCREEN ════ -->
+  <div class="screen" id="scr-progress">
+    <div class="prog-hero2">
+      <div class="prog-hero2-title">Your Journey</div>
+      <div class="prog-hero2-sub">April 2026 → December 2026</div>
+    </div>
+
+    <div class="sec-title">Skills Breakdown</div>
+    <div class="skill-grid">
+      <div class="skill-card2">
+        <div class="sk-name">Reading</div>
+        <div class="sk-bg"><div class="sk-bar" style="width:18%;background:var(--purple)"></div></div>
+        <div class="sk-pct" style="color:var(--purple)">18%</div>
+      </div>
+      <div class="skill-card2">
+        <div class="sk-name">Listening</div>
+        <div class="sk-bg"><div class="sk-bar" style="width:25%;background:var(--teal)"></div></div>
+        <div class="sk-pct" style="color:var(--teal)">25%</div>
+      </div>
+      <div class="skill-card2">
+        <div class="sk-name">Speaking</div>
+        <div class="sk-bg"><div class="sk-bar" style="width:12%;background:var(--red)"></div></div>
+        <div class="sk-pct" style="color:var(--red)">12%</div>
+      </div>
+      <div class="skill-card2">
+        <div class="sk-name">Vocabulary</div>
+        <div class="sk-bg"><div class="sk-bar" style="width:30%;background:var(--amber)"></div></div>
+        <div class="sk-pct" style="color:var(--amber)">30%</div>
+      </div>
+    </div>
+
+    <div class="sec-title">Curriculum Roadmap</div>
+    <div class="tl-wrap">
+      <div class="tl-item">
+        <div><div class="tl-dot done"></div><div class="tl-line"></div></div>
+        <div class="tl-txt"><div class="tl-m">April 2026 ✓</div><div class="tl-d">Hiragana basics · Greetings · Numbers 1–20</div></div>
+      </div>
+      <div class="tl-item">
+        <div><div class="tl-dot now"></div><div class="tl-line"></div></div>
+        <div class="tl-txt"><div class="tl-m" style="color:var(--purple)">May 2026 — You Are Here</div><div class="tl-d">Complete Hiragana · Katakana intro · Self-introduction</div></div>
+      </div>
+      <div class="tl-item">
+        <div><div class="tl-dot soon"></div><div class="tl-line"></div></div>
+        <div class="tl-txt"><div class="tl-m">Jun – Jul 2026</div><div class="tl-d">JLPT N5 vocab (800 words) · Particles は が を · Verb forms</div></div>
+      </div>
+      <div class="tl-item">
+        <div><div class="tl-dot soon"></div><div class="tl-line"></div></div>
+        <div class="tl-txt"><div class="tl-m">Aug – Sep 2026</div><div class="tl-d">Kanji N5 (80 chars) · Past &amp; future tense · て-form</div></div>
+      </div>
+      <div class="tl-item">
+        <div><div class="tl-dot soon"></div><div class="tl-line"></div></div>
+        <div class="tl-txt"><div class="tl-m">Oct – Nov 2026</div><div class="tl-d">Full conversation drills · Listening comprehension · Reading short texts</div></div>
+      </div>
+      <div class="tl-item">
+        <div><div class="tl-dot soon" style="background:linear-gradient(135deg,var(--purple),var(--teal))"></div></div>
+        <div class="tl-txt"><div class="tl-m" style="font-weight:600">🎌 December 2026</div><div class="tl-d">JLPT N5 ready · Conversational Japanese achieved!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bnav">
+    <div class="ni active" id="ni-home" onclick="showScr('home',this)">
+      <div class="ni-icon">🏠</div>
+      <div class="ni-lbl">Home</div>
+      <div class="ni-pip"></div>
+    </div>
+    <div class="ni" id="ni-speak" onclick="showScr('speak',this);renderDaily()">
+      <div class="ni-icon">🎙</div>
+      <div class="ni-lbl">Speak</div>
+      <div class="ni-pip"></div>
+    </div>
+    <div class="ni" id="ni-progress" onclick="showScr('progress',this)">
+      <div class="ni-icon">📈</div>
+      <div class="ni-lbl">Progress</div>
+      <div class="ni-pip"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const HIRAGANA = [
+  {c:'あ',r:'a',h:'Like "ah" in father'},
+  {c:'い',r:'i',h:'Like "ee" in see'},
+  {c:'う',r:'u',h:'Short "oo" sound'},
+  {c:'え',r:'e',h:'Like "eh" in bed'},
+  {c:'お',r:'o',h:'Like "oh" in go'},
+  {c:'か',r:'ka',h:'Like "ka" in car'},
+  {c:'き',r:'ki',h:'Like "key"'},
+  {c:'く',r:'ku',h:'Like "coo" in cool'},
+  {c:'け',r:'ke',h:'Like "keh"'},
+  {c:'こ',r:'ko',h:'Like "co" in coat'},
+  {c:'さ',r:'sa',h:'Like "sa" in safari'},
+  {c:'し',r:'shi',h:'Like "she"'},
+  {c:'す',r:'su',h:'Like "soo"'},
+  {c:'せ',r:'se',h:'Like "seh"'},
+  {c:'そ',r:'so',h:'Like "so"'},
+  {c:'た',r:'ta',h:'Like "ta" in taco'},
+  {c:'ち',r:'chi',h:'Like "chee"'},
+  {c:'つ',r:'tsu',h:'Like "tsu" in tsunami'},
+  {c:'て',r:'te',h:'Like "teh"'},
+  {c:'と',r:'to',h:'Like "to" in total'},
+];
+
+const SPEAK_ROWS = [
+  {jp:'か き く け こ', en:'ka · ki · ku · ke · ko'},
+  {jp:'さ し す せ そ', en:'sa · shi · su · se · so'},
+  {jp:'た ち つ て と', en:'ta · chi · tsu · te · to'},
+  {jp:'な に ぬ ね の', en:'na · ni · nu · ne · no'},
+];
+
+const DAILY = [
+  {jp:'おはようございます',en:'Good morning',rm:'Ohayou gozaimasu'},
+  {jp:'こんにちは',en:'Hello / Good afternoon',rm:'Konnichiwa'},
+  {jp:'ありがとうございます',en:'Thank you very much',rm:'Arigatou gozaimasu'},
+  {jp:'すみません',en:'Excuse me / Sorry',rm:'Sumimasen'},
+  {jp:'はじめまして',en:'Nice to meet you',rm:'Hajimemashite'},
+  {jp:'よろしくおねがいします',en:'Please treat me well',rm:'Yoroshiku onegaishimasu'},
+  {jp:'わかりません',en:"I don't understand",rm:'Wakarimasen'},
+  {jp:'もう一度お願いします',en:'Please say that again',rm:'Mou ichido onegaishimasu'},
+  {jp:'いくらですか',en:'How much is it?',rm:'Ikura desu ka'},
+  {jp:'どこですか',en:'Where is it?',rm:'Doko desu ka'},
+];
+
+/* ── STATE ── */
+let cardIdx = 0, cardFlipped = false;
+let quizIdx = 0;
+
+/* ── CLOCK & DAYS ── */
+function tick(){
+  const d=new Date(), h=d.getHours()%12||12, m=String(d.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent=`${h}:${m}`;
+}
+tick(); setInterval(tick,30000);
+(function daysLeft(){
+  const t=new Date('2026-12-31'), now=new Date();
+  const days=Math.ceil((t-now)/86400000);
+  document.getElementById('days-left').textContent=`${days} days remaining — keep it up!`;
+})();
+
+/* ── NAV ── */
+function showScr(name,el){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('scr-'+name).classList.add('active');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el) el.classList.add('active');
+}
+function goHome(){showScr('home',document.getElementById('ni-home'))}
+
+/* ── LESSON ── */
+function openLesson(type, name){
+  document.getElementById('l-title').textContent=name;
+  showScr('lesson',null);
+  cardIdx=0; cardFlipped=false;
+  setMode('flash');
+  loadCard();
+  buildSpeakRows();
+}
+
+/* ── MODE ── */
+function setMode(m){
+  document.getElementById('m-flash').style.display = m==='flash'?'block':'none';
+  document.getElementById('m-quiz').style.display  = m==='quiz'?'flex':'none';
+  document.getElementById('m-speak').style.display = m==='speak'?'block':'none';
+  if(m==='quiz') buildQuiz();
+}
+
+/* ── FLASHCARD ── */
+function loadCard(){
+  const c=HIRAGANA[cardIdx];
+  cardFlipped=false;
+  document.getElementById('fc-jp').textContent=c.c;
+  document.getElementById('fc-rm').textContent=c.r;
+  document.getElementById('fc-hint').textContent=c.h;
+  document.getElementById('fc-hint').classList.remove('show');
+  document.getElementById('fc-tap').textContent='Tap to reveal · tap 🔊 to hear';
+  buildDots();
+}
+function buildDots(){
+  const wrap=document.getElementById('f-dots');
+  wrap.innerHTML='';
+  const total=Math.min(HIRAGANA.length,10);
+  for(let i=0;i<total;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i===cardIdx?' cur':i<cardIdx?' done':'');
+    wrap.appendChild(d);
+  }
+}
+function revealCard(){
+  if(!cardFlipped){
+    cardFlipped=true;
+    document.getElementById('fc-hint').classList.add('show');
+    document.getElementById('fc-tap').textContent='';
+    tts(HIRAGANA[cardIdx].c);
+  }
+}
+function evt_speak(e){
+  e.stopPropagation();
+  tts(HIRAGANA[cardIdx].c);
+}
+function nextCard(xp){
+  if(xp>0){
+    const el=document.getElementById('xp');
+    el.textContent=parseInt(el.textContent)+xp;
+  }
+  cardIdx=(cardIdx+1)%HIRAGANA.length;
+  cardFlipped=false;
+  loadCard();
+}
+
+/* ── QUIZ ── */
+function buildQuiz(){
+  const c=HIRAGANA[quizIdx];
+  document.getElementById('q-char').textContent=c.c;
+  document.getElementById('q-fb').innerHTML='';
+  const opts=document.getElementById('q-opts');
+  opts.innerHTML='';
+  const choices=[c.r];
+  while(choices.length<4){
+    const x=HIRAGANA[Math.floor(Math.random()*HIRAGANA.length)].r;
+    if(!choices.includes(x)) choices.push(x);
+  }
+  choices.sort(()=>Math.random()-.5).forEach(ch=>{
+    const b=document.createElement('button');
+    b.className='qopt';b.textContent=ch;
+    b.onclick=()=>answerQuiz(b,ch,c.r,c.c);
+    opts.appendChild(b);
+  });
+}
+function answerQuiz(btn,chosen,correct,char){
+  document.querySelectorAll('.qopt').forEach(b=>b.onclick=null);
+  if(chosen===correct){
+    btn.classList.add('correct');
+    document.getElementById('q-fb').innerHTML=`<span style="color:#0F6E56">✓ Correct!</span>`;
+    tts(char);
+    const el=document.getElementById('xp');
+    el.textContent=parseInt(el.textContent)+3;
+    setTimeout(()=>{quizIdx=(quizIdx+1)%HIRAGANA.length;buildQuiz();},1100);
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.qopt').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});
+    document.getElementById('q-fb').innerHTML=`<span style="color:#993C1D">✗ It's "${correct}"</span>`;
+    setTimeout(()=>buildQuiz(),1600);
+  }
+}
+
+/* ── SPEAK MODE (lesson) ── */
+function buildSpeakRows(){
+  const wrap=document.getElementById('sp-rows');
+  wrap.innerHTML='';
+  SPEAK_ROWS.forEach(row=>{
+    const div=document.createElement('div');
+    div.className='phrase-item';
+    div.innerHTML=`
+      <div>
+        <div class="pi-jp">${row.jp}</div>
+        <div class="pi-en">${row.en}</div>
+      </div>
+      <div class="pi-btns">
+        <button class="pi-play" onclick="tts('${row.jp}')">🔊</button>
+        <button class="pi-mic" data-phrase="${row.jp}" onclick="practiceRow(this)">🎙</button>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function listenMain(){
+  const btn=document.getElementById('sp-mic-main');
+  const res=document.getElementById('sp-result');
+  listen('ja-JP',
+    text=>{res.textContent=`Heard: "${text}"`;res.style.color='#0F6E56';},
+    ()=>{res.textContent='Could not hear — try again';res.style.color=var_red();},
+    btn
+  );
+}
+function practiceRow(btn){
+  const phrase=btn.dataset.phrase;
+  listen('ja-JP',
+    text=>{
+      const match=text.replace(/\s/g,'')===phrase.replace(/\s/g,'');
+      let score=btn.closest('.phrase-item').querySelector('.pi-score');
+      if(!score){score=document.createElement('div');score.className='pi-score';btn.closest('.phrase-item').querySelector('.pi-btns').insertAdjacentElement('afterend',score);}
+      score.textContent=match?'Perfect! ✓':`Heard: "${text}"`;
+      score.style.color=match?'#0F6E56':'#BA7517';
+    },
+    ()=>{},btn
+  );
+}
+function var_red(){return'#D85A30'}
+
+/* ── DAILY SPEAK SCREEN ── */
+function renderDaily(){
+  const wrap=document.getElementById('daily-list');
+  if(wrap.children.length>0)return;
+  DAILY.forEach(p=>{
+    const div=document.createElement('div');
+    div.className='phrase-item';
+    div.innerHTML=`
+      <div>
+        <div class="pi-jp">${p.jp}</div>
+        <div class="pi-en">${p.en}</div>
+        <div class="pi-rm">${p.rm}</div>
+      </div>
+      <div class="pi-btns">
+        <button class="pi-play" onclick="tts('${p.jp}')">🔊</button>
+        <button class="pi-mic" data-phrase="${p.jp}" onclick="practiceRow(this)">🎙</button>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+
+/* ── SPEECH UTILS ── */
+function tts(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ja-JP';u.rate=0.82;u.pitch=1.05;
+  window.speechSynthesis.speak(u);
+}
+function listen(lang,onResult,onError,btn){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){onError&&onError();return;}
+  const rec=new SR();
+  rec.lang=lang;rec.interimResults=false;rec.maxAlternatives=1;
+  if(btn)btn.classList.add('rec');
+  rec.onresult=e=>{onResult(e.results[0][0].transcript);if(btn)btn.classList.remove('rec');};
+  rec.onerror=()=>{onError&&onError();if(btn)btn.classList.remove('rec');};
+  rec.onend=()=>{if(btn)btn.classList.remove('rec');};
+  rec.start();
+}
+</script>
+</body>
+</html>
