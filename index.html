@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -325,20 +324,20 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
 /* GRAMMAR TAB */
 .grammar-sub-tabs{display:flex;padding:10px 14px;gap:6px;background:#fff;border-bottom:0.5px solid #f0ede4;position:sticky;top:0;z-index:10;overflow-x:auto}
 .grammar-sub-tabs::-webkit-scrollbar{display:none}
-.grammar-sub-tab{flex-shrink:0;padding:7px 13px;font-size:11px;font-weight:500;border-radius:9px;cursor:pointer;color:var(–muted);background:var(–soft);border:none;font-family:‘DM Sans’,sans-serif;transition:all .2s;white-space:nowrap}
+.grammar-sub-tab{flex-shrink:0;padding:7px 13px;font-size:11px;font-weight:500;border-radius:9px;cursor:pointer;color:var(--muted);background:var(--soft);border:none;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
 .grammar-sub-tab.active{background:#7c3aed;color:#fff}
-.sentence-card{margin:0 14px 14px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(–shadow)}
-.sentence-jp{font-family:‘Noto Sans JP’,sans-serif;font-size:22px;padding:16px 16px 10px;line-height:1.6;display:flex;flex-wrap:wrap;gap:4px;align-items:baseline}
-.sentence-rom{font-size:12px;color:var(–muted);padding:0 16px 8px;font-style:italic}
+.sentence-card{margin:0 14px 14px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(--shadow)}
+.sentence-jp{font-family:'Noto Sans JP',sans-serif;font-size:22px;padding:16px 16px 10px;line-height:1.6;display:flex;flex-wrap:wrap;gap:4px;align-items:baseline}
+.sentence-rom{font-size:12px;color:var(--muted);padding:0 16px 8px;font-style:italic}
 .sentence-en{font-size:14px;font-weight:500;padding:0 16px 14px;border-bottom:0.5px solid #f0ede4}
 .parts-list{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
 .part-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;cursor:pointer;transition:background .15s}
-.part-row:active{background:var(–soft)}
-.part-token{font-family:‘Noto Sans JP’,sans-serif;font-size:20px;min-width:60px;flex-shrink:0;line-height:1.3}
+.part-row:active{background:var(--soft)}
+.part-token{font-family:'Noto Sans JP',sans-serif;font-size:20px;min-width:60px;flex-shrink:0;line-height:1.3}
 .part-info{flex:1}
 .part-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;padding:2px 8px;border-radius:6px;display:inline-block}
 .part-meaning{font-size:13px;font-weight:500;margin-bottom:3px}
-.part-explain{font-size:11px;color:var(–muted);line-height:1.5}
+.part-explain{font-size:11px;color:var(--muted);line-height:1.5}
 .role-subject{background:#dbeafe;color:#1e40af}
 .role-topic{background:#ede9fe;color:#5b21b6}
 .role-verb{background:#d1fae5;color:#065f46}
@@ -349,20 +348,138 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
 .role-copula{background:#f3f4f6;color:#374151}
 .role-connector{background:#fdf4ff;color:#7e22ce}
 .grammar-rule-card{margin:0 14px 12px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px}
-.rule-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(–purple);margin-bottom:6px}
+.rule-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:6px}
 .rule-title{font-size:14px;font-weight:600;margin-bottom:6px}
-.rule-pattern{font-family:‘Noto Sans JP’,sans-serif;background:var(–soft);border-radius:9px;padding:10px 12px;font-size:14px;margin-bottom:8px;line-height:1.6}
+.rule-pattern{font-family:'Noto Sans JP',sans-serif;background:var(--soft);border-radius:9px;padding:10px 12px;font-size:14px;margin-bottom:8px;line-height:1.6}
 .rule-explain{font-size:12px;color:#555;line-height:1.7}
 .rule-example{margin-top:8px;padding:8px 10px;background:#f3e8ff;border-radius:8px;font-size:12px}
-.rule-ex-jp{font-family:‘Noto Sans JP’,sans-serif;font-size:16px;margin-bottom:2px}
-.rule-ex-en{color:var(–muted);font-size:11px}
+.rule-ex-jp{font-family:'Noto Sans JP',sans-serif;font-size:16px;margin-bottom:2px}
+.rule-ex-en{color:var(--muted);font-size:11px}
 /* CANVAS COMPARE */
 .compare-result{margin:8px 14px;padding:12px 14px;border-radius:12px;font-size:13px;font-weight:500;display:none}
 .compare-result.show{display:block}
 .compare-score-bar{height:8px;border-radius:4px;background:#f0ede4;overflow:hidden;margin:6px 0}
 .compare-score-fill{height:100%;border-radius:4px;transition:width .8s ease}
-</style>
 
+/* ── STUDY MODE ── */
+.study-wrap{padding:0 0 16px}
+.study-progress-bar{height:5px;background:#f0ede4;border-radius:3px;overflow:hidden;margin:0 18px 14px}
+.study-progress-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--blue));border-radius:3px;transition:width .5s ease}
+.study-counter{display:flex;justify-content:space-between;align-items:center;padding:0 18px;margin-bottom:14px;font-size:11px;color:var(--muted)}
+.study-dots{display:flex;gap:4px;flex-wrap:wrap;max-width:200px}
+.study-dot{width:8px;height:8px;border-radius:50%;background:#f0ede4;flex-shrink:0;transition:background .3s}
+.study-dot.seen{background:var(--navy)}
+.study-dot.known{background:var(--green)}
+.study-dot.again{background:var(--red)}
+/* Flip card */
+.flip-scene{width:calc(100% - 36px);margin:0 18px 14px;perspective:1000px;cursor:pointer}
+.flip-card{width:100%;position:relative;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,2,.6,1);min-height:260px}
+.flip-card.flipped{transform:rotateY(180deg)}
+.flip-face{position:absolute;width:100%;min-height:260px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:24px 20px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0.5px solid #e8e4db;box-shadow:0 4px 18px rgba(0,0,0,0.1)}
+.flip-front{background:linear-gradient(160deg,#0f4c81,#1a237e);color:#fff}
+.flip-back{background:#fff;transform:rotateY(180deg)}
+.flip-hint{font-size:10px;opacity:0.55;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.flip-jp{font-family:'Noto Sans JP',sans-serif;font-size:52px;line-height:1.2;text-align:center;margin-bottom:10px}
+.flip-rom{font-size:16px;opacity:0.75;margin-bottom:6px}
+.flip-tap{font-size:11px;opacity:0.4;margin-top:16px}
+.flip-en{font-size:22px;font-weight:500;text-align:center;margin-bottom:10px;color:var(--ink)}
+.flip-rom-back{font-size:14px;color:var(--muted);margin-bottom:14px}
+.flip-tip{font-size:12px;color:#555;background:var(--soft);border-radius:10px;padding:10px 12px;text-align:left;line-height:1.6;width:100%;margin-bottom:14px}
+.flip-audio{background:var(--ink);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+/* Rating buttons */
+.rating-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 18px;margin-bottom:12px}
+.rating-btn{border:none;border-radius:12px;padding:14px 6px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.rating-btn:active{transform:scale(0.95)}
+.rating-again{background:#fde8e8;color:#c0392b}
+.rating-hard{background:#fef3c7;color:#92400e}
+.rating-good{background:#e8f8ef;color:#1a7a40}
+.rating-hidden{display:none}
+.study-nav{display:flex;gap:8px;padding:0 18px;margin-bottom:10px}
+.study-nav-btn{flex:1;background:var(--soft);border:none;border-radius:11px;padding:11px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;color:var(--ink)}
+.study-nav-btn:active{transform:scale(0.97)}
+.study-nav-btn.primary{background:var(--navy);color:#fff}
+/* Study completion */
+.study-complete{text-align:center;padding:28px 18px}
+.sc-emoji{font-size:56px;margin-bottom:12px}
+.sc-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:8px}
+.sc-sub{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.sc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+.sc-stat{background:var(--soft);border-radius:12px;padding:12px;text-align:center}
+.sc-stat-num{font-size:24px;font-weight:300;margin-bottom:2px}
+.sc-stat-lbl{font-size:10px;color:var(--muted)}
+.sc-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:13px;padding:14px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;margin-bottom:8px}
+.sc-btn2{width:100%;background:transparent;color:var(--ink);border:1.5px solid #ddd;border-radius:13px;padding:12px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;margin-bottom:8px}
+/* Study mode header band */
+.study-mode-hdr{background:linear-gradient(135deg,#0f4c81,#1a237e);color:#fff;padding:12px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.study-mode-title{font-size:12px;font-weight:500;opacity:0.85}
+.study-mode-sub{font-size:10px;opacity:0.6;margin-top:2px}
+
+/* ─── KANA LAB ─────────────────────────── */
+.kana-lab-wrap{padding:0 0 20px}
+.kana-lab-header{background:linear-gradient(135deg,#1a237e,#0f4c81);color:#fff;padding:14px 18px;margin-bottom:0}
+.kana-lab-title{font-size:15px;font-weight:600;margin-bottom:2px}
+.kana-lab-sub{font-size:11px;opacity:0.65}
+.kana-section-tabs{display:flex;overflow-x:auto;padding:10px 14px;gap:6px;background:#fff;border-bottom:0.5px solid #f0ede4;position:sticky;top:0;z-index:10}
+.kana-section-tabs::-webkit-scrollbar{display:none}
+.kana-sec-tab{flex-shrink:0;padding:7px 13px;font-size:11px;font-weight:500;border-radius:20px;cursor:pointer;border:1.5px solid #e8e4db;background:#fff;font-family:"DM Sans",sans-serif;transition:all .2s;white-space:nowrap;color:var(--muted)}
+.kana-sec-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+/* Character grid browser */
+.kana-chart-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:12px 14px}
+.kana-chart-cell{background:#fff;border-radius:11px;padding:10px 4px;text-align:center;border:0.5px solid #e8e4db;cursor:pointer;transition:all .2s}
+.kana-chart-cell:active{transform:scale(0.93)}
+.kana-chart-cell.kl-done{border-color:var(--green);background:#e8f8ef}
+.kana-chart-cell.kl-cur{border-color:var(--navy);border-width:2px;background:#e8f0fe}
+.kcc-char{font-family:"Noto Sans JP",sans-serif;font-size:22px;line-height:1.2;margin-bottom:2px}
+.kcc-rom{font-size:9px;color:var(--muted)}
+/* Learn one character */
+.kl-learn-card{margin:12px 14px;background:#fff;border-radius:18px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);overflow:hidden}
+.kl-learn-hdr{background:linear-gradient(135deg,#0f4c81,#1a237e);padding:18px;text-align:center;color:#fff}
+.kl-big-char{font-family:"Noto Sans JP",sans-serif;font-size:90px;line-height:1;margin-bottom:8px}
+.kl-rom{font-size:20px;font-weight:500;margin-bottom:4px}
+.kl-group{font-size:11px;opacity:0.6;text-transform:uppercase;letter-spacing:1px}
+.kl-body{padding:16px}
+.kl-section-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px;font-weight:600}
+.kl-mnemonic{background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.kl-mnemonic-text{font-size:13px;color:#4c1d95;line-height:1.6}
+.kl-stroke-box{background:var(--soft);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.kl-stroke-title{font-size:11px;font-weight:600;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px}
+.kl-stroke-item{font-size:12px;color:#444;margin-bottom:5px;display:flex;gap:8px;align-items:flex-start}
+.kl-stroke-num{background:var(--navy);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px}
+.kl-words-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.kl-word-chip{background:#fff;border:0.5px solid #e8e4db;border-radius:10px;padding:8px 12px;text-align:center}
+.kl-word-jp{font-family:"Noto Sans JP",sans-serif;font-size:18px;margin-bottom:2px}
+.kl-word-rom{font-size:10px;color:var(--muted);margin-bottom:1px}
+.kl-word-en{font-size:11px;color:var(--ink);font-weight:500}
+.kl-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 14px}
+.kl-btn{border:none;border-radius:12px;padding:12px;font-size:13px;font-family:"DM Sans",sans-serif;font-weight:500;cursor:pointer;transition:transform .15s}
+.kl-btn:active{transform:scale(0.96)}
+.kl-btn-hear{background:var(--ink);color:#fff}
+.kl-btn-next{background:var(--navy);color:#fff}
+.kl-btn-mark{background:#e8f8ef;color:#1a7a40}
+.kl-btn-quiz{background:var(--purple);color:#fff}
+/* Canvas in kana lab */
+.kl-canvas-wrap{margin:0 14px 12px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;overflow:hidden;box-shadow:var(--shadow)}
+.kl-canvas-hdr{background:linear-gradient(135deg,#0f4c81,#1a237e);color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.kl-canvas-char{font-family:"Noto Sans JP",sans-serif;font-size:48px;line-height:1}
+.kl-canvas-body{position:relative;background:#faf8f2;cursor:crosshair;touch-action:none}
+.kl-canvas-body canvas{display:block;width:100%;touch-action:none}
+.kl-canvas-hint{padding:6px 14px;background:#f8f6f2;font-size:10px;color:var(--muted);text-align:center;border-bottom:0.5px solid #f0ede4}
+.kl-canvas-btns{display:flex;gap:6px;padding:8px 12px}
+.kl-canvas-btn{flex:1;border:none;border-radius:9px;padding:9px;font-size:12px;font-family:"DM Sans",sans-serif;font-weight:500;cursor:pointer}
+/* Kana quiz */
+.kl-quiz-card{margin:12px 14px;background:#fff;border-radius:16px;border:0.5px solid #e8e4db;padding:18px;box-shadow:var(--shadow)}
+.kl-q-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px}
+.kl-q-char{font-family:"Noto Sans JP",sans-serif;font-size:72px;text-align:center;margin-bottom:6px;cursor:pointer}
+.kl-q-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.kl-q-btn{border:1.5px solid #e8e4db;border-radius:12px;padding:14px;font-size:16px;font-family:"DM Sans",sans-serif;cursor:pointer;background:#fff;transition:all .2s;text-align:center}
+.kl-q-btn.kl-correct{background:#e8f8ef;border-color:var(--green);color:#1a7a40;font-weight:600}
+.kl-q-btn.kl-wrong{background:#fde8e8;border-color:var(--red);color:#c0392b}
+.kl-q-feedback{margin-top:10px;font-size:13px;font-weight:500;min-height:20px;text-align:center}
+/* Progress ring */
+.kl-prog-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--soft);border-bottom:0.5px solid #e8e4db}
+.kl-prog-txt{font-size:12px;color:var(--muted)}
+.kl-prog-val{font-size:13px;font-weight:600;color:var(--navy)}
+</style>
 </head>
 <body>
 <div class="phone">
@@ -372,148 +489,146 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
   </div>
   <div class="screen">
 
-```
-<!-- HOME -->
-<div class="page active" id="page-home">
-  <div class="page-header dark">
-    <div class="h-title">NihongoStep 🌸</div>
-    <div class="h-sub" id="homeGreeting">Your Japanese journey starts today</div>
-    <div class="pill-row">
-      <div class="pill" id="pillStreak">🔥 Day 1</div>
-      <div class="pill" id="pillXP">⭐ 0 XP</div>
-      <div class="pill">🎯 N5 Goal</div>
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="page-header dark">
+        <div class="h-title">NihongoStep 🌸</div>
+        <div class="h-sub" id="homeGreeting">Your Japanese journey starts today</div>
+        <div class="pill-row">
+          <div class="pill" id="pillStreak">🔥 Day 1</div>
+          <div class="pill" id="pillXP">⭐ 0 XP</div>
+          <div class="pill">🎯 N5 Goal</div>
+        </div>
+      </div>
+      <div class="streak-banner" id="streakBanner">
+        <div style="font-size:24px">🔥</div>
+        <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
+        <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
+      </div>
+      <div style="height:14px;background:var(--paper)"></div>
+      <div class="wotd-card">
+        <div class="wotd-lbl">🌟 Word of the Day</div>
+        <div class="wotd-jp" id="wotdJP">がんばって</div>
+        <div class="wotd-rom" id="wotdRomaji">Ganbatte</div>
+        <div class="wotd-en" id="wotdEn">Do your best / Good luck!</div>
+        <button class="wotd-btn" onclick="speakWotd()">🔊 Hear it</button>
+      </div>
+      <div class="card" style="margin-top:2px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:500">N5 by December 2026</span>
+          <span style="font-size:12px;color:var(--red);font-weight:500" id="goalPct">0%</span>
+        </div>
+        <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+        <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months</span></div>
+      </div>
+      <div class="sec-title">Daily Review</div>
+      <div class="review-banner" id="reviewBanner">
+        <div style="font-size:12px;font-weight:500;margin-bottom:5px">📚 5-Question Daily Recap</div>
+        <div style="font-size:11px;color:#5a4a30;line-height:1.5;margin-bottom:10px">A quick recap of words you've learned — keeps them fresh in your memory.</div>
+        <button style="background:var(--gold);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer" onclick="startDailyReview()">Start Review →</button>
+      </div>
+      <div class="sec-title">Your Units</div>
+      <div class="h-scroll" id="homeChips"></div>
+      <div class="sec-title">Practice</div>
+      <div class="action-list">
+        <div class="action-row" onclick="openLesson(0)">
+          <div class="action-icon" style="background:#fde8e8">🎯</div>
+          <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics</div></div>
+          <div class="action-cta">Start →</div>
+        </div>
+        <div class="action-row" onclick="openExam()">
+          <div class="action-icon" style="background:#f3e8ff">📝</div>
+          <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam · all units</div></div>
+          <div class="action-cta">Take →</div>
+        </div>
+        <div class="action-row" onclick="switchTab('practice')">
+          <div class="action-icon" style="background:#e8f8ef">🎮</div>
+          <div class="action-info"><div class="action-name">Practice Hub</div><div class="action-sub">Listening · sentences · role-play</div></div>
+          <div class="action-cta">Open →</div>
+        </div>
+      </div>
+      <div class="tips-card" style="margin-top:10px">
+        <div class="tips-title">🎯 Your daily study routine</div>
+        <div class="tip-item">1. Do the Daily Review first (5 min)</div>
+        <div class="tip-item">2. Study a lesson + take its quiz</div>
+        <div class="tip-item">3. Practice writing in the Write tab</div>
+        <div class="tip-item">4. Do one speaking or listening drill</div>
+        <div class="tip-item">5. After 3+ lessons, take the Section Test</div>
+      </div>
     </div>
-  </div>
-  <div class="streak-banner" id="streakBanner">
-    <div style="font-size:24px">🔥</div>
-    <div class="sb-text"><div class="sb-title">Keep your streak alive!</div><div class="sb-sub">Complete a lesson today</div></div>
-    <button class="sb-close" onclick="document.getElementById('streakBanner').classList.add('hidden')">✕</button>
-  </div>
-  <div style="height:14px;background:var(--paper)"></div>
-  <div class="wotd-card">
-    <div class="wotd-lbl">🌟 Word of the Day</div>
-    <div class="wotd-jp" id="wotdJP">がんばって</div>
-    <div class="wotd-rom" id="wotdRomaji">Ganbatte</div>
-    <div class="wotd-en" id="wotdEn">Do your best / Good luck!</div>
-    <button class="wotd-btn" onclick="speakWotd()">🔊 Hear it</button>
-  </div>
-  <div class="card" style="margin-top:2px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
-      <span style="font-size:12px;font-weight:500">N5 by December 2026</span>
-      <span style="font-size:12px;color:var(--red);font-weight:500" id="goalPct">0%</span>
+
+    <!-- LESSONS -->
+    <div class="page" id="page-learn">
+      <div class="page-header dark">
+        <div class="h-title">Classroom 🏫</div>
+        <div class="h-sub">5 lessons · JLPT N5 → N4</div>
+      </div>
+      <div style="height:14px"></div>
+      <div id="unitList"></div>
+      <div class="sec-title">Section Test</div>
+      <div class="section-test-card" onclick="openExam()">
+        <div class="st-lbl">📝 JLPT-Style Exam</div>
+        <div class="st-title">Units 1–5 Section Test</div>
+        <div class="st-sub">Vocab · Grammar · Reading · Listening · Pass = 70%+</div>
+        <button class="st-btn">Start Test →</button>
+      </div>
     </div>
-    <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
-    <div class="goal-sub"><span id="goalLeft">Started today 🌱</span><span>~9 months</span></div>
-  </div>
-  <div class="sec-title">Daily Review</div>
-  <div class="review-banner" id="reviewBanner">
-    <div style="font-size:12px;font-weight:500;margin-bottom:5px">📚 5-Question Daily Recap</div>
-    <div style="font-size:11px;color:#5a4a30;line-height:1.5;margin-bottom:10px">A quick recap of words you've learned — keeps them fresh in your memory.</div>
-    <button style="background:var(--gold);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer" onclick="startDailyReview()">Start Review →</button>
-  </div>
-  <div class="sec-title">Your Units</div>
-  <div class="h-scroll" id="homeChips"></div>
-  <div class="sec-title">Practice</div>
-  <div class="action-list">
-    <div class="action-row" onclick="openLesson(0)">
-      <div class="action-icon" style="background:#fde8e8">🎯</div>
-      <div class="action-info"><div class="action-name">Start Lesson 1</div><div class="action-sub">Greetings & polite basics</div></div>
-      <div class="action-cta">Start →</div>
+
+    <!-- LESSON DETAIL -->
+    <div class="page" id="page-detail">
+      <div class="lesson-detail" id="detailContent"></div>
     </div>
-    <div class="action-row" onclick="openExam()">
-      <div class="action-icon" style="background:#f3e8ff">📝</div>
-      <div class="action-info"><div class="action-name">Section Test</div><div class="action-sub">JLPT-style exam · all units</div></div>
-      <div class="action-cta">Take →</div>
+
+    <!-- SECTION EXAM -->
+    <div class="page" id="page-exam">
+      <div class="page-header exam">
+        <div class="h-title">Section Test 📝</div>
+        <div class="h-sub">JLPT N5 Format — Units 1–5</div>
+      </div>
+      <div id="examContent"></div>
     </div>
-    <div class="action-row" onclick="switchTab('practice')">
-      <div class="action-icon" style="background:#e8f8ef">🎮</div>
-      <div class="action-info"><div class="action-name">Practice Hub</div><div class="action-sub">Listening · sentences · role-play</div></div>
-      <div class="action-cta">Open →</div>
+
+    <!-- PRACTICE HUB -->
+    <div class="page" id="page-practice">
+      <div class="page-header teal">
+        <div class="h-title">Practice Hub 🎮</div>
+        <div class="h-sub">Listening · Writing · Speaking · Games</div>
+      </div>
+      <div id="practiceContent"></div>
     </div>
-  </div>
-  <div class="tips-card" style="margin-top:10px">
-    <div class="tips-title">🎯 Your daily study routine</div>
-    <div class="tip-item">1. Do the Daily Review first (5 min)</div>
-    <div class="tip-item">2. Study a lesson + take its quiz</div>
-    <div class="tip-item">3. Practice writing in the Write tab</div>
-    <div class="tip-item">4. Do one speaking or listening drill</div>
-    <div class="tip-item">5. After 3+ lessons, take the Section Test</div>
-  </div>
-</div>
 
-<!-- LESSONS -->
-<div class="page" id="page-learn">
-  <div class="page-header dark">
-    <div class="h-title">Classroom 🏫</div>
-    <div class="h-sub">5 lessons · JLPT N5 → N4</div>
-  </div>
-  <div style="height:14px"></div>
-  <div id="unitList"></div>
-  <div class="sec-title">Section Test</div>
-  <div class="section-test-card" onclick="openExam()">
-    <div class="st-lbl">📝 JLPT-Style Exam</div>
-    <div class="st-title">Units 1–5 Section Test</div>
-    <div class="st-sub">Vocab · Grammar · Reading · Listening · Pass = 70%+</div>
-    <button class="st-btn">Start Test →</button>
-  </div>
-</div>
+    <!-- PRACTICE SUB-PAGE -->
+    <div class="page" id="page-practice-sub">
+      <div class="lesson-detail" id="practiceSubContent"></div>
+    </div>
 
-<!-- LESSON DETAIL -->
-<div class="page" id="page-detail">
-  <div class="lesson-detail" id="detailContent"></div>
-</div>
+    <!-- GRAMMAR -->
+    <div class="page" id="page-grammar">
+      <div class="page-header" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
+        <div class="h-title">Grammar 📐</div>
+        <div class="h-sub">Understand how Japanese sentences work</div>
+      </div>
+      <div id="grammarContent"></div>
+    </div>
 
-<!-- SECTION EXAM -->
-<div class="page" id="page-exam">
-  <div class="page-header exam">
-    <div class="h-title">Section Test 📝</div>
-    <div class="h-sub">JLPT N5 Format — Units 1–5</div>
-  </div>
-  <div id="examContent"></div>
-</div>
+    <!-- WRITE -->
+    <div class="page" id="page-write">
+      <div class="page-header navy">
+        <div class="h-title">Write ✍️</div>
+        <div class="h-sub">Hiragana · Katakana · Vocabulary</div>
+      </div>
+      <div id="writeContent"></div>
+    </div>
 
-<!-- PRACTICE HUB -->
-<div class="page" id="page-practice">
-  <div class="page-header teal">
-    <div class="h-title">Practice Hub 🎮</div>
-    <div class="h-sub">Listening · Writing · Speaking · Games</div>
-  </div>
-  <div id="practiceContent"></div>
-</div>
-
-<!-- PRACTICE SUB-PAGE -->
-<div class="page" id="page-practice-sub">
-  <div class="lesson-detail" id="practiceSubContent"></div>
-</div>
-
-<!-- GRAMMAR -->
-<div class="page" id="page-grammar">
-  <div class="page-header" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
-    <div class="h-title">Grammar 📐</div>
-    <div class="h-sub">Understand how Japanese sentences work</div>
-  </div>
-  <div id="grammarContent"></div>
-</div>
-
-<!-- WRITE -->
-<div class="page" id="page-write">
-  <div class="page-header navy">
-    <div class="h-title">Write ✍️</div>
-    <div class="h-sub">Hiragana · Katakana · Vocabulary</div>
-  </div>
-  <div id="writeContent"></div>
-</div>
-
-<!-- PROGRESS -->
-<div class="page" id="page-progress">
-  <div class="page-header dark">
-    <div class="h-title">Progress 📊</div>
-    <div class="h-sub">Your stats · badges · planner</div>
-  </div>
-  <div style="height:14px"></div>
-  <div id="progressContent"></div>
-</div>
-```
+    <!-- PROGRESS -->
+    <div class="page" id="page-progress">
+      <div class="page-header dark">
+        <div class="h-title">Progress 📊</div>
+        <div class="h-sub">Your stats · badges · planner</div>
+      </div>
+      <div style="height:14px"></div>
+      <div id="progressContent"></div>
+    </div>
 
   </div>
 
@@ -532,120 +647,376 @@ body{font-family:'DM Sans',sans-serif;color:var(--ink);display:flex;justify-cont
    DATA
 ============================================================ */
 const lessons=[
-  {unit:"Lesson 1",title:"Greetings & Polite Basics",objective:"Recognize and say the most common greetings and polite phrases.",difficulty:"beginner",minutes:12,jlpt:"JLPT N5",
+  /* ===== UNIT 1: The Japanese Writing Systems ===== */
+  {unit:"Unit 1",title:"The Japanese Writing Systems",objective:"Understand the three scripts — Hiragana, Katakana, and Kanji — and when each is used.",difficulty:"beginner",minutes:20,jlpt:"JLPT N5",
    cards:[
-    {jp:"こんにちは",rom:"Konnichiwa",en:"Hello / Good afternoon",tip:"Used during the day. The 'wa' particle is written with は here."},
-    {jp:"おはようございます",rom:"Ohayou gozaimasu",en:"Good morning",tip:"Formal version. Safe for strangers and at work."},
-    {jp:"こんばんは",rom:"Konbanwa",en:"Good evening",tip:"Used after sunset. Also written with は."},
-    {jp:"ありがとうございます",rom:"Arigatou gozaimasu",en:"Thank you (formal)",tip:"The polite, full version. Use with anyone you respect."},
-    {jp:"すみません",rom:"Sumimasen",en:"Excuse me / Sorry",tip:"Used to get attention, apologize, or thank someone."},
-    {jp:"はい / いいえ",rom:"Hai / Iie",en:"Yes / No",tip:"はい can also mean 'I heard you' — not always agreement."}
-   ],
+    {jp:"ひらがな",rom:"Hiragana",en:"Hiragana script (平仮名)",tip:"46 basic characters + voiced/combo forms = 104 total. Used for native Japanese words, verb endings, and grammatical particles. Every learner must master this first. Rounded, cursive shapes derived from Chinese characters."},
+    {jp:"カタカナ",rom:"Katakana",en:"Katakana script (片仮名)",tip:"46 characters matching hiragana sounds. Angular shapes. Used for: foreign loanwords (コーヒー coffee), scientific terms, foreign names, onomatopoeia, and emphasis. Recognising katakana unlocks thousands of English-based words."},
+    {jp:"かんじ",rom:"Kanji",en:"Chinese characters (漢字)",tip:"Logographic characters each with meaning(s). N5 = ~100 kanji. N4 = ~300. N3 = ~650. N2 = ~1,000. N1 = ~2,000. Each has ON-reading (Chinese origin) and KUN-reading (Japanese). Example: 山 = やま (kun) / サン (on)."},
+    {jp:"あいうえお",rom:"a i u e o",en:"The five Japanese vowels",tip:"All Japanese syllables are built on these 5 vowels. They are pure, never diphthong: あ(ah), い(ee), う(oo, no lip rounding), え(eh), お(oh). Mastering these gives you perfect Japanese pronunciation."},
+    {jp:"か行: かきくけこ",rom:"ka ki ku ke ko",en:"The K-row of hiragana",tip:"か(ka) き(ki) く(ku) け(ke) こ(ko). Add two small strokes (゛) to make voiced G-sounds: が(ga) ぎ(gi) ぐ(gu) げ(ge) ご(go). This voiced/unvoiced pairing repeats throughout the hiragana chart."},
+    {jp:"さ行: さしすせそ",rom:"sa shi su se so",en:"The S-row of hiragana",tip:"Note: し is 'shi' not 'si'. す is 'su' with barely rounded lips. Add ゛ for Z-sounds: ざ(za) じ(ji) ず(zu) ぜ(ze) ぞ(zo). Note じ = 'ji' not 'zi'. These irregularities are worth memorising early."},
+    {jp:"た行: たちつてと",rom:"ta chi tsu te to",en:"The T-row of hiragana",tip:"Important irregulars: ち = 'chi' (not 'ti'), つ = 'tsu' (not 'tu'). Add ゛ for D-sounds: だ(da) ぢ(ji*) づ(zu*) で(de) ど(do). *ぢ and づ are rare and sound like じ and ず respectively."},
+    {jp:"な行: なにぬねの",rom:"na ni nu ne no",en:"The N-row of hiragana",tip:"The N-row is fully regular — no voiced counterpart. These are among the most common sounds in Japanese. の (no) is the possessive particle. に (ni) is the location/time particle. Both extremely frequent."},
+    {jp:"は行: はひふへほ",rom:"ha hi fu he ho",en:"The H-row of hiragana",tip:"Note: ふ = 'fu' not 'hu'. Add ゛ for B-sounds: ば(ba) び(bi) ぶ(bu) べ(be) ぼ(bo). Add ゜ for P-sounds: ぱ(pa) ぴ(pi) ぷ(pu) ぺ(pe) ぽ(po). は as a particle is pronounced 'wa'."},
+    {jp:"ま行〜ら行〜わ行",rom:"ma~wa rows",en:"M, Y, R, W rows of hiragana",tip:"ま行: まみむめも(ma mi mu me mo). や行: やゆよ(ya yu yo) — only 3. ら行: らりるれろ(ra ri ru re ro) — 'r' is a flap sound between l and r. わ行: わをん(wa wo n) — を is only used as the object particle."},
+    {jp:"ようおん: きゃ きゅ きょ",rom:"kya kyu kyo",en:"Combination sounds (拗音 youon)",tip:"Combine consonant rows with small や、ゆ、よ. き+ゃ=きゃ(kya), き+ゅ=きゅ(kyu), き+ょ=きょ(kyo). All consonant rows (except N-row) have these combos: しゃ(sha) しゅ(shu) しょ(sho), ちゃ(cha) ちゅ(chu) ちょ(cho), にゃ(nya), etc."},
+    {jp:"っ (small tsu) — double consonants",rom:"small tsu = geminate",tip:"Doubles the following consonant. きって(kitte=stamp) vs きて(kite=come). Pause on the doubled consonant for one beat. Common in: こっか(kokka), ざっし(zasshi), きっぷ(kippu). The small っ takes one mora of time."},
+    {jp:"ん — the standalone N",rom:"n / m / ng",en:"Syllabic nasal — the only standalone consonant",tip:"ん is a full syllable by itself. Its sound changes by context: before b/m/p = 'm'. Before k/g = 'ng'. Elsewhere = 'n'. さんぽ(sanpo→'sampo'), さんがつ(sangatsu→'sanggatsu'). Never appears at the start of a word."},
+    {jp:"長音 — ちょうおん",rom:"chouon",en:"Long vowels — held for 2 beats",tip:"Hiragana: double the vowel (おかあさん, おにいさん). In katakana: use ー (dash). セーター(sweater), コーヒー(coffee). Long vowels change meaning: おばさん(aunt) vs おばあさん(grandmother). Always hold for exactly 2 beats."},
+    {jp:"日本語の文字システム",rom:"Nihongo no moji shisutemu",en:"The Japanese writing system as a whole",tip:"Real Japanese text mixes all three scripts naturally: 私(kanji)は日本語(kanji)をべんきょう(hiragana)しています。カフェ(katakana)でコーヒー(katakana)を飲(kanji)みます。Don't be intimidated — learn one script at a time."},
+    {jp:"一 二 三 四 五",rom:"ichi ni san shi go",en:"Number kanji 1–5",tip:"一(1) 二(2) 三(3) 四(4) 五(5). These are among the first kanji to learn. Very simple stroke patterns — one, two, three horizontal strokes for 1, 2, 3. Used in dates, prices, addresses."},
+    {jp:"六 七 八 九 十",rom:"roku nana hachi ku juu",en:"Number kanji 6–10",tip:"六(6) 七(7) 八(8) 九(9) 十(10). 十 looks like a cross (+). These appear constantly in prices (十円=10 yen), dates (十日=10th), and times (十時=10 o'clock)."},
+    {jp:"日 月 火 水 木 金 土",rom:"Nichi Getsu Ka Sui Moku Kin Do",en:"The 7 day kanji (days of the week)",tip:"Sunday=日曜日, Monday=月曜日, Tuesday=火曜日, Wednesday=水曜日, Thursday=木曜日, Friday=金曜日, Saturday=土曜日. The kanji mean: sun/moon/fire/water/wood/gold/earth — the seven classical elements."},
+    {jp:"人 口 手 目 耳",rom:"hito/jin, kuchi/ko, te/shu, me/moku, mimi/ji",en:"Body part kanji — person, mouth, hand, eye, ear",tip:"人(person) — looks like a person walking. 口(mouth) — a square, like an open mouth. 手(hand) — fingers on a palm. 目(eye) — an eye shape on its side. 耳(ear). These are pictographic origins — the kanji began as drawings."},
+    {jp:"大 小 中 上 下",rom:"dai/oo, shou/chii, chuu/naka, jou/ue, ka/shita",en:"Size and position kanji",tip:"大(big/large) — a person with arms wide. 小(small) — a small shape. 中(middle/inside). 上(above/up). 下(below/down). All N5 kanji. 大学(daigaku=university), 中学校(chuugakkou=middle school), 上手(jouzu=skilled)."}
+  ],
    quiz:[
-    {type:"vocab",prompt:"What does こんにちは mean?",jp:"こんにちは",choices:["Good morning","Hello / Good afternoon","Good evening","Thank you"],answer:"Hello / Good afternoon",explain:"こんにちは is used during the day."},
-    {type:"vocab",prompt:"Which phrase do you use in the morning?",jp:"",choices:["こんばんは","すみません","おはようございます","ありがとう"],answer:"おはようございます",explain:"おはようございます means 'Good morning'."},
-    {type:"reading",prompt:"What does this mean?",jp:"すみません",choices:["You're welcome","Excuse me / Sorry","Good evening","Yes"],answer:"Excuse me / Sorry",explain:"すみません = Excuse me or Sorry."},
-    {type:"vocab",prompt:"How do you say 'Thank you' formally?",jp:"",choices:["はい","ありがとうございます","こんにちは","いいえ"],answer:"ありがとうございます",explain:"ありがとうございます is the formal thank you."},
-    {type:"grammar",prompt:"Which word means 'No'?",jp:"",choices:["はい","すみません","いいえ","また"],answer:"いいえ",explain:"いいえ = No. はい = Yes."}
+    {type:"vocab",prompt:"Which script is used for foreign loanwords like 'coffee'?",jp:"",choices:["Hiragana","Kanji","Katakana","Romaji"],answer:"Katakana",explain:"Katakana is used for foreign loanwords. コーヒー = coffee."},
+    {type:"reading",prompt:"What does this kanji mean?",jp:"山",choices:["River","Mountain","Sun","Moon"],answer:"Mountain",explain:"山 (yama) means mountain. It looks like a mountain with three peaks."},
+    {type:"reading",prompt:"What does this kanji mean?",jp:"日",choices:["Moon","Month","Sun / Day","Year"],answer:"Sun / Day",explain:"日 means sun and day. Read as hi, nichi, or jitsu depending on context."},
+    {type:"vocab",prompt:"Which script uses rounded, cursive shapes for native Japanese words?",jp:"",choices:["Katakana","Romaji","Kanji","Hiragana"],answer:"Hiragana",explain:"Hiragana is the rounded script used for native Japanese words and grammar."},
+    {type:"reading",prompt:"What does 川 mean?",jp:"川",choices:["Mountain","Sun","River","Forest"],answer:"River",explain:"川 (kawa) means river. The three strokes represent flowing water."},
+    {type:"vocab",prompt:"How many hiragana characters are there?",jp:"",choices:["26","46","100","1000"],answer:"46",explain:"There are 46 basic hiragana characters, matching 46 katakana."}
    ],
-   speaking:{jp:"こんにちは。ありがとうございます。",rom:"Konnichiwa. Arigatou gozaimasu.",en:"Hello. Thank you."}
+   speaking:{jp:"わたしは にほんごを べんきょうしています。",rom:"Watashi wa nihongo o benkyou shite imasu.",en:"I am studying Japanese."}
   },
-  {unit:"Lesson 2",title:"Self-Introduction",objective:"Introduce yourself with a simple and polite pattern.",difficulty:"beginner",minutes:15,jlpt:"JLPT N5",
+
+  /* ===== UNIT 2: Greetings & Daily Expressions ===== */
+  {unit:"Unit 2",title:"Greetings & Daily Expressions",objective:"Master formal and informal greetings, daily expressions, and basic social phrases.",difficulty:"beginner",minutes:18,jlpt:"JLPT N5",
    cards:[
-    {jp:"わたし は ～ です",rom:"Watashi wa ~ desu",en:"I am ~",tip:"Basic intro pattern. Fill in your name for ~."},
-    {jp:"です",rom:"Desu",en:"To be (polite)",tip:"です ends most polite sentences. Never skip it."},
-    {jp:"よろしくおねがいします",rom:"Yoroshiku onegaishimasu",en:"Nice to meet you",tip:"Always said after introducing yourself."},
-    {jp:"なまえ は ～ です",rom:"Namae wa ~ desu",en:"My name is ~",tip:"なまえ means 'name'. Add your name then です."},
-    {jp:"～じん です",rom:"~jin desu",en:"I am from ~ (nationality)",tip:"じん attaches to a country. アメリカじん = American."},
-    {jp:"しゅみ は ～ です",rom:"Shumi wa ~ desu",en:"My hobby is ~",tip:"しゅみ means 'hobby'."}
-   ],
+    {jp:"おはようございます",rom:"Ohayou gozaimasu",en:"Good morning (formal)",tip:"Use with teachers, seniors, colleagues, strangers. Informal: おはよう (close friends, family). Literally 'it is early'. Always the safe choice when in doubt about formality level."},
+    {jp:"おはよう",rom:"Ohayou",en:"Good morning (casual)",tip:"For friends, close colleagues, family members. Adding ございます makes it formal. A very common mistake by learners is using the casual form with superiors — always use the full ございます form at school or work."},
+    {jp:"こんにちは",rom:"Konnichiwa",en:"Hello / Good afternoon",tip:"Used roughly 10am–6pm. The は is the topic particle but always pronounced 'wa'. Literally 'as for today [it is a fine day]' — the end was dropped over centuries. Don't use late at night."},
+    {jp:"こんばんは",rom:"Konbanwa",en:"Good evening",tip:"Used from around 6pm onwards. Same structure as こんにちは — は is the topic particle. Reply with こんばんは. Used when meeting someone in the evening for the first time that day."},
+    {jp:"おやすみなさい",rom:"Oyasumi nasai",en:"Good night (formal)",tip:"Said when going to sleep or parting at night. Casual: おやすみ. Literally 'please rest'. Often followed by ゆっくりやすんでください (please rest well) or いい夢をみてください (please have nice dreams)."},
+    {jp:"さようなら / じゃあね",rom:"Sayounara / Jaa ne",en:"Goodbye (formal / casual)",tip:"さようなら = formal goodbye, implies a longer separation. じゃあね = casual 'see ya'. またね = see you again. またあした = see you tomorrow. でわまた = well then, again. Use さようなら with teachers when leaving for the day."},
+    {jp:"いってきます / いってらっしゃい",rom:"Ittekimasu / Itterasshai",en:"I'm leaving (I'll go and come back) / Take care (reply)",tip:"Said when leaving the house. いってきます = I'm going and will return (said by the person leaving). いってらっしゃい = please go and return safely (said by the one staying). A deeply Japanese cultural exchange."},
+    {jp:"ただいま / おかえりなさい",rom:"Tadaima / Okaerinasai",en:"I'm home / Welcome home",tip:"ただいま = I'm back (said by the person returning). おかえりなさい = welcome home (said by those already home). These two always pair together. So cultural they appear constantly in anime and TV dramas."},
+    {jp:"はじめまして",rom:"Hajimemashite",en:"How do you do (first meeting only)",tip:"Only for the VERY FIRST meeting. Literally 'for the first time'. After the first meeting, use ordinary greetings. Always followed by よろしくおねがいします. Never use with someone you've met before."},
+    {jp:"よろしくおねがいします",rom:"Yoroshiku onegai shimasu",en:"Please treat me well / Nice to meet you",tip:"Essential multi-purpose phrase. Used: after introductions, when making requests, starting a new job/class, asking for a favour. Casual: よろしく. Very casual: よろ. The cultural weight of this phrase cannot be overstated in Japanese society."},
+    {jp:"どうぞよろしく",rom:"Douzo yoroshiku",en:"Please be good to me / I look forward to working with you",tip:"A warmer version of よろしく. どうぞ = please (inviting). Often used in emails and formal introductions. Reply: こちらこそ、よろしくおねがいします (likewise, I look forward to it)."},
+    {jp:"ありがとうございます",rom:"Arigatou gozaimasu",en:"Thank you (formal)",tip:"Always appropriate. Informal: ありがとう. Very informal: どうも. Extra formal: たいへんありがとうございます. Written: どうもありがとうございます. In shops you often hear ありがとうございました (past tense, after service is complete)."},
+    {jp:"どうもありがとうございました",rom:"Doumo arigatou gozaimashita",en:"Thank you very much (for what you did)",tip:"The past tense ました is used after the action/service is complete. You'll hear this constantly in shops, restaurants, and at the end of meetings. The ました makes it feel more final and grateful."},
+    {jp:"どういたしまして",rom:"Dou itashimashite",en:"You're welcome (formal)",tip:"Formal response to ありがとう. More casual/humble alternatives: いえいえ (oh no, it's nothing), とんでもない (not at all), おやすいごよう (it's easy for me). Younger Japanese sometimes say 大丈夫です (it's fine)."},
+    {jp:"すみません",rom:"Sumimasen",en:"Excuse me / I'm sorry (versatile)",tip:"Three main uses: 1) Getting attention (excuse me, waiter!). 2) Minor apology (sorry for bumping into you). 3) Humble thanks (thank you for going out of your way). More humble and indebted than ありがとう when someone helps you significantly."},
+    {jp:"ごめんなさい / もうしわけありません",rom:"Gomen nasai / Moushiwake arimasen",en:"I'm sorry / I have no excuse (deep apology)",tip:"ごめんなさい = sincere personal apology. もうしわけありません = extremely formal 'I have absolutely no excuse' — used in business, serious situations. The more you lower yourself, the more sincerely Japanese you sound."},
+    {jp:"おじゃまします",rom:"Ojama shimasu",en:"Excuse me for disturbing you (entering someone's home)",tip:"Said when entering someone's home or office. Literally 'I am going to intrude'. A uniquely Japanese expression of respect. Reply from the host: どうぞ、おあがりください (please come in, please enter). Remove shoes at the genkan (entrance)."},
+    {jp:"いただきます / ごちそうさまでした",rom:"Itadakimasu / Gochisousama deshita",en:"Let's eat / That was a wonderful meal",tip:"いただきます = said before eating (humble receiving). ごちそうさまでした = said after finishing (thank you for the feast). Both are deeply ingrained cultural rituals. Never start eating at a Japanese table without saying いただきます."}
+  ],
    quiz:[
-    {type:"grammar",prompt:"How do you say 'I am Yuki'?",jp:"",choices:["わたしは ゆきです","ゆきは わたしです","ゆき です わたし","ですゆきわたし"],answer:"わたしは ゆきです",explain:"Pattern: わたしは [name] です."},
-    {type:"vocab",prompt:"What does よろしくおねがいします mean?",jp:"よろしくおねがいします",choices:["Goodbye","Nice to meet you","Thank you","Excuse me"],answer:"Nice to meet you",explain:"よろしくおねがいします = Nice to meet you."},
-    {type:"reading",prompt:"Choose the correct reading:",jp:"です",choices:["desu","deso","deske","deshi"],answer:"desu",explain:"です is read 'desu'."},
-    {type:"grammar",prompt:"'アメリカじんです' means:",jp:"アメリカじんです",choices:["I like America","I am American","America is nice","From America"],answer:"I am American",explain:"じん = person from. アメリカじん = American."},
-    {type:"vocab",prompt:"How do you say 'hobby'?",jp:"",choices:["なまえ","しゅみ","ゆめ","ともだち"],answer:"しゅみ",explain:"しゅみ = hobby."}
+    {type:"vocab",prompt:"Which greeting is ONLY used when meeting someone for the first time?",jp:"",choices:["こんにちは","おはようございます","はじめまして","よろしくおねがいします"],answer:"はじめまして",explain:"はじめまして literally means 'for the first time' and is only for first meetings."},
+    {type:"grammar",prompt:"What is the formal way to say 'Thank you'?",jp:"",choices:["すみません","ごめんなさい","ありがとうございます","どういたしまして"],answer:"ありがとうございます",explain:"ありがとうございます is the formal thank you. Casual is ありがとう."},
+    {type:"reading",prompt:"Someone says this to you in the morning. What do you reply?",jp:"おはようございます",choices:["こんばんは","おはようございます","おやすみなさい","さようなら"],answer:"おはようございます",explain:"Reply to おはようございます with おはようございます — same greeting back."},
+    {type:"vocab",prompt:"You bump into someone accidentally. What do you say?",jp:"",choices:["ありがとうございます","はじめまして","すみません","どういたしまして"],answer:"すみません",explain:"すみません is used for minor apologies and to get someone's attention."},
+    {type:"vocab",prompt:"Someone thanks you. What is the standard formal response?",jp:"",choices:["すみません","どういたしまして","ごめんなさい","おはようございます"],answer:"どういたしまして",explain:"どういたしまして means 'you're welcome' — the response to ありがとう."},
+    {type:"grammar",prompt:"What does だいじょうぶですか mean?",jp:"だいじょうぶですか",choices:["Nice to meet you","Thank you","Are you okay?","Good morning"],answer:"Are you okay?",explain:"だいじょうぶ = okay/fine, ですか = question. So: 'Is it okay? / Are you alright?'"}
    ],
-   speaking:{jp:"わたしは [なまえ] です。よろしくおねがいします。",rom:"Watashi wa [name] desu. Yoroshiku onegaishimasu.",en:"I am [name]. Nice to meet you."}
+   speaking:{jp:"はじめまして。わたしは [なまえ] です。よろしくおねがいします。",rom:"Hajimemashite. Watashi wa [name] desu. Yoroshiku onegai shimasu.",en:"How do you do. I am [name]. Nice to meet you."}
   },
-  {unit:"Lesson 3",title:"Travel & Daily Survival",objective:"Ask simple questions and handle stores or stations confidently.",difficulty:"earlyIntermediate",minutes:18,jlpt:"JLPT N5",
+
+  /* ===== UNIT 3: Nouns, Pronouns & the Copula です ===== */
+  {unit:"Unit 3",title:"Nouns, Pronouns & the Copula です",objective:"Build the foundation of Japanese sentences using nouns, pronouns, and the polite copula です.",difficulty:"beginner",minutes:22,jlpt:"JLPT N5",
    cards:[
-    {jp:"これは いくらですか",rom:"Kore wa ikura desu ka",en:"How much is this?",tip:"これ = this, いくら = how much, か = question marker."},
-    {jp:"～は どこですか",rom:"~ wa doko desu ka",en:"Where is ~?",tip:"どこ = where. Great for finding places."},
-    {jp:"えき",rom:"Eki",en:"Station",tip:"Japan's train network is huge — you'll use this daily."},
-    {jp:"みずを おねがいします",rom:"Mizu o onegaishimasu",en:"Water, please",tip:"みず = water. Works in any restaurant."},
-    {jp:"もういちど おねがいします",rom:"Mou ichido onegaishimasu",en:"One more time, please",tip:"Use when you didn't catch something."},
-    {jp:"わかりません",rom:"Wakarimasen",en:"I don't understand",tip:"Honest and polite. Speakers will slow down for you."}
-   ],
+    {jp:"わたし / わたくし",rom:"Watashi / Watakushi",en:"I / Me — neutral / very formal",tip:"わたし = standard neutral first-person (all genders, all contexts). わたくし = extremely formal (business speeches, formal ceremonies). In casual conversation, many Japanese people drop the subject entirely — just たべます means 'I eat' if context is clear."},
+    {jp:"ぼく / おれ",rom:"Boku / Ore",en:"I — masculine casual / masculine rough",tip:"ぼく = male, casual-friendly, used by boys/young men. Sounds slightly softer and endearing. おれ = male, rough/assertive. Used in casual male speech. Women using おれ sounds very unusual/deliberately tough. Never in formal contexts."},
+    {jp:"あたし / うち",rom:"Atashi / Uchi",en:"I — feminine casual / Kansai feminine",tip:"あたし = female casual version of わたし. うち = Kansai dialect (Osaka, Kyoto) female first person, also heard elsewhere casually. Regional and gender variation in pronouns is a fascinating aspect of Japanese sociolinguistics."},
+    {jp:"あなた / きみ / あんた",rom:"Anata / Kimi / Anta",en:"You — formal / casual / blunt",tip:"あなた = technically polite but often avoidedz — can feel cold or confrontational between Japanese people. Use the person's name + さん instead. きみ = casual (slight downward or affectionate nuance). あんた = blunt/direct, can sound rude."},
+    {jp:"かれ / かのじょ",rom:"Kare / Kanojo",en:"He/Boyfriend / She/Girlfriend",tip:"かれ = he + boyfriend (context determines). かのじょ = she + girlfriend. かれし (boyfriend, affectionate). This dual meaning creates interesting ambiguity in conversation — 'かれがいます' can mean either 'there is a man' or 'I have a boyfriend'."},
+    {jp:"わたしたち / みなさん",rom:"Watashitachi / Minasan",en:"We / Everyone (polite group address)",tip:"たち makes pronouns plural: わたしたち(we), かれたち(they-masc), かのじょたち(they-fem). みなさん = everyone (respectful) — used to address a group. みんな = everyone (casual). おたがい = each other, mutually."},
+    {jp:"AはBです — basic copula",rom:"A wa B desu",en:"A is B — the foundation of Japanese sentences",tip:"Most fundamental pattern. は = topic marker. です = polite copula. Example: わたしはがくせいです (I am a student). これはほんです (This is a book). The topic は often carries the meaning 'as for X, speaking of X...'"},
+    {jp:"AはBではありません",rom:"A wa B dewa arimasen",en:"A is not B — polite negative",tip:"ではありません = is not. More casual: じゃないです or じゃありません. Very casual: じゃない. These contractions are extremely common in speech. ではありません is used in writing and formal speech."},
+    {jp:"AはBですか → はい/いいえ",rom:"A wa B desu ka → Hai/Iie",en:"Is A B? → Yes/No answer patterns",tip:"Add か to make a yes/no question. Answers: はい、そうです (yes, that's right). はい、～です (yes, [it] is ~). いいえ、ちがいます (no, that's different/wrong). いいえ、～ではありません (no, [it] is not ~). Always confirm or deny specifically."},
+    {jp:"これ / それ / あれ / どれ",rom:"Kore / Sore / Are / Dore",en:"This / That (near you) / That (over there) / Which",tip:"Ko-so-a-do system (こそあど): こ = near speaker, そ = near listener, あ = far from both, ど = question. これ(this thing), それ(that thing near you), あれ(that thing over there), どれ(which thing?). Essential for pointing and describing."},
+    {jp:"この / その / あの / どの",rom:"Kono / Sono / Ano / Dono",en:"This ~ / That ~ / That ~ over there / Which ~",tip:"Same こそあど system but followed by a noun. このほん(this book), そのひと(that person near you), あのたてもの(that building over there), どのくるま(which car?). These cannot stand alone — always precede a noun."},
+    {jp:"ここ / そこ / あそこ / どこ",rom:"Koko / Soko / Asoko / Doko",en:"Here / There / Over there / Where",tip:"Location version of こそあど. ここ(here/this place), そこ(there/that place near you), あそこ(over there), どこ(where?). Used with に and で: ここにいます(I am here). あそこで(over there at...). どこにいますか(where are you?)."},
+    {jp:"なにじん / ～じんです",rom:"Nanijin / ~jin desu",en:"What nationality / I am [nationality]",tip:"じん attaches to country names. アメリカじん(American), イギリスじん(British), ちゅうごくじん(Chinese), かんこくじん(Korean), にほんじん(Japanese). なにじんですか = What nationality are you? Very natural conversation opener."},
+    {jp:"しごと / せんもん / せんこう",rom:"Shigoto / Senmon / Senkou",en:"Job/Work / Speciality/Field / University major",tip:"おしごとはなんですか = What is your job? (polite with お prefix). せんもんはなんですか = What is your field/specialty? せんこうはなんですか = What is your major? These are standard conversation questions in Japan."},
+    {jp:"なんさいですか / おいくつですか",rom:"Nansai desu ka / Oikutsu desu ka",en:"How old are you? (direct/polite)",tip:"なんさいですか = direct (fine for most situations). おいくつですか = more polite (for strangers/elderly). Answer: にじゅうさいです(20 years old), etc. Asking age is common in Japan as it determines speech level between people."},
+    {jp:"〜語 / 〜語ができます",rom:"~go / ~go ga dekimasu",en:"[Language] / I can speak [language]",tip:"語 = language. にほんご(Japanese), えいご(English), ちゅうごくご(Chinese), かんこくご(Korean), フランスご(French), スペインご(Spanish). ～語ができます = I can speak ~. ～語をべんきょうしています = I am studying ~."}
+  ],
    quiz:[
-    {type:"vocab",prompt:"How do you ask 'Where is the bathroom?'",jp:"",choices:["トイレはいくらですか","トイレはどこですか","トイレはなんですか","えきはどこですか"],answer:"トイレはどこですか",explain:"どこ = where. トイレはどこですか = Where is the bathroom?"},
-    {type:"reading",prompt:"What does this mean?",jp:"わかりません",choices:["I understand","I don't understand","I don't know the price","Repeat please"],answer:"I don't understand",explain:"わかりません = I don't understand."},
-    {type:"grammar",prompt:"'これは いくらですか' means:",jp:"これは いくらですか",choices:["What is this?","Where is this?","How much is this?","Is this cheap?"],answer:"How much is this?",explain:"いくら = how much. これ = this."},
-    {type:"vocab",prompt:"How do you say 'station'?",jp:"",choices:["みず","でんしゃ","えき","ホテル"],answer:"えき",explain:"えき = train station."},
-    {type:"grammar",prompt:"Which ending do you use to politely request something?",jp:"",choices:["ください","おねがいします","ありがとう","すみません"],answer:"おねがいします",explain:"おねがいします is the polite request ending."}
+    {type:"grammar",prompt:"Complete: わたしは がくせい ___。",jp:"わたしは がくせい ___",choices:["は","です","が","を"],answer:"です",explain:"です is the polite copula 'to be'. わたしは がくせいです = I am a student."},
+    {type:"grammar",prompt:"'これは ほんでは ありません' means:",jp:"これは ほんではありません",choices:["This is a book","Is this a book?","This is not a book","What is this?"],answer:"This is not a book",explain:"ではありません is the negative copula = 'is not'."},
+    {type:"vocab",prompt:"Which pronoun 'I' is gender-neutral and appropriate in formal situations?",jp:"",choices:["ぼく","おれ","わたし","きみ"],answer:"わたし",explain:"わたし is the neutral, polite first-person pronoun suitable for all situations."},
+    {type:"grammar",prompt:"How do you make a です sentence into a question?",jp:"",choices:["Change word order","Add か to the end","Add は to the start","Change です to ます"],answer:"Add か to the end",explain:"Simply add か to the end of a statement to make a yes/no question. No word order change needed!"},
+    {type:"reading",prompt:"Someone asks: 'アメリカじんですか？' You are American. How do you reply?",jp:"アメリカじんですか？",choices:["いいえ、ちがいます","わかりません","はい、そうです","どういたしまして"],answer:"はい、そうです",explain:"はい、そうです = Yes, that's right. The natural response to a yes/no question."},
+    {type:"vocab",prompt:"かれ can mean both 'he' AND what else?",jp:"かれ",choices:["Friend","Teacher","Boyfriend","Brother"],answer:"Boyfriend",explain:"かれ means both 'he' and 'boyfriend'. かのじょ means both 'she' and 'girlfriend'."}
    ],
-   speaking:{jp:"トイレは どこですか。もういちど おねがいします。",rom:"Toire wa doko desu ka. Mou ichido onegaishimasu.",en:"Where is the bathroom? One more time, please."}
+   speaking:{jp:"わたしは アメリカじんです。せんこうは にほんごです。よろしくおねがいします。",rom:"Watashi wa Amerika-jin desu. Senkou wa Nihongo desu. Yoroshiku onegai shimasu.",en:"I am American. My major is Japanese. Nice to meet you."}
   },
-  {unit:"Lesson 4",title:"Conversation Builders",objective:"Use short replies and connectors to keep conversations natural.",difficulty:"conversation",minutes:16,jlpt:"JLPT N4",
+
+  /* ===== UNIT 4: Particles は, が, を, に, で, も ===== */
+  {unit:"Unit 4",title:"Core Particles — は が を に で も",objective:"Master the six most essential Japanese particles and understand how they shape sentence meaning.",difficulty:"beginner",minutes:25,jlpt:"JLPT N5",
    cards:[
-    {jp:"そうですね",rom:"Sou desu ne",en:"I see / That's right",tip:"Natural thinking filler. Shows you're engaged."},
-    {jp:"ほんとうですか",rom:"Hontou desu ka",en:"Really?",tip:"Shows surprise or interest."},
-    {jp:"たのしいです",rom:"Tanoshii desu",en:"It's fun",tip:"i-adjective + です pattern."},
-    {jp:"すきです",rom:"Suki desu",en:"I like it",tip:"Add が before what you like."},
-    {jp:"でも",rom:"Demo",en:"But / However",tip:"Contrasts two ideas."},
-    {jp:"だから",rom:"Dakara",en:"So / Therefore",tip:"Links reason to conclusion."}
-   ],
+    {jp:"は vs が — the key distinction",rom:"wa vs ga",en:"Topic marker は vs Subject marker が",tip:"は marks the TOPIC (what we're talking about, often known info). が marks the SUBJECT (grammatical, often new/emphasised info). わたしはがくせいです (I [topic] am a student — introducing yourself). だれがきましたか/やまださんがきました (Who came? — Yamada came [new info, subject])."},
+    {jp:"は (topic marker) — deeper usage",rom:"wa",en:"は — contrast, topic shift, and emphasis",tip:"は also expresses CONTRAST: コーヒーはのみます、でもおちゃはのみません (I drink coffee, but I don't drink tea). This contrastive は is extremely common. は can replace other particles: がっこうにはいきます (As for going to school, I do go — implying contrast with somewhere else)."},
+    {jp:"が (subject marker) — deeper usage",rom:"ga",en:"が — new information, questions, emotions",tip:"が marks: 1) New information introduced for the first time. 2) The answer to a question about who/what: だれがきましたか→やまださんがきました. 3) With adjectives/verbs of perception and emotion: にほんごがわかります(I understand Japanese). すきがが(like), こわい(scary), ほしい(want) all take が."},
+    {jp:"を (object marker)",rom:"o",en:"を — the direct object of action verbs",tip:"を marks what directly receives the action. ほんをよむ(read a book). おんがくをきく(listen to music). みちをあるく(walk along a road). Note: を is also used for 'along/through': こうえんをさんぽする(stroll through the park). Written を but sounds like 'o'."},
+    {jp:"に — direction, time, existence",rom:"ni",en:"に — three core uses",tip:"1) DIRECTION with movement verbs: がっこうにいく(go to school). 2) TIME point: ろくじにおきる(wake up at 6). 3) LOCATION with existence verbs: つくえのうえにある(on top of the desk). に = static location with ある/いる, but で = location of action."},
+    {jp:"で — action location, means, material",rom:"de",en:"で — where actions happen and how",tip:"1) Location of ACTION: としょかんでべんきょうする(study at the library). Compare: に with ある/いる (static), で with action verbs (dynamic). 2) MEANS: バスでいく(go by bus), にほんごではなす(speak in Japanese). 3) MATERIAL: きでできている(made of wood)."},
+    {jp:"も (also/too) — replacing particles",rom:"mo",en:"も — addition and emphasis",tip:"も replaces は or が to add 'also/too'. わたしもがくせいです(I am also a student). やまださんもきました(Yamada also came). Stacked: わたしもあなたも = both you and I. も with negative = 'not even': なにもない(there is nothing at all), だれもいない(nobody is here)."},
+    {jp:"の (possessive and connector)",rom:"no",en:"の — possession, description, nominalisation",tip:"1) POSSESSION: わたしのほん(my book), にほんのりょうり(Japanese cuisine). 2) NOUN MODIFIER connecting two nouns: にほんごのせんせい(Japanese language teacher), だいがくのともだち(university friend). 3) NOMINALISATION: たべるのがすき(I like eating) — の turns verb to noun."},
+    {jp:"と (and/with)",rom:"to",en:"と — listing and accompaniment",tip:"1) LISTING nouns (exhaustive): ほんとえんぴつとノート(a book, pencil, and notebook — complete list). Compare: や (non-exhaustive, etc.): ほんやえんぴつ(books, pencils, etc.). 2) ACCOMPANIMENT: ともだちとえいがをみる(watch a movie with a friend). と lists nouns, not verb actions."},
+    {jp:"や (non-exhaustive list)",rom:"ya",en:"や — and/or, implying 'among other things'",tip:"Like と but non-exhaustive. ほんやざっし(books and magazines [among other things]). Use や when the list isn't complete. ～やら～やら = this and that (nuance of exasperation). や gives a more natural, open-ended feeling than the complete listing of と."},
+    {jp:"から / まで",rom:"kara / made",en:"From / Until — start and end points",tip:"から = from (time, place, origin): ここからえきまで(from here to the station). ９じから(from 9 o'clock). まで = until/to (endpoint): ６じまで(until 6). Combined: ９じから５じまでしごとします(I work from 9 to 5). Also: から = because (ので is softer version)."},
+    {jp:"へ (direction — literary)",rom:"e",en:"へ — towards, in the direction of",tip:"Similar to に for direction but more literary and vague. にほんへいく(head towards Japan). In everyday speech, に is preferred: にほんにいく. へ suggests 'towards' without specifying arrival. Also used in formal writing and on signs:→東京へ (towards Tokyo). Written へ, pronounced 'e'."},
+    {jp:"で (by/using means)",rom:"de",en:"で — indicating means, method, language",tip:"Important second use of で: METHOD/MEANS. バスでいきます(go by bus). でんしゃでかえります(return by train). にほんごではなせますか(can you speak in Japanese?). はしでたべます(eat with chopsticks). えんぴつでかきます(write with a pencil)."},
+    {jp:"ね / よ — sentence-final particles",rom:"ne / yo",en:"ね (seeking agreement) / よ (asserting information)",tip:"ね = 'isn't it? / right?' seeking agreement or softening: いいてんきですね(nice weather, isn't it?). よ = asserting info the listener doesn't know: これはほんですよ(this IS a book, you know). Combined: ですよね = asserting while seeking agreement. These particles give Japanese its conversational texture."},
+    {jp:"か (question) / かな (wondering)",rom:"ka / kana",en:"か — question / かな — self-musing",tip:"か at end = direct question. かな at end = wondering aloud or softening: いいですかな(I wonder if it's okay / Is it okay, I wonder?). かしら = feminine equivalent of かな. These show the speaker is uncertain rather than directly asking."},
+    {jp:"ばかり / だけ / しか～ない",rom:"bakari / dake / shika~nai",en:"Only — three ways to express exclusivity",tip:"だけ = only (neutral): これだけでいい(just this is fine). ばかり = nothing but (excessive nuance): ゲームばかりする(does nothing but play games). しか + negative = only (implying insufficiency): これしかない(there is only this [and that's not enough]). Subtle but important distinctions."}
+  ],
    quiz:[
-    {type:"grammar",prompt:"Which word means 'But'?",jp:"",choices:["だから","でも","そして","また"],answer:"でも",explain:"でも = but / however."},
-    {type:"vocab",prompt:"What does ほんとうですか mean?",jp:"ほんとうですか",choices:["Really?","That's right","I understand","How interesting"],answer:"Really?",explain:"ほんとうですか = Really?"},
-    {type:"reading",prompt:"Choose the correct meaning:",jp:"たのしいです",choices:["It's difficult","It's fun","It's delicious","It's pretty"],answer:"It's fun",explain:"たのしい = fun / enjoyable."},
-    {type:"grammar",prompt:"'にほんごが すきです' means:",jp:"にほんごが すきです",choices:["Japanese is difficult","I want Japanese","I like Japanese","Japanese is fun"],answer:"I like Japanese",explain:"すきです = I like it. が marks what you like."},
-    {type:"vocab",prompt:"だから means:",jp:"だから",choices:["But","And","So / Therefore","Or"],answer:"So / Therefore",explain:"だから = so / therefore."}
+    {type:"grammar",prompt:"'パンを たべます' — what role does を play?",jp:"パンを たべます",choices:["Marks the location","Marks the topic","Marks the direct object","Marks the time"],answer:"Marks the direct object",explain:"を marks the direct object — パン (bread) is what receives the action of eating."},
+    {type:"grammar",prompt:"'えきに いきます' — what does に indicate here?",jp:"えきに いきます",choices:["The topic","The direction/destination","The means of transport","The time"],answer:"The direction/destination",explain:"に indicates direction here — going TO the station. に = destination with movement verbs."},
+    {type:"grammar",prompt:"'がっこうで べんきょうします' — what does で indicate?",jp:"がっこうで べんきょうします",choices:["Direction","Possession","Location of the action","Subject"],answer:"Location of the action",explain:"で marks where an action takes place. Studying happens AT school."},
+    {type:"grammar",prompt:"Which particle replaces は to mean 'also' or 'too'?",jp:"わたし___ がくせいです",choices:["が","を","に","も"],answer:"も",explain:"も replaces は (or が) to add the meaning 'also/too'. わたしもがくせいです = I am also a student."},
+    {type:"grammar",prompt:"'わたしのほん' — what does の show?",jp:"わたしのほん",choices:["Topic","Object","Possession / Connection","Direction"],answer:"Possession / Connection",explain:"の is the possessive particle. わたしのほん = my book (book OF me)."},
+    {type:"grammar",prompt:"Choose the correct particle: 'ともだち___ えいがをみます' (watch a movie WITH a friend)",jp:"ともだち___ えいがをみます",choices:["に","で","と","が"],answer:"と",explain:"と means 'with' when accompanying someone. ともだちと = with a friend."}
    ],
-   speaking:{jp:"にほんごが すきです。でも、むずかしいです。",rom:"Nihongo ga suki desu. Demo, muzukashii desu.",en:"I like Japanese. But it's difficult."}
+   speaking:{jp:"わたしはがっこうで にほんごをべんきょうします。まいにち ろくじかん べんきょうします。",rom:"Watashi wa gakkou de nihongo o benkyou shimasu. Mainichi roku jikan benkyou shimasu.",en:"I study Japanese at school. I study 6 hours every day."}
   },
-  {unit:"Lesson 5",title:"Daily Routine & Core Verbs",objective:"Describe your daily routine using basic verb patterns.",difficulty:"intermediate",minutes:20,jlpt:"JLPT N4",
+
+  /* ===== UNIT 5: Verbs — ます Form & Basic Conjugation ===== */
+  {unit:"Unit 5",title:"Verbs — ます Form & Basic Conjugation",objective:"Learn how Japanese verbs work, the three verb groups, and polite present/past/negative conjugations.",difficulty:"earlyIntermediate",minutes:28,jlpt:"JLPT N5",
    cards:[
-    {jp:"おきます",rom:"Okimasu",en:"Wake up",tip:"Polite ます-form. All daily verbs use this ending."},
-    {jp:"たべます",rom:"Tabemasu",en:"Eat",tip:"Use を before food: パンを たべます = I eat bread."},
-    {jp:"はたらきます",rom:"Hatarakimasu",en:"Work",tip:"Use で for where: かいしゃで はたらきます = I work at a company."},
-    {jp:"べんきょうします",rom:"Benkyou shimasu",en:"Study",tip:"べんきょう = study + します = do."},
-    {jp:"まいにち",rom:"Mainichi",en:"Every day",tip:"Time words go near the start of a sentence."},
-    {jp:"なんじに",rom:"Nanji ni",en:"At what time?",tip:"に marks time: ろくじに おきます = I wake up at 6."}
-   ],
+    {jp:"動詞グループ1 — う-verbs (godan)",rom:"Group 1 — u-verbs",en:"Godan verbs — the largest group",tip:"End in: く、ぐ、す、む、ぶ、ぬ、つ、る (when preceded by consonant+u), う. ます-form rule: change the う sound to い sound then add ます. かく→かきます, はなす→はなします, よむ→よみます, かつ→かちます, かえる→かえります (return — G1 not G2!)."},
+    {jp:"動詞グループ2 — る-verbs (ichidan)",rom:"Group 2 — ru-verbs",en:"Ichidan verbs — simple and regular",tip:"End in る, always preceded by i or e sound. Simply drop る and add ます: たべる→たべます, みる→みます, おきる→おきます, しめる→しめます (close). Easy trick: if the sound before る is 'i' or 'e', it's usually Group 2 (exceptions: かえる=G1, はいる=G1, きる=G1 meaning 'cut')."},
+    {jp:"グループ3 — irregular する and くる",rom:"suru / kuru",en:"Only two irregular verbs exist",tip:"する→します (do). くる→きます (come). する attaches to nouns: べんきょうする→べんきょうします, でんわする→でんわします, りょこうする→りょこうします (travel). Hundreds of noun+する verbs exist. くる is important in て-form: きて."},
+    {jp:"ます (present/future polite)",rom:"masu",en:"Polite non-past — present habit or future",tip:"Time words clarify meaning: まいにちたべます(I eat every day — habit). あしたいきます(I will go tomorrow — future). Bare ます with no time word defaults to habitual or immediate future. Japanese doesn't grammatically distinguish these — context does all the work."},
+    {jp:"ません (negative polite)",rom:"masen",en:"Polite negative — don't do / won't do",tip:"たべません(don't eat). いきません(won't go). はなしません(don't speak). The negative works for BOTH habit and future — same form. This simplicity is one of Japanese grammar's elegant features."},
+    {jp:"ました (past polite)",rom:"mashita",en:"Polite past — did, ate, went",tip:"たべました(ate). いきました(went). みました(watched/saw). ました covers both simple past (I ate) and present perfect (I have eaten) in English — Japanese doesn't distinguish. Use context or expressions like もう(already) and まだ(not yet) to clarify."},
+    {jp:"ませんでした (negative past polite)",rom:"masen deshita",en:"Polite negative past — didn't do",tip:"たべませんでした(didn't eat). いきませんでした(didn't go). Long but completely regular. Only one form — no irregular negative pasts at N5. Used frequently when explaining what you couldn't do or forgot to do."},
+    {jp:"いきます / きます / かえります / まいります",rom:"Ikimasu/Kimasu/Kaerimasu/Mairimasu",en:"Go / Come / Return / Humble go/come",tip:"いきます = go away from speaker. きます = come toward speaker. かえります = return to base (home, school). まいります = humble form of いきます/きます (used when lowering yourself). Destination marked by に or へ. Starting point by から."},
+    {jp:"たべます / のみます / たべさせます",rom:"Tabemasu / Nomimasu",en:"Eat / Drink — core consumption verbs",tip:"たべます = eat solid food. のみます = drink or swallow (pills too). Both take を for the object. ごはんをたべます(eat rice/meal). みずをのみます(drink water). くすりをのみます(take medicine). Also ちゅうもんします(order food at a restaurant)."},
+    {jp:"みます / きこえます / みえます",rom:"Mimasu / Kikoemasu / Miemasu",en:"Watch intentionally / Can be heard / Can be seen",tip:"みます = intentional watching (テレビをみます). ききます = intentional listening. But: みえます = can see (naturally, involuntarily — the view is visible). きこえます = can hear (sound reaches your ears). These pairs show intentional vs passive perception."},
+    {jp:"かきます / よみます / はなします",rom:"Kakimasu / Yomimasu / Hanashimasu",en:"Write / Read / Speak — literacy verbs",tip:"かきます(write) — を for what's written: てがみをかきます(write a letter). よみます(read) — を: ほんをよみます(read a book). はなします(speak/talk) — で for language: にほんごではなします(speak in Japanese). と for who with: ともだちとはなします(talk with a friend)."},
+    {jp:"おきます / ねます / やすみます",rom:"Okimasu / Nemasu / Yasumimasu",en:"Wake up / Sleep / Rest/Take a day off",tip:"おきます(wake up). ねます(sleep/lie down). やすみます(rest/take time off from work or school). Time words: なんじにおきますか(what time do you wake up?). はやくねてください(please sleep early). やすんでください(please rest)."},
+    {jp:"かいます / うります / もらいます / あげます",rom:"Kaimasu/Urimasu/Moraimasu/Agemasu",en:"Buy / Sell / Receive / Give",tip:"かいます(buy) — を for item, で for price/place. うります(sell). もらいます(receive/get) — に for giver: ともだちにもらいました(received from a friend). あげます(give) — に for recipient: ともだちにあげます(give to a friend). These verbs track the direction of objects between people."},
+    {jp:"できます / わかります / しります",rom:"Dekimasu / Wakarimasu / Shirimasu",en:"Can do/Exist / Understand / Know (a fact)",tip:"できます = can do (ability) or something has come into being. わかります = understand (takes が): にほんごがわかります. しります = know a fact (takes を, but usually ～をしっています for ongoing state): たなかさんをしっていますか(do you know Tanaka?). These are stative verbs — permanent states."},
+    {jp:"見る / 聞く / 書く / 読む / 話す — kanji",rom:"miru/kiku/kaku/yomu/hanasu",en:"Common verb kanji — 見聞書読話",tip:"見(see/watch), 聞(hear/ask), 書(write), 読(read), 話(speak/story). These are core N5 kanji for verbs. テレビを見ます. 音楽を聞きます. 手紙を書きます. 本を読みます. 日本語を話します. Learning the kanji of verbs you already know in hiragana is very effective."},
+    {jp:"動詞の活用表 (conjugation summary)",rom:"Douji no katsuyou-hyou",en:"Verb conjugation overview",tip:"G1 (う-verbs): かく→かき+ます/ません/ました/ませんでした/まして(te-form). G2 (る-verbs): たべる→たべ+ます/ません/ました/ませんでした/て. G3 (irregular): する→し+ます/ません/ました/ませんでした/て. くる→き+ます/きません/きました/きませんでした/きて. Memorise this table."}
+  ],
    quiz:[
-    {type:"grammar",prompt:"Which verb means 'I study'?",jp:"",choices:["たべます","おきます","べんきょうします","はたらきます"],answer:"べんきょうします",explain:"べんきょうします = study."},
-    {type:"vocab",prompt:"What does まいにち mean?",jp:"まいにち",choices:["Every day","Every morning","Yesterday","Tomorrow"],answer:"Every day",explain:"まいにち = every day."},
-    {type:"grammar",prompt:"'パンを たべます' means:",jp:"パンを たべます",choices:["I eat bread","I like bread","I buy bread","Bread is tasty"],answer:"I eat bread",explain:"を marks object. たべます = eat."},
-    {type:"reading",prompt:"What does this mean?",jp:"まいにち にほんごを べんきょうします",choices:["I study Japanese every day","Japanese is hard","I eat Japanese food","I work in Japan"],answer:"I study Japanese every day",explain:"まいにち = every day, べんきょうします = study."},
-    {type:"grammar",prompt:"Which particle marks the time of an action?",jp:"",choices:["は","を","が","に"],answer:"に",explain:"に marks time: ろくじに = at 6."}
+    {type:"grammar",prompt:"'たべる' is a Group 2 verb. What is its ます form?",jp:"たべる → ___",choices:["たべいます","たべます","たべります","たべます"],answer:"たべます",explain:"Group 2: drop る, add ます. たべる → たべます (eat)."},
+    {type:"grammar",prompt:"What is the polite NEGATIVE of いきます?",jp:"いきます → ___ (negative)",choices:["いきません","いきませんでした","いきました","いきじゃない"],answer:"いきません",explain:"Polite negative: drop ます, add ません. いきます → いきません (don't go)."},
+    {type:"grammar",prompt:"What does ～ました indicate?",jp:"たべました",choices:["Present action","Future plan","Past completed action","Negative"],answer:"Past completed action",explain:"ました is the polite past tense. たべました = I ate (past)."},
+    {type:"reading",prompt:"'まいにち おんがくを ききます' means:",jp:"まいにち おんがくを ききます",choices:["I read music every day","I listen to music every day","I watch music every day","I buy music every day"],answer:"I listen to music every day",explain:"ききます = listen/hear. おんがくを = music (object). まいにち = every day."},
+    {type:"grammar",prompt:"Which are the ONLY two irregular verbs in Japanese?",jp:"",choices:["いく and くる","する and くる","たべる and のむ","みる and きく"],answer:"する and くる",explain:"Only する (do→します) and くる (come→きます) are truly irregular. All others follow patterns."},
+    {type:"grammar",prompt:"'テレビを ___' — which verb fits to mean 'I watch TV'?",jp:"テレビを ___",choices:["ききます","よみます","みます","かいます"],answer:"みます",explain:"みます = watch/see. テレビをみます = I watch TV."}
    ],
-   speaking:{jp:"まいにち にほんごを べんきょうします。",rom:"Mainichi nihongo o benkyou shimasu.",en:"I study Japanese every day."}
+   speaking:{jp:"わたしは まいばん テレビをみます。でも、きのうは みませんでした。",rom:"Watashi wa maiban terebi o mimasu. Demo, kinou wa mimasen deshita.",en:"I watch TV every evening. But yesterday I didn't watch."}
+  },
+
+  /* ===== UNIT 6: Adjectives — い-adjectives and な-adjectives ===== */
+  {unit:"Unit 6",title:"Adjectives — い-type and な-type",objective:"Learn both adjective classes, how to conjugate them, and use them before nouns and as predicates.",difficulty:"earlyIntermediate",minutes:25,jlpt:"JLPT N5",
+   cards:[
+    {jp:"い-adjective system",rom:"i-adjective",en:"い-adjectives — self-conjugating",tip:"い-adjectives conjugate without needing a helper. They ALWAYS end in い (but NOT adjectives ending in -ei like きれい — that's a な-adj!). Common ones: たかい(expensive/tall), やすい(cheap), おいしい(delicious), まずい(bad-tasting), おおきい(big), ちいさい(small), あつい(hot), さむい(cold), あたらしい(new), ふるい(old)."},
+    {jp:"い-adj conjugation table",rom:"i-adj conjugation",en:"Present / Negative / Past / Negative Past",tip:"たかい → Present: たかいです. Negative: たかくないです(or たかくありません). Past: たかかったです. Negative past: たかくなかったです. Pattern: drop い → add く for neg/adverb, かった for past. Memorise this one pattern — it works for ALL い-adjectives (except いい)."},
+    {jp:"いい → よい (irregular い-adjective)",rom:"ii → yoi (irregular)",en:"The only irregular い-adjective",tip:"いい (good) → all forms use よ: よくない(not good), よかった(was good), よくなかった(wasn't good). よかったですね = That was good, wasn't it / I'm glad. The dictionary form is よい (formal) or いい (casual). Never say いくない or いかった."},
+    {jp:"な-adjective system",rom:"na-adjective",en:"な-adjectives — behave like nouns",tip:"な-adjectives don't conjugate — they use です and its forms. They need な before nouns. Common ones: しずか(quiet), にぎやか(lively), きれい(pretty/clean), ゆうめい(famous), べんり(convenient), ふべん(inconvenient), だいじ(important), けんこう(healthy), ひつよう(necessary), たいへん(difficult/terrible)."},
+    {jp:"な-adj conjugation table",rom:"na-adj conjugation",en:"Present / Negative / Past / Negative Past",tip:"しずかです → Negative: しずかではありません(しずかじゃないです). Past: しずかでした. Negative past: しずかではありませんでした(しずかじゃなかったです). Pattern: same as NOUN+です conjugation. Remembering 'な-adj = noun' helps with conjugation."},
+    {jp:"adjective + noun modification",rom:"adj+noun",en:"Using adjectives before nouns",tip:"い-adj: directly before noun (no change). おいしいラーメン(delicious ramen), やすいホテル(cheap hotel). な-adj: add な before noun. しずかなまち(quiet town), きれいなはな(beautiful flower). Never add な to い-adjectives! たかなやま would be wrong."},
+    {jp:"adverbs from adjectives",rom:"adj → adverb",en:"Turning adjectives into adverbs",tip:"い-adj → adverb: drop い add く. はやい(fast)→はやく(quickly). おおきい(big)→おおきく(making it bigger). な-adj → adverb: add に. しずか→しずかに(quietly), べんり→べんりに(conveniently). Adverbs modify verbs: はやくはしります(run quickly). しずかにはなしてください(please speak quietly)."},
+    {jp:"とても / たいへん / すごく (very)",rom:"totemo / taihen / sugoku",en:"Degree adverbs — very, extremely",tip:"とても = very (general). たいへん = very (formal, implies effort/difficulty). すごく = very (casual, colloquial). むちゃくちゃ = extremely (very casual). Usage: とてもおいしい, たいへんありがとうございます, すごくたかい. Degree adverbs always precede the adjective."},
+    {jp:"あまり / そんなに / それほど + negative",rom:"amari~nai",en:"Not very / Not that much",tip:"あまり + negative: あまりおいしくない(not very delicious). そんなに + negative: そんなにたかくない(not that expensive). それほど + negative: それほどむずかしくない(not that difficult). ALL must be followed by negative. Saying あまりおいしい is grammatically and semantically wrong."},
+    {jp:"すこし / ちょっと / もう少し",rom:"sukoshi / chotto / mou sukoshi",en:"A little / A bit / A little more",tip:"すこし = a little (neutral). ちょっと = a bit (casual, also used to soften refusals: ちょっと... = that's a bit...[difficult/I'd rather not]). もうすこし = a little more. もっと = more/more than that. ずっと = much more/continuously. すこしたかい = a little expensive."},
+    {jp:"どんな + noun",rom:"donna + noun",en:"What kind of ~",tip:"どんな precedes a noun to ask what type/kind. どんなたべものがすきですか(what kind of food do you like?). どんなひとですか(what kind of person is he/she?). Answer with adjective + noun or just adjective: しずかなひとです(a quiet person). どんな is extremely useful for descriptions."},
+    {jp:"どう / どのように",rom:"dou / dono you ni",en:"How / In what way",tip:"どうですか = how is it? (asking opinion/feeling). しごとはどうですか(how is work?). どのように = in what way (more specific, formal). どうやって = how (method): どうやっていきますか(how do you get there?). どう思いますか(what do you think?) — extremely common."},
+    {jp:"比較 — AはBより～です",rom:"A wa B yori ~ desu",en:"A is more ~ than B (comparison)",tip:"より = than. とうきょうはおおさかよりおおきいです(Tokyo is bigger than Osaka). AとBとどちらが～ですか = Which is more ~, A or B? Answer: AのほうがBよりです. のほうが = the one that is more. Basic comparison is tested at N5."},
+    {jp:"一番 (most/best)",rom:"ichiban",en:"The most ~ / Number one",tip:"いちばん + adjective = most/best/worst. このレストランがいちばんおいしいです(this restaurant is the most delicious). ～のなかでいちばん = the most among ~. スポーツのなかでなにがいちばんすきですか(what sport do you like most?). いちばん is used constantly in everyday Japanese."},
+    {jp:"～そうです (looks/seems ~)",rom:"~sou desu",en:"Looks ~ / Seems ~ (appearance-based)",tip:"i-adj: drop い add そう. おいしそうです(looks delicious). たかそうです(looks expensive). な-adj: add そう directly. げんきそうです(looks healthy). Expresses judgement from appearance/observation. Different from ～らしい(seems like based on info) and ～ようです(seems like based on evidence)."},
+    {jp:"気持ち (feelings) adjectives",rom:"kimochi — feelings",en:"Emotional and sensory adjectives",tip:"うれしい(happy/glad), かなしい(sad), たのしい(fun/enjoyable), つまらない(boring), こわい(scary), はずかしい(embarrassing), さびしい(lonely), むずかしい(difficult), やさしい(kind/easy). These are all い-adjectives. Using feelings vocabulary makes conversations much more natural and expressive."}
+  ],
+   quiz:[
+    {type:"grammar",prompt:"'おいしい' (delicious) in the NEGATIVE form is:",jp:"おいしい → ___ (negative)",choices:["おいしいくない","おいしくない","おいしじゃない","おいしなくない"],answer:"おいしくない",explain:"い-adjective negative: drop い, add くない. おいしい → おいしくない."},
+    {type:"grammar",prompt:"'たかかった' is the past form of which adjective?",jp:"たかかった",choices:["たかい (expensive)","たかな","たかです","たかく"],answer:"たかい (expensive)",explain:"い-adjective past: drop い, add かった. たかい → たかかった (was expensive)."},
+    {type:"grammar",prompt:"'しずか' is a な-adjective. How do you say 'quiet street' (before a noun)?",jp:"しずか + みち",choices:["しずかみち","しずいみち","しずかなみち","しずくみち"],answer:"しずかなみち",explain:"な-adjectives need な before nouns: しずかなみち = quiet street."},
+    {type:"grammar",prompt:"Which sentence is CORRECT? (The food is not very delicious)",jp:"",choices:["たべものはあまりおいしいです","たべものはあまりおいしくないです","たべものはとてもおいしくないです","たべものはすこしおいしくないです"],answer:"たべものはあまりおいしくないです",explain:"あまり must be followed by a NEGATIVE. あまり～くない = not very ~."},
+    {type:"reading",prompt:"'いい' is irregular. What is the CORRECT negative of いい?",jp:"いい → ___ (negative)",choices:["いくない","いいくない","よくない","いなくない"],answer:"よくない",explain:"いい is the only irregular い-adjective. All forms use よ: よくない (not good), よかった (was good)."},
+    {type:"vocab",prompt:"どんなたべものがすきですか — what is being asked?",jp:"どんなたべものがすきですか",choices:["Do you like food?","Where do you eat?","What kind of food do you like?","How much is the food?"],answer:"What kind of food do you like?",explain:"どんな = what kind of. たべもの = food. すきですか = do you like?"}
+   ],
+   speaking:{jp:"このまちはとてもにぎやかです。でも、わたしはしずかなまちのほうがすきです。",rom:"Kono machi wa totemo nigiyaka desu. Demo, watashi wa shizuka na machi no hou ga suki desu.",en:"This city is very lively. But I prefer quiet cities."}
+  },
+
+  /* ===== UNIT 7: Numbers, Time, and Counters ===== */
+  {unit:"Unit 7",title:"Numbers, Time & Counters",objective:"Master Japanese numbers from 1 to 10,000, tell the time, express dates, and use common counters.",difficulty:"earlyIntermediate",minutes:24,jlpt:"JLPT N5",
+   cards:[
+    {jp:"一〜十 (1-10) 和語 vs 漢語",rom:"Wago vs Kango numbers",en:"Two number systems: Native Japanese & Sino-Japanese",tip:"SINO-JAPANESE (most common): いち(1)に(2)さん(3)し/よん(4)ご(5)ろく(6)なな/しち(7)はち(8)きゅう/く(9)じゅう(10). NATIVE JAPANESE (up to 10, general counting): ひとつ(1)ふたつ(2)みっつ(3)よっつ(4)いつつ(5)むっつ(6)ななつ(7)やっつ(8)ここのつ(9)とお(10). Native numbers used without counters for objects in general."},
+    {jp:"十一〜百〜千〜万",rom:"11~100~1000~10000",en:"Larger numbers — tens, hundreds, thousands",tip:"11=じゅういち, 12=じゅうに, 20=にじゅう, 21=にじゅういち. 100=ひゃく, 200=にひゃく, 300=さんびゃく(irregular!), 600=ろっぴゃく(irregular!), 800=はっぴゃく(irregular!). 1,000=せん, 3,000=さんぜん(irregular!), 8,000=はっせん(irregular!). 10,000=いちまん. Japan counts in units of 万(10,000)."},
+    {jp:"四(4)と九(9)の縁起",rom:"4 and 9 — unlucky numbers",en:"Avoid し(4) and く(9) in hospital/gift contexts",tip:"4(し)sounds like 死(death). 9(く)sounds like 苦(suffering). Hospitals avoid room 4 and 9. Gift sets avoid these numbers. Gift money in envelopes should be odd numbers (1,3,5,7). These superstitions are real and taken seriously in Japanese daily life."},
+    {jp:"なんじですか — telling time",rom:"Nanji desu ka",en:"What time is it? — hours and minutes",tip:"じ=o'clock: いちじ(1:00)にじ(2:00)さんじ(3:00)よじ(4:00)ごじ(5:00)ろくじ(6:00)しちじ(7:00)はちじ(8:00)くじ(9:00)じゅうじ(10:00)じゅういちじ(11:00)じゅうにじ(12:00). ごぜん=AM, ごご=PM. はん=half past. ごじはん=5:30."},
+    {jp:"ふん/ぷん — minutes",rom:"fun/pun — irregular minutes",en:"Minute counter — irregular sound changes",tip:"いっぷん(1min), にふん(2min), さんぷん(3min), よんふん(4min), ごふん(5min), ろっぷん(6min), ななふん(7min), はっぷん(8min), きゅうふん(9min), じゅっぷん(10min). The pp-sound changes make these irregular. じゅうごふん=15min, さんじゅっぷん=30min, よんじゅうごふん=45min."},
+    {jp:"曜日 — days of the week",rom:"youbi — days",en:"The 7 days using classical element kanji",tip:"にちようび(Sun=日/sun), げつようび(Mon=月/moon), かようび(Tue=火/fire), すいようび(Wed=水/water), もくようび(Thu=木/wood), きんようび(Fri=金/gold), どようび(Sat=土/earth). Weekends: どようび+にちようび=しゅうまつ(weekend). なんようびですか=what day is it?"},
+    {jp:"月 — months of the year",rom:"gatsu — months",en:"12 months — just number + がつ",tip:"いちがつ(Jan)にがつ(Feb)さんがつ(Mar)しがつ(Apr)ごがつ(May)ろくがつ(Jun)しちがつ(Jul)はちがつ(Aug)くがつ(Sep)じゅうがつ(Oct)じゅういちがつ(Nov)じゅうにがつ(Dec). なんがつですか=what month? たんじょうびはなんがつですか=what month is your birthday?"},
+    {jp:"日 — dates (irregular readings)",rom:"nichi/ka — dates",en:"Dates 1–31 (many irregular readings!)",tip:"1日=ついたち, 2日=ふつか, 3日=みっか, 4日=よっか, 5日=いつか, 6日=むいか, 7日=なのか, 8日=ようか, 9日=ここのか, 10日=とおか, 14日=じゅうよっか, 20日=はつか, 24日=にじゅうよっか. Others are regular: 11日=じゅういちにち. These must be memorised!"},
+    {jp:"〜年〜月〜日 (full date)",rom:"nen/gatsu/nichi",en:"Expressing full dates in Japanese order",tip:"Japanese date order: YEAR → MONTH → DAY (largest to smallest). にせんにじゅうろくねんしがつついたち = April 1, 2026. ねん=year, がつ=month, にち=day. Formal documents and official settings always use this order. The opposite of American month/day/year order."},
+    {jp:"〜時間 vs 〜時 (duration vs point in time)",rom:"jikan vs ji",en:"Duration of hours vs clock time",tip:"じ=clock time (point): ごじ=at 5 o'clock. じかん=duration (period): ごじかん=5 hours. にじかんべんきょうします=I study for 2 hours. にじにべんきょうします=I study at 2 o'clock. This distinction is crucial and commonly confused."},
+    {jp:"Counter: 〜本 (long thin objects)",rom:"hon counter",en:"本 — for long thin things",tip:"いっぽん(1), にほん(2), さんぼん(3), よんほん(4), ごほん(5), ろっぽん(6), ななほん(7), はっぽん(8), きゅうほん(9), じゅっぽん(10). Used for: pens, bottles, trees, fingers, roads, phone calls, movies, injections. えんぴつをごほんかいました=I bought 5 pencils."},
+    {jp:"Counter: 〜枚 (flat thin objects)",rom:"mai counter",en:"枚 — for flat things like paper and tickets",tip:"いちまい(1), にまい(2), さんまい(3), よんまい(4), ごまい(5). Fully regular! Used for: paper, tickets, stamps, CDs, T-shirts, plates, slices of bread. きってをじゅうまいください=10 stamps please. しゃつをにまいかいました=I bought 2 shirts."},
+    {jp:"Counter: 〜冊 (bound books)",rom:"satsu counter",en:"冊 — for books, magazines, notebooks",tip:"いっさつ(1), にさつ(2), さんさつ(3), よんさつ(4), ごさつ(5), ろくさつ(6), ななさつ(7), はっさつ(8), きゅうさつ(9), じゅっさつ(10). ほんをさんさつよみました=I read 3 books. ノートをにさつかってください=please buy 2 notebooks."},
+    {jp:"Counter: 〜台 (machines/vehicles)",rom:"dai counter",en:"台 — for machines, vehicles, appliances",tip:"いちだい(1), にだい(2), さんだい(3). Used for: cars, bicycles, computers, TVs, washing machines, trains. くるまをいちだいもっています=I have one car. Regular and reliable — no sound changes."},
+    {jp:"Counter: 〜人 (people)",rom:"nin/ri counter",en:"People counter — irregular for 1 and 2",tip:"ひとり(1 person), ふたり(2 people), さんにん(3), よにん(4), ごにん(5), ろくにん(6), ななにん(7), はちにん(8), きゅうにん(9), じゅうにん(10). The irregulars ひとり and ふたり are essential — used constantly. かぞくはよにんです=my family has 4 people."},
+    {jp:"いくら vs どのくらい vs どれくらい",rom:"ikura vs dono kurai",en:"How much (price) vs How much/long (extent)",tip:"いくら=how much money. これはいくらですか=how much is this? どのくらい/どれくらい=how long/how much (extent/duration). どのくらいかかりますか=how long does it take? にじかんくらいかかります=it takes about 2 hours. くらい/ごろ=approximately: ごじごろにきます=I'll come around 5."}
+  ],
+   quiz:[
+    {type:"vocab",prompt:"How do you say '3,000 yen' in Japanese?",jp:"",choices:["さんせんえん","さんぜんえん","みっつえん","さんひゃくえん"],answer:"さんぜんえん",explain:"3,000 = さんぜん (irregular — ぜん not せん). さんぜんえん = 3,000 yen."},
+    {type:"grammar",prompt:"'What time is it?' in Japanese is:",jp:"",choices:["なんようびですか","なんさいですか","なんじですか","いくらですか"],answer:"なんじですか",explain:"なんじですか = What time is it? じ = o'clock, なん = what."},
+    {type:"reading",prompt:"'ごじはんです' means:",jp:"ごじはんです",choices:["5 o'clock","5:15","5:30","5:45"],answer:"5:30",explain:"ごじ = 5 o'clock. はん = half (30 minutes). ごじはん = 5:30."},
+    {type:"vocab",prompt:"Which counter is used for BOOKS?",jp:"",choices:["ほん","まい","さつ","こ"],answer:"さつ",explain:"さつ is used for bound objects like books and magazines. ほん is for long thin things."},
+    {type:"grammar",prompt:"'まいばん' means:",jp:"まいばん",choices:["Every morning","Every week","Every evening","Every year"],answer:"Every evening",explain:"まい = every. ばん = evening/night. まいばん = every evening."},
+    {type:"reading",prompt:"'にじゅういっさいです' — how old is this person?",jp:"にじゅういっさいです",choices:["20","21","12","22"],answer:"21",explain:"にじゅう = 20. いち = 1. さい = years old. So 21 years old."}
+   ],
+   speaking:{jp:"いまなんじですか。ごぜん くじ じゅっぷんです。じゅうじに じゅぎょうが あります。",rom:"Ima nanji desu ka. Gozen kuji juppun desu. Juuji ni jugyou ga arimasu.",en:"What time is it now? It is 9:10 AM. I have class at 10 o'clock."}
+  },
+
+  /* ===== UNIT 8: Existence Verbs あります / います & Location ===== */
+  {unit:"Unit 8",title:"Existence Verbs あります & います",objective:"Use あります and います correctly, describe where things and people are, and understand location expressions.",difficulty:"earlyIntermediate",minutes:22,jlpt:"JLPT N5",
+   cards:[
+    {jp:"あります vs います — the core rule",rom:"arimasu vs imasu",en:"Inanimate things → あります / Animate beings → います",tip:"ARIMASU: objects, plants, buildings, events, time, money, ideas — things that don't move by themselves. IMASU: people, animals, insects — living things that move. EXCEPTION: robots and stuffed animals can use either depending on how you feel about them. Plants technically use あります despite being alive."},
+    {jp:"〜がある/いる — existence as new information",rom:"~ga aru/iru",en:"が marks newly introduced existence",tip:"When stating that something exists (introducing new information), use が. あそこにコンビニがあります(there is a convenience store over there). にわにねこがいます(there is a cat in the garden). が = the existing thing is new/important information."},
+    {jp:"〜はある/いる — existence as known topic",rom:"~wa aru/iru",en:"は marks the topic being asked about",tip:"When the thing is already known/asked about, use は. わたしはじかんがあります(I have time). Note: は + が together. わたし=topic(は), じかん=subject(が). ほんはどこにありますか(where IS the book? — book is known, asking location)."},
+    {jp:"Location + に + thing + が + あります/います",rom:"Location ni ~ ga aru/iru",en:"Standard 'There is X in Y' pattern",tip:"つくえのうえにほんがあります(there is a book ON the desk). こうえんにこどもたちがいます(there are children IN the park). The location always comes first with に, then the thing with が. This word order is the standard for describing scenes."},
+    {jp:"Thing + は + Location + に + あります/います",rom:"~ wa location ni aru/iru",en:"Standard 'X is at Y' pattern (topic-first)",tip:"ほんはつくえのうえにあります(the book is on the desk — talking about the book). せんせいはきょうしつにいます(the teacher is in the classroom). Compare: location-first vs thing-first. When asked 'where is X?', use thing は + location + に + あります/います."},
+    {jp:"位置詞 — location words",rom:"ijishi — position words",en:"The complete set of position words",tip:"うえ(above/on), した(below/under), まえ(in front), うしろ(behind/back), みぎ(right), ひだり(left), なか(inside), そと(outside), となり(next to/beside), ちかく(nearby/near), あいだ(between), まわり(around/surrounding), むこう(across/over there), よこ(beside/side)."},
+    {jp:"〜の + 位置詞",rom:"~no + position",en:"Connecting location words to reference points",tip:"の connects the reference noun to the position word. いすのうえ(on the chair), えきのまえ(in front of the station), としょかんのとなり(next to the library), ふたつのたてもののあいだ(between two buildings). の is essential — you can't say just まえにあります without specifying in front of WHAT."},
+    {jp:"どこにありますか/いますか — location questions",rom:"Doko ni arimasu/imasu ka",en:"Asking where something/someone is",tip:"ほんはどこにありますか(where is the book?). やまださんはどこにいますか(where is Yamada?). Reply: ～に あります/います. あそこにあります(it's over there). にかいにいます(he's on the second floor). にかい=second floor, いっかい=first floor."},
+    {jp:"なにがありますか/いますか — asking about contents",rom:"Nani ga arimasu/imasu ka",en:"Asking what exists in a place",tip:"このへやになにがありますか(what is in this room?). こうえんになにがいますか(what is in the park?). Answer by listing: つくえとイスとパソコンがあります(there is a desk, chair, and computer). いぬとねこがいます(there are dogs and cats)."},
+    {jp:"いる vs ある for possession (people/things)",rom:"iru vs aru for having",tip:"Having PEOPLE or ANIMALS uses います: きょうだいがいますか(do you have siblings?). こどもがふたりいます(I have two children). ペットがいます(I have a pet). Having THINGS uses あります: くるまがあります(I have a car). じかんがあります(I have time). おかねがあります(I have money)."},
+    {jp:"〜階 (floors of a building)",rom:"~kai — floor counter",en:"Building floor counter",tip:"いっかい(1F), にかい(2F), さんがい(3F), よんかい(4F), ごかい(5F), ろっかい(6F), ななかい(7F), はっかい(8F), きゅうかい(9F), じゅっかい(10F). Note irregular readings: さんがい(3F), ろっかい(6F), はっかい(8F). アパートのにかいにすんでいます(I live on the 2nd floor of the apartment)."},
+    {jp:"〜番 (numbers, order, bus lines)",rom:"ban — number counter",en:"Number/order counter for addresses, buses, seats",tip:"いちばん(No.1/first), にばん(No.2), さんばん(No.3). Used for: bus numbers(にばんのバス=bus No.2), seat numbers(さんばんせき=seat 3), addresses(ごばん=number 5). Also: いちばん=most/best (as in いちばんすき=like most)."},
+    {jp:"たくさん vs すこし vs ぜんぜん",rom:"takusan / sukoshi / zenzen",en:"Quantity expressions with あります/います",tip:"ほんがたくさんあります(there are many books). ひとがすこしいます(there are a few people). じかんがぜんぜんありません(there is no time at all). おかねがあまりありません(there isn't much money). These quantity words go before the verb or the noun depending on emphasis."},
+    {jp:"もうある/いる vs まだある/いる",rom:"mou / mada",en:"Already have / Still have / Not yet",tip:"もうあります=already have/there already is. まだあります=still have/still there. まだない=not yet/still don't have. もうない=no longer there. おかねはもうありません(the money is already gone). まだじかんがあります(there is still time). These are crucial temporal markers."},
+    {jp:"どこかに / どこにも～ない",rom:"dokoka ni / doko ni mo nai",en:"Somewhere / Nowhere",tip:"どこかに = somewhere: どこかにいきましょう(let's go somewhere). どこかにさいふがあるはずです(my wallet must be somewhere). どこにもない = nowhere/not anywhere: かぎがどこにもありません(the key is nowhere). どこでも = anywhere/everywhere: どこでもいいです(anywhere is fine)."},
+    {jp:"ある vs いる for abstract concepts",rom:"aru vs iru abstract",en:"Extended uses of existence verbs",tip:"あります with abstract nouns: じかんがあります(I have time), もんだいがあります(there is a problem), チャンスがあります(there is a chance), ようじがあります(I have an errand). Also: ～がわかります(understand, takes が like existence). These abstract uses of ある are extremely common in Japanese."}
+  ],
+   quiz:[
+    {type:"grammar",prompt:"'ねこ' (cat) exists somewhere. Which verb do you use?",jp:"ねこが ___",choices:["あります","います","です","なります"],answer:"います",explain:"います is for animate things (can move by themselves) — animals, people. ねこがいます = there is a cat."},
+    {type:"grammar",prompt:"'じかんがあります' means:",jp:"じかんがあります",choices:["I am time","I have time","There is a clock","I need time"],answer:"I have time",explain:"あります can express 'having' for inanimate things. じかん = time. じかんがあります = I have time."},
+    {type:"reading",prompt:"'ぎんこうのまえにあります' — where is it?",jp:"ぎんこうのまえにあります",choices:["Behind the bank","Next to the bank","In front of the bank","Inside the bank"],answer:"In front of the bank",explain:"まえ = front. ぎんこうのまえ = in front of the bank. に = location marker."},
+    {type:"grammar",prompt:"'I have a younger sister' — which is correct?",jp:"",choices:["いもうとがあります","いもうとをいます","いもうとがいます","いもうとはあります"],answer:"いもうとがいます",explain:"People take います. いもうとがいます = I have a younger sister (younger sister exists)."},
+    {type:"grammar",prompt:"ほんはどこにありますか — what is being asked?",jp:"ほんはどこにありますか",choices:["What is the book?","Is there a book?","Where is the book?","How many books?"],answer:"Where is the book?",explain:"どこ = where. に = location. あります = exists. So: where is the book?"},
+    {type:"vocab",prompt:"Which word means 'between'?",jp:"",choices:["となり","まえ","うしろ","あいだ"],answer:"あいだ",explain:"あいだ means between/among. となり = next to, まえ = in front, うしろ = behind."}
+   ],
+   speaking:{jp:"わたしのへやにはほんがたくさんあります。つくえのうえにパソコンとノートがあります。",rom:"Watashi no heya ni wa hon ga takusan arimasu. Tsukue no ue ni pasokon to nooto ga arimasu.",en:"There are many books in my room. On the desk there is a computer and a notebook."}
+  },
+
+  /* ===== UNIT 9: て-form — Connecting Actions & Requests ===== */
+  {unit:"Unit 9",title:"て-form — Connecting Actions & Requests",objective:"Learn the て-form of verbs, use it to connect sequential actions, make requests, and form continuous tense.",difficulty:"intermediate",minutes:26,jlpt:"JLPT N5",
+   cards:[
+    {jp:"て-form formation rules (complete)",rom:"te-form rules",en:"The complete て-form conjugation guide",tip:"GROUP 1: く→いて(かく→かいて), ぐ→いで(およぐ→およいで), す→して(はなす→はなして), つ/る/う→って(かつ→かって, とる→とって, かう→かって), ぬ/ぶ/む→んで(のむ→のんで, よぶ→よんで, しぬ→しんで). EXCEPTION: いく→いって. GROUP 2: drop る, add て(たべる→たべて). GROUP 3: する→して, くる→きて."},
+    {jp:"〜てください (polite request)",rom:"~te kudasai",en:"Please do ~ (standard polite request)",tip:"たべてください(please eat), きいてください(please listen), ここにかいてください(please write here), まってください(please wait). Very common in daily life, instructions, classrooms. More polite: 〜ていただけますか(would you please~?). 〜ていただけないでしょうか=even more formal."},
+    {jp:"〜ないでください (negative request)",rom:"~nai de kudasai",en:"Please don't ~ (polite prohibition)",tip:"Negative plain form + でください. たべないでください(please don't eat), はしらないでください(please don't run), しゃしんをとらないでください(please don't take photos). Softer than 〜てはいけません. Used on signs, in instructions, and for polite requests."},
+    {jp:"〜てもいいですか (asking permission)",rom:"~te mo ii desu ka",en:"May I ~? Is it okay to ~?",tip:"しゃしんをとってもいいですか(may I take a photo?). はいってもいいですか(may I come in?). Permission granted: はい、どうぞ(yes, please go ahead). どうぞ alone also works. Permission denied politely: すみません、ちょっと...(I'm sorry, that's a bit...). The trailing ちょっと is a polite refusal."},
+    {jp:"〜てはいけません (prohibition)",rom:"~te wa ikemasen",en:"Must not ~ / You are not allowed to",tip:"ここでたべてはいけません(you must not eat here). しゃしんをとってはいけません(photography is prohibited). ここにはいってはいけません(no entry). Used for rules and strict prohibitions. More severe than ないでください. Signs often use てはいけません or forms like 禁止(kinshi=prohibited)."},
+    {jp:"〜ています (currently doing — progressive)",rom:"~te imasu (progressive)",en:"Is doing ~ right now",tip:"いまなにをしていますか(what are you doing now?). テレビをみています(I am watching TV). べんきょうをしています(I am studying). Note: Japanese progressive is used more sparingly than English '-ing'. In English we say 'I'm going to school' for routine — Japanese would use just いきます for habits."},
+    {jp:"〜ています (resultant state)",rom:"~te imasu (state)",en:"Is in the state of having done ~",tip:"Crucial: some verbs use ています for an ongoing STATE (result of action, not ongoing action). すんでいます(lives somewhere — state of having moved there). けっこんしています(is married — state). きています(is wearing — state). しっています(knows — state of having learnt). しんでいます(is dead — state)."},
+    {jp:"〜てから (after doing ~)",rom:"~te kara",en:"After doing ~ (then, subsequently)",tip:"Sequence: action 1 て + から + action 2. たべてからでかけます(I'll go out after eating). じゅぎょうがおわってからいきます(I'll go after class ends). Te-form + から emphasises completion before the next action. Compare: あとで(later) which is less sequential."},
+    {jp:"て-form to chain actions (〜て〜て〜ます)",rom:"~te ~te ~masu",en:"Listing sequential actions",tip:"おきて(wake up), かおをあらって(wash face), ごはんをたべて, がっこうにいきます(go to school). The final verb sets the tense/formality for all. This pattern is essential for describing routines, stories, and sequences. The て-form = 'and then' in these chains."},
+    {jp:"〜ておく (do in advance/preparation)",rom:"~te oku",en:"Do something in advance / prepare",tip:"じゅんびをしておく(prepare in advance). メモをとっておく(take notes beforehand). やすんでおく(rest beforehand). ておく(=te+oku, literally 'do and leave') means doing something now for future benefit. Casual contraction: 〜とく(のんどく=drink beforehand)."},
+    {jp:"〜てみる (try doing something)",rom:"~te miru",en:"Try doing ~ / Do ~ and see",tip:"たべてみます(I'll try eating it). いってみましょう(let's try going). はなしてみてください(please try speaking). て+みる (literally 'do and see') = try doing something and observe the result. Very natural and frequently used when trying new things or suggesting something."},
+    {jp:"〜てしまう (do completely / regrettably)",rom:"~te shimau",en:"End up doing / Do completely (regret/completion)",tip:"Two meanings: 1) COMPLETION: ぜんぶたべてしまいました(I've eaten it all up — finished). 2) REGRET/UNINTENDED: わすれてしまいました(I ended up forgetting — unfortunately). Casual contraction: 〜ちゃう/〜じゃう. たべちゃった=ate it all up (casual). Very common in spoken Japanese."},
+    {jp:"〜てある (has been done — resultant state)",rom:"~te aru",en:"Has been done (by someone, intentionally)",tip:"まどがあいてあります(the window has been opened — by someone, intentionally). じゅんびがしてあります(preparations have been made). ドアがしめてあります(the door has been closed). てある = result of intentional human action visible now. Compare: ています(state) vs てある(intentional result)."},
+    {jp:"〜てくる / 〜ていく (direction of action)",rom:"~te kuru / ~te iku",en:"Come doing ~ / Go doing ~ (temporal movement)",tip:"てくる: action moves toward present/speaker. だんだんさむくなってきました(it's gotten gradually colder — coming this way in time). ていく: action moves away from present. だんだんあたたかくなっていきます(it's gradually getting warmer — going forward). Also spatial: もってきます(bring here) vs もっていきます(take there)."},
+    {jp:"〜ている (habits, ongoing states)",rom:"~te iru (habitual/ongoing)",en:"ている for habitual actions over time",tip:"〜ています also expresses ongoing situations and habitual professional activities. やまださんはぎんこうではたらいています(Yamada works at a bank — ongoing situation). まいにちはしっています(I run every day — habitual). This differs from the progressive (happening right now) — context clarifies which."},
+    {jp:"て-form review + common patterns",rom:"te-form review",en:"Key て-form patterns summary",tip:"REQUESTS: 〜てください / 〜ないでください. PERMISSION: 〜てもいいですか. PROHIBITION: 〜てはいけません. PROGRESSIVE: 〜ています. SEQUENCE: 〜てから. CHAIN: 〜て、〜て、〜ます. TRY: 〜てみる. REGRET/COMPLETE: 〜てしまう. PREPARATION: 〜ておく. Master these 8 patterns and your Japanese becomes dramatically more natural."}
+  ],
+   quiz:[
+    {type:"grammar",prompt:"What is the て-form of たべる?",jp:"たべる → ___ (て-form)",choices:["たべいて","たべて","たべって","たべくて"],answer:"たべて",explain:"Group 2: drop る, add て. たべる → たべて."},
+    {type:"grammar",prompt:"'しゃしんをとってもいいですか' means:",jp:"しゃしんをとってもいいですか",choices:["Please take a photo","You must not take photos","May I take a photo?","I am taking a photo"],answer:"May I take a photo?",explain:"て-form + もいいですか = May I ~? Permission question."},
+    {type:"grammar",prompt:"'いまなにを していますか' is asking:",jp:"いまなにをしていますか",choices:["What did you do?","What will you do?","What are you doing now?","What do you usually do?"],answer:"What are you doing now?",explain:"～ています = ongoing action. いま = now. So: what are you doing right now?"},
+    {type:"grammar",prompt:"What is the て-form of いく (go)?",jp:"いく → ___ (て-form)",choices:["いいて","いって","いきて","いて"],answer:"いって",explain:"いく is an exception to the G1 く→いて rule: いく → いって (not いいて)."},
+    {type:"grammar",prompt:"'たべてから べんきょうします' means:",jp:"たべてから べんきょうします",choices:["I study while eating","I study instead of eating","After eating, I study","I eat after studying"],answer:"After eating, I study",explain:"て-form + から = after doing ~. After eating → I will study."},
+    {type:"grammar",prompt:"'ここで はしらないでください' means:",jp:"ここで はしらないでください",choices:["Please run here","You must run here","Please don't run here","Where do you run?"],answer:"Please don't run here",explain:"～ないでください = please don't ~. はしる = run. ここで = here."}
+   ],
+   speaking:{jp:"まいあさ おきて、シャワーをあびて、ごはんをたべてから がっこうにいきます。",rom:"Maiasa okite, shawaa o abite, gohan o tabete kara gakkou ni ikimasu.",en:"Every morning I wake up, take a shower, and then go to school after eating."}
+  },
+
+  /* ===== UNIT 10: Expressing Preferences, Ability & Plans ===== */
+  {unit:"Unit 10",title:"Preferences, Ability & Future Plans",objective:"Express what you like/dislike, what you can do, and discuss future plans and intentions.",difficulty:"intermediate",minutes:24,jlpt:"JLPT N4",
+   cards:[
+    {jp:"〜がすきです / きらいです / きらいじゃない",rom:"suki/kirai/suki janai",en:"Like / Dislike / Don't dislike",tip:"すき/きらい are な-adjectives taking が: にほんごがすきです. とてもすき(love it), だいすき(really love), すき(like), まあまあすき(like it okay), あまりすきじゃない(don't like much), きらい(dislike), だいきらい(hate). Very useful spectrum. でも used between: すきだけどむずかしい."},
+    {jp:"〜がじょうずです / とくいです / へたです",rom:"jouzu/tokui/heta",en:"Good at / Specialty / Bad at",tip:"じょうず: skilled at (complimenting OTHERS). にほんごがじょうずですね! とくい: good at (your own specialty/strength). わたしはりょうりがとくいです(I'm good at cooking). へた: unskilled. うたがへたです(I'm bad at singing). Using じょうず about yourself sounds boastful — use とくい instead."},
+    {jp:"〜ができます — ability",rom:"~ga dekimasu",en:"Can do ~ / Able to ~",tip:"にほんごができます(I can speak Japanese). ピアノができます(I can play piano). General ability with が. More specific: たべることができます(I am able to eat it). できる→できます(Group 2 verb). できません(can't). できました(could/was able to). できたらいいな(I wish I could)."},
+    {jp:"potential form 〜られる/〜える",rom:"rareru/eru potential",en:"The potential verb form",tip:"GROUP 2: drop る + られる: たべる→たべられます(can eat). みる→みられます(can see). GROUP 1: change u→e + る: かく→かける(can write), のむ→のめる(can drink), いく→いける(can go), はなす→はなせる(can speak). GROUP 3: できる(can do), こられる(can come). Potential verbs take が for object: にほんごがはなせます."},
+    {jp:"〜たいです / 〜たがっています",rom:"~tai desu / ~tagatte imasu",en:"I want to ~ / He/She wants to ~",tip:"Speaker's desire: たべたいです(I want to eat), いきたいです(I want to go). たい conjugates like い-adjective: たくない(don't want to), たかった(wanted to). Third person desire: たがっています(seems to want to — observe behavior). かのじょはにほんにいきたがっています(she seems to want to go to Japan)."},
+    {jp:"〜がほしいです / 〜をほしがっています",rom:"~ga hoshii desu",en:"I want (a thing) / He/She wants",tip:"ほしい = want (a thing) — い-adjective. What you want takes が: あたらしいほんがほしいです(I want a new book). Negative: ほしくないです. Past: ほしかったです. Third person: ほしがっています(seems to want). Never use ほしい for wanting to DO something — use たい for actions."},
+    {jp:"〜つもりです / 〜と思っています",rom:"tsumori desu / to omotteimasu",en:"I intend to ~ / I am thinking of ~ing",tip:"つもりです = firm personal intention. にほんにいくつもりです(I intend to go to Japan). Negative intention: いかないつもりです(I don't intend to go). 〜とおもっています = less firm, ongoing thought/consideration. にほんにいこうとおもっています(I'm thinking of going to Japan). とおもっています is ongoing mental state."},
+    {jp:"〜よていです / 〜はずです",rom:"yotei desu / hazu desu",en:"I plan to ~ / Should be (expectation)",tip:"よていです = scheduled/planned event: らいねんにほんにいくよていです(I plan to go to Japan next year). はずです = something that should/ought to be the case based on logical expectation: もうすぐくるはずです(he should be arriving soon — it's expected). はず expresses confident expectation."},
+    {jp:"〜とおもいます — expressing opinions",rom:"~to omoimasu",en:"I think that ~ (softened opinion)",tip:"Plain form + とおもいます: たかいとおもいます(I think it's expensive). いいとおもいます(I think it's good). Negative: 〜ないとおもいます: こないとおもいます(I think he won't come). このほうがいいとおもいます(I think this one is better). とおもいます softens assertions — very Japanese to avoid sounding too direct."},
+    {jp:"どうしてですか / 〜からです",rom:"doushite / ~kara desu",en:"Why? / It is because ~",tip:"Question: どうしてですか or なぜですか(why?). Answer: 〜からです(it's because ~). にほんごをべんきょうしているんですか→にほんがすきだからです(why are you studying Japanese? → because I like Japan). Short casual answer: just 〜から: すきだから(because I like it)."},
+    {jp:"〜ので — softer because",rom:"~node",en:"Because ~ (polite/natural reason)",tip:"〜から vs 〜ので: から = direct/causal, ので = polite/natural consequence. Use ので in formal situations, with superiors, in written Japanese: じかんがないので、いきません(I won't go because I have no time — natural reason). ので sounds more mature and considered than から."},
+    {jp:"〜でしょう / 〜かもしれません",rom:"~deshoo / ~kamoshiremasen",en:"Probably ~ / Might be ~",tip:"でしょう = probably (confident prediction): あしたはあめでしょう(it will probably rain tomorrow). Weather forecasters use this constantly. かもしれません = might/may be (uncertain possibility): かれはくるかもしれません(he might come). かも alone is very casual: くるかも(might come)."},
+    {jp:"〜ましょう / 〜ましょうか",rom:"~mashou / ~mashou ka",en:"Let's ~ / Shall we ~?",tip:"Invitation/suggestion: いきましょう(let's go!). たべましょう(let's eat!). ましょうか = offering help or a softer suggestion: もちましょうか(shall I carry it?). てつだいましょうか(shall I help you?). This is how you offer assistance in Japanese — very polite and expected."},
+    {jp:"〜たら / 〜ば — conditional forms",rom:"~tara / ~ba conditionals",en:"When/If ~ (basic conditional forms)",tip:"たら = when/if (temporal/conditional): にほんにいったら(when/if I go to Japan). Past + ら: たべたら(after eating/if you eat). ば = hypothetical if: たかければかわない(if it's expensive I won't buy it). ば/たら are introduced at N5-N4. たら is more versatile and colloquial."},
+    {jp:"〜ながら (doing two things simultaneously)",rom:"~nagara",en:"While doing ~ at the same time",tip:"Stem + ながら: おんがくをきき+ながら+べんきょうします(I study while listening to music). はし+ながら+はなす(talk while walking). The ながら action is secondary/background. テレビをみながらしょくじします(eat while watching TV). The main verb comes last."},
+    {jp:"〜そうです / 〜らしいです / 〜ようです",rom:"sou/rashii/you desu",en:"Looks like / Apparently / Seems like",tip:"〜そうです: visual judgement — looks like(adj) or I heard(reported). おいしそう(looks delicious — visual). 〜らしいです: hearsay/apparently — based on info: かれはにほんじんらしいです(he appears to be Japanese — from info). 〜ようです: seems like — based on evidence: かぜのようです(seems like a cold — based on symptoms)."}
+  ],
+   quiz:[
+    {type:"grammar",prompt:"'にほんごがすきです' — what role does が play here?",jp:"にほんごがすきです",choices:["Object marker","Topic marker","Subject of what is liked","Direction marker"],answer:"Subject of what is liked",explain:"With すき and きらい, the liked/disliked thing takes が, not を. にほんご = what is liked."},
+    {type:"grammar",prompt:"'にほんにいきたいです' means:",jp:"にほんにいきたいです",choices:["I went to Japan","I am going to Japan","I want to go to Japan","I can go to Japan"],answer:"I want to go to Japan",explain:"～たいです = want to do. いきたい = want to go. に = direction (to Japan)."},
+    {type:"grammar",prompt:"Which expression means 'I can speak Japanese' most naturally at N5?",jp:"",choices:["にほんごをはなします","にほんごがすきです","にほんごができます","にほんごをたいです"],answer:"にほんごができます",explain:"～ができます = can do. にほんごができます = I can do Japanese / speak Japanese."},
+    {type:"grammar",prompt:"'らいねんにほんにいくつもりです' means:",jp:"らいねんにほんにいくつもりです",choices:["I went to Japan last year","I want to go to Japan","I intend to go to Japan next year","I plan to study Japanese"],answer:"I intend to go to Japan next year",explain:"つもりです = intend to. らいねん = next year. いく = go. に = to Japan."},
+    {type:"grammar",prompt:"When explaining a reason politely, which conjunction sounds more mature/formal?",jp:"",choices:["だから","から","ので","なぜなら"],answer:"ので",explain:"ので is softer and more polished than から for expressing reason. Better in formal/polite contexts."},
+    {type:"reading",prompt:"'あたらしいパソコンがほしいです' — what does this express?",jp:"あたらしいパソコンがほしいです",choices:["I have a new computer","I want a new computer","I bought a new computer","I like new computers"],answer:"I want a new computer",explain:"ほしいです = want (a thing). あたらしい = new. パソコン = computer. が marks what is wanted."}
+   ],
+   speaking:{jp:"わたしはにほんにいきたいです。にほんごがすこしできます。もっとじょうずになりたいです。",rom:"Watashi wa nihon ni ikitai desu. Nihongo ga sukoshi dekimasu. Motto jouzu ni naritai desu.",en:"I want to go to Japan. I can speak Japanese a little. I want to become more skilled."}
   }
 ];
 
 const vocabBank=[
-  {jp:"こんにちは",rom:"Konnichiwa",en:"Hello",lesson:0},
-  {jp:"ありがとう",rom:"Arigatou",en:"Thank you",lesson:0},
-  {jp:"すみません",rom:"Sumimasen",en:"Excuse me",lesson:0},
-  {jp:"おはよう",rom:"Ohayou",en:"Good morning",lesson:0},
-  {jp:"わたし",rom:"Watashi",en:"I / Me",lesson:1},
-  {jp:"です",rom:"Desu",en:"To be (polite)",lesson:1},
-  {jp:"なまえ",rom:"Namae",en:"Name",lesson:1},
-  {jp:"しゅみ",rom:"Shumi",en:"Hobby",lesson:1},
-  {jp:"えき",rom:"Eki",en:"Station",lesson:2},
-  {jp:"みず",rom:"Mizu",en:"Water",lesson:2},
-  {jp:"いくら",rom:"Ikura",en:"How much",lesson:2},
-  {jp:"どこ",rom:"Doko",en:"Where",lesson:2},
-  {jp:"すき",rom:"Suki",en:"Like",lesson:3},
-  {jp:"たのしい",rom:"Tanoshii",en:"Fun",lesson:3},
-  {jp:"でも",rom:"Demo",en:"But",lesson:3},
-  {jp:"おきます",rom:"Okimasu",en:"Wake up",lesson:4},
+  {jp:"こんにちは",rom:"Konnichiwa",en:"Hello",lesson:1},
+  {jp:"ありがとうございます",rom:"Arigatou gozaimasu",en:"Thank you",lesson:1},
+  {jp:"すみません",rom:"Sumimasen",en:"Excuse me",lesson:1},
+  {jp:"おはようございます",rom:"Ohayou gozaimasu",en:"Good morning",lesson:1},
+  {jp:"はじめまして",rom:"Hajimemashite",en:"Nice to meet you",lesson:1},
+  {jp:"よろしくおねがいします",rom:"Yoroshiku onegai shimasu",en:"Please treat me well",lesson:1},
+  {jp:"ごめんなさい",rom:"Gomen nasai",en:"I'm sorry",lesson:1},
+  {jp:"だいじょうぶ",rom:"Daijoubu",en:"It's okay / Fine",lesson:1},
+  {jp:"わたし",rom:"Watashi",en:"I / Me",lesson:2},
+  {jp:"です",rom:"Desu",en:"To be (polite)",lesson:2},
+  {jp:"ちがいます",rom:"Chigaimasu",en:"That's wrong / Different",lesson:2},
+  {jp:"そうです",rom:"Sou desu",en:"That's right",lesson:2},
+  {jp:"は (particle)",rom:"wa",en:"Topic marker particle",lesson:3},
+  {jp:"が (particle)",rom:"ga",en:"Subject marker particle",lesson:3},
+  {jp:"を (particle)",rom:"o",en:"Object marker particle",lesson:3},
+  {jp:"に (particle)",rom:"ni",en:"Direction / Time particle",lesson:3},
+  {jp:"で (particle)",rom:"de",en:"Location of action particle",lesson:3},
+  {jp:"も (particle)",rom:"mo",en:"Also / Too",lesson:3},
+  {jp:"いきます",rom:"Ikimasu",en:"Go",lesson:4},
+  {jp:"きます",rom:"Kimasu",en:"Come",lesson:4},
   {jp:"たべます",rom:"Tabemasu",en:"Eat",lesson:4},
-  {jp:"べんきょう",rom:"Benkyou",en:"Study",lesson:4},
-  {jp:"まいにち",rom:"Mainichi",en:"Every day",lesson:4}
+  {jp:"のみます",rom:"Nomimasu",en:"Drink",lesson:4},
+  {jp:"みます",rom:"Mimasu",en:"Watch / See",lesson:4},
+  {jp:"ききます",rom:"Kikimasu",en:"Listen / Hear",lesson:4},
+  {jp:"よみます",rom:"Yomimasu",en:"Read",lesson:4},
+  {jp:"べんきょうします",rom:"Benkyou shimasu",en:"Study",lesson:4},
+  {jp:"おおきい",rom:"Ookii",en:"Big / Large",lesson:5},
+  {jp:"ちいさい",rom:"Chiisai",en:"Small / Little",lesson:5},
+  {jp:"たかい",rom:"Takai",en:"Expensive / Tall",lesson:5},
+  {jp:"やすい",rom:"Yasui",en:"Cheap / Inexpensive",lesson:5},
+  {jp:"おいしい",rom:"Oishii",en:"Delicious",lesson:5},
+  {jp:"むずかしい",rom:"Muzukashii",en:"Difficult",lesson:5},
+  {jp:"すき",rom:"Suki",en:"Like / Fond of",lesson:5},
+  {jp:"きれい",rom:"Kirei",en:"Beautiful / Clean",lesson:5},
+  {jp:"まいにち",rom:"Mainichi",en:"Every day",lesson:6},
+  {jp:"いち",rom:"Ichi",en:"One (1)",lesson:6},
+  {jp:"に",rom:"Ni",en:"Two (2)",lesson:6},
+  {jp:"さん",rom:"San",en:"Three (3)",lesson:6},
+  {jp:"なんじ",rom:"Nanji",en:"What time",lesson:6},
+  {jp:"あります",rom:"Arimasu",en:"There is (inanimate)",lesson:7},
+  {jp:"います",rom:"Imasu",en:"There is (animate)",lesson:7},
+  {jp:"うえ",rom:"Ue",en:"Above / On top",lesson:7},
+  {jp:"した",rom:"Shita",en:"Below / Under",lesson:7},
+  {jp:"となり",rom:"Tonari",en:"Next to",lesson:7},
+  {jp:"てください",rom:"te kudasai",en:"Please do ~",lesson:8},
+  {jp:"ています",rom:"te imasu",en:"Is doing ~",lesson:8},
+  {jp:"てもいいですか",rom:"te mo ii desu ka",en:"May I ~?",lesson:8},
+  {jp:"すきです",rom:"Suki desu",en:"I like it",lesson:9},
+  {jp:"いきたいです",rom:"Ikitai desu",en:"I want to go",lesson:9},
+  {jp:"できます",rom:"Dekimasu",en:"Can do",lesson:9},
+  {jp:"つもりです",rom:"Tsumori desu",en:"I intend to",lesson:9}
 ];
-
 const sentenceBuilderQs=[
   {prompt:"Build: 'I am Yuki'",answer:["わたしは","ゆきです"],words:["わたしは","ゆきです","ありがとう","どこ"],translate:"Watashi wa Yuki desu"},
   {prompt:"Build: 'Where is the station?'",answer:["えきは","どこですか"],words:["えきは","どこですか","みずを","です"],translate:"Eki wa doko desu ka"},
@@ -711,29 +1082,99 @@ const sectionExam={
 };
 
 const hiragana=[
+  /* Vowels */
   {char:"あ",rom:"a"},{char:"い",rom:"i"},{char:"う",rom:"u"},{char:"え",rom:"e"},{char:"お",rom:"o"},
+  /* K row */
   {char:"か",rom:"ka"},{char:"き",rom:"ki"},{char:"く",rom:"ku"},{char:"け",rom:"ke"},{char:"こ",rom:"ko"},
+  /* S row */
   {char:"さ",rom:"sa"},{char:"し",rom:"shi"},{char:"す",rom:"su"},{char:"せ",rom:"se"},{char:"そ",rom:"so"},
+  /* T row */
   {char:"た",rom:"ta"},{char:"ち",rom:"chi"},{char:"つ",rom:"tsu"},{char:"て",rom:"te"},{char:"と",rom:"to"},
+  /* N row */
   {char:"な",rom:"na"},{char:"に",rom:"ni"},{char:"ぬ",rom:"nu"},{char:"ね",rom:"ne"},{char:"の",rom:"no"},
+  /* H row */
   {char:"は",rom:"ha"},{char:"ひ",rom:"hi"},{char:"ふ",rom:"fu"},{char:"へ",rom:"he"},{char:"ほ",rom:"ho"},
+  /* M row */
   {char:"ま",rom:"ma"},{char:"み",rom:"mi"},{char:"む",rom:"mu"},{char:"め",rom:"me"},{char:"も",rom:"mo"},
+  /* Y row */
   {char:"や",rom:"ya"},{char:"ゆ",rom:"yu"},{char:"よ",rom:"yo"},
+  /* R row */
   {char:"ら",rom:"ra"},{char:"り",rom:"ri"},{char:"る",rom:"ru"},{char:"れ",rom:"re"},{char:"ろ",rom:"ro"},
-  {char:"わ",rom:"wa"},{char:"を",rom:"wo"},{char:"ん",rom:"n"}
-];
+  /* W row + N */
+  {char:"わ",rom:"wa"},{char:"を",rom:"wo"},{char:"ん",rom:"n"},
+  /* Dakuten G row (voiced K) */
+  {char:"が",rom:"ga"},{char:"ぎ",rom:"gi"},{char:"ぐ",rom:"gu"},{char:"げ",rom:"ge"},{char:"ご",rom:"go"},
+  /* Dakuten Z row (voiced S) */
+  {char:"ざ",rom:"za"},{char:"じ",rom:"ji"},{char:"ず",rom:"zu"},{char:"ぜ",rom:"ze"},{char:"ぞ",rom:"zo"},
+  /* Dakuten D row (voiced T) */
+  {char:"だ",rom:"da"},{char:"ぢ",rom:"ji(d)"},{char:"づ",rom:"zu(d)"},{char:"で",rom:"de"},{char:"ど",rom:"do"},
+  /* Dakuten B row (voiced H) */
+  {char:"ば",rom:"ba"},{char:"び",rom:"bi"},{char:"ぶ",rom:"bu"},{char:"べ",rom:"be"},{char:"ぼ",rom:"bo"},
+  /* Handakuten P row */
+  {char:"ぱ",rom:"pa"},{char:"ぴ",rom:"pi"},{char:"ぷ",rom:"pu"},{char:"ぺ",rom:"pe"},{char:"ぽ",rom:"po"},
+  /* Combination sounds (youon) */
+  {char:"きゃ",rom:"kya"},{char:"きゅ",rom:"kyu"},{char:"きょ",rom:"kyo"},
+  {char:"しゃ",rom:"sha"},{char:"しゅ",rom:"shu"},{char:"しょ",rom:"sho"},
+  {char:"ちゃ",rom:"cha"},{char:"ちゅ",rom:"chu"},{char:"ちょ",rom:"cho"},
+  {char:"にゃ",rom:"nya"},{char:"にゅ",rom:"nyu"},{char:"にょ",rom:"nyo"},
+  {char:"ひゃ",rom:"hya"},{char:"ひゅ",rom:"hyu"},{char:"ひょ",rom:"hyo"},
+  {char:"みゃ",rom:"mya"},{char:"みゅ",rom:"myu"},{char:"みょ",rom:"myo"},
+  {char:"りゃ",rom:"rya"},{char:"りゅ",rom:"ryu"},{char:"りょ",rom:"ryo"},
+  {char:"ぎゃ",rom:"gya"},{char:"ぎゅ",rom:"gyu"},{char:"ぎょ",rom:"gyo"},
+  {char:"じゃ",rom:"ja"},{char:"じゅ",rom:"ju"},{char:"じょ",rom:"jo"},
+  {char:"びゃ",rom:"bya"},{char:"びゅ",rom:"byu"},{char:"びょ",rom:"byo"},
+  {char:"ぴゃ",rom:"pya"},{char:"ぴゅ",rom:"pyu"},{char:"ぴょ",rom:"pyo"}
+]
 const katakana=[
+  /* Vowels */
   {char:"ア",rom:"a"},{char:"イ",rom:"i"},{char:"ウ",rom:"u"},{char:"エ",rom:"e"},{char:"オ",rom:"o"},
+  /* K row */
   {char:"カ",rom:"ka"},{char:"キ",rom:"ki"},{char:"ク",rom:"ku"},{char:"ケ",rom:"ke"},{char:"コ",rom:"ko"},
+  /* S row */
   {char:"サ",rom:"sa"},{char:"シ",rom:"shi"},{char:"ス",rom:"su"},{char:"セ",rom:"se"},{char:"ソ",rom:"so"},
+  /* T row */
   {char:"タ",rom:"ta"},{char:"チ",rom:"chi"},{char:"ツ",rom:"tsu"},{char:"テ",rom:"te"},{char:"ト",rom:"to"},
+  /* N row */
   {char:"ナ",rom:"na"},{char:"ニ",rom:"ni"},{char:"ヌ",rom:"nu"},{char:"ネ",rom:"ne"},{char:"ノ",rom:"no"},
+  /* H row */
   {char:"ハ",rom:"ha"},{char:"ヒ",rom:"hi"},{char:"フ",rom:"fu"},{char:"ヘ",rom:"he"},{char:"ホ",rom:"ho"},
+  /* M row */
   {char:"マ",rom:"ma"},{char:"ミ",rom:"mi"},{char:"ム",rom:"mu"},{char:"メ",rom:"me"},{char:"モ",rom:"mo"},
+  /* Y row */
   {char:"ヤ",rom:"ya"},{char:"ユ",rom:"yu"},{char:"ヨ",rom:"yo"},
+  /* R row */
   {char:"ラ",rom:"ra"},{char:"リ",rom:"ri"},{char:"ル",rom:"ru"},{char:"レ",rom:"re"},{char:"ロ",rom:"ro"},
-  {char:"ワ",rom:"wa"},{char:"ヲ",rom:"wo"},{char:"ン",rom:"n"}
-];
+  /* W row + N */
+  {char:"ワ",rom:"wa"},{char:"ヲ",rom:"wo"},{char:"ン",rom:"n"},
+  /* Dakuten G row */
+  {char:"ガ",rom:"ga"},{char:"ギ",rom:"gi"},{char:"グ",rom:"gu"},{char:"ゲ",rom:"ge"},{char:"ゴ",rom:"go"},
+  /* Dakuten Z row */
+  {char:"ザ",rom:"za"},{char:"ジ",rom:"ji"},{char:"ズ",rom:"zu"},{char:"ゼ",rom:"ze"},{char:"ゾ",rom:"zo"},
+  /* Dakuten D row */
+  {char:"ダ",rom:"da"},{char:"ヂ",rom:"ji(d)"},{char:"ヅ",rom:"zu(d)"},{char:"デ",rom:"de"},{char:"ド",rom:"do"},
+  /* Dakuten B row */
+  {char:"バ",rom:"ba"},{char:"ビ",rom:"bi"},{char:"ブ",rom:"bu"},{char:"ベ",rom:"be"},{char:"ボ",rom:"bo"},
+  /* Handakuten P row */
+  {char:"パ",rom:"pa"},{char:"ピ",rom:"pi"},{char:"プ",rom:"pu"},{char:"ペ",rom:"pe"},{char:"ポ",rom:"po"},
+  /* Combination sounds */
+  {char:"キャ",rom:"kya"},{char:"キュ",rom:"kyu"},{char:"キョ",rom:"kyo"},
+  {char:"シャ",rom:"sha"},{char:"シュ",rom:"shu"},{char:"ショ",rom:"sho"},
+  {char:"チャ",rom:"cha"},{char:"チュ",rom:"chu"},{char:"チョ",rom:"cho"},
+  {char:"ニャ",rom:"nya"},{char:"ニュ",rom:"nyu"},{char:"ニョ",rom:"nyo"},
+  {char:"ヒャ",rom:"hya"},{char:"ヒュ",rom:"hyu"},{char:"ヒョ",rom:"hyo"},
+  {char:"ミャ",rom:"mya"},{char:"ミュ",rom:"myu"},{char:"ミョ",rom:"myo"},
+  {char:"リャ",rom:"rya"},{char:"リュ",rom:"ryu"},{char:"リョ",rom:"ryo"},
+  {char:"ギャ",rom:"gya"},{char:"ギュ",rom:"gyu"},{char:"ギョ",rom:"gyo"},
+  {char:"ジャ",rom:"ja"},{char:"ジュ",rom:"ju"},{char:"ジョ",rom:"jo"},
+  {char:"ビャ",rom:"bya"},{char:"ビュ",rom:"byu"},{char:"ビョ",rom:"byo"},
+  {char:"ピャ",rom:"pya"},{char:"ピュ",rom:"pyu"},{char:"ピョ",rom:"pyo"},
+  /* Extended katakana for foreign sounds */
+  {char:"ファ",rom:"fa"},{char:"フィ",rom:"fi"},{char:"フェ",rom:"fe"},{char:"フォ",rom:"fo"},
+  {char:"ウィ",rom:"wi"},{char:"ウェ",rom:"we"},{char:"ウォ",rom:"wo"},
+  {char:"ヴァ",rom:"va"},{char:"ヴィ",rom:"vi"},{char:"ヴ",rom:"vu"},{char:"ヴェ",rom:"ve"},{char:"ヴォ",rom:"vo"},
+  {char:"ティ",rom:"ti"},{char:"ディ",rom:"di"},{char:"トゥ",rom:"tu"},{char:"ドゥ",rom:"du"},
+  {char:"チェ",rom:"che"},{char:"ジェ",rom:"je"},{char:"シェ",rom:"she"}
+]
 const writeVocab=[
   {char:"日本語",rom:"Nihongo",meaning:"Japanese language"},
   {char:"ありがとう",rom:"Arigatou",meaning:"Thank you"},
@@ -968,13 +1409,15 @@ function renderDetail(){
       <div class="detail-obj">📋 ${l.objective}</div>
     </div>
     <div class="detail-tabs">
-      <div class="detail-tab active" id="dtab-cards" onclick="switchDTab('cards')">📚 Study</div>
+      ${curLesson===0?"<div class=\"detail-tab active\" id=\"dtab-kana\" onclick=\"switchDTab('kana')\">🔤 Kana Lab</div>":""}
+      <div class="detail-tab ${curLesson===0?"":"active"}" id="dtab-cards" onclick="switchDTab('cards')">📖 Lesson</div>
       <div class="detail-tab" id="dtab-quiz" onclick="switchDTab('quiz')">📝 Quiz</div>
       <div class="detail-tab" id="dtab-speak" onclick="switchDTab('speak')">🗣️ Speak</div>
       <div class="detail-tab" id="dtab-shadow" onclick="switchDTab('shadow')">📣 Shadow</div>
     </div>
-    <div class="detail-panel active" id="dpanel-cards">${buildCards(l)}</div>
-    <div class="detail-panel" id="dpanel-quiz"><div class="quiz-wrap" id="quizArea"><div style="text-align:center;padding:20px;color:var(--muted)">Tap Quiz to start</div></div></div>
+    <div class="detail-panel ${curLesson===0?"active":""}" id="dpanel-kana">${curLesson===0?buildKanaLab(l):""}</div>
+    <div class="detail-panel ${curLesson!==0?"active":""}" id="dpanel-cards">${buildCards(l)}</div>
+    <div class="detail-panel" id="dpanel-quiz"><div class="quiz-wrap" id="quizArea"><div style="text-align:center;padding:20px;color:var(--muted)">Complete the Lesson tab first, then take the Quiz</div></div></div>
     <div class="detail-panel" id="dpanel-speak">${buildSpeakPanel(l)}</div>
     <div class="detail-panel" id="dpanel-shadow">${buildShadowPanel(l)}</div>
   `;
@@ -984,22 +1427,357 @@ function switchDTab(tab){
   playClick();curDTab=tab;
   document.querySelectorAll(".detail-tab").forEach(t=>t.classList.remove("active"));
   document.querySelectorAll(".detail-panel").forEach(p=>p.classList.remove("active"));
-  document.getElementById("dtab-"+tab).classList.add("active");
-  document.getElementById("dpanel-"+tab).classList.add("active");
+  const tabEl=document.getElementById("dtab-"+tab);
+  const panelEl=document.getElementById("dpanel-"+tab);
+  if(tabEl)tabEl.classList.add("active");
+  if(panelEl)panelEl.classList.add("active");
   if(tab==="quiz")initQuiz();
+  if(tab==="kana"){
+    const panel=document.getElementById("dpanel-kana");
+    if(panel&&!panel.innerHTML.trim()){const l=lessons[curLesson];panel.innerHTML=buildKanaLab(l);}
+    if(kl.mode==="write")setTimeout(initKLCanvas,80);
+  }
 }
-function buildCards(l){
-  return`<div style="padding:10px 0 2px;font-size:11px;color:var(--muted)">Study each card, then tap the Quiz tab.</div>`+
-  l.cards.map((c,i)=>`
-    <div class="flashcard">
-      <div class="fc-num">Card ${i+1} of ${l.cards.length}</div>
-      <div class="fc-jp">${c.jp}</div>
-      <div class="fc-rom">${c.rom}</div>
-      <div class="fc-en">${c.en}</div>
-      <div class="fc-tip">💡 ${c.tip}</div>
-      <button class="fc-audio" onclick="speak('${c.jp.replace(/'/g,"\\'")}')">🔊 Hear it</button>
-    </div>`).join("");
+/* ═══════════════════════════════════════
+   GUIDED LESSON ENGINE
+═══════════════════════════════════════ */
+let ls = {          // lesson session state
+  idx: 0,           // current item index
+  phase: 'intro',   // intro | teach | check | done
+  checkAnswered: false,
+  wrongItems: [],
+  score: 0,
+  reviewMode: false
+};
+
+function buildCards(l) {
+  ls = { idx:0, phase:'intro', checkAnswered:false, wrongItems:[], score:0, reviewMode:false };
+  return renderLesson(l);
 }
+
+function renderLesson(l) {
+  if (ls.phase === 'intro')  return renderLessonIntro(l);
+  if (ls.phase === 'teach')  return renderLessonTeach(l);
+  if (ls.phase === 'check')  return renderLessonCheck(l);
+  if (ls.phase === 'review') return renderLessonReview(l);
+  if (ls.phase === 'done')   return renderLessonDone(l);
+  return '';
+}
+
+/* ── helpers ── */
+function esc(s){ return s ? s.replace(/'/g,"\'").replace(/`/g,"\`") : ''; }
+function refreshLesson(){
+  const p = document.getElementById('dpanel-cards');
+  if(p){ p.innerHTML = renderLesson(lessons[curLesson]); p.scrollTop=0; }
+  const d = document.querySelector('.lesson-detail');
+  if(d) d.scrollTop = 0;
+}
+
+/* ── INTRO SCREEN ── */
+function renderLessonIntro(l) {
+  const total = l.cards.length;
+  const icons = ['👋','🙋','✈️','💬','📅','📝','🔢','📍','🔗','🎯'];
+  return `
+  <div style="padding:0 18px 20px">
+    <div style="background:linear-gradient(135deg,#0f4c81,#1a237e);border-radius:18px;padding:22px 18px;color:#fff;margin-top:14px;text-align:center">
+      <div style="font-size:48px;margin-bottom:10px">${icons[curLesson]||'📖'}</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">${l.title}</div>
+      <div style="font-size:12px;opacity:0.7;margin-bottom:14px">${l.unit} · ${l.jlpt} · ~${l.minutes} min</div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.6;text-align:left">${l.objective}</div>
+    </div>
+    <div style="margin-top:14px;background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px;font-weight:600">What you'll learn</div>
+      ${l.cards.slice(0,5).map(c=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid #f5f3ef">
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:20px;min-width:48px">${c.jp.split(' ')[0]}</div>
+          <div><div style="font-size:12px;font-weight:500">${c.en}</div><div style="font-size:10px;color:var(--muted)">${c.rom}</div></div>
+        </div>`).join('')}
+      ${total>5?`<div style="font-size:11px;color:var(--muted);padding-top:8px">+ ${total-5} more items</div>`:''}
+    </div>
+    <button onclick="ls.phase='teach';ls.idx=0;refreshLesson()" 
+      style="width:100%;margin-top:14px;background:var(--navy);color:#fff;border:none;border-radius:14px;padding:16px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer">
+      Start Lesson →
+    </button>
+  </div>`;
+}
+
+/* ── TEACH ONE ITEM ── */
+function renderLessonTeach(l) {
+  const cards = ls.reviewMode ? ls.wrongItems : l.cards;
+  if (ls.idx >= cards.length) {
+    ls.phase = ls.reviewMode ? 'done' : 'check';
+    ls.idx = 0; ls.checkAnswered = false;
+    return renderLesson(l);
+  }
+  const c = cards[ls.idx];
+  const total = cards.length;
+  const pct = Math.round((ls.idx / total) * 100);
+  const jpEsc = esc(c.jp);
+  const dots = cards.map((_,i) => 
+    `<div style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:${i<ls.idx?'#2ecc71':i===ls.idx?'#fff':'rgba(255,255,255,0.3)'}"></div>`
+  ).join('');
+
+  // Parse tip into digestible chunks
+  const tipSentences = c.tip.split(/(?<=[.。])\s+/).filter(s=>s.trim());
+
+  return `
+  <div style="padding:0 0 20px">
+    <!-- Progress header -->
+    <div style="background:linear-gradient(135deg,#0f4c81,#1a237e);padding:12px 18px 10px;color:#fff">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-size:11px;opacity:0.7">${ls.reviewMode?'Review':'Lesson'} · Item ${ls.idx+1} of ${total}</div>
+        <div style="font-size:11px;opacity:0.7">${pct}%</div>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.2);border-radius:2px;overflow:hidden;margin-bottom:8px">
+        <div style="height:100%;background:#fff;border-radius:2px;width:${pct}%;transition:width .4s"></div>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">${dots}</div>
+    </div>
+
+    <!-- Main teaching card -->
+    <div style="margin:14px 16px 0;background:#fff;border-radius:18px;border:0.5px solid #e8e4db;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden">
+      
+      <!-- Front: Japanese -->
+      <div style="background:linear-gradient(135deg,#1a237e,#283593);padding:24px 18px;text-align:center;cursor:pointer" onclick="speak('${jpEsc}')">
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Japanese</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:${c.jp.length>4?'36px':'52px'};color:#fff;line-height:1.2;margin-bottom:8px">${c.jp}</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:4px">${c.rom}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:8px">🔊 tap to hear</div>
+      </div>
+
+      <!-- Divider -->
+      <div style="height:1px;background:#f0ede4"></div>
+
+      <!-- Meaning -->
+      <div style="padding:16px 18px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px">Meaning</div>
+        <div style="font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px">${c.en}</div>
+        <div style="font-size:13px;color:var(--muted)">${c.rom}</div>
+      </div>
+
+      <!-- Divider -->
+      <div style="height:1px;background:#f0ede4"></div>
+
+      <!-- Explanation broken into points -->
+      <div style="padding:14px 18px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px;font-weight:600">💡 Notes & Usage</div>
+        ${tipSentences.map(s=>`
+          <div style="display:flex;gap:8px;margin-bottom:9px;align-items:flex-start">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--navy);flex-shrink:0;margin-top:5px"></div>
+            <div style="font-size:13px;color:#444;line-height:1.6">${s.trim()}</div>
+          </div>`).join('')}
+      </div>
+
+      <!-- Example usage if available -->
+      ${c.example ? `
+      <div style="margin:0 16px 14px;background:linear-gradient(135deg,#f3e8ff,#ede0ff);border-radius:12px;padding:12px 14px">
+        <div style="font-size:10px;color:var(--purple);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Example</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;margin-bottom:3px">${c.example.jp}</div>
+        <div style="font-size:12px;color:var(--muted)">${c.example.en}</div>
+      </div>` : ''}
+    </div>
+
+    <!-- Audio button -->
+    <div style="margin:12px 16px 0;display:flex;gap:8px">
+      <button onclick="speak('${jpEsc}')"
+        style="flex:1;background:var(--ink);color:#fff;border:none;border-radius:12px;padding:13px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer">
+        🔊 Hear pronunciation
+      </button>
+      <button onclick="speak('${jpEsc}');speak('${jpEsc}');speak('${jpEsc}')"
+        style="background:var(--soft);color:var(--ink);border:none;border-radius:12px;padding:13px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">
+        🔁 ×3
+      </button>
+    </div>
+
+    <!-- Nav -->
+    <div style="margin:10px 16px 0;display:flex;gap:8px">
+      ${ls.idx > 0 ? `<button onclick="ls.idx--;refreshLesson()"
+        style="background:var(--soft);color:var(--ink);border:none;border-radius:12px;padding:13px 16px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">← Back</button>` : '<div></div>'}
+      <button onclick="ls.idx++;refreshLesson()"
+        style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer">
+        ${ls.idx < total-1 ? 'Next item →' : ls.reviewMode ? 'Finish review →' : 'Check what I learned →'}
+      </button>
+    </div>
+  </div>`;
+}
+
+/* ── CHECK (mini-quiz on each item) ── */
+function renderLessonCheck(l) {
+  const cards = l.cards;
+  if (ls.idx >= cards.length) {
+    ls.phase = ls.wrongItems.length > 0 ? 'review' : 'done';
+    ls.idx = 0;
+    return renderLesson(l);
+  }
+  const c = cards[ls.idx];
+  const total = cards.length;
+  const pct = Math.round((ls.idx / total) * 100);
+
+  // Build 4 choices
+  const pool = cards.filter((_,i) => i !== ls.idx);
+  const wrongs = pool.sort(()=>Math.random()-0.5).slice(0,3).map(x=>x.en);
+  const choices = [c.en, ...wrongs].sort(()=>Math.random()-0.5);
+  const jpEsc = esc(c.jp);
+
+  return `
+  <div style="padding:0 0 20px">
+    <div style="background:linear-gradient(135deg,#7c3aed,#4f46e5);padding:12px 18px 10px;color:#fff">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:11px;opacity:0.7">Quick Check · ${ls.idx+1} of ${total}</div>
+        <div style="font-size:11px;opacity:0.7">${pct}%</div>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.2);border-radius:2px;overflow:hidden">
+        <div style="height:100%;background:#fff;border-radius:2px;width:${pct}%"></div>
+      </div>
+    </div>
+
+    <div style="padding:16px 16px 0">
+      <div style="background:#fff;border-radius:16px;border:0.5px solid #e8e4db;box-shadow:var(--shadow);padding:20px;text-align:center;margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">What does this mean?</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:${c.jp.length>4?'38px':'54px'};margin-bottom:6px;cursor:pointer" onclick="speak('${jpEsc}')">${c.jp}</div>
+        <div style="font-size:13px;color:var(--muted)">${c.rom} &nbsp;🔊</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px" id="checkChoices">
+        ${choices.map(ch=>`
+          <button onclick="checkAnswer(this,'${esc(ch)}','${esc(c.en)}','${jpEsc}')"
+            style="background:#fff;border:1.5px solid #e8e4db;border-radius:13px;padding:14px 16px;font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left;transition:all .2s">
+            ${ch}
+          </button>`).join('')}
+      </div>
+      <div id="checkFeedback" style="margin-top:12px;min-height:20px"></div>
+    </div>
+  </div>`;
+}
+
+function checkAnswer(btn, chosen, correct, jp) {
+  if (ls.checkAnswered) return;
+  ls.checkAnswered = true;
+  document.querySelectorAll('#checkChoices button').forEach(b => b.disabled = true);
+
+  if (chosen === correct) {
+    btn.style.background = '#e8f8ef';
+    btn.style.borderColor = 'var(--green)';
+    btn.style.color = '#1a7a40';
+    btn.style.fontWeight = '600';
+    document.getElementById('checkFeedback').innerHTML =
+      `<div style="color:var(--green);font-size:13px;font-weight:500;text-align:center">✅ Correct! Well done.</div>`;
+    ls.score++;
+    playOK();
+  } else {
+    btn.style.background = '#fde8e8';
+    btn.style.borderColor = 'var(--red)';
+    btn.style.color = '#c0392b';
+    document.querySelectorAll('#checkChoices button').forEach(b => {
+      if (b.textContent.trim() === correct) {
+        b.style.background = '#e8f8ef';
+        b.style.borderColor = 'var(--green)';
+        b.style.color = '#1a7a40';
+        b.style.fontWeight = '600';
+      }
+    });
+    document.getElementById('checkFeedback').innerHTML =
+      `<div style="color:var(--red);font-size:13px;font-weight:500;text-align:center">❌ The answer is: <b>${correct}</b></div>`;
+    ls.wrongItems.push(lessons[curLesson].cards[ls.idx]);
+    playBad();
+  }
+  speak(jp);
+  // Auto advance
+  setTimeout(() => {
+    ls.idx++;
+    ls.checkAnswered = false;
+    refreshLesson();
+  }, 1800);
+}
+
+/* ── REVIEW ROUND (wrong items only) ── */
+function renderLessonReview(l) {
+  return `
+  <div style="padding:16px 16px 20px">
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:44px;margin-bottom:10px">🔄</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Quick review!</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:18px">
+        You missed ${ls.wrongItems.length} item${ls.wrongItems.length>1?'s':''}. Let's go over ${ls.wrongItems.length>1?'them':'it'} once more.
+      </div>
+      <button onclick="ls.phase='teach';ls.idx=0;ls.reviewMode=true;refreshLesson()"
+        style="width:100%;background:var(--navy);color:#fff;border:none;border-radius:14px;padding:14px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer">
+        Review now →
+      </button>
+      <button onclick="ls.phase='done';refreshLesson()"
+        style="width:100%;margin-top:8px;background:transparent;border:1.5px solid #ddd;border-radius:14px;padding:12px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">
+        Skip to quiz
+      </button>
+    </div>
+  </div>`;
+}
+
+/* ── DONE ── */
+function renderLessonDone(l) {
+  const total = l.cards.length;
+  const pct = Math.round((ls.score / total) * 100);
+  const xp = Math.round((ls.score / total) * 40) + 10;
+  save.xp = (save.xp||0) + xp;
+  const today = todayStr();
+  if (!save.activeDays) save.activeDays = [];
+  if (!save.activeDays.includes(today)) save.activeDays.push(today);
+  saveSave(save);
+  showToast('⭐ +' + xp + ' XP — lesson complete!');
+
+  return `
+  <div style="padding:16px 16px 20px">
+    <div style="text-align:center;padding:16px 0 20px">
+      <div style="font-size:52px;margin-bottom:10px">${pct>=80?'🎉':pct>=60?'👍':'💪'}</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:6px">
+        ${pct>=80?'Lesson complete!':pct>=60?'Good job!':'Keep going!'}
+      </div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:18px">
+        ${ls.score} of ${total} checks correct
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px">
+        <div style="background:var(--soft);border-radius:12px;padding:14px;text-align:center">
+          <div style="font-size:28px;font-weight:300;color:var(--green)">${ls.score}</div>
+          <div style="font-size:10px;color:var(--muted)">Correct</div>
+        </div>
+        <div style="background:var(--soft);border-radius:12px;padding:14px;text-align:center">
+          <div style="font-size:28px;font-weight:300;color:var(--navy)">${xp}</div>
+          <div style="font-size:10px;color:var(--muted)">XP earned</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What you learned summary -->
+    <div style="background:#fff;border-radius:14px;border:0.5px solid #e8e4db;padding:14px;margin-bottom:14px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px;font-weight:600">What you studied</div>
+      ${l.cards.map(c=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid #f5f3ef">
+          <div style="font-family:'Noto Sans JP',sans-serif;font-size:18px;min-width:44px">${c.jp.split(' ')[0]}</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:500">${c.en}</div>
+            <div style="font-size:10px;color:var(--muted)">${c.rom}</div>
+          </div>
+          <button onclick="speak('${esc(c.jp)}')"
+            style="background:var(--soft);border:none;border-radius:8px;padding:5px 10px;font-size:11px;cursor:pointer">🔊</button>
+        </div>`).join('')}
+    </div>
+
+    <button onclick="switchDTab('quiz')"
+      style="width:100%;background:var(--navy);color:#fff;border:none;border-radius:14px;padding:15px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;margin-bottom:8px">
+      📝 Take the Lesson Quiz →
+    </button>
+    <button onclick="ls={idx:0,phase:'intro',checkAnswered:false,wrongItems:[],score:0,reviewMode:false};refreshLesson()"
+      style="width:100%;background:transparent;border:1.5px solid #ddd;border-radius:14px;padding:12px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">
+      🔄 Restart lesson
+    </button>
+  </div>`;
+}
+
+function restartStudy(){
+  ls = {idx:0,phase:'intro',checkAnswered:false,wrongItems:[],score:0,reviewMode:false};
+  refreshLesson();
+}
+
+
 function buildSpeakPanel(l){
   const s=l.speaking;const jp=s.jp.replace(/'/g,"\\'");
   return`<div style="padding:10px 0 2px;font-size:11px;color:var(--muted)">Hear the model sentence, then speak it aloud.</div>
@@ -2240,7 +3018,362 @@ function showCompareResult(score,msg,color){
   if(score>=60)playOK();else playBad();
 }
 
-</script>
 
+
+/* ═══════════════════════════════════════════════
+   KANA LAB — full step-by-step kana learning
+═══════════════════════════════════════════════ */
+const kanaLabData={
+  hiragana:{
+    label:"Hiragana",
+    sections:[
+      {name:"Vowels あいうえお",chars:[
+        {char:"あ",rom:"a",mnemonic:"Looks like a person sitting — 'ah!' they say when they sit down.",strokes:["Horizontal stroke across the top","Vertical stroke down through center","Curved stroke: right then loop left and down"],words:[{jp:"あお",rom:"ao",en:"blue"},{jp:"あめ",rom:"ame",en:"rain"},{jp:"あさ",rom:"asa",en:"morning"}]},
+        {char:"い",rom:"i",mnemonic:"Two strokes like two people (EE) standing side by side.",strokes:["Left stroke: curve down and in","Right stroke: curve down and hook left"],words:[{jp:"いぬ",rom:"inu",en:"dog"},{jp:"いす",rom:"isu",en:"chair"},{jp:"いえ",rom:"ie",en:"house"}]},
+        {char:"う",rom:"u",mnemonic:"Like a fish opening its mouth to say 'oo'.",strokes:["Short horizontal stroke on top","Curved body: start top, go down, curve right"],words:[{jp:"うみ",rom:"umi",en:"sea"},{jp:"うた",rom:"uta",en:"song"},{jp:"うし",rom:"ushi",en:"cow"}]},
+        {char:"え",rom:"e",mnemonic:"A cross with a small curl — like a person saying 'eh?'",strokes:["Horizontal stroke","Vertical stroke down","Lower curved sweep to the right"],words:[{jp:"えき",rom:"eki",en:"station"},{jp:"えん",rom:"en",en:"yen"},{jp:"えほん",rom:"ehon",en:"picture book"}]},
+        {char:"お",rom:"o",mnemonic:"Like someone with arms wide saying 'OH!'",strokes:["Horizontal stroke","Vertical stroke down","Curved stroke: right, loop, extend down"],words:[{jp:"おかあさん",rom:"okaasan",en:"mother"},{jp:"おちゃ",rom:"ocha",en:"green tea"},{jp:"おと",rom:"oto",en:"sound"}]}
+      ]},
+      {name:"K-row かきくけこ",chars:[
+        {char:"か",rom:"ka",mnemonic:"Looks like a sword (KAtana).",strokes:["Vertical stroke down","Horizontal crossing stroke","Lower right diagonal"],words:[{jp:"かお",rom:"kao",en:"face"},{jp:"かわ",rom:"kawa",en:"river"},{jp:"かみ",rom:"kami",en:"paper/god"}]},
+        {char:"き",rom:"ki",mnemonic:"Like a KEY shape — it opens things.",strokes:["Top horizontal stroke","Middle horizontal stroke","Vertical stroke down","Bottom right curved stroke"],words:[{jp:"きく",rom:"kiku",en:"listen"},{jp:"きって",rom:"kitte",en:"stamp"},{jp:"きのう",rom:"kinou",en:"yesterday"}]},
+        {char:"く",rom:"ku",mnemonic:"Like a bird's beak going 'KOO koo'.",strokes:["Single stroke: angle down-right then up-right"],words:[{jp:"くに",rom:"kuni",en:"country"},{jp:"くち",rom:"kuchi",en:"mouth"},{jp:"くも",rom:"kumo",en:"cloud/spider"}]},
+        {char:"け",rom:"ke",mnemonic:"Looks like a KEY upside down.",strokes:["Vertical stroke down","Top-right stroke","Lower curve to the right"],words:[{jp:"けさ",rom:"kesa",en:"this morning"},{jp:"けいたい",rom:"keitai",en:"mobile phone"},{jp:"けむり",rom:"kemuri",en:"smoke"}]},
+        {char:"こ",rom:"ko",mnemonic:"Two horizontal lines — like CO (company) letterhead.",strokes:["Top horizontal stroke","Bottom horizontal stroke"],words:[{jp:"こえ",rom:"koe",en:"voice"},{jp:"こころ",rom:"kokoro",en:"heart/mind"},{jp:"こども",rom:"kodomo",en:"child"}]}
+      ]},
+      {name:"S-row さしすせそ",chars:[
+        {char:"さ",rom:"sa",mnemonic:"Looks like a fishing SAck with a hook.",strokes:["Horizontal stroke","Vertical stroke down","Lower curved stroke right"],words:[{jp:"さかな",rom:"sakana",en:"fish"},{jp:"さくら",rom:"sakura",en:"cherry blossom"},{jp:"さむい",rom:"samui",en:"cold"}]},
+        {char:"し",rom:"shi",mnemonic:"Like a fishhook — SHE dropped her hook.",strokes:["Single stroke: down then hook right"],words:[{jp:"しお",rom:"shio",en:"salt"},{jp:"しろ",rom:"shiro",en:"white/castle"},{jp:"しごと",rom:"shigoto",en:"work"}]},
+        {char:"す",rom:"su",mnemonic:"Like a nest (SU means nest in Japanese!).",strokes:["Horizontal stroke","Vertical then curve left into loop"],words:[{jp:"すし",rom:"sushi",en:"sushi"},{jp:"すき",rom:"suki",en:"like"},{jp:"すいか",rom:"suika",en:"watermelon"}]},
+        {char:"せ",rom:"se",mnemonic:"Looks like a person sitting (SEdentary).",strokes:["Vertical left stroke","Cross stroke","Right stroke down with hook"],words:[{jp:"せんせい",rom:"sensei",en:"teacher"},{jp:"せかい",rom:"sekai",en:"world"},{jp:"せまい",rom:"semai",en:"narrow"}]},
+        {char:"そ",rom:"so",mnemonic:"Looks like the number 3 — SO there are 3 strokes.",strokes:["Two linked curves sweeping right"],words:[{jp:"そら",rom:"sora",en:"sky"},{jp:"そと",rom:"soto",en:"outside"},{jp:"そうじ",rom:"souji",en:"cleaning"}]}
+      ]},
+      {name:"T-row たちつてと",chars:[
+        {char:"た",rom:"ta",mnemonic:"Like a table (TA-ble) with legs.",strokes:["Horizontal stroke","Vertical through it","Lower-left diagonal","Lower-right curve"],words:[{jp:"たべる",rom:"taberu",en:"eat"},{jp:"たつ",rom:"tatsu",en:"stand"},{jp:"たのしい",rom:"tanoshii",en:"fun"}]},
+        {char:"ち",rom:"chi",mnemonic:"Looks like a CHIcken pecking the ground.",strokes:["Horizontal stroke","Curved stroke: down and loop left"],words:[{jp:"ちかい",rom:"chikai",en:"near/close"},{jp:"ちず",rom:"chizu",en:"map"},{jp:"ちから",rom:"chikara",en:"strength"}]},
+        {char:"つ",rom:"tsu",mnemonic:"Like a small wave — TSUnami starts with this!",strokes:["Single sweep: right then curve down-left"],words:[{jp:"つき",rom:"tsuki",en:"moon"},{jp:"つくえ",rom:"tsukue",en:"desk"},{jp:"つよい",rom:"tsuyoi",en:"strong"}]},
+        {char:"て",rom:"te",mnemonic:"Like a TE-lephone hook on a wall.",strokes:["Single stroke: horizontal then hook down-left"],words:[{jp:"てがみ",rom:"tegami",en:"letter"},{jp:"てんき",rom:"tenki",en:"weather"},{jp:"でんわ",rom:"denwa",en:"telephone"}]},
+        {char:"と",rom:"to",mnemonic:"Looks like a TOtem pole with a spike.",strokes:["Vertical stroke","Small diagonal spike right"],words:[{jp:"とり",rom:"tori",en:"bird"},{jp:"ともだち",rom:"tomodachi",en:"friend"},{jp:"とかい",rom:"tokai",en:"city"}]}
+      ]},
+      {name:"N-row なにぬねの",chars:[
+        {char:"な",rom:"na",mnemonic:"Like a kNife — NA, don't touch!",strokes:["Horizontal stroke","Vertical stroke","Curve right and loop"],words:[{jp:"なまえ",rom:"namae",en:"name"},{jp:"なつ",rom:"natsu",en:"summer"},{jp:"ないふ",rom:"naifu",en:"knife"}]},
+        {char:"に",rom:"ni",mnemonic:"Like the number 2 (NI = 2 in Japanese!).",strokes:["Two horizontal strokes","Vertical stroke connecting them"],words:[{jp:"にく",rom:"niku",en:"meat"},{jp:"にほん",rom:"nihon",en:"Japan"},{jp:"にもつ",rom:"nimotsu",en:"luggage"}]},
+        {char:"ぬ",rom:"nu",mnemonic:"Like a bowl of NOOdles.",strokes:["Left curve down","Right loop and sweep down"],words:[{jp:"ぬの",rom:"nuno",en:"cloth"},{jp:"ぬき",rom:"nuki",en:"extraction"},{jp:"ぬれる",rom:"nureru",en:"get wet"}]},
+        {char:"ね",rom:"ne",mnemonic:"Like a cat sleeping (NEKO = cat).",strokes:["Horizontal stroke","Vertical stroke","Loop right then sweep left"],words:[{jp:"ねこ",rom:"neko",en:"cat"},{jp:"ねる",rom:"neru",en:"sleep"},{jp:"ねつ",rom:"netsu",en:"fever"}]},
+        {char:"の",rom:"no",mnemonic:"A snail shell spiral — makes the 'NO' sound.",strokes:["Single oval loop stroke"],words:[{jp:"のみもの",rom:"nomimono",en:"drink"},{jp:"のり",rom:"nori",en:"seaweed"},{jp:"のど",rom:"nodo",en:"throat"}]}
+      ]},
+      {name:"H-row はひふへほ",chars:[
+        {char:"は",rom:"ha",mnemonic:"Looks like someone raising their HAt.",strokes:["Vertical stroke","Middle vertical stroke","Right curve loop"],words:[{jp:"はな",rom:"hana",en:"flower/nose"},{jp:"はる",rom:"haru",en:"spring"},{jp:"はやい",rom:"hayai",en:"fast"}]},
+        {char:"ひ",rom:"hi",mnemonic:"Like a smiling face (HI there!).",strokes:["Single loop stroke to the right"],words:[{jp:"ひと",rom:"hito",en:"person"},{jp:"ひかり",rom:"hikari",en:"light"},{jp:"ひる",rom:"hiru",en:"noon"}]},
+        {char:"ふ",rom:"fu",mnemonic:"Like mount FUji with snow on top.",strokes:["Top horizontal stroke","Left dot","Right upper curve","Right lower curve"],words:[{jp:"ふゆ",rom:"fuyu",en:"winter"},{jp:"ふね",rom:"fune",en:"ship"},{jp:"ふるい",rom:"furui",en:"old"}]},
+        {char:"へ",rom:"he",mnemonic:"Like a mountain peak — HEy, look at the top!",strokes:["Single peak stroke: up then down-right"],words:[{jp:"へや",rom:"heya",en:"room"},{jp:"へた",rom:"heta",en:"unskilled"},{jp:"へいわ",rom:"heiwa",en:"peace"}]},
+        {char:"ほ",rom:"ho",mnemonic:"Like a HOtel sign with two wings.",strokes:["Vertical stroke","Cross stroke","Right upper curve","Right lower loop"],words:[{jp:"ほん",rom:"hon",en:"book"},{jp:"ほし",rom:"hoshi",en:"star"},{jp:"ほっかいどう",rom:"hokkaidou",en:"Hokkaido"}]}
+      ]},
+      {name:"M-row まみむめも",chars:[
+        {char:"ま",rom:"ma",mnemonic:"Like a MAma hugging two children.",strokes:["Horizontal stroke","Horizontal stroke","Vertical down with right loop"],words:[{jp:"まち",rom:"machi",en:"town"},{jp:"まど",rom:"mado",en:"window"},{jp:"まいにち",rom:"mainichi",en:"every day"}]},
+        {char:"み",rom:"mi",mnemonic:"Like MEat hooks — MI mi mi (musical scale).",strokes:["Left curve down-right","Loop stroke then extend right"],words:[{jp:"みず",rom:"mizu",en:"water"},{jp:"みち",rom:"michi",en:"road"},{jp:"みんな",rom:"minna",en:"everyone"}]},
+        {char:"む",rom:"mu",mnemonic:"Like a MOO-ing cow's face.",strokes:["Curve stroke right","Loop stroke down"],words:[{jp:"むし",rom:"mushi",en:"insect"},{jp:"むすめ",rom:"musume",en:"daughter"},{jp:"むずかしい",rom:"muzukashii",en:"difficult"}]},
+        {char:"め",rom:"me",mnemonic:"Like a MEdal with a loop — eyes (ME = eye in Japanese!).",strokes:["Left curve stroke","Right loop stroke"],words:[{jp:"め",rom:"me",en:"eye"},{jp:"めがね",rom:"megane",en:"glasses"},{jp:"めずらしい",rom:"mezurashii",en:"rare"}]},
+        {char:"も",rom:"mo",mnemonic:"Like a fisherman's line with MORE hooks.",strokes:["Two horizontal strokes","Vertical down with right curve"],words:[{jp:"もり",rom:"mori",en:"forest"},{jp:"もの",rom:"mono",en:"thing"},{jp:"もっと",rom:"motto",en:"more"}]}
+      ]},
+      {name:"Y・R・W rows",chars:[
+        {char:"や",rom:"ya",mnemonic:"Like a YAcht with sails.",strokes:["Left diagonal stroke","Upper right curve","Lower right stroke"],words:[{jp:"やま",rom:"yama",en:"mountain"},{jp:"やさい",rom:"yasai",en:"vegetable"},{jp:"やすい",rom:"yasui",en:"cheap"}]},
+        {char:"ゆ",rom:"yu",mnemonic:"Like a YOU-tube play button.",strokes:["Left curve stroke","Right upper stroke","Right lower curve"],words:[{jp:"ゆき",rom:"yuki",en:"snow"},{jp:"ゆめ",rom:"yume",en:"dream"},{jp:"ゆっくり",rom:"yukkuri",en:"slowly"}]},
+        {char:"よ",rom:"yo",mnemonic:"Like YO-YO — two horizontal bars on a stick.",strokes:["Two horizontal strokes","Vertical right side"],words:[{jp:"よる",rom:"yoru",en:"night"},{jp:"よむ",rom:"yomu",en:"read"},{jp:"ようび",rom:"youbi",en:"day of week"}]},
+        {char:"ら",rom:"ra",mnemonic:"Like a bent RAdio antenna.",strokes:["Short curve right","Long curve: down, hook left"],words:[{jp:"らいねん",rom:"rainen",en:"next year"},{jp:"ラーメン",rom:"raamen",en:"ramen"},{jp:"らく",rom:"raku",en:"comfortable"}]},
+        {char:"り",rom:"ri",mnemonic:"Like a musical note — RE mi fa...",strokes:["Left stroke down","Right stroke curve down"],words:[{jp:"りんご",rom:"ringo",en:"apple"},{jp:"りょうり",rom:"ryouri",en:"cooking"},{jp:"りゆう",rom:"riyuu",en:"reason"}]},
+        {char:"る",rom:"ru",mnemonic:"Like a RUg rolled up at the end.",strokes:["Curve right then loop back"],words:[{jp:"るす",rom:"rusu",en:"away from home"},{jp:"るーむ",rom:"ruumu",en:"room (loan)"},{jp:"るび",rom:"rubi",en:"ruby/furigana"}]},
+        {char:"れ",rom:"re",mnemonic:"Like a person REaching for something.",strokes:["Vertical stroke","Curve right, loop, sweep left"],words:[{jp:"れんしゅう",rom:"renshuu",en:"practice"},{jp:"れきし",rom:"rekishi",en:"history"},{jp:"れいぞうこ",rom:"reizouko",en:"refrigerator"}]},
+        {char:"ろ",rom:"ro",mnemonic:"Like a ROck — round at the bottom.",strokes:["Single stroke: right then down loop"],words:[{jp:"ろうか",rom:"rouka",en:"corridor"},{jp:"ろく",rom:"roku",en:"six"},{jp:"ろんぶん",rom:"ronbun",en:"thesis"}]},
+        {char:"わ",rom:"wa",mnemonic:"Like a WAtching eye — the particle は (wa)!",strokes:["Vertical stroke","Curve right, down, hook left"],words:[{jp:"わたし",rom:"watashi",en:"I/me"},{jp:"わるい",rom:"warui",en:"bad"},{jp:"わかる",rom:"wakaru",en:"understand"}]},
+        {char:"を",rom:"wo",mnemonic:"Only used as the object particle を. Never in words.",strokes:["Three strokes forming the character"],words:[{jp:"～をたべる",rom:"~o taberu",en:"eat ~"},{jp:"～をみる",rom:"~o miru",en:"see ~"},{jp:"～をきく",rom:"~o kiku",en:"listen to ~"}]},
+        {char:"ん",rom:"n",mnemonic:"Only standalone consonant. Looks like an N with a bend.",strokes:["Curve right, hook up, then down-left"],words:[{jp:"にほん",rom:"nihon",en:"Japan"},{jp:"パン",rom:"pan",en:"bread"},{jp:"でんわ",rom:"denwa",en:"telephone"}]}
+      ]}
+    ]
+  }
+};
+
+/* ── Kana Lab State ── */
+let kl={
+  script:"hiragana",
+  section:0,
+  charIdx:0,
+  mode:"learn",   // "learn" | "write" | "quiz"
+  quizIdx:0,
+  quizAnswered:false,
+  quizScore:0,
+  doneSections:new Set(),
+  doneChars:new Set(),
+  klCanvas:null,
+  klCtx:null,
+  klPainting:false
+};
+
+function buildKanaLab(l){
+  kl.charIdx=0; kl.section=0; kl.mode="learn"; kl.quizIdx=0;
+  return renderKanaLab();
+}
+
+function renderKanaLab(){
+  const data=kanaLabData.hiragana;
+  const sections=data.sections;
+  const sec=sections[kl.section];
+  const totalDone=kl.doneChars.size;
+  const totalChars=sections.reduce((a,s)=>a+s.chars.length,0);
+
+  const secTabs=sections.map((s,i)=>`
+    <button class="kana-sec-tab ${i===kl.section?"active":""}" onclick="setKLSection(${i})">${s.name.split(" ")[0]}</button>`).join("");
+
+  let body="";
+  if(kl.mode==="learn") body=renderKLLearn(sec);
+  else if(kl.mode==="write") body=renderKLWrite(sec);
+  else if(kl.mode==="quiz") body=renderKLQuiz(sec);
+
+  return`<div class="kana-lab-wrap" id="klWrap">
+    <div class="kana-lab-header">
+      <div class="kana-lab-title">🔤 Kana Lab — Hiragana</div>
+      <div class="kana-lab-sub">Step through every character · Learn → Write → Quiz</div>
+    </div>
+    <div class="kl-prog-row">
+      <span class="kl-prog-txt">Progress: ${totalDone}/${totalChars} characters learned</span>
+      <span class="kl-prog-val">${totalChars>0?Math.round((totalDone/totalChars)*100):0}%</span>
+    </div>
+    <div class="kana-section-tabs">${secTabs}</div>
+    <div style="padding:8px 14px 4px;font-size:11px;color:var(--muted)">
+      ${kl.mode==="learn"?"📖 Learn — study each character one by one":
+        kl.mode==="write"?"✍️ Write — trace the character on the canvas":
+        "📝 Quiz — choose the correct reading"}
+      &nbsp;·&nbsp;
+      <span onclick="setKLMode('learn')" style="cursor:pointer;color:${kl.mode==="learn"?'var(--navy)':'var(--muted)'}">Learn</span> &nbsp;
+      <span onclick="setKLMode('write')" style="cursor:pointer;color:${kl.mode==="write"?'var(--navy)':'var(--muted)'}">Write</span> &nbsp;
+      <span onclick="setKLMode('quiz')" style="cursor:pointer;color:${kl.mode==="quiz"?'var(--navy)':'var(--muted)'}">Quiz</span>
+    </div>
+    ${body}
+    <div class="kana-section-tabs" style="margin-top:4px">
+      <button class="kana-sec-tab" onclick="setKLMode('learn')">📖 Learn</button>
+      <button class="kana-sec-tab" onclick="setKLMode('write')">✍️ Write</button>
+      <button class="kana-sec-tab" onclick="setKLMode('quiz')">📝 Quiz</button>
+      <button class="kana-sec-tab" onclick="switchDTab('quiz')">🎓 Full Quiz</button>
+    </div>
+    <div style="height:14px"></div>
+  </div>`;
+}
+
+function setKLSection(idx){
+  kl.section=idx; kl.charIdx=0; kl.quizIdx=0; kl.quizAnswered=false; kl.quizScore=0;
+  refreshKL(); playClick();
+}
+function setKLMode(mode){
+  kl.mode=mode; kl.quizIdx=0; kl.quizAnswered=false; kl.quizScore=0;
+  refreshKL(); playClick();
+}
+function refreshKL(){
+  const panel=document.getElementById("dpanel-cards");
+  if(panel){panel.innerHTML=renderKanaLab();panel.scrollTop=0;}
+  if(kl.mode==="write") setTimeout(initKLCanvas,80);
+}
+
+/* ── LEARN MODE ── */
+function renderKLLearn(sec){
+  const chars=sec.chars;
+  if(kl.charIdx>=chars.length) return renderKLSectionDone(sec);
+  const c=chars[kl.charIdx];
+  const jp=c.char.replace(/'/g,"\'");
+  kl.doneChars.add(kl.section+"-"+kl.charIdx);
+
+  const grid=chars.map((ch,i)=>`
+    <div class="kana-chart-cell ${i===kl.charIdx?"kl-cur":kl.doneChars.has(kl.section+"-"+i)?"kl-done":""}" onclick="goKLChar(${i})">
+      <div class="kcc-char">${ch.char}</div>
+      <div class="kcc-rom">${ch.rom}</div>
+    </div>`).join("");
+
+  return`
+    <div class="kana-chart-grid">${grid}</div>
+    <div class="kl-learn-card">
+      <div class="kl-learn-hdr">
+        <div class="kl-big-char" onclick="speak('${jp}')">${c.char}</div>
+        <div class="kl-rom">${c.rom}</div>
+        <div class="kl-group">${sec.name} · ${kl.charIdx+1} of ${chars.length}</div>
+      </div>
+      <div class="kl-body">
+        <div class="kl-section-lbl">Memory trick</div>
+        <div class="kl-mnemonic"><div class="kl-mnemonic-text">💡 ${c.mnemonic}</div></div>
+        <div class="kl-section-lbl">Stroke order</div>
+        <div class="kl-stroke-box">
+          <div class="kl-stroke-title">How to write ${c.char}</div>
+          ${c.strokes.map((s,i)=>`<div class="kl-stroke-item"><div class="kl-stroke-num">${i+1}</div><span>${s}</span></div>`).join("")}
+        </div>
+        <div class="kl-section-lbl">Words using ${c.char}</div>
+        <div class="kl-words-row">
+          ${c.words.map(w=>`<div class="kl-word-chip" onclick="speak('${w.jp.replace(/'/g,"\'")}')">
+            <div class="kl-word-jp">${w.jp}</div>
+            <div class="kl-word-rom">${w.rom}</div>
+            <div class="kl-word-en">${w.en}</div>
+          </div>`).join("")}
+        </div>
+      </div>
+    </div>
+    <div class="kl-actions">
+      <button class="kl-btn kl-btn-hear" onclick="speak('${jp}')">🔊 Hear ${c.char}</button>
+      <button class="kl-btn kl-btn-mark" onclick="setKLMode('write')">✍️ Practice writing</button>
+    </div>
+    <div class="kl-actions">
+      ${kl.charIdx>0?`<button class="kl-btn" style="background:var(--soft)" onclick="goKLChar(${kl.charIdx-1})">← Previous</button>`:'<div></div>'}
+      ${kl.charIdx<chars.length-1?
+        `<button class="kl-btn kl-btn-next" onclick="goKLChar(${kl.charIdx+1})">Next ${chars[kl.charIdx+1].char} →</button>`:
+        `<button class="kl-btn kl-btn-quiz" onclick="setKLMode('quiz')">📝 Take quiz →</button>`}
+    </div>`;
+}
+
+function goKLChar(idx){
+  kl.charIdx=idx; kl.doneChars.add(kl.section+"-"+idx);
+  refreshKL(); playClick();
+  const sec=kanaLabData.hiragana.sections[kl.section];
+  if(sec&&sec.chars[idx]) speak(sec.chars[idx].char);
+}
+
+function renderKLSectionDone(sec){
+  return`<div style="text-align:center;padding:28px 18px">
+    <div style="font-size:48px;margin-bottom:10px">🎉</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Section complete!</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:18px">You've studied all ${sec.chars.length} characters in ${sec.name}.</div>
+    <button class="sc-btn" onclick="setKLMode('quiz')">📝 Quiz this section →</button>
+    <button class="sc-btn2" style="margin-top:8px" onclick="goKLChar(0)">🔄 Review from start</button>
+  </div>`;
+}
+
+/* ── WRITE MODE ── */
+function renderKLWrite(sec){
+  const chars=sec.chars;
+  const c=chars[kl.charIdx]||chars[0];
+  const jp=c.char.replace(/'/g,"\'");
+  return`
+    <div class="kl-canvas-wrap" id="klCanvasWrap">
+      <div class="kl-canvas-hdr">
+        <div><div class="kl-canvas-char">${c.char}</div><div style="font-size:13px;opacity:0.7">${c.rom}</div></div>
+        <div style="text-align:right">
+          <div style="font-size:10px;opacity:0.55;margin-bottom:4px">Stroke order</div>
+          ${c.strokes.map((s,i)=>`<div style="font-size:10px;opacity:0.8;margin-bottom:2px">${i+1}. ${s}</div>`).join("")}
+        </div>
+      </div>
+      <div class="kl-canvas-body" id="klDrawArea"><canvas id="klCanvas" height="240"></canvas></div>
+      <div class="kl-canvas-hint">✏️ Write the character above · Follow the stroke order</div>
+      <div class="kl-canvas-btns">
+        <button class="kl-canvas-btn" style="background:#f0ede4;color:var(--ink)" onclick="clearKLCanvas()">🗑 Clear</button>
+        <button class="kl-canvas-btn" style="background:var(--ink);color:#fff" onclick="speak('${jp}')">🔊 Hear</button>
+        <button class="kl-canvas-btn" style="background:var(--green);color:#fff" onclick="klNextWrite()">Next →</button>
+      </div>
+    </div>
+    <div style="padding:0 14px 6px">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">All characters in this section:</div>
+      <div class="kana-chart-grid" style="padding:0">${chars.map((ch,i)=>`<div class="kana-chart-cell ${i===kl.charIdx?"kl-cur":""}" onclick="klGoWrite(${i})"><div class="kcc-char">${ch.char}</div><div class="kcc-rom">${ch.rom}</div></div>`).join("")}</div>
+    </div>`;
+}
+
+function initKLCanvas(){
+  const canvas=document.getElementById("klCanvas");
+  const area=document.getElementById("klDrawArea");
+  if(!canvas||!area)return;
+  canvas.width=area.offsetWidth||340; canvas.height=240;
+  kl.klCtx=canvas.getContext("2d"); kl.klCanvas=canvas; kl.klPainting=false;
+  const sec=kanaLabData.hiragana.sections[kl.section];
+  const c=sec.chars[kl.charIdx]||sec.chars[0];
+  // Draw guide
+  drawKLGuide(kl.klCtx,c.char,canvas.width,canvas.height);
+  // Events
+  canvas.addEventListener("mousedown",e=>{kl.klPainting=true;const p=klPos(e,canvas);kl.klCtx.strokeStyle="#0f4c81";kl.klCtx.lineWidth=5;kl.klCtx.lineCap="round";kl.klCtx.lineJoin="round";kl.klCtx.beginPath();kl.klCtx.moveTo(p.x,p.y);});
+  canvas.addEventListener("mousemove",e=>{if(!kl.klPainting)return;const p=klPos(e,canvas);kl.klCtx.lineTo(p.x,p.y);kl.klCtx.stroke();});
+  canvas.addEventListener("mouseup",()=>{kl.klPainting=false;});
+  canvas.addEventListener("mouseleave",()=>{kl.klPainting=false;});
+  canvas.addEventListener("touchstart",e=>{e.preventDefault();kl.klPainting=true;const p=klPos(e.touches[0],canvas);kl.klCtx.strokeStyle="#0f4c81";kl.klCtx.lineWidth=5;kl.klCtx.lineCap="round";kl.klCtx.lineJoin="round";kl.klCtx.beginPath();kl.klCtx.moveTo(p.x,p.y);},{passive:false});
+  canvas.addEventListener("touchmove",e=>{e.preventDefault();if(!kl.klPainting)return;const p=klPos(e.touches[0],canvas);kl.klCtx.lineTo(p.x,p.y);kl.klCtx.stroke();},{passive:false});
+  canvas.addEventListener("touchend",()=>{kl.klPainting=false;});
+}
+function drawKLGuide(ctx,char,w,h){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="#faf8f2"; ctx.fillRect(0,0,w,h);
+  // Grid
+  ctx.strokeStyle="rgba(15,76,129,0.08)"; ctx.lineWidth=1; ctx.setLineDash([5,5]);
+  ctx.beginPath();
+  ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);
+  ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);
+  ctx.stroke(); ctx.setLineDash([]);
+  // Border
+  const p=12; ctx.strokeStyle="rgba(15,76,129,0.18)"; ctx.lineWidth=1.5;
+  ctx.strokeRect(p,p,w-p*2,h-p*2);
+  // Guide char
+  const sz=Math.min(w,h)-p*4;
+  ctx.font=sz+"px 'Noto Sans JP',sans-serif";
+  ctx.fillStyle="rgba(15,76,129,0.1)";
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  ctx.fillText(char,w/2,h/2);
+}
+function klPos(e,canvas){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)};}
+function clearKLCanvas(){if(!kl.klCtx||!kl.klCanvas)return;const sec=kanaLabData.hiragana.sections[kl.section];const c=sec.chars[kl.charIdx]||sec.chars[0];drawKLGuide(kl.klCtx,c.char,kl.klCanvas.width,kl.klCanvas.height);}
+function klGoWrite(i){kl.charIdx=i;refreshKL();setTimeout(initKLCanvas,80);}
+function klNextWrite(){
+  const sec=kanaLabData.hiragana.sections[kl.section];
+  if(kl.charIdx<sec.chars.length-1){kl.charIdx++;refreshKL();setTimeout(initKLCanvas,80);}
+  else setKLMode("quiz");
+}
+
+/* ── QUIZ MODE ── */
+function renderKLQuiz(sec){
+  const chars=sec.chars;
+  if(kl.quizIdx>=chars.length) return renderKLQuizDone(sec);
+  const c=chars[kl.quizIdx];
+  const jp=c.char.replace(/'/g,"\'");
+  // Build 4 choices (1 correct + 3 random from section)
+  const pool=chars.filter((_,i)=>i!==kl.quizIdx);
+  const wrongs=pool.sort(()=>Math.random()-0.5).slice(0,3).map(x=>x.rom);
+  const choices=[c.rom,...wrongs].sort(()=>Math.random()-0.5);
+  return`<div class="kl-quiz-card">
+    <div class="kl-q-lbl">📝 Section Quiz · ${kl.quizIdx+1} of ${chars.length}</div>
+    <div class="kl-q-char" onclick="speak('${jp}')">${c.char} <span style="font-size:16px">🔊</span></div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:2px">What is the reading of this character?</div>
+    <div class="kl-q-choices">
+      ${choices.map(ch=>`<button class="kl-q-btn" onclick="checkKLQuiz(this,'${ch.replace(/'/g,"\'")}','${c.rom.replace(/'/g,"\'")}','${jp}')">${ch}</button>`).join("")}
+    </div>
+    <div class="kl-q-feedback" id="klFb"></div>
+  </div>`;
+}
+
+function checkKLQuiz(btn,chosen,correct,jp){
+  if(kl.quizAnswered)return;
+  kl.quizAnswered=true;
+  document.querySelectorAll(".kl-q-btn").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("klFb");
+  if(chosen===correct){
+    btn.classList.add("kl-correct");
+    if(fb)fb.innerHTML=`<span style="color:var(--green)">✅ Correct! ${correct}</span>`;
+    kl.quizScore++; playOK();
+  }else{
+    btn.classList.add("kl-wrong");
+    document.querySelectorAll(".kl-q-btn").forEach(b=>{if(b.textContent.trim()===correct)b.classList.add("kl-correct");});
+    if(fb)fb.innerHTML=`<span style="color:var(--red)">❌ It's ${correct}</span>`;
+    playBad();
+  }
+  speak(jp);
+  setTimeout(()=>{kl.quizIdx++;kl.quizAnswered=false;refreshKL();},1400);
+}
+
+function renderKLQuizDone(sec){
+  const total=sec.chars.length;
+  const pct=Math.round((kl.quizScore/total)*100);
+  const xp=kl.quizScore*5;
+  save.xp=(save.xp||0)+xp; saveSave(save);
+  showToast("⭐ +"+xp+" XP — Kana quiz done!");
+  return`<div class="study-complete">
+    <div class="sc-emoji">${pct>=80?"🎉":pct>=60?"👍":"💪"}</div>
+    <div class="sc-title">${pct>=80?"Section mastered!":pct>=60?"Good progress!":"Keep practising!"}</div>
+    <div class="sc-sub">${kl.quizScore}/${total} correct (${pct}%)<br>${sec.name}</div>
+    <div class="xp-pill" style="margin-bottom:16px">⭐ +${xp} XP</div>
+    <button class="sc-btn" onclick="kl.quizIdx=0;kl.quizScore=0;kl.quizAnswered=false;refreshKL()">🔄 Retry quiz</button>
+    <button class="sc-btn2" style="margin-top:8px" onclick="kl.charIdx=0;setKLMode('learn')">📖 Study again</button>
+    ${kl.section<kanaLabData.hiragana.sections.length-1?`<button class="sc-btn2" style="margin-top:8px" onclick="setKLSection(${kl.section+1})">Next section →</button>`:""}
+  </div>`;
+}
+
+</script>
 </body>
 </html>
